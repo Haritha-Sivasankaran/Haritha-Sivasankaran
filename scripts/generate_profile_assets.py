@@ -592,9 +592,25 @@ def write_outputs(profile: dict) -> None:
     JSON_PATH.write_text(json.dumps(metadata, indent=2), encoding="utf-8")
 
 
+def update_readme_cache_buster() -> None:
+    readme_path = ROOT / "README.md"
+    if not readme_path.exists():
+        return
+    content = readme_path.read_text(encoding="utf-8")
+    timestamp = int(current_datetime().timestamp())
+    
+    new_content = re.sub(
+        r'src="\./assets/profile-overview\.svg(?:\?t=\d+)?"',
+        f'src="./assets/profile-overview.svg?t={timestamp}"',
+        content
+    )
+    readme_path.write_text(new_content, encoding="utf-8")
+
+
 def main() -> None:
     profile = fetch_profile_data()
     write_outputs(profile)
+    update_readme_cache_buster()
 
 
 if __name__ == "__main__":

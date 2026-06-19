@@ -1,0 +1,51 @@
+name: Refresh Profile Stats
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 */6 * * *"
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "assets/profile-overview.svg"
+      - "assets/profile-data.json"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: profile-stats
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate live profile assets
+        env:
+          PROFILE_USERNAME: Haritha-Sivasankaran
+          PROFILE_TIMEZONE: Asia/Calcutta
+          PROFILE_STATS_TOKEN: ${{ secrets.PROFILE_STATS_TOKEN }}
+        run: python scripts/generate_profile_assets.py
+
+      - name: Commit refreshed assets
+        run: |
+          if git diff --quiet; then
+            echo "No generated changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/profile-overview.svg assets/profile-data.json
+          git commit -m "chore: refresh profile stats"
+          git push

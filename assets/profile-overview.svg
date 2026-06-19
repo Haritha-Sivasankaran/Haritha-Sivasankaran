@@ -1,0 +1,144 @@
+<svg width="1100" height="540" viewBox="0 0 1100 540" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Live GitHub profile overview for Haritha Sivasankaran</title>
+  <desc id="desc">Automatically refreshed GitHub stats showing contributions, repositories, stars, languages, and recent weekly activity.</desc>
+  <defs>
+    <linearGradient id="hero" x1="40" y1="24" x2="1060" y2="520" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F172A" />
+      <stop offset="0.5" stop-color="#111827" />
+      <stop offset="1" stop-color="#050816" />
+    </linearGradient>
+  </defs>
+
+  <rect x="10" y="10" width="1080" height="520" rx="30" fill="url(#hero)" stroke="#1E293B" />
+  <rect x="38" y="34" width="132" height="34" rx="17" fill="#111C31" stroke="#22304A" />
+  <text x="60" y="56" font-size="13" font-weight="700" fill="#60A5FA" letter-spacing="1.4">DEV PULSE</text>
+  <text x="38" y="94" font-size="36" font-weight="700" fill="#F8FAFC">Haritha Sivasankaran</text>
+  <text x="38" y="118" font-size="16" fill="#94A3B8">full-stack energy, live GitHub signal, zero mock stats</text>
+
+  <rect x="822" y="34" width="230" height="34" rx="17" fill="#111C31" stroke="#22304A" />
+  <text x="842" y="56" font-size="12" font-weight="600" fill="#E2E8F0">GitHub GraphQL live sync</text>
+  <text x="822" y="92" font-size="13" fill="#64748B">last refresh: 20 Jun 2026 | 02:03 AM</text>
+
+  <g>
+      <rect x="44" y="112" width="220" height="112" rx="22" fill="#101827" stroke="#1E293B" />
+      <rect x="62" y="130" width="8" height="32" rx="4" fill="#2563EB" />
+      <text x="82" y="148" font-size="13" fill="#94A3B8" letter-spacing="0.4">365D CONTRIBUTIONS</text>
+      <text x="66" y="186" font-size="34" font-weight="700" fill="#F8FAFC">254</text>
+      <text x="66" y="208" font-size="13" fill="#94A3B8">actual GitHub contribution calendar</text>
+    </g><g>
+      <rect x="278" y="112" width="220" height="112" rx="22" fill="#101827" stroke="#1E293B" />
+      <rect x="296" y="130" width="8" height="32" rx="4" fill="#EC4899" />
+      <text x="316" y="148" font-size="13" fill="#94A3B8" letter-spacing="0.4">ACTIVE DAYS</text>
+      <text x="300" y="186" font-size="34" font-weight="700" fill="#F8FAFC">27</text>
+      <text x="300" y="208" font-size="13" fill="#94A3B8">days with at least one contribution</text>
+    </g><g>
+      <rect x="44" y="242" width="220" height="112" rx="22" fill="#101827" stroke="#1E293B" />
+      <rect x="62" y="260" width="8" height="32" rx="4" fill="#F97316" />
+      <text x="82" y="278" font-size="13" fill="#94A3B8" letter-spacing="0.4">PUBLIC REPOS</text>
+      <text x="66" y="316" font-size="34" font-weight="700" fill="#F8FAFC">12</text>
+      <text x="66" y="338" font-size="13" fill="#94A3B8">building since 2021</text>
+    </g><g>
+      <rect x="278" y="242" width="220" height="112" rx="22" fill="#101827" stroke="#1E293B" />
+      <rect x="296" y="260" width="8" height="32" rx="4" fill="#7C3AED" />
+      <text x="316" y="278" font-size="13" fill="#94A3B8" letter-spacing="0.4">STARS EARNED</text>
+      <text x="300" y="316" font-size="34" font-weight="700" fill="#F8FAFC">2</text>
+      <text x="300" y="338" font-size="13" fill="#94A3B8">peak day: 32</text>
+    </g>
+
+  <rect x="546" y="112" width="510" height="242" rx="26" fill="#101827" stroke="#1E293B" />
+  <text x="592" y="148" font-size="24" font-weight="700" fill="#F8FAFC">Stack Snapshot</text>
+  <text x="592" y="170" font-size="14" fill="#94A3B8">based on your public repos, not a guessed tech stack</text>
+  <g>
+              <circle cx="604" cy="174" r="7" fill="#F97316" />
+              <text x="620" y="180" font-size="18" font-weight="600" fill="#E2E8F0">HTML</text>
+              <text x="940" y="180" font-size="15" text-anchor="end" fill="#94A3B8">4 repos</text>
+              <rect x="620" y="192" width="240" height="8" rx="4" fill="#172033" />
+              <rect x="620" y="192" width="240" height="8" rx="4" fill="#F97316" />
+            </g>
+<g>
+              <circle cx="604" cy="220" r="7" fill="#60A5FA" />
+              <text x="620" y="226" font-size="18" font-weight="600" fill="#E2E8F0">Python</text>
+              <text x="940" y="226" font-size="15" text-anchor="end" fill="#94A3B8">3 repos</text>
+              <rect x="620" y="238" width="240" height="8" rx="4" fill="#172033" />
+              <rect x="620" y="238" width="180" height="8" rx="4" fill="#60A5FA" />
+            </g>
+<g>
+              <circle cx="604" cy="266" r="7" fill="#F59E0B" />
+              <text x="620" y="272" font-size="18" font-weight="600" fill="#E2E8F0">Jupyter Notebook</text>
+              <text x="940" y="272" font-size="15" text-anchor="end" fill="#94A3B8">1 repo</text>
+              <rect x="620" y="284" width="240" height="8" rx="4" fill="#172033" />
+              <rect x="620" y="284" width="60" height="8" rx="4" fill="#F59E0B" />
+            </g>
+<g>
+              <circle cx="604" cy="312" r="7" fill="#FB923C" />
+              <text x="620" y="318" font-size="18" font-weight="600" fill="#E2E8F0">Java</text>
+              <text x="940" y="318" font-size="15" text-anchor="end" fill="#94A3B8">1 repo</text>
+              <rect x="620" y="330" width="240" height="8" rx="4" fill="#172033" />
+              <rect x="620" y="330" width="60" height="8" rx="4" fill="#FB923C" />
+            </g>
+
+  <rect x="38" y="382" width="1018" height="118" rx="26" fill="#101827" stroke="#1E293B" />
+  <text x="56" y="418" font-size="24" font-weight="700" fill="#F8FAFC">Shipping Rhythm</text>
+  <text x="56" y="440" font-size="14" fill="#94A3B8">real weekly contributions from the last 12 weeks</text>
+  <line x1="56" y1="482" x2="1028" y2="482" stroke="#1E293B" />
+  <g>
+              <rect x="64" y="474" width="58" height="8" rx="18" fill="#2563EB" opacity="0.95" />
+              
+              <text x="93.0" y="508" font-size="12" text-anchor="middle" fill="#64748B">Mar</text>
+            </g>
+<g>
+              <rect x="144" y="474" width="58" height="8" rx="18" fill="#38BDF8" opacity="0.95" />
+              
+              <text x="173.0" y="508" font-size="12" text-anchor="middle" fill="#64748B"></text>
+            </g>
+<g>
+              <rect x="224" y="464" width="58" height="18" rx="18" fill="#F97316" opacity="0.95" />
+              <text x="253.0" y="454" font-size="13" text-anchor="middle" fill="#CBD5E1">14</text>
+              <text x="253.0" y="508" font-size="12" text-anchor="middle" fill="#64748B"></text>
+            </g>
+<g>
+              <rect x="304" y="474" width="58" height="8" rx="18" fill="#EC4899" opacity="0.95" />
+              <text x="333.0" y="464" font-size="13" text-anchor="middle" fill="#CBD5E1">1</text>
+              <text x="333.0" y="508" font-size="12" text-anchor="middle" fill="#64748B"></text>
+            </g>
+<g>
+              <rect x="384" y="474" width="58" height="8" rx="18" fill="#2563EB" opacity="0.95" />
+              
+              <text x="413.0" y="508" font-size="12" text-anchor="middle" fill="#64748B">Apr</text>
+            </g>
+<g>
+              <rect x="464" y="474" width="58" height="8" rx="18" fill="#38BDF8" opacity="0.95" />
+              
+              <text x="493.0" y="508" font-size="12" text-anchor="middle" fill="#64748B"></text>
+            </g>
+<g>
+              <rect x="544" y="474" width="58" height="8" rx="18" fill="#F97316" opacity="0.95" />
+              
+              <text x="573.0" y="508" font-size="12" text-anchor="middle" fill="#64748B"></text>
+            </g>
+<g>
+              <rect x="624" y="448" width="58" height="34" rx="18" fill="#EC4899" opacity="0.95" />
+              <text x="653.0" y="438" font-size="13" text-anchor="middle" fill="#CBD5E1">26</text>
+              <text x="653.0" y="508" font-size="12" text-anchor="middle" fill="#64748B"></text>
+            </g>
+<g>
+              <rect x="704" y="366" width="58" height="116" rx="18" fill="#2563EB" opacity="0.95" />
+              <text x="733.0" y="356" font-size="13" text-anchor="middle" fill="#CBD5E1">88</text>
+              <text x="733.0" y="508" font-size="12" text-anchor="middle" fill="#64748B">May</text>
+            </g>
+<g>
+              <rect x="784" y="452" width="58" height="30" rx="18" fill="#38BDF8" opacity="0.95" />
+              <text x="813.0" y="442" font-size="13" text-anchor="middle" fill="#CBD5E1">23</text>
+              <text x="813.0" y="508" font-size="12" text-anchor="middle" fill="#64748B"></text>
+            </g>
+<g>
+              <rect x="864" y="414" width="58" height="68" rx="18" fill="#F97316" opacity="0.95" />
+              <text x="893.0" y="404" font-size="13" text-anchor="middle" fill="#CBD5E1">52</text>
+              <text x="893.0" y="508" font-size="12" text-anchor="middle" fill="#64748B"></text>
+            </g>
+<g>
+              <rect x="944" y="424" width="58" height="58" rx="18" fill="#EC4899" opacity="0.95" />
+              <text x="973.0" y="414" font-size="13" text-anchor="middle" fill="#CBD5E1">44</text>
+              <text x="973.0" y="508" font-size="12" text-anchor="middle" fill="#64748B">Jun</text>
+            </g>
+</svg>

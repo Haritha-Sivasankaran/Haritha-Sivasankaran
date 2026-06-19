@@ -43,22 +43,13 @@ const haritha = {
   <img src="https://img.shields.io/badge/Jupyter-111827?style=flat-square&logo=jupyter&logoColor=FB923C" alt="Jupyter" />
 </p>
 
-## Stats.exe
+## Dev Pulse
 
-<table width="100%">
-  <tr>
-    <td width="50%" valign="top" align="center">
-      <img width="100%" src="https://github-readme-stats.vercel.app/api?username=Haritha-Sivasankaran&show_icons=true&theme=radical&hide_border=true&bg_color=00000000&title_color=60A5FA&icon_color=EC4899&text_color=CBD5E1&rank_icon=github" alt="Haritha's GitHub stats" />
-    </td>
-    <td width="50%" valign="top" align="center">
-      <img width="100%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Haritha-Sivasankaran&layout=compact&theme=radical&hide_border=true&bg_color=00000000&title_color=60A5FA&text_color=CBD5E1&langs_count=6&card_width=420&hide=Jupyter%20Notebook,Shell,PHP" alt="Haritha's top languages" />
-    </td>
-  </tr>
-</table>
+<img width="100%" src="./assets/profile-overview.svg" alt="Live GitHub profile stats for Haritha" />
 
-## Contribution Flow
-
-[![Haritha's GitHub activity graph](https://github-readme-activity-graph.vercel.app/graph?username=Haritha-Sivasankaran&bg_color=0D1117&color=94A3B8&line=60A5FA&point=F97316&area=true&area_color=2563EB&hide_border=true&custom_title=Haritha's%20Contribution%20Flow)](https://github.com/Haritha-Sivasankaran)
+<p align="center">
+  <sub>real data • auto-refreshes every 6 hours • updates on profile repo pushes</sub>
+</p>
 
 <p align="center">
   <strong>terminal open. tabs everywhere. still shipping.</strong>

@@ -1,0 +1,71 @@
+{
+  "username": "Haritha-Sivasankaran",
+  "name": "Haritha Sivasankaran",
+  "source_mode": "github-graphql",
+  "generated_at": "2026-06-20T02:03:52.073895+05:30",
+  "timezone": "Asia/Calcutta",
+  "contributions_365d": 254,
+  "active_days": 27,
+  "peak_day": 32,
+  "public_repos": 12,
+  "stars_earned": 2,
+  "joined_year": 2021,
+  "has_restricted_contributions": true,
+  "restricted_contributions": 239,
+  "language_counts": {
+    "Python": 3,
+    "Jupyter Notebook": 1,
+    "Java": 1,
+    "HTML": 4
+  },
+  "weekly_totals": [
+    {
+      "start": "2026-03-29",
+      "total": 0
+    },
+    {
+      "start": "2026-04-05",
+      "total": 0
+    },
+    {
+      "start": "2026-04-12",
+      "total": 14
+    },
+    {
+      "start": "2026-04-19",
+      "total": 1
+    },
+    {
+      "start": "2026-04-26",
+      "total": 0
+    },
+    {
+      "start": "2026-05-03",
+      "total": 0
+    },
+    {
+      "start": "2026-05-10",
+      "total": 0
+    },
+    {
+      "start": "2026-05-17",
+      "total": 26
+    },
+    {
+      "start": "2026-05-24",
+      "total": 88
+    },
+    {
+      "start": "2026-05-31",
+      "total": 23
+    },
+    {
+      "start": "2026-06-07",
+      "total": 52
+    },
+    {
+      "start": "2026-06-14",
+      "total": 44
+    }
+  ]
+}

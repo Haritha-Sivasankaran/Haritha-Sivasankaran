@@ -17,9 +17,9 @@ Haritha-Sivasankaran
   <img src="https://img.shields.io/badge/AI%20SIDE%20QUESTS-111827?style=for-the-badge&labelColor=020617&color=7C3AED" alt="AI side quests" />
 </p>
 
-## Player Build
+## Main Character Build
 
-<img width="100%" src="./assets/profile-build.svg" alt="Haritha build mode card" />
+<img width="100%" src="./assets/profile-build.svg" alt="Haritha main character build card" />
 
 ## Build Receipts
 

@@ -6,7 +6,7 @@ Haritha-Sivasankaran
 <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&height=220&color=0:0F172A,45:2563EB,100:EC4899&text=Haritha%20Sivasankaran&fontColor=FFFFFF&fontSize=40&fontAlignY=45&animation=fadeIn" alt="Header banner" />
 
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=py,js,html,css,java,ts,react,nodejs,git,github,vscode,jupyter" alt="My Skills" />
+  <img src="https://skillicons.dev/icons?i=py,js,html,css,java,ts,react,nextjs,tailwind,nodejs,vite,docker,git,github,vscode,jupyter" alt="My Skills" />
 </p>
 
 <p align="center">

@@ -269,8 +269,19 @@ def fetch_profile_data() -> dict:
     if TOKEN:
         try:
             return fetch_graphql_profile(USERNAME, from_date, today, TOKEN)
-        except (HTTPError, URLError, RuntimeError, KeyError, ValueError):
-            pass
+        except (HTTPError, URLError, RuntimeError, KeyError, ValueError) as e:
+            print(f"GraphQL fetch failed: {e}")
+
+    # Fallback to existing JSON data to preserve token-synced numbers if run locally
+    if JSON_PATH.exists():
+        try:
+            with open(JSON_PATH, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            required_keys = ["username", "name", "source_mode", "contributions_365d", "language_breakdown", "weekly_totals"]
+            if all(k in data for k in required_keys):
+                return data
+        except Exception as e:
+            print(f"Failed to read existing JSON profile data: {e}")
 
     return fetch_public_profile(USERNAME)
 
@@ -541,7 +552,7 @@ def build_svg(profile: dict) -> str:
 
   <!-- Content -->
   <text x="68" y="445" font-size="18" font-weight="800" fill="#FFFFFF" class="font-sans">recent shipping curve</text>
-  <text x="280" y="445" font-size="12" font-weight="500" fill="#94A3B8" class="font-sans">last 12 weeks of contribution movement</text>
+  <text x="330" y="445" font-size="12" font-weight="500" fill="#94A3B8" class="font-sans">last 12 weeks of contribution movement</text>
   
   <rect x="912" y="430" width="124" height="20" rx="4" fill="#1E2030" stroke="#000000" stroke-width="1.5" />
   <text x="974" y="444" font-size="10.5" font-weight="700" fill="#E2E8F0" text-anchor="middle" class="font-mono">PEAK WEEK: {peak_week}</text>

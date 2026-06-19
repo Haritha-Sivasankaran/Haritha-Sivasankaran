@@ -59,26 +59,6 @@ const haritha = {
 
 [![Haritha's GitHub activity graph](https://github-readme-activity-graph.vercel.app/graph?username=Haritha-Sivasankaran&bg_color=0D1117&color=7D8590&line=58A6FF&point=F78166&area=true&area_color=1F6FEB&hide_border=true&custom_title=Contribution%20Flow)](https://github.com/Haritha-Sivasankaran)
 
-## Featured Builds
-
-<p align="center">
-  <a href="https://github.com/Haritha-Sivasankaran/TransitPulse">
-    <img width="49%" src="https://github-readme-stats.vercel.app/api/pin/?username=Haritha-Sivasankaran&repo=TransitPulse&theme=github_dark&hide_border=true" alt="TransitPulse repository card" />
-  </a>
-  <a href="https://github.com/Haritha-Sivasankaran/headroom">
-    <img width="49%" src="https://github-readme-stats.vercel.app/api/pin/?username=Haritha-Sivasankaran&repo=headroom&theme=github_dark&hide_border=true" alt="headroom repository card" />
-  </a>
-</p>
-
-<p align="center">
-  <a href="https://github.com/Haritha-Sivasankaran/Ticket_Booking_Bot">
-    <img width="49%" src="https://github-readme-stats.vercel.app/api/pin/?username=Haritha-Sivasankaran&repo=Ticket_Booking_Bot&theme=github_dark&hide_border=true" alt="Ticket Booking Bot repository card" />
-  </a>
-  <a href="https://github.com/Haritha-Sivasankaran/SKIN-SEGMENTATION-AND-FIND-DOMINANT-SKIN-TONE">
-    <img width="49%" src="https://github-readme-stats.vercel.app/api/pin/?username=Haritha-Sivasankaran&repo=SKIN-SEGMENTATION-AND-FIND-DOMINANT-SKIN-TONE&theme=github_dark&hide_border=true" alt="Skin segmentation repository card" />
-  </a>
-</p>
-
 <p align="center">
   <strong>Clean systems. Useful automation. A little bit of chaos for flavor.</strong>
 </p>

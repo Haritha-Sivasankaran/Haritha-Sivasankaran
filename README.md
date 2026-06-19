@@ -9,6 +9,9 @@ Haritha-Sivasankaran
   <a href="https://www.linkedin.com/in/haritha-sivasankaran/" target="_blank">
     <img src="https://img.shields.io/badge/LINKEDIN-0077B5?style=for-the-badge&logo=linkedin&logoColor=white&labelColor=020617" alt="LinkedIn" />
   </a>
+</p>
+
+<p align="center">
   <img src="https://img.shields.io/badge/FULL%20STACK-111827?style=for-the-badge&labelColor=020617&color=2563EB" alt="Full stack" />
   <img src="https://img.shields.io/badge/FRONTEND-111827?style=for-the-badge&labelColor=020617&color=EC4899" alt="Frontend" />
   <img src="https://img.shields.io/badge/BACKEND-111827?style=for-the-badge&labelColor=020617&color=38BDF8" alt="Backend" />
@@ -22,7 +25,7 @@ Haritha-Sivasankaran
 
 ## Build Receipts
 
-<img width="100%" src="./assets/profile-overview.svg?t=1781906505" alt="Live GitHub profile stats for Haritha" />
+<img width="100%" src="./assets/profile-overview.svg?t=1781906581" alt="Live GitHub profile stats for Haritha" />
 
 <p align="center">
   <sub>real data | auto-refreshes every 6 hours | updates on profile repo pushes</sub>

@@ -6,9 +6,9 @@ Haritha-Sivasankaran
 <h1 align="center">Haritha Sivasankaran</h1>
 
 <p align="center">
-  <strong>Backend, automation, and AI-flavored developer.</strong>
+  <strong>Dev with a backend brain, automation habits, and a thing for shipping useful builds.</strong>
   <br />
-  Building useful things, cleaning up chaos, and shipping anyway.
+  Turning ideas into repos, workflows into bots, and bugs into plot twists.
 </p>
 
 <p align="center">
@@ -19,21 +19,28 @@ Haritha-Sivasankaran
   <img src="https://img.shields.io/badge/Focus-Backend%20%7C%20Automation%20%7C%20AI-111827?style=for-the-badge&labelColor=0F172A&color=2563EB" alt="Focus areas" />
 </p>
 
-```ts
-const haritha = {
-  builds: ["backend systems", "automation workflows", "AI experiments"],
-  stack: ["Java", "Python", "JavaScript", "MySQL", "UiPath"],
-  mindset: "ship fast, learn faster, keep the code clean"
+<p align="center">
+  <code>backend-first</code>
+  <code>automation-heavy</code>
+  <code>ai-side-quests</code>
+  <code>builder-mode:on</code>
+</p>
+
+```js
+const profile = {
+  currently: ["building", "debugging", "shipping"],
+  focus: ["Java", "Python", "automation", "AI tooling"],
+  mindset: "clean logic, fast iteration, no boring builds"
 };
 ```
 
-## Developer Mode
+## What I Build
 
-- I like building things that are useful, fast, and a little ambitious.
-- Most of my work lives around backend logic, automation, data-heavy ideas, and experimental tooling.
-- This profile is a live snapshot of what I am building and what I have shipped.
+- Backend flows that do real work.
+- Automation that saves time, clicks, and repeat effort.
+- AI and data-driven experiments that feel practical, not just flashy.
 
-## Stack I Reach For
+## Stack Rotation
 
 <p align="center">
   <img src="https://img.shields.io/badge/Java-111827?style=flat-square&logo=openjdk&logoColor=F59E0B" alt="Java" />
@@ -60,5 +67,5 @@ const haritha = {
 [![Haritha's GitHub activity graph](https://github-readme-activity-graph.vercel.app/graph?username=Haritha-Sivasankaran&bg_color=0D1117&color=7D8590&line=58A6FF&point=F78166&area=true&area_color=1F6FEB&hide_border=true&custom_title=Contribution%20Flow)](https://github.com/Haritha-Sivasankaran)
 
 <p align="center">
-  <strong>Clean systems. Useful automation. A little bit of chaos for flavor.</strong>
+  <strong>Builder energy. Terminal open. Shipping in progress.</strong>
 </p>

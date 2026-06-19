@@ -5,23 +5,23 @@ from pathlib import Path
 
 # Define icons to fetch (Simple Icons names)
 ICONS = {
-    "python": {"label": "Python", "x": 90, "y": 45, "size": 34, "opacity": 0.8, "rot": 12, "anim": 1},
-    "javascript": {"label": "JavaScript", "x": 160, "y": 120, "size": 32, "opacity": 0.85, "rot": -8, "anim": 2},
-    "html5": {"label": "HTML5", "x": 300, "y": 120, "size": 30, "opacity": 0.75, "rot": 5, "anim": 3},
-    "css3": {"label": "CSS3", "x": 90, "y": 120, "size": 30, "opacity": 0.75, "rot": -10, "anim": 4},
-    "java": {"label": "Java", "x": 160, "y": 40, "size": 30, "opacity": 0.7, "rot": 10, "anim": 1},
-    "typescript": {"label": "TypeScript", "x": 230, "y": 105, "size": 34, "opacity": 0.85, "rot": -5, "anim": 2},
-    "react": {"label": "React", "x": 230, "y": 40, "size": 38, "opacity": 0.9, "rot": 15, "anim": 3},
-    "nodedotjs": {"label": "Node.js", "x": 300, "y": 45, "size": 34, "opacity": 0.8, "rot": 8, "anim": 4},
+    "python": {"label": "Python", "x": 80, "y": 50, "size": 34, "opacity": 0.8, "rot": 12, "anim": 1},
+    "javascript": {"label": "JavaScript", "x": 160, "y": 130, "size": 32, "opacity": 0.85, "rot": -8, "anim": 2},
+    "html5": {"label": "HTML5", "x": 320, "y": 130, "size": 30, "opacity": 0.75, "rot": 5, "anim": 3},
+    "css3": {"label": "CSS3", "x": 80, "y": 130, "size": 30, "opacity": 0.75, "rot": -10, "anim": 4},
+    "java": {"label": "Java", "x": 160, "y": 50, "size": 30, "opacity": 0.7, "rot": 10, "anim": 1},
+    "typescript": {"label": "TypeScript", "x": 240, "y": 115, "size": 34, "opacity": 0.85, "rot": -5, "anim": 2},
+    "react": {"label": "React", "x": 240, "y": 45, "size": 38, "opacity": 0.9, "rot": 15, "anim": 3},
+    "nodedotjs": {"label": "Node.js", "x": 320, "y": 50, "size": 34, "opacity": 0.8, "rot": 8, "anim": 4},
     
-    "nextdotjs": {"label": "Next.js", "x": 670, "y": 45, "size": 38, "opacity": 0.9, "rot": -15, "anim": 1},
-    "tailwindcss": {"label": "Tailwind CSS", "x": 810, "y": 120, "size": 32, "opacity": 0.85, "rot": 8, "anim": 2},
-    "vite": {"label": "Vite", "x": 880, "y": 45, "size": 34, "opacity": 0.8, "rot": -10, "anim": 3},
-    "docker": {"label": "Docker", "x": 740, "y": 120, "size": 36, "opacity": 0.85, "rot": 12, "anim": 4},
-    "git": {"label": "Git", "x": 670, "y": 115, "size": 30, "opacity": 0.75, "rot": -8, "anim": 1},
-    "github": {"label": "GitHub", "x": 810, "y": 40, "size": 34, "opacity": 0.8, "rot": 5, "anim": 2},
-    "visualstudiocode": {"label": "VS Code", "x": 880, "y": 115, "size": 32, "opacity": 0.85, "rot": 10, "anim": 3},
-    "jupyter": {"label": "Jupyter", "x": 740, "y": 40, "size": 30, "opacity": 0.7, "rot": -5, "anim": 4}
+    "nextdotjs": {"label": "Next.js", "x": 680, "y": 50, "size": 38, "opacity": 0.9, "rot": -15, "anim": 1},
+    "tailwindcss": {"label": "Tailwind CSS", "x": 820, "y": 130, "size": 32, "opacity": 0.85, "rot": 8, "anim": 2},
+    "vite": {"label": "Vite", "x": 920, "y": 50, "size": 34, "opacity": 0.8, "rot": -10, "anim": 3},
+    "docker": {"label": "Docker", "x": 750, "y": 130, "size": 36, "opacity": 0.85, "rot": 12, "anim": 4},
+    "git": {"label": "Git", "x": 680, "y": 130, "size": 30, "opacity": 0.75, "rot": -8, "anim": 1},
+    "github": {"label": "GitHub", "x": 820, "y": 50, "size": 34, "opacity": 0.8, "rot": 5, "anim": 2},
+    "visualstudiocode": {"label": "VS Code", "x": 920, "y": 130, "size": 32, "opacity": 0.85, "rot": 10, "anim": 3},
+    "jupyter": {"label": "Jupyter", "x": 750, "y": 50, "size": 30, "opacity": 0.7, "rot": -5, "anim": 4}
 }
 
 def get_base64_icon(name: str) -> str:
@@ -64,14 +64,33 @@ def get_base64_icon(name: str) -> str:
 def main():
     print("Fetching and encoding icons...")
     encoded_icons = {}
+    
+    # Try to load cache first to save network calls
+    cache_path = Path("scripts/banner_icons_cache.json")
+    if cache_path.exists():
+        try:
+            with open(cache_path, "r", encoding="utf-8") as f:
+                encoded_icons = json.load(f)
+            print("Loaded icons from cache.")
+        except Exception:
+            pass
+
+    # Fetch missing icons
+    missing_fetched = False
     for key, info in ICONS.items():
-        label = info["label"]
-        b64 = get_base64_icon(key)
-        if b64:
-            encoded_icons[key] = b64
-            print(f"OK: {label} encoded successfully.")
-        else:
-            print(f"FAIL: {label} failed.")
+        if key not in encoded_icons:
+            label = info["label"]
+            b64 = get_base64_icon(key)
+            if b64:
+                encoded_icons[key] = b64
+                missing_fetched = True
+                print(f"OK: {label} encoded successfully.")
+            else:
+                print(f"FAIL: {label} failed.")
+
+    if missing_fetched:
+        with open("scripts/banner_icons_cache.json", "w", encoding="utf-8") as f:
+            json.dump(encoded_icons, f, indent=2)
 
     # SVG Construction
     icon_elements = []
@@ -85,10 +104,16 @@ def main():
         opacity = info["opacity"]
         rot = info["rot"]
         anim = info["anim"]
+        half_size = size / 2
         
+        # Nested structure: 
+        # Outer group translates to (x, y) and applies initial rotation.
+        # Inner group animates float independently.
         icon_elem = f"""
-  <g class="float-icon-{anim}" transform="translate({x}, {y}) rotate({rot})">
-    <image href="{b64}" width="{size}" height="{size}" opacity="{opacity}" />
+  <g transform="translate({x}, {y}) rotate({rot})">
+    <g class="float-icon-{anim}">
+      <image href="{b64}" x="-{half_size}" y="-{half_size}" width="{size}" height="{size}" opacity="{opacity}" />
+    </g>
   </g>"""
         icon_elements.append(icon_elem)
 
@@ -96,15 +121,11 @@ def main():
 
     svg_content = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 220" width="1000" height="220">
   <defs>
-    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#0F172A" />
       <stop offset="45%" stop-color="#2563EB" />
       <stop offset="100%" stop-color="#EC4899" />
     </linearGradient>
-    
-    <clipPath id="waveClip">
-      <path d="M 0 0 L 1000 0 L 1000 185 C 750 225, 250 145, 0 185 Z" />
-    </clipPath>
     
     <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
       <feDropShadow dx="2" dy="4" stdDeviation="4" flood-opacity="0.3" />
@@ -114,22 +135,22 @@ def main():
   <style>
     @keyframes float1 {{
       0% {{ transform: translateY(0px) rotate(0deg); }}
-      50% {{ transform: translateY(-6px) rotate(2deg); }}
+      50% {{ transform: translateY(-5px) rotate(1deg); }}
       100% {{ transform: translateY(0px) rotate(0deg); }}
     }}
     @keyframes float2 {{
       0% {{ transform: translateY(0px) rotate(0deg); }}
-      50% {{ transform: translateY(-8px) rotate(-2deg); }}
+      50% {{ transform: translateY(-7px) rotate(-1.5deg); }}
       100% {{ transform: translateY(0px) rotate(0deg); }}
     }}
     @keyframes float3 {{
       0% {{ transform: translateY(0px) rotate(0deg); }}
-      50% {{ transform: translateY(6px) rotate(1deg); }}
+      50% {{ transform: translateY(5px) rotate(1deg); }}
       100% {{ transform: translateY(0px) rotate(0deg); }}
     }}
     @keyframes float4 {{
       0% {{ transform: translateY(0px) rotate(0deg); }}
-      50% {{ transform: translateY(8px) rotate(-1deg); }}
+      50% {{ transform: translateY(7px) rotate(-1deg); }}
       100% {{ transform: translateY(0px) rotate(0deg); }}
     }}
     .float-icon-1 {{ animation: float1 5s ease-in-out infinite; }}
@@ -146,14 +167,39 @@ def main():
     }}
   </style>
 
-  <!-- Main clipped background -->
-  <rect width="1000" height="220" fill="url(#bgGradient)" clip-path="url(#waveClip)" />
+  <!-- Animated Waving Background Layers from capsule-render -->
+  <g>
+    <!-- Wave 1 (Back wave) -->
+    <path d="M0 0 L 0 140 Q 250 180 500 150 T 1000 175 L 1000 0 Z" fill="url(#bgGradient)" opacity="0.45">
+      <animate
+          attributeName="d"
+          dur="20s"
+          repeatCount="indefinite"
+          keyTimes="0;0.333;0.667;1"
+          calcMode="spline"
+          keySplines="0.2 0 0.2 1;0.2 0 0.2 1;0.2 0 0.2 1"
+          begin="0s"
+          values="M0 0 L 0 140 Q 250 180 500 150 T 1000 175 L 1000 0 Z; M0 0 L 0 165 Q 250 180 500 160 T 1000 150 L 1000 0 Z; M0 0 L 0 185 Q 250 155 500 185 T 1000 150 L 1000 0 Z; M0 0 L 0 140 Q 250 180 500 150 T 1000 175 L 1000 0 Z" />
+    </path>
+    <!-- Wave 2 (Front wave) -->
+    <path d="M0 0 L 0 155 Q 250 200 500 170 T 1000 180 L 1000 0 Z" fill="url(#bgGradient)" opacity="0.65">
+      <animate
+          attributeName="d"
+          dur="20s"
+          repeatCount="indefinite"
+          keyTimes="0;0.333;0.667;1"
+          calcMode="spline"
+          keySplines="0.2 0 0.2 1;0.2 0 0.2 1;0.2 0 0.2 1"
+          begin="-10s"
+          values="M0 0 L 0 155 Q 250 200 500 170 T 1000 180 L 1000 0 Z; M0 0 L 0 170 Q 250 140 500 140 T 1000 160 L 1000 0 Z; M0 0 L 0 165 Q 250 145 500 170 T 1000 185 L 1000 0 Z; M0 0 L 0 155 Q 250 200 500 170 T 1000 180 L 1000 0 Z" />
+    </path>
+  </g>
 
   <!-- Floating Tech Stack Icons -->
   {icons_str}
 
   <!-- Developer Name -->
-  <text x="500" y="105" text-anchor="middle" dominant-baseline="middle" class="title" filter="url(#shadow)">Haritha Sivasankaran</text>
+  <text x="500" y="100" text-anchor="middle" dominant-baseline="middle" class="title" filter="url(#shadow)">Haritha Sivasankaran</text>
 </svg>"""
 
     banner_path = Path("assets/profile-banner.svg")

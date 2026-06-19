@@ -30,11 +30,11 @@
 
   <rect x="856" y="34" width="180" height="32" rx="16" fill="#0F1B33" stroke="#22304A" />
   <text x="876" y="54" font-size="12" font-weight="700" fill="#E2E8F0">token sync + private</text>
-  <text x="856" y="92" font-size="13" fill="#64748B">last refresh: 20 Jun 2026 | 02:41 AM</text>
+  <text x="856" y="92" font-size="13" fill="#64748B">last refresh: 20 Jun 2026 | 02:53 AM</text>
 
   <rect x="44" y="146" width="430" height="224" rx="28" fill="#0D1526" stroke="#1E293B" />
   <text x="68" y="182" font-size="12" font-weight="700" fill="#64748B" letter-spacing="1.2">THIS YEAR</text>
-  <text x="68" y="268" font-size="92" font-weight="800" fill="#F8FAFC">261</text>
+  <text x="68" y="268" font-size="92" font-weight="800" fill="#F8FAFC">263</text>
   <text x="72" y="298" font-size="20" font-weight="700" fill="#CBD5E1">contributions</text>
   <text x="68" y="324" font-size="14" fill="#94A3B8">public + private activity</text>
   <text x="68" y="346" font-size="13" fill="#64748B">shipping publicly since 2021</text>
@@ -117,8 +117,8 @@
   <line x1="84" y1="500" x2="1016" y2="500" stroke="#1E293B" />
 <line x1="84" y1="476" x2="1016" y2="476" stroke="#142033" />
 <line x1="84" y1="452" x2="1016" y2="452" stroke="#142033" />
-<path d="M 84.00 500.00 84.00 498.00 L 168.73 498.00 L 253.45 492.36 L 338.18 499.45 L 422.91 498.00 L 507.64 498.00 L 592.36 498.00 L 677.09 485.82 L 761.82 452.00 L 846.55 487.45 L 931.27 471.64 L 1016.00 472.18 L 1016.00 500.00 Z" fill="url(#tempoFill)" opacity="0.9" />
-<path d="M 84.00 498.00 L 168.73 498.00 L 253.45 492.36 L 338.18 499.45 L 422.91 498.00 L 507.64 498.00 L 592.36 498.00 L 677.09 485.82 L 761.82 452.00 L 846.55 487.45 L 931.27 471.64 L 1016.00 472.18" fill="none" stroke="url(#tempoStroke)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M 84.00 500.00 84.00 498.00 L 168.73 498.00 L 253.45 492.36 L 338.18 499.45 L 422.91 498.00 L 507.64 498.00 L 592.36 498.00 L 677.09 485.82 L 761.82 452.00 L 846.55 487.45 L 931.27 471.64 L 1016.00 471.09 L 1016.00 500.00 Z" fill="url(#tempoFill)" opacity="0.9" />
+<path d="M 84.00 498.00 L 168.73 498.00 L 253.45 492.36 L 338.18 499.45 L 422.91 498.00 L 507.64 498.00 L 592.36 498.00 L 677.09 485.82 L 761.82 452.00 L 846.55 487.45 L 931.27 471.64 L 1016.00 471.09" fill="none" stroke="url(#tempoStroke)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
 <circle cx="84.00" cy="498.00" r="4.5" fill="#0F172A" stroke="#60A5FA" stroke-width="3" />
 <text x="84.00" y="520" font-size="12" text-anchor="middle" fill="#64748B">Mar</text>
 <circle cx="168.73" cy="498.00" r="4.5" fill="#0F172A" stroke="#60A5FA" stroke-width="3" />
@@ -139,7 +139,7 @@
 <text x="846.55" y="475.45" font-size="11" font-weight="600" text-anchor="middle" fill="#E2E8F0">23</text>
 <circle cx="931.27" cy="471.64" r="4.5" fill="#0F172A" stroke="#60A5FA" stroke-width="3" />
 <text x="931.27" y="459.64" font-size="11" font-weight="600" text-anchor="middle" fill="#E2E8F0">52</text>
-<circle cx="1016.00" cy="472.18" r="4.5" fill="#0F172A" stroke="#60A5FA" stroke-width="3" />
-<text x="1016.00" y="460.18" font-size="11" font-weight="600" text-anchor="middle" fill="#E2E8F0">51</text>
+<circle cx="1016.00" cy="471.09" r="4.5" fill="#0F172A" stroke="#60A5FA" stroke-width="3" />
+<text x="1016.00" y="459.09" font-size="11" font-weight="600" text-anchor="middle" fill="#E2E8F0">53</text>
 <text x="1016.00" y="520" font-size="12" text-anchor="middle" fill="#64748B">Jun</text>
 </svg>

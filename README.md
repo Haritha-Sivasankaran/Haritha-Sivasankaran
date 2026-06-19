@@ -32,19 +32,6 @@ const haritha = {
 - Using automation the second repetitive work starts getting annoying.
 - Exploring AI and data ideas that are useful enough to keep shipping.
 
-## Stack Rotation
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Java-111827?style=flat-square&logo=openjdk&logoColor=F59E0B" alt="Java" />
-  <img src="https://img.shields.io/badge/Python-111827?style=flat-square&logo=python&logoColor=60A5FA" alt="Python" />
-  <img src="https://img.shields.io/badge/JavaScript-111827?style=flat-square&logo=javascript&logoColor=FACC15" alt="JavaScript" />
-  <img src="https://img.shields.io/badge/HTML5-111827?style=flat-square&logo=html5&logoColor=F97316" alt="HTML5" />
-  <img src="https://img.shields.io/badge/CSS3-111827?style=flat-square&logo=css3&logoColor=60A5FA" alt="CSS3" />
-  <img src="https://img.shields.io/badge/MySQL-111827?style=flat-square&logo=mysql&logoColor=38BDF8" alt="MySQL" />
-  <img src="https://img.shields.io/badge/UiPath-111827?style=flat-square&logo=uipath&logoColor=FB7185" alt="UiPath" />
-  <img src="https://img.shields.io/badge/Jupyter-111827?style=flat-square&logo=jupyter&logoColor=FB923C" alt="Jupyter" />
-</p>
-
 ## Dev Pulse
 
 <img width="100%" src="./assets/profile-overview.svg" alt="Live GitHub profile stats for Haritha" />

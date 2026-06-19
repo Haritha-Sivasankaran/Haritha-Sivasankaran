@@ -20,6 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 ASSETS_DIR = ROOT / "assets"
 SVG_PATH = ASSETS_DIR / "profile-overview.svg"
 JSON_PATH = ASSETS_DIR / "profile-data.json"
+MAX_LANGUAGES = 6
 
 USERNAME = os.getenv("PROFILE_USERNAME", "Haritha-Sivasankaran")
 TIMEZONE_NAME = os.getenv("PROFILE_TIMEZONE", "Asia/Calcutta")
@@ -115,6 +116,35 @@ def request_text(url: str) -> str:
         return response.read().decode("utf-8")
 
 
+def fetch_public_repo_language_breakdown(login: str, token: str | None = None) -> list[dict]:
+    repos = request_json(
+        f"https://api.github.com/users/{login}/repos?per_page=100&type=owner&sort=updated",
+        token=token,
+    )
+
+    totals = Counter()
+    for repo in repos:
+        if repo.get("fork"):
+            continue
+        repo_languages = request_json(repo["languages_url"], token=token)
+        for language, byte_count in repo_languages.items():
+            totals[language] += byte_count
+
+    if not totals:
+        return []
+
+    total_bytes = sum(totals.values()) or 1
+    ranked = totals.most_common(MAX_LANGUAGES)
+    return [
+        {
+            "name": language,
+            "bytes": byte_count,
+            "percent": round((byte_count / total_bytes) * 100, 2),
+        }
+        for language, byte_count in ranked
+    ]
+
+
 def fetch_graphql_profile(login: str, from_date: date, to_date: date, token: str) -> dict:
     payload = {
         "query": GRAPHQL_QUERY,
@@ -131,6 +161,7 @@ def fetch_graphql_profile(login: str, from_date: date, to_date: date, token: str
 
     user = response["data"]["user"]
     repositories = user["repositories"]["nodes"]
+    language_breakdown = fetch_public_repo_language_breakdown(login, token=token)
 
     contribution_days: list[dict] = []
     weekly_totals: list[dict] = []
@@ -149,12 +180,6 @@ def fetch_graphql_profile(login: str, from_date: date, to_date: date, token: str
                 }
             )
 
-    language_counts = Counter(
-        repo["primaryLanguage"]["name"]
-        for repo in repositories
-        if repo.get("primaryLanguage") and repo["primaryLanguage"].get("name")
-    )
-
     return {
         "source_mode": "github-graphql",
         "username": user["login"],
@@ -168,7 +193,7 @@ def fetch_graphql_profile(login: str, from_date: date, to_date: date, token: str
         "restricted_contributions": user["contributionsCollection"]["restrictedContributionsCount"],
         "has_restricted_contributions": user["contributionsCollection"]["hasAnyRestrictedContributions"],
         "weekly_totals": weekly_totals[-12:],
-        "language_counts": language_counts,
+        "language_breakdown": language_breakdown,
     }
 
 
@@ -220,12 +245,6 @@ def fetch_public_profile(login: str) -> dict:
             }
         )
 
-    language_counts = Counter(
-        repo["language"]
-        for repo in repos
-        if not repo.get("fork") and repo.get("language")
-    )
-
     return {
         "source_mode": "github-public",
         "username": user["login"],
@@ -239,7 +258,7 @@ def fetch_public_profile(login: str) -> dict:
         "restricted_contributions": 0,
         "has_restricted_contributions": False,
         "weekly_totals": weekly_totals[-12:],
-        "language_counts": language_counts,
+        "language_breakdown": fetch_public_repo_language_breakdown(login),
     }
 
 
@@ -277,32 +296,61 @@ def draw_metric_card(x: int, y: int, label: str, value: str, accent: str, note: 
     """.strip()
 
 
-def draw_language_rows(language_counts: Counter) -> str:
-    if not language_counts:
+def draw_language_breakdown(language_breakdown: list[dict]) -> str:
+    if not language_breakdown:
         return """
         <text x="592" y="178" font-size="16" fill="#94A3B8">No public repo language data yet.</text>
         """.strip()
 
-    top_languages = language_counts.most_common(4)
-    max_count = max(count for _, count in top_languages) or 1
-    rows = []
-    for index, (language, count) in enumerate(top_languages):
-        y = 180 + index * 46
-        bar_width = int(240 * (count / max_count))
+    breakdown_total = sum(item["percent"] for item in language_breakdown) or 1
+    legend_items = []
+    stacked_segments = []
+    bar_x = 592
+    bar_y = 184
+    bar_width = 360
+    current_x = bar_x
+    raw_widths = [bar_width * (item["percent"] / breakdown_total) for item in language_breakdown]
+    segment_widths = [int(width) for width in raw_widths]
+    remaining_pixels = bar_width - sum(segment_widths)
+    remainders = sorted(
+        enumerate(raw_widths),
+        key=lambda item: item[1] - int(item[1]),
+        reverse=True,
+    )
+    for index, _ in remainders[:remaining_pixels]:
+        segment_widths[index] += 1
+
+    for item, width in zip(language_breakdown, segment_widths):
+        language = item["name"]
         accent = LANGUAGE_COLORS.get(language, "#94A3B8")
-        repo_label = "repo" if count == 1 else "repos"
-        rows.append(
+        stacked_segments.append(
+            f'<rect x="{current_x}" y="{bar_y}" width="{width}" height="14" rx="7" fill="{accent}" />'
+        )
+        current_x += width
+
+    for index, item in enumerate(language_breakdown):
+        column = index % 2
+        row = index // 2
+        x = 592 + column * 190
+        y = 236 + row * 42
+        accent = LANGUAGE_COLORS.get(item["name"], "#94A3B8")
+        legend_items.append(
             f"""
             <g>
-              <circle cx="604" cy="{y - 6}" r="7" fill="{accent}" />
-              <text x="620" y="{y}" font-size="18" font-weight="600" fill="#E2E8F0">{escape(language)}</text>
-              <text x="940" y="{y}" font-size="15" text-anchor="end" fill="#94A3B8">{count} {repo_label}</text>
-              <rect x="620" y="{y + 12}" width="240" height="8" rx="4" fill="#172033" />
-              <rect x="620" y="{y + 12}" width="{bar_width}" height="8" rx="4" fill="{accent}" />
+              <circle cx="{x + 8}" cy="{y - 5}" r="7" fill="{accent}" />
+              <text x="{x + 24}" y="{y}" font-size="17" font-weight="600" fill="#E2E8F0">{escape(item["name"])}</text>
+              <text x="{x + 168}" y="{y}" font-size="14" text-anchor="end" fill="#94A3B8">{item["percent"]:.2f}%</text>
             </g>
             """.strip()
         )
-    return "\n".join(rows)
+
+    return "\n".join(
+        [
+            f'<rect x="{bar_x}" y="{bar_y}" width="{bar_width}" height="14" rx="7" fill="#172033" />',
+            *stacked_segments,
+            *legend_items,
+        ]
+    )
 
 
 def draw_weekly_chart(weekly_totals: list[dict]) -> str:
@@ -427,9 +475,9 @@ def build_svg(profile: dict) -> str:
   {"".join(cards)}
 
   <rect x="546" y="112" width="510" height="242" rx="26" fill="#101827" stroke="#1E293B" />
-  <text x="592" y="148" font-size="24" font-weight="700" fill="#F8FAFC">Stack Snapshot</text>
-  <text x="592" y="170" font-size="14" fill="#94A3B8">based on your public repos, not a guessed tech stack</text>
-  {draw_language_rows(profile["language_counts"])}
+  <text x="592" y="148" font-size="24" font-weight="700" fill="#F8FAFC">Language Mix</text>
+  <text x="592" y="170" font-size="14" fill="#94A3B8">actual percentages from your public repos</text>
+  {draw_language_breakdown(profile["language_breakdown"])}
 
   <rect x="38" y="382" width="1018" height="118" rx="26" fill="#101827" stroke="#1E293B" />
   <text x="56" y="418" font-size="24" font-weight="700" fill="#F8FAFC">Shipping Rhythm</text>
@@ -458,7 +506,7 @@ def write_outputs(profile: dict) -> None:
         "joined_year": profile["joined_year"],
         "has_restricted_contributions": profile["has_restricted_contributions"],
         "restricted_contributions": profile["restricted_contributions"],
-        "language_counts": dict(profile["language_counts"]),
+        "language_breakdown": profile["language_breakdown"],
         "weekly_totals": profile["weekly_totals"],
     }
     JSON_PATH.write_text(json.dumps(metadata, indent=2), encoding="utf-8")

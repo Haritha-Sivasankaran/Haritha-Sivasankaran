@@ -2,7 +2,7 @@
   "username": "Haritha-Sivasankaran",
   "name": "Haritha Sivasankaran",
   "source_mode": "github-graphql",
-  "generated_at": "2026-06-20T02:17:19.118178+05:30",
+  "generated_at": "2026-06-20T02:22:10.276183+05:30",
   "timezone": "Asia/Calcutta",
   "contributions_365d": 257,
   "active_days": 27,
@@ -12,12 +12,38 @@
   "joined_year": 2021,
   "has_restricted_contributions": true,
   "restricted_contributions": 239,
-  "language_counts": {
-    "Python": 4,
-    "Jupyter Notebook": 1,
-    "Java": 1,
-    "HTML": 4
-  },
+  "language_breakdown": [
+    {
+      "name": "Jupyter Notebook",
+      "bytes": 439263,
+      "percent": 58.92
+    },
+    {
+      "name": "HTML",
+      "bytes": 171702,
+      "percent": 23.03
+    },
+    {
+      "name": "Python",
+      "bytes": 87538,
+      "percent": 11.74
+    },
+    {
+      "name": "CSS",
+      "bytes": 29629,
+      "percent": 3.97
+    },
+    {
+      "name": "JavaScript",
+      "bytes": 9497,
+      "percent": 1.27
+    },
+    {
+      "name": "Java",
+      "bytes": 3754,
+      "percent": 0.5
+    }
+  ],
   "weekly_totals": [
     {
       "start": "2026-03-29",

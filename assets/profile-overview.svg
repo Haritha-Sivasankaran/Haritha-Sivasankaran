@@ -17,7 +17,7 @@
 
   <rect x="822" y="34" width="230" height="34" rx="17" fill="#111C31" stroke="#22304A" />
   <text x="842" y="56" font-size="12" font-weight="600" fill="#E2E8F0">GitHub token sync + private</text>
-  <text x="822" y="92" font-size="13" fill="#64748B">last refresh: 20 Jun 2026 | 02:17 AM</text>
+  <text x="822" y="92" font-size="13" fill="#64748B">last refresh: 20 Jun 2026 | 02:22 AM</text>
 
   <g>
       <rect x="44" y="112" width="220" height="112" rx="22" fill="#101827" stroke="#1E293B" />
@@ -46,35 +46,44 @@
     </g>
 
   <rect x="546" y="112" width="510" height="242" rx="26" fill="#101827" stroke="#1E293B" />
-  <text x="592" y="148" font-size="24" font-weight="700" fill="#F8FAFC">Stack Snapshot</text>
-  <text x="592" y="170" font-size="14" fill="#94A3B8">based on your public repos, not a guessed tech stack</text>
-  <g>
-              <circle cx="604" cy="174" r="7" fill="#60A5FA" />
-              <text x="620" y="180" font-size="18" font-weight="600" fill="#E2E8F0">Python</text>
-              <text x="940" y="180" font-size="15" text-anchor="end" fill="#94A3B8">4 repos</text>
-              <rect x="620" y="192" width="240" height="8" rx="4" fill="#172033" />
-              <rect x="620" y="192" width="240" height="8" rx="4" fill="#60A5FA" />
+  <text x="592" y="148" font-size="24" font-weight="700" fill="#F8FAFC">Language Mix</text>
+  <text x="592" y="170" font-size="14" fill="#94A3B8">actual percentages from your public repos</text>
+  <rect x="592" y="184" width="360" height="14" rx="7" fill="#172033" />
+<rect x="592" y="184" width="213" height="14" rx="7" fill="#F59E0B" />
+<rect x="805" y="184" width="83" height="14" rx="7" fill="#F97316" />
+<rect x="888" y="184" width="43" height="14" rx="7" fill="#60A5FA" />
+<rect x="931" y="184" width="14" height="14" rx="7" fill="#7C3AED" />
+<rect x="945" y="184" width="5" height="14" rx="7" fill="#FACC15" />
+<rect x="950" y="184" width="2" height="14" rx="7" fill="#FB923C" />
+<g>
+              <circle cx="600" cy="231" r="7" fill="#F59E0B" />
+              <text x="616" y="236" font-size="17" font-weight="600" fill="#E2E8F0">Jupyter Notebook</text>
+              <text x="760" y="236" font-size="14" text-anchor="end" fill="#94A3B8">58.92%</text>
             </g>
 <g>
-              <circle cx="604" cy="220" r="7" fill="#F97316" />
-              <text x="620" y="226" font-size="18" font-weight="600" fill="#E2E8F0">HTML</text>
-              <text x="940" y="226" font-size="15" text-anchor="end" fill="#94A3B8">4 repos</text>
-              <rect x="620" y="238" width="240" height="8" rx="4" fill="#172033" />
-              <rect x="620" y="238" width="240" height="8" rx="4" fill="#F97316" />
+              <circle cx="790" cy="231" r="7" fill="#F97316" />
+              <text x="806" y="236" font-size="17" font-weight="600" fill="#E2E8F0">HTML</text>
+              <text x="950" y="236" font-size="14" text-anchor="end" fill="#94A3B8">23.03%</text>
             </g>
 <g>
-              <circle cx="604" cy="266" r="7" fill="#F59E0B" />
-              <text x="620" y="272" font-size="18" font-weight="600" fill="#E2E8F0">Jupyter Notebook</text>
-              <text x="940" y="272" font-size="15" text-anchor="end" fill="#94A3B8">1 repo</text>
-              <rect x="620" y="284" width="240" height="8" rx="4" fill="#172033" />
-              <rect x="620" y="284" width="60" height="8" rx="4" fill="#F59E0B" />
+              <circle cx="600" cy="273" r="7" fill="#60A5FA" />
+              <text x="616" y="278" font-size="17" font-weight="600" fill="#E2E8F0">Python</text>
+              <text x="760" y="278" font-size="14" text-anchor="end" fill="#94A3B8">11.74%</text>
             </g>
 <g>
-              <circle cx="604" cy="312" r="7" fill="#FB923C" />
-              <text x="620" y="318" font-size="18" font-weight="600" fill="#E2E8F0">Java</text>
-              <text x="940" y="318" font-size="15" text-anchor="end" fill="#94A3B8">1 repo</text>
-              <rect x="620" y="330" width="240" height="8" rx="4" fill="#172033" />
-              <rect x="620" y="330" width="60" height="8" rx="4" fill="#FB923C" />
+              <circle cx="790" cy="273" r="7" fill="#7C3AED" />
+              <text x="806" y="278" font-size="17" font-weight="600" fill="#E2E8F0">CSS</text>
+              <text x="950" y="278" font-size="14" text-anchor="end" fill="#94A3B8">3.97%</text>
+            </g>
+<g>
+              <circle cx="600" cy="315" r="7" fill="#FACC15" />
+              <text x="616" y="320" font-size="17" font-weight="600" fill="#E2E8F0">JavaScript</text>
+              <text x="760" y="320" font-size="14" text-anchor="end" fill="#94A3B8">1.27%</text>
+            </g>
+<g>
+              <circle cx="790" cy="315" r="7" fill="#FB923C" />
+              <text x="806" y="320" font-size="17" font-weight="600" fill="#E2E8F0">Java</text>
+              <text x="950" y="320" font-size="14" text-anchor="end" fill="#94A3B8">0.50%</text>
             </g>
 
   <rect x="38" y="382" width="1018" height="118" rx="26" fill="#101827" stroke="#1E293B" />

@@ -117,18 +117,25 @@ def request_text(url: str) -> str:
 
 
 def fetch_public_repo_language_breakdown(login: str, token: str | None = None) -> list[dict]:
-    repos = request_json(
-        f"https://api.github.com/users/{login}/repos?per_page=100&type=owner&sort=updated",
-        token=token,
-    )
+    if token:
+        # Use /user/repos to fetch both public and private repositories for the authenticated user
+        url = "https://api.github.com/user/repos?per_page=100&type=owner&sort=updated"
+    else:
+        url = f"https://api.github.com/users/{login}/repos?per_page=100&type=owner&sort=updated"
+
+    repos = request_json(url, token=token)
 
     totals = Counter()
     for repo in repos:
         if repo.get("fork"):
             continue
-        repo_languages = request_json(repo["languages_url"], token=token)
-        for language, byte_count in repo_languages.items():
-            totals[language] += byte_count
+        try:
+            repo_languages = request_json(repo["languages_url"], token=token)
+            for language, byte_count in repo_languages.items():
+                totals[language] += byte_count
+        except Exception as e:
+            # Handle potential API errors gracefully for individual repos
+            print(f"Failed to fetch languages for {repo.get('name')}: {e}")
 
     if not totals:
         return []

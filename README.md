@@ -11,24 +11,15 @@ Haritha-Sivasankaran
 
 <p align="center">
   <img src="https://img.shields.io/badge/FULL%20STACK-111827?style=for-the-badge&labelColor=020617&color=2563EB" alt="Full stack" />
-  <img src="https://img.shields.io/badge/FRONTEND%20+%20BACKEND-111827?style=for-the-badge&labelColor=020617&color=DB2777" alt="Frontend and backend" />
   <img src="https://img.shields.io/badge/AUTOMATION%20MODE-111827?style=for-the-badge&labelColor=020617&color=F97316" alt="Automation mode" />
   <img src="https://img.shields.io/badge/AI%20SIDE%20QUESTS-111827?style=for-the-badge&labelColor=020617&color=7C3AED" alt="AI side quests" />
 </p>
 
-<p align="center">
-  <code>full-stack-mode:on</code>
-  <code>frontend-with-taste</code>
-  <code>backend-that-works</code>
-  <code>builder-brain</code>
-</p>
-
 ```js
 const haritha = {
-  role: "full-stack developer",
-  currently: ["building", "debugging", "shipping"],
-  strengths: ["frontend", "backend", "automation", "AI tooling"],
-  vibe: "clean visuals, solid logic, no boring builds"
+  ships: ["full-stack apps", "automation flows", "AI side projects"],
+  cares_about: ["clean UI", "solid backend", "good developer experience"],
+  avoids: ["messy logic", "clunky screens", "doing the same task twice"]
 };
 ```
 

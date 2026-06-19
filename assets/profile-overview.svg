@@ -34,7 +34,7 @@
 
   <rect x="44" y="146" width="430" height="224" rx="28" fill="#0D1526" stroke="#1E293B" />
   <text x="68" y="182" font-size="12" font-weight="700" fill="#64748B" letter-spacing="1.2">THIS YEAR</text>
-  <text x="68" y="268" font-size="92" font-weight="800" fill="#F8FAFC">258</text>
+  <text x="68" y="268" font-size="92" font-weight="800" fill="#F8FAFC">259</text>
   <text x="72" y="298" font-size="20" font-weight="700" fill="#CBD5E1">contributions</text>
   <text x="68" y="324" font-size="14" fill="#94A3B8">public + private activity</text>
   <text x="68" y="346" font-size="13" fill="#64748B">shipping publicly since 2021</text>
@@ -65,9 +65,9 @@
   <text x="524" y="208" font-size="26" font-weight="700" fill="#F8FAFC">actual language mix</text>
   <text x="524" y="228" font-size="14" fill="#94A3B8">only the real repo languages make the lineup.</text>
   <rect x="524" y="246" width="476" height="14" rx="7" fill="#172033" />
-<rect x="524" y="246" width="282" height="14" rx="7" fill="#F59E0B" />
-<rect x="806" y="246" width="110" height="14" rx="7" fill="#F97316" />
-<rect x="916" y="246" width="57" height="14" rx="7" fill="#60A5FA" />
+<rect x="524" y="246" width="281" height="14" rx="7" fill="#F59E0B" />
+<rect x="805" y="246" width="110" height="14" rx="7" fill="#F97316" />
+<rect x="915" y="246" width="58" height="14" rx="7" fill="#60A5FA" />
 <rect x="973" y="246" width="19" height="14" rx="7" fill="#7C3AED" />
 <rect x="992" y="246" width="6" height="14" rx="7" fill="#FACC15" />
 <rect x="998" y="246" width="2" height="14" rx="7" fill="#FB923C" />
@@ -75,25 +75,25 @@
               <rect x="524" y="280" width="166" height="38" rx="16" fill="#111B2E" />
               <rect x="536" y="290" width="7" height="18" rx="3" fill="#F59E0B" />
               <text x="553" y="296" font-size="10.5" font-weight="600" fill="#94A3B8">Jupyter Notebook</text>
-              <text x="553" y="312" font-size="19" font-weight="700" fill="#F8FAFC">58.80%</text>
+              <text x="553" y="312" font-size="19" font-weight="700" fill="#F8FAFC">58.63%</text>
             </g>
 <g>
               <rect x="702" y="280" width="166" height="38" rx="16" fill="#111B2E" />
               <rect x="714" y="290" width="7" height="18" rx="3" fill="#F97316" />
               <text x="731" y="296" font-size="10.5" font-weight="600" fill="#94A3B8">HTML</text>
-              <text x="731" y="312" font-size="19" font-weight="700" fill="#F8FAFC">22.98%</text>
+              <text x="731" y="312" font-size="19" font-weight="700" fill="#F8FAFC">22.92%</text>
             </g>
 <g>
               <rect x="880" y="280" width="166" height="38" rx="16" fill="#111B2E" />
               <rect x="892" y="290" width="7" height="18" rx="3" fill="#60A5FA" />
               <text x="909" y="296" font-size="10.5" font-weight="600" fill="#94A3B8">Python</text>
-              <text x="909" y="312" font-size="19" font-weight="700" fill="#F8FAFC">11.92%</text>
+              <text x="909" y="312" font-size="19" font-weight="700" fill="#F8FAFC">12.17%</text>
             </g>
 <g>
               <rect x="524" y="330" width="166" height="38" rx="16" fill="#111B2E" />
               <rect x="536" y="340" width="7" height="18" rx="3" fill="#7C3AED" />
               <text x="553" y="346" font-size="10.5" font-weight="600" fill="#94A3B8">CSS</text>
-              <text x="553" y="362" font-size="19" font-weight="700" fill="#F8FAFC">3.97%</text>
+              <text x="553" y="362" font-size="19" font-weight="700" fill="#F8FAFC">3.95%</text>
             </g>
 <g>
               <rect x="702" y="330" width="166" height="38" rx="16" fill="#111B2E" />
@@ -117,8 +117,8 @@
   <line x1="84" y1="500" x2="1016" y2="500" stroke="#1E293B" />
 <line x1="84" y1="476" x2="1016" y2="476" stroke="#142033" />
 <line x1="84" y1="452" x2="1016" y2="452" stroke="#142033" />
-<path d="M 84.00 500.00 84.00 498.00 L 168.73 498.00 L 253.45 492.36 L 338.18 499.45 L 422.91 498.00 L 507.64 498.00 L 592.36 498.00 L 677.09 485.82 L 761.82 452.00 L 846.55 487.45 L 931.27 471.64 L 1016.00 473.82 L 1016.00 500.00 Z" fill="url(#tempoFill)" opacity="0.9" />
-<path d="M 84.00 498.00 L 168.73 498.00 L 253.45 492.36 L 338.18 499.45 L 422.91 498.00 L 507.64 498.00 L 592.36 498.00 L 677.09 485.82 L 761.82 452.00 L 846.55 487.45 L 931.27 471.64 L 1016.00 473.82" fill="none" stroke="url(#tempoStroke)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M 84.00 500.00 84.00 498.00 L 168.73 498.00 L 253.45 492.36 L 338.18 499.45 L 422.91 498.00 L 507.64 498.00 L 592.36 498.00 L 677.09 485.82 L 761.82 452.00 L 846.55 487.45 L 931.27 471.64 L 1016.00 473.27 L 1016.00 500.00 Z" fill="url(#tempoFill)" opacity="0.9" />
+<path d="M 84.00 498.00 L 168.73 498.00 L 253.45 492.36 L 338.18 499.45 L 422.91 498.00 L 507.64 498.00 L 592.36 498.00 L 677.09 485.82 L 761.82 452.00 L 846.55 487.45 L 931.27 471.64 L 1016.00 473.27" fill="none" stroke="url(#tempoStroke)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
 <circle cx="84.00" cy="498.00" r="4.5" fill="#0F172A" stroke="#60A5FA" stroke-width="3" />
 <text x="84.00" y="520" font-size="12" text-anchor="middle" fill="#64748B">Mar</text>
 <circle cx="168.73" cy="498.00" r="4.5" fill="#0F172A" stroke="#60A5FA" stroke-width="3" />
@@ -139,7 +139,7 @@
 <text x="846.55" y="475.45" font-size="11" font-weight="600" text-anchor="middle" fill="#E2E8F0">23</text>
 <circle cx="931.27" cy="471.64" r="4.5" fill="#0F172A" stroke="#60A5FA" stroke-width="3" />
 <text x="931.27" y="459.64" font-size="11" font-weight="600" text-anchor="middle" fill="#E2E8F0">52</text>
-<circle cx="1016.00" cy="473.82" r="4.5" fill="#0F172A" stroke="#60A5FA" stroke-width="3" />
-<text x="1016.00" y="461.82" font-size="11" font-weight="600" text-anchor="middle" fill="#E2E8F0">48</text>
+<circle cx="1016.00" cy="473.27" r="4.5" fill="#0F172A" stroke="#60A5FA" stroke-width="3" />
+<text x="1016.00" y="461.27" font-size="11" font-weight="600" text-anchor="middle" fill="#E2E8F0">49</text>
 <text x="1016.00" y="520" font-size="12" text-anchor="middle" fill="#64748B">Jun</text>
 </svg>

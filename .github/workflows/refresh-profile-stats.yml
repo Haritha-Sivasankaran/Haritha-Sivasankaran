@@ -51,3 +51,6 @@ jobs:
           git add assets/profile-overview.svg assets/profile-data.json
           git commit -m "chore: refresh profile stats"
           git push
+
+      - name: Purge Camo Cache
+        uses: kevincobain2000/action-camo-purge@v1

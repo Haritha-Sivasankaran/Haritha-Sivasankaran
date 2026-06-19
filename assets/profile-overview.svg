@@ -16,15 +16,15 @@
   <text x="38" y="118" font-size="16" fill="#94A3B8">full-stack energy, live GitHub signal, zero mock stats</text>
 
   <rect x="822" y="34" width="230" height="34" rx="17" fill="#111C31" stroke="#22304A" />
-  <text x="842" y="56" font-size="12" font-weight="600" fill="#E2E8F0">GitHub GraphQL live sync</text>
-  <text x="822" y="92" font-size="13" fill="#64748B">last refresh: 20 Jun 2026 | 02:09 AM</text>
+  <text x="842" y="56" font-size="12" font-weight="600" fill="#E2E8F0">GitHub token sync + private</text>
+  <text x="822" y="92" font-size="13" fill="#64748B">last refresh: 20 Jun 2026 | 02:14 AM</text>
 
   <g>
       <rect x="44" y="112" width="220" height="112" rx="22" fill="#101827" stroke="#1E293B" />
       <rect x="62" y="130" width="8" height="32" rx="4" fill="#2563EB" />
       <text x="82" y="148" font-size="13" fill="#94A3B8" letter-spacing="0.4">365D CONTRIBUTIONS</text>
       <text x="66" y="186" font-size="34" font-weight="700" fill="#F8FAFC">256</text>
-      <text x="66" y="208" font-size="13" fill="#94A3B8">actual GitHub contribution calendar</text>
+      <text x="66" y="208" font-size="13" fill="#94A3B8">public + private activity</text>
     </g><g>
       <rect x="278" y="112" width="220" height="112" rx="22" fill="#101827" stroke="#1E293B" />
       <rect x="296" y="130" width="8" height="32" rx="4" fill="#EC4899" />

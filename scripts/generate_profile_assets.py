@@ -347,6 +347,22 @@ def draw_weekly_chart(weekly_totals: list[dict]) -> str:
     return "\n".join(chart)
 
 
+def get_contribution_note(profile: dict) -> str:
+    if profile["source_mode"] == "github-graphql" and profile["has_restricted_contributions"]:
+        return "public + private activity"
+    if profile["source_mode"] == "github-graphql":
+        return "token-synced activity"
+    return "public activity only"
+
+
+def get_source_tag(profile: dict) -> str:
+    if profile["source_mode"] == "github-graphql" and profile["has_restricted_contributions"]:
+        return "GitHub token sync + private"
+    if profile["source_mode"] == "github-graphql":
+        return "GitHub token sync"
+    return "GitHub public sync"
+
+
 def build_svg(profile: dict) -> str:
     now = current_datetime()
     cards = [
@@ -356,7 +372,7 @@ def build_svg(profile: dict) -> str:
             "365d contributions",
             format_number(profile["contributions_365d"]),
             "#2563EB",
-            "actual GitHub contribution calendar",
+            get_contribution_note(profile),
         ),
         draw_metric_card(
             278,
@@ -384,7 +400,7 @@ def build_svg(profile: dict) -> str:
         ),
     ]
 
-    source_tag = "GitHub GraphQL live sync" if profile["source_mode"] == "github-graphql" else "GitHub public sync"
+    source_tag = get_source_tag(profile)
     updated_label = now.strftime("%d %b %Y | %I:%M %p")
 
     return f"""<svg width="1100" height="540" viewBox="0 0 1100 540" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">

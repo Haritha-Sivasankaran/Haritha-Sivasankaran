@@ -32,6 +32,8 @@ jobs:
           python-version: "3.12"
 
       - name: Generate live profile assets
+        # Use a PAT in PROFILE_STATS_TOKEN. GitHub needs read:user on classic PATs
+        # when you want private contribution counts to be available to the script.
         env:
           PROFILE_USERNAME: Haritha-Sivasankaran
           PROFILE_TIMEZONE: Asia/Calcutta

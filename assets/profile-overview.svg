@@ -17,13 +17,13 @@
 
   <rect x="822" y="34" width="230" height="34" rx="17" fill="#111C31" stroke="#22304A" />
   <text x="842" y="56" font-size="12" font-weight="600" fill="#E2E8F0">GitHub GraphQL live sync</text>
-  <text x="822" y="92" font-size="13" fill="#64748B">last refresh: 20 Jun 2026 | 02:03 AM</text>
+  <text x="822" y="92" font-size="13" fill="#64748B">last refresh: 20 Jun 2026 | 02:05 AM</text>
 
   <g>
       <rect x="44" y="112" width="220" height="112" rx="22" fill="#101827" stroke="#1E293B" />
       <rect x="62" y="130" width="8" height="32" rx="4" fill="#2563EB" />
       <text x="82" y="148" font-size="13" fill="#94A3B8" letter-spacing="0.4">365D CONTRIBUTIONS</text>
-      <text x="66" y="186" font-size="34" font-weight="700" fill="#F8FAFC">254</text>
+      <text x="66" y="186" font-size="34" font-weight="700" fill="#F8FAFC">255</text>
       <text x="66" y="208" font-size="13" fill="#94A3B8">actual GitHub contribution calendar</text>
     </g><g>
       <rect x="278" y="112" width="220" height="112" rx="22" fill="#101827" stroke="#1E293B" />
@@ -49,18 +49,18 @@
   <text x="592" y="148" font-size="24" font-weight="700" fill="#F8FAFC">Stack Snapshot</text>
   <text x="592" y="170" font-size="14" fill="#94A3B8">based on your public repos, not a guessed tech stack</text>
   <g>
-              <circle cx="604" cy="174" r="7" fill="#F97316" />
-              <text x="620" y="180" font-size="18" font-weight="600" fill="#E2E8F0">HTML</text>
+              <circle cx="604" cy="174" r="7" fill="#60A5FA" />
+              <text x="620" y="180" font-size="18" font-weight="600" fill="#E2E8F0">Python</text>
               <text x="940" y="180" font-size="15" text-anchor="end" fill="#94A3B8">4 repos</text>
               <rect x="620" y="192" width="240" height="8" rx="4" fill="#172033" />
-              <rect x="620" y="192" width="240" height="8" rx="4" fill="#F97316" />
+              <rect x="620" y="192" width="240" height="8" rx="4" fill="#60A5FA" />
             </g>
 <g>
-              <circle cx="604" cy="220" r="7" fill="#60A5FA" />
-              <text x="620" y="226" font-size="18" font-weight="600" fill="#E2E8F0">Python</text>
-              <text x="940" y="226" font-size="15" text-anchor="end" fill="#94A3B8">3 repos</text>
+              <circle cx="604" cy="220" r="7" fill="#F97316" />
+              <text x="620" y="226" font-size="18" font-weight="600" fill="#E2E8F0">HTML</text>
+              <text x="940" y="226" font-size="15" text-anchor="end" fill="#94A3B8">4 repos</text>
               <rect x="620" y="238" width="240" height="8" rx="4" fill="#172033" />
-              <rect x="620" y="238" width="180" height="8" rx="4" fill="#60A5FA" />
+              <rect x="620" y="238" width="240" height="8" rx="4" fill="#F97316" />
             </g>
 <g>
               <circle cx="604" cy="266" r="7" fill="#F59E0B" />
@@ -137,8 +137,8 @@
               <text x="893.0" y="508" font-size="12" text-anchor="middle" fill="#64748B"></text>
             </g>
 <g>
-              <rect x="944" y="424" width="58" height="58" rx="18" fill="#EC4899" opacity="0.95" />
-              <text x="973.0" y="414" font-size="13" text-anchor="middle" fill="#CBD5E1">44</text>
+              <rect x="944" y="423" width="58" height="59" rx="18" fill="#EC4899" opacity="0.95" />
+              <text x="973.0" y="413" font-size="13" text-anchor="middle" fill="#CBD5E1">45</text>
               <text x="973.0" y="508" font-size="12" text-anchor="middle" fill="#64748B">Jun</text>
             </g>
 </svg>

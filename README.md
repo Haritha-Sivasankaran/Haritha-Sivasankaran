@@ -6,17 +6,18 @@ Haritha-Sivasankaran
 <h1 align="center">Haritha Sivasankaran</h1>
 
 <p align="center">
-  <strong>Dev with a backend brain, automation habits, and a thing for shipping useful builds.</strong>
+  <strong>Full-stack developer building across frontend, backend, automation, and AI-flavored products.</strong>
   <br />
-  Turning ideas into repos, workflows into bots, and bugs into plot twists.
+  Turning ideas into interfaces, logic into systems, and side quests into shipped projects.
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Focus-Backend%20%7C%20Automation%20%7C%20AI-111827?style=for-the-badge&labelColor=0F172A&color=2563EB" alt="Focus areas" />
+  <img src="https://img.shields.io/badge/Focus-Full%20Stack%20%7C%20Frontend%20%7C%20Backend%20%7C%20Automation-111827?style=for-the-badge&labelColor=0F172A&color=2563EB" alt="Focus areas" />
 </p>
 
 <p align="center">
-  <code>backend-first</code>
+  <code>full-stack-mode</code>
+  <code>frontend-aware</code>
   <code>automation-heavy</code>
   <code>ai-side-quests</code>
   <code>builder-mode:on</code>
@@ -25,13 +26,14 @@ Haritha-Sivasankaran
 ```js
 const profile = {
   currently: ["building", "debugging", "shipping"],
-  focus: ["Java", "Python", "automation", "AI tooling"],
+  focus: ["frontend", "backend", "automation", "AI tooling"],
   mindset: "clean logic, fast iteration, no boring builds"
 };
 ```
 
 ## What I Build
 
+- Frontend experiences that feel clean, fast, and easy to use.
 - Backend flows that do real work.
 - Automation that saves time, clicks, and repeat effort.
 - AI and data-driven experiments that feel practical, not just flashy.

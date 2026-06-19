@@ -1,17 +1,17 @@
 {
   "username": "Haritha-Sivasankaran",
   "name": "Haritha Sivasankaran",
-  "source_mode": "github-graphql",
-  "generated_at": "2026-06-20T02:53:15.033828+05:30",
+  "source_mode": "github-public",
+  "generated_at": "2026-06-20T02:56:02.291219+05:30",
   "timezone": "Asia/Calcutta",
-  "contributions_365d": 263,
-  "active_days": 27,
+  "contributions_365d": 245,
+  "active_days": 26,
   "peak_day": 32,
-  "public_repos": 12,
+  "public_repos": 15,
   "stars_earned": 2,
   "joined_year": 2021,
-  "has_restricted_contributions": true,
-  "restricted_contributions": 239,
+  "has_restricted_contributions": false,
+  "restricted_contributions": 0,
   "language_breakdown": [
     {
       "name": "Jupyter Notebook",
@@ -91,7 +91,7 @@
     },
     {
       "start": "2026-06-14",
-      "total": 53
+      "total": 35
     }
   ]
 }

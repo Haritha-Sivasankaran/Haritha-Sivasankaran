@@ -298,10 +298,11 @@ def get_source_tag(profile: dict) -> str:
 def draw_micro_stat(x: int, y: int, label: str, value: str, accent: str) -> str:
     return f"""
     <g>
-      <rect x="{x}" y="{y}" width="92" height="56" rx="18" fill="#111B2E" />
-      <rect x="{x + 12}" y="{y + 12}" width="6" height="30" rx="3" fill="{accent}" />
-      <text x="{x + 28}" y="{y + 23}" font-size="11" font-weight="600" fill="#94A3B8" letter-spacing="0.6">{escape(label.upper())}</text>
-      <text x="{x + 28}" y="{y + 44}" font-size="24" font-weight="700" fill="#F8FAFC">{escape(value)}</text>
+      <rect x="{x + 3}" y="{y + 3}" width="92" height="56" rx="4" fill="#000000" />
+      <rect x="{x}" y="{y}" width="92" height="56" rx="4" fill="#1E2030" stroke="#000000" stroke-width="2" />
+      <rect x="{x + 8}" y="{y + 8}" width="4" height="40" rx="1" fill="{accent}" />
+      <text x="{x + 18}" y="{y + 22}" font-size="9" font-weight="700" fill="#94A3B8" letter-spacing="0.6" class="font-mono">{escape(label.upper())}</text>
+      <text x="{x + 18}" y="{y + 44}" font-size="20" font-weight="800" fill="#F8FAFC" class="font-sans">{escape(value)}</text>
     </g>
     """.strip()
 
@@ -309,13 +310,13 @@ def draw_micro_stat(x: int, y: int, label: str, value: str, accent: str) -> str:
 def draw_language_mix(language_breakdown: list[dict]) -> str:
     if not language_breakdown:
         return """
-        <text x="524" y="256" font-size="16" fill="#94A3B8">No public repo language data yet.</text>
+        <text x="524" y="256" font-size="16" fill="#94A3B8" class="font-sans">No public repo language data yet.</text>
         """.strip()
 
     breakdown_total = sum(item["percent"] for item in language_breakdown) or 1
     bar_x = 524
     bar_y = 246
-    bar_width = 476
+    bar_width = 508
     current_x = bar_x
 
     raw_widths = [bar_width * (item["percent"] / breakdown_total) for item in language_breakdown]
@@ -329,11 +330,15 @@ def draw_language_mix(language_breakdown: list[dict]) -> str:
     for index, _ in remainders[:remaining_pixels]:
         segment_widths[index] += 1
 
-    segments = [f'<rect x="{bar_x}" y="{bar_y}" width="{bar_width}" height="14" rx="7" fill="#172033" />']
+    segments = [
+        f'<rect x="{bar_x}" y="{bar_y}" width="{bar_width}" height="14" rx="4" fill="#1E2030" stroke="#000" stroke-width="2" />'
+    ]
     for item, width in zip(language_breakdown, segment_widths):
+        if width <= 0:
+            continue
         accent = LANGUAGE_COLORS.get(item["name"], "#94A3B8")
         segments.append(
-            f'<rect x="{current_x}" y="{bar_y}" width="{width}" height="14" rx="7" fill="{accent}" />'
+            f'<rect x="{current_x}" y="{bar_y}" width="{width}" height="14" rx="4" fill="{accent}" stroke="#000" stroke-width="2" />'
         )
         current_x += width
 
@@ -353,10 +358,11 @@ def draw_language_mix(language_breakdown: list[dict]) -> str:
         tiles.append(
             f"""
             <g>
-              <rect x="{x}" y="{y}" width="{tile_width}" height="{tile_height}" rx="16" fill="#111B2E" />
-              <rect x="{x + 12}" y="{y + 10}" width="7" height="18" rx="3" fill="{accent}" />
-              <text x="{x + 29}" y="{y + 16}" font-size="10.5" font-weight="600" fill="#94A3B8">{escape(item["name"])}</text>
-              <text x="{x + 29}" y="{y + 32}" font-size="19" font-weight="700" fill="#F8FAFC">{item["percent"]:.2f}%</text>
+              <rect x="{x + 3}" y="{y + 3}" width="{tile_width}" height="{tile_height}" rx="4" fill="#000" />
+              <rect x="{x}" y="{y}" width="{tile_width}" height="{tile_height}" rx="4" fill="#12131C" stroke="#000" stroke-width="2" />
+              <rect x="{x + 10}" y="{y + 10}" width="6" height="18" rx="1.5" fill="{accent}" stroke="#000" stroke-width="1.2" />
+              <text x="{x + 24}" y="{y + 17}" font-size="10" font-weight="700" fill="#94A3B8" class="font-mono">{escape(item["name"])}</text>
+              <text x="{x + 24}" y="{y + 32}" font-size="16" font-weight="800" fill="#F8FAFC" class="font-sans">{item["percent"]:.2f}%</text>
             </g>
             """.strip()
         )
@@ -367,7 +373,7 @@ def draw_language_mix(language_breakdown: list[dict]) -> str:
 def draw_build_tempo(weekly_totals: list[dict]) -> str:
     if not weekly_totals:
         return """
-        <text x="84" y="474" font-size="16" fill="#94A3B8">Tempo chart appears after tracked contribution activity.</text>
+        <text x="84" y="474" font-size="16" fill="#94A3B8" class="font-sans">Tempo chart appears after tracked contribution activity.</text>
         """.strip()
 
     chart_left = 84
@@ -397,23 +403,23 @@ def draw_build_tempo(weekly_totals: list[dict]) -> str:
     labels = []
     month_indices = {0, 4, 8, len(points) - 1}
     for index, (x, y, total, start_date) in enumerate(points):
-        accent = "#F97316" if total == max_total and total > 0 else "#60A5FA"
+        accent = "#FF007F" if total == max_total and total > 0 else "#00E5FF"
         labels.append(
-            f'<circle cx="{x:.2f}" cy="{y:.2f}" r="4.5" fill="#0F172A" stroke="{accent}" stroke-width="3" />'
+            f'<circle cx="{x:.2f}" cy="{y:.2f}" r="4.5" fill="#090a0f" stroke="{accent}" stroke-width="3" />'
         )
         if total > 0:
             labels.append(
-                f'<text x="{x:.2f}" y="{y - 12:.2f}" font-size="11" font-weight="600" text-anchor="middle" fill="#E2E8F0">{total}</text>'
+                f'<text x="{x:.2f}" y="{y - 12:.2f}" font-size="11" font-weight="700" text-anchor="middle" fill="#00FF66" class="font-mono">{total}</text>'
             )
         if index in month_indices:
             labels.append(
-                f'<text x="{x:.2f}" y="520" font-size="12" text-anchor="middle" fill="#64748B">{date.fromisoformat(start_date).strftime("%b")}</text>'
+                f'<text x="{x:.2f}" y="522" font-size="11" font-weight="700" text-anchor="middle" fill="#64748B" class="font-mono">{date.fromisoformat(start_date).strftime("%b").upper()}</text>'
             )
 
     grid = [
-        '<line x1="84" y1="500" x2="1016" y2="500" stroke="#1E293B" />',
-        '<line x1="84" y1="476" x2="1016" y2="476" stroke="#142033" />',
-        '<line x1="84" y1="452" x2="1016" y2="452" stroke="#142033" />',
+        '<line x1="84" y1="500" x2="1016" y2="500" stroke="#000" stroke-width="2" />',
+        '<line x1="84" y1="476" x2="1016" y2="476" stroke="#1E2030" stroke-dasharray="3,3" />',
+        '<line x1="84" y1="452" x2="1016" y2="452" stroke="#1E2030" stroke-dasharray="3,3" />',
     ]
 
     return "\n".join(
@@ -429,71 +435,116 @@ def draw_build_tempo(weekly_totals: list[dict]) -> str:
 def build_svg(profile: dict) -> str:
     now = current_datetime()
     source_tag = get_source_tag(profile)
-    updated_label = now.strftime("%d %b %Y | %I:%M %p")
+    updated_label = now.strftime("%d %b %Y | %I:%M %p").upper()
 
     micro_stats = [
-        draw_micro_stat(256, 188, "active", format_number(profile["active_days"]), "#EC4899"),
-        draw_micro_stat(358, 188, "repos", format_number(profile["public_repos"]), "#F97316"),
-        draw_micro_stat(256, 254, "stars", format_number(profile["stars_earned"]), "#7C3AED"),
-        draw_micro_stat(358, 254, "peak", format_number(profile["peak_day"]), "#38BDF8"),
+        draw_micro_stat(256, 188, "active", format_number(profile["active_days"]), "#FF007F"),
+        draw_micro_stat(358, 188, "repos", format_number(profile["public_repos"]), "#FACC15"),
+        draw_micro_stat(256, 254, "stars", format_number(profile["stars_earned"]), "#00E5FF"),
+        draw_micro_stat(358, 254, "peak", format_number(profile["peak_day"]), "#00FF66"),
     ]
 
     peak_week = max((week["total"] for week in profile["weekly_totals"]), default=0)
 
-    return f"""<svg width="1100" height="560" viewBox="0 0 1100 560" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc" style="font-family:'Segoe UI','Trebuchet MS',sans-serif;">
+    return f"""<svg width="1100" height="560" viewBox="0 0 1100 560" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">Live GitHub profile overview for {escape(profile["name"])}</title>
   <desc id="desc">Automatically refreshed GitHub stats showing contributions, repositories, stars, language mix, and recent build tempo.</desc>
   <defs>
-    <linearGradient id="hero" x1="40" y1="24" x2="1060" y2="520" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#0F172A" />
-      <stop offset="0.5" stop-color="#111827" />
-      <stop offset="1" stop-color="#050816" />
-    </linearGradient>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap');
+      .font-sans {{ font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif; }}
+      .font-mono {{ font-family: 'JetBrains Mono', monospace; }}
+      .pulse {{ animation: pulse-glow 1.5s ease-in-out infinite; }}
+      @keyframes pulse-glow {{ 0%, 100% {{ opacity: 0.4; }} 50% {{ opacity: 1; }} }}
+    </style>
+    <pattern id="dotGrid" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.5" fill="#1e293b" fill-opacity="0.6" />
+    </pattern>
     <linearGradient id="tempoFill" x1="0" y1="430" x2="0" y2="500" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#2563EB" stop-opacity="0.35" />
-      <stop offset="1" stop-color="#2563EB" stop-opacity="0" />
+      <stop stop-color="#00E5FF" stop-opacity="0.2" />
+      <stop offset="1" stop-color="#00E5FF" stop-opacity="0" />
     </linearGradient>
     <linearGradient id="tempoStroke" x1="84" y1="470" x2="1016" y2="470" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#38BDF8" />
-      <stop offset="0.55" stop-color="#2563EB" />
-      <stop offset="1" stop-color="#EC4899" />
+      <stop stop-color="#00FF66" />
+      <stop offset="0.5" stop-color="#00E5FF" />
+      <stop offset="1" stop-color="#FF007F" />
     </linearGradient>
   </defs>
 
-  <rect x="10" y="10" width="1080" height="540" rx="30" fill="url(#hero)" stroke="#1E293B" />
-  <circle cx="986" cy="114" r="104" fill="#2563EB" opacity="0.08" />
-  <circle cx="124" cy="500" r="96" fill="#F97316" opacity="0.07" />
-  <circle cx="954" cy="470" r="116" fill="#EC4899" opacity="0.06" />
+  <!-- Canvas Background -->
+  <rect width="1100" height="560" rx="16" fill="#090a0f" />
+  <rect width="1100" height="560" rx="16" fill="url(#dotGrid)" />
 
-  <rect x="44" y="34" width="154" height="32" rx="16" fill="#0F1B33" stroke="#22304A" />
-  <text x="66" y="54" font-size="12" font-weight="700" fill="#60A5FA" letter-spacing="1.2">LIVE RECEIPTS</text>
-  <text x="44" y="100" font-size="34" font-weight="700" fill="#F8FAFC">live build receipts</text>
-  <text x="44" y="126" font-size="15" fill="#94A3B8">real GitHub data, auto-refreshed, zero fake flex.</text>
+  <!-- Header Prompt -->
+  <text x="44" y="60" font-size="14" font-weight="700" fill="#00FF66" class="font-mono">❯ <tspan fill="#E2E8F0">git log --profile --live</tspan></text>
+  
+  <rect x="44" y="80" width="124" height="22" rx="4" fill="#00FF66" stroke="#000000" stroke-width="2" />
+  <text x="106" y="95" font-size="10.5" font-weight="800" fill="#000000" text-anchor="middle" class="font-sans">LIVE RECEIPTS</text>
+  
+  <text x="180" y="96" font-size="13" font-weight="500" fill="#94A3B8" class="font-sans">real GitHub data, auto-refreshed, zero fake flex.</text>
+  
+  <!-- Right Details -->
+  <rect x="916" y="44" width="140" height="22" rx="4" fill="#1E2030" stroke="#000000" stroke-width="2" />
+  <text x="986" y="59" font-size="10.5" font-weight="800" fill="#00E5FF" text-anchor="middle" class="font-mono">{source_tag.upper()}</text>
+  <text x="1056" y="96" font-size="12" font-weight="700" fill="#64748B" class="font-mono" text-anchor="end">LAST REFRESH: {escape(updated_label)}</text>
 
-  <rect x="856" y="34" width="180" height="32" rx="16" fill="#0F1B33" stroke="#22304A" />
-  <text x="876" y="54" font-size="12" font-weight="700" fill="#E2E8F0">{escape(source_tag)}</text>
-  <text x="856" y="92" font-size="13" fill="#64748B">last refresh: {escape(updated_label)}</text>
+  <!-- ================= WINDOW 1: STATS ================= -->
+  <!-- Shadow -->
+  <rect x="52" y="154" width="430" height="224" rx="8" fill="#FF007F" />
+  <!-- Card -->
+  <rect x="44" y="146" width="430" height="224" rx="8" fill="#12131C" stroke="#000000" stroke-width="3" />
+  
+  <!-- Header -->
+  <path d="M 45.5 180 L 472.5 180" stroke="#000000" stroke-width="3" />
+  <text x="60" y="168" font-size="12" font-weight="700" fill="#94A3B8" class="font-mono">~/receipts/year.sh</text>
+  <circle cx="456" cy="163" r="6" fill="#EF4444" stroke="#000" stroke-width="1.5" />
+  <circle cx="438" cy="163" r="6" fill="#F59E0B" stroke="#000" stroke-width="1.5" />
+  <circle cx="420" cy="163" r="6" fill="#10B981" stroke="#000" stroke-width="1.5" />
 
-  <rect x="44" y="146" width="430" height="224" rx="28" fill="#0D1526" stroke="#1E293B" />
-  <text x="68" y="182" font-size="12" font-weight="700" fill="#64748B" letter-spacing="1.2">THIS YEAR</text>
-  <text x="68" y="268" font-size="92" font-weight="800" fill="#F8FAFC">{format_number(profile["contributions_365d"])}</text>
-  <text x="72" y="298" font-size="20" font-weight="700" fill="#CBD5E1">contributions</text>
-  <text x="68" y="324" font-size="14" fill="#94A3B8">{escape(get_contribution_note(profile))}</text>
-  <text x="68" y="346" font-size="13" fill="#64748B">shipping publicly since {profile["joined_year"]}</text>
+  <!-- Content -->
+  <text x="68" y="275" font-size="78" font-weight="800" fill="#FFFFFF" class="font-sans">{format_number(profile["contributions_365d"])}</text>
+  <text x="70" y="305" font-size="18" font-weight="700" fill="#CBD5E1" class="font-sans">contributions</text>
+  <text x="70" y="328" font-size="12" font-weight="500" fill="#94A3B8" class="font-sans">{escape(get_contribution_note(profile))}</text>
+  <text x="70" y="348" font-size="11" font-weight="500" fill="#64748B" class="font-sans">shipping publicly since {profile["joined_year"]}</text>
   {"".join(micro_stats)}
 
-  <rect x="500" y="146" width="556" height="224" rx="28" fill="#0D1526" stroke="#1E293B" />
-  <text x="524" y="182" font-size="12" font-weight="700" fill="#64748B" letter-spacing="1.2">STACK TAPE</text>
-  <text x="524" y="208" font-size="26" font-weight="700" fill="#F8FAFC">actual language mix</text>
-  <text x="524" y="228" font-size="14" fill="#94A3B8">only the real repo languages make the lineup.</text>
+  <!-- ================= WINDOW 2: STACK TAPE ================= -->
+  <!-- Shadow -->
+  <rect x="508" y="154" width="556" height="224" rx="8" fill="#FACC15" />
+  <!-- Card -->
+  <rect x="500" y="146" width="556" height="224" rx="8" fill="#12131C" stroke="#000000" stroke-width="3" />
+  
+  <!-- Header -->
+  <path d="M 501.5 180 L 1054.5 180" stroke="#000000" stroke-width="3" />
+  <text x="516" y="168" font-size="12" font-weight="700" fill="#94A3B8" class="font-mono">~/receipts/languages.py</text>
+  <circle cx="1042" cy="163" r="6" fill="#EF4444" stroke="#000" stroke-width="1.5" />
+  <circle cx="1024" cy="163" r="6" fill="#F59E0B" stroke="#000" stroke-width="1.5" />
+  <circle cx="1006" cy="163" r="6" fill="#10B981" stroke="#000" stroke-width="1.5" />
+
+  <!-- Content -->
+  <text x="524" y="208" font-size="20" font-weight="800" fill="#FFFFFF" class="font-sans">actual language mix</text>
+  <text x="524" y="228" font-size="12.5" font-weight="500" fill="#94A3B8" class="font-sans">only the real repo languages make the lineup.</text>
   {draw_language_mix(profile["language_breakdown"])}
 
-  <rect x="44" y="390" width="1012" height="140" rx="28" fill="#0D1526" stroke="#1E293B" />
-  <text x="68" y="424" font-size="12" font-weight="700" fill="#64748B" letter-spacing="1.2">BUILD TEMPO</text>
-  <text x="68" y="448" font-size="24" font-weight="700" fill="#F8FAFC">recent shipping curve</text>
-  <text x="68" y="468" font-size="14" fill="#94A3B8">last 12 weeks of contribution movement</text>
-  <rect x="890" y="412" width="136" height="30" rx="15" fill="#111B2E" />
-  <text x="958" y="432" font-size="12" font-weight="700" text-anchor="middle" fill="#E2E8F0">peak week {peak_week}</text>
+  <!-- ================= WINDOW 3: BUILD TEMPO ================= -->
+  <!-- Shadow -->
+  <rect x="52" y="398" width="1012" height="140" rx="8" fill="#00E5FF" />
+  <!-- Card -->
+  <rect x="44" y="390" width="1012" height="140" rx="8" fill="#12131C" stroke="#000000" stroke-width="3" />
+  
+  <!-- Header -->
+  <path d="M 45.5 420 L 1054.5 420" stroke="#000000" stroke-width="3" />
+  <text x="60" y="412" font-size="12" font-weight="700" fill="#94A3B8" class="font-mono">~/receipts/tempo.log</text>
+  <circle cx="1042" cy="407" r="6" fill="#EF4444" stroke="#000" stroke-width="1.5" />
+  <circle cx="1024" cy="407" r="6" fill="#F59E0B" stroke="#000" stroke-width="1.5" />
+  <circle cx="1006" cy="407" r="6" fill="#10B981" stroke="#000" stroke-width="1.5" />
+
+  <!-- Content -->
+  <text x="68" y="445" font-size="18" font-weight="800" fill="#FFFFFF" class="font-sans">recent shipping curve</text>
+  <text x="280" y="445" font-size="12" font-weight="500" fill="#94A3B8" class="font-sans">last 12 weeks of contribution movement</text>
+  
+  <rect x="912" y="430" width="124" height="20" rx="4" fill="#1E2030" stroke="#000000" stroke-width="1.5" />
+  <text x="974" y="444" font-size="10.5" font-weight="700" fill="#E2E8F0" text-anchor="middle" class="font-mono">PEAK WEEK: {peak_week}</text>
   {draw_build_tempo(profile["weekly_totals"])}
 </svg>
 """.strip()

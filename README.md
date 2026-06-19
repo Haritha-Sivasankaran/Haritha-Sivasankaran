@@ -28,3 +28,11 @@ Haritha-Sivasankaran
 <p align="center">
   <strong>terminal open. tabs everywhere. still shipping.</strong>
 </p>
+
+## Connect
+
+<p align="center">
+  <a href="https://www.linkedin.com/in/haritha-sivasankaran-a0234b221/" target="_blank">
+    <img src="https://img.shields.io/badge/CONNECT%20ON%20LINKEDIN-0077B5?style=for-the-badge&logo=linkedin&logoColor=white&labelColor=020617" alt="LinkedIn" />
+  </a>
+</p>

@@ -206,18 +206,13 @@ def main():
   {icons_str}
 
   <!-- Developer Name -->
-  <text x="500" y="90" text-anchor="middle" dominant-baseline="middle" class="title" filter="url(#shadow)">Haritha Sivasankaran</text>
-
-  <!-- LinkedIn Redirect Icon directly under the name -->
-  <a href="https://www.linkedin.com/in/haritha-sivasankaran/" target="_blank">
-    <image href="{linkedin_b64}" x="487" y="125" width="26" height="26" opacity="0.95" style="cursor: pointer;" />
-  </a>
+  <text x="500" y="100" text-anchor="middle" dominant-baseline="middle" class="title" filter="url(#shadow)">Haritha Sivasankaran</text>
 </svg>"""
 
-    # Generate v4 file to bypass cache
-    banner_path = Path("assets/profile-banner-v4.svg")
+    # Generate v5 file to bypass cache
+    banner_path = Path("assets/profile-banner-v5.svg")
     banner_path.write_text(svg_content, encoding="utf-8")
-    print("OK: Banner SVG generated successfully at assets/profile-banner-v4.svg!")
+    print("OK: Banner SVG generated successfully at assets/profile-banner-v5.svg!")
 
 if __name__ == "__main__":
     main()

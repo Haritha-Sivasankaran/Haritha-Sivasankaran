@@ -3,9 +3,12 @@ For this README to appear on your GitHub profile, the repository name must be ex
 Haritha-Sivasankaran
 -->
 
-[<img width="100%" src="./assets/profile-banner-v4.svg" alt="Haritha Sivasankaran" />](https://www.linkedin.com/in/haritha-sivasankaran/)
+<img width="100%" src="./assets/profile-banner-v5.svg" alt="Haritha Sivasankaran" />
 
 <p align="center">
+  <a href="https://www.linkedin.com/in/haritha-sivasankaran/" target="_blank">
+    <img src="https://img.shields.io/badge/LINKEDIN-0077B5?style=for-the-badge&logo=linkedin&logoColor=white&labelColor=020617" alt="LinkedIn" />
+  </a>
   <img src="https://img.shields.io/badge/FULL%20STACK-111827?style=for-the-badge&labelColor=020617&color=2563EB" alt="Full stack" />
   <img src="https://img.shields.io/badge/FRONTEND-111827?style=for-the-badge&labelColor=020617&color=EC4899" alt="Frontend" />
   <img src="https://img.shields.io/badge/BACKEND-111827?style=for-the-badge&labelColor=020617&color=38BDF8" alt="Backend" />
@@ -19,7 +22,7 @@ Haritha-Sivasankaran
 
 ## Build Receipts
 
-<img width="100%" src="./assets/profile-overview.svg?t=1781906378" alt="Live GitHub profile stats for Haritha" />
+<img width="100%" src="./assets/profile-overview.svg?t=1781906476" alt="Live GitHub profile stats for Haritha" />
 
 <p align="center">
   <sub>real data | auto-refreshes every 6 hours | updates on profile repo pushes</sub>
@@ -27,12 +30,4 @@ Haritha-Sivasankaran
 
 <p align="center">
   <strong>terminal open. tabs everywhere. still shipping.</strong>
-</p>
-
-## Connect
-
-<p align="center">
-  <a href="https://www.linkedin.com/in/haritha-sivasankaran/" target="_blank">
-    <img src="https://img.shields.io/badge/CONNECT%20ON%20LINKEDIN-0077B5?style=for-the-badge&logo=linkedin&logoColor=white&labelColor=020617" alt="LinkedIn" />
-  </a>
 </p>

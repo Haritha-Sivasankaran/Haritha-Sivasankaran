@@ -54,10 +54,16 @@ const haritha = {
 
 ## Stats.exe
 
-<p align="center">
-  <img width="49%" src="https://github-readme-stats.vercel.app/api?username=Haritha-Sivasankaran&show_icons=true&theme=radical&hide_border=true&bg_color=00000000&title_color=60A5FA&icon_color=EC4899&text_color=CBD5E1&rank_icon=github" alt="Haritha's GitHub stats" />
-  <img width="49%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Haritha-Sivasankaran&layout=compact&theme=radical&hide_border=true&bg_color=00000000&title_color=60A5FA&text_color=CBD5E1&langs_count=8&hide_progress=true" alt="Haritha's top languages" />
-</p>
+<table width="100%">
+  <tr>
+    <td width="50%" valign="top" align="center">
+      <img width="100%" src="https://github-readme-stats.vercel.app/api?username=Haritha-Sivasankaran&show_icons=true&theme=radical&hide_border=true&bg_color=00000000&title_color=60A5FA&icon_color=EC4899&text_color=CBD5E1&rank_icon=github" alt="Haritha's GitHub stats" />
+    </td>
+    <td width="50%" valign="top" align="center">
+      <img width="100%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Haritha-Sivasankaran&layout=compact&theme=radical&hide_border=true&bg_color=00000000&title_color=60A5FA&text_color=CBD5E1&langs_count=6&card_width=420&hide=Jupyter%20Notebook,Shell,PHP" alt="Haritha's top languages" />
+    </td>
+  </tr>
+</table>
 
 ## Contribution Flow
 

@@ -3,7 +3,7 @@ For this README to appear on your GitHub profile, the repository name must be ex
 Haritha-Sivasankaran
 -->
 
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&height=220&color=0:0F172A,45:2563EB,100:EC4899&text=Haritha%20Sivasankaran&fontColor=FFFFFF&fontSize=40&fontAlignY=38&desc=clean%20UI%20%7C%20solid%20logic%20%7C%20automation%20energy&descAlignY=60&animation=fadeIn" alt="Header banner" />
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&height=220&color=0:0F172A,45:2563EB,100:EC4899&text=Haritha%20Sivasankaran&fontColor=FFFFFF&fontSize=40&fontAlignY=38&desc=frontend%20finesse%20%7C%20backend%20brains%20%7C%20builder%20mode%20on&descAlignY=60&animation=fadeIn" alt="Header banner" />
 
 <p align="center">
   <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=20&pause=1200&color=60A5FA&center=true&vCenter=true&width=820&lines=shipping+clean+UI+and+solid+logic;turning+ideas+into+products+that+actually+work;automation-heavy%2C+bug-resistant-ish%2C+always+in+builder+mode" alt="Typing intro" />

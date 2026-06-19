@@ -279,36 +279,45 @@ def format_number(value: int) -> str:
     return f"{value:,}"
 
 
-def draw_metric_card(x: int, y: int, label: str, value: str, accent: str, note: str = "") -> str:
-    note_text = (
-        f'<text x="{x + 22}" y="{y + 96}" font-size="13" fill="#94A3B8">{escape(note)}</text>'
-        if note
-        else ""
-    )
+def get_contribution_note(profile: dict) -> str:
+    if profile["source_mode"] == "github-graphql" and profile["has_restricted_contributions"]:
+        return "public + private activity"
+    if profile["source_mode"] == "github-graphql":
+        return "token-synced activity"
+    return "public activity only"
+
+
+def get_source_tag(profile: dict) -> str:
+    if profile["source_mode"] == "github-graphql" and profile["has_restricted_contributions"]:
+        return "token sync + private"
+    if profile["source_mode"] == "github-graphql":
+        return "token sync"
+    return "public sync"
+
+
+def draw_micro_stat(x: int, y: int, label: str, value: str, accent: str) -> str:
     return f"""
     <g>
-      <rect x="{x}" y="{y}" width="220" height="112" rx="22" fill="#101827" stroke="#1E293B" />
-      <rect x="{x + 18}" y="{y + 18}" width="8" height="32" rx="4" fill="{accent}" />
-      <text x="{x + 38}" y="{y + 36}" font-size="13" fill="#94A3B8" letter-spacing="0.4">{escape(label.upper())}</text>
-      <text x="{x + 22}" y="{y + 74}" font-size="34" font-weight="700" fill="#F8FAFC">{escape(value)}</text>
-      {note_text}
+      <rect x="{x}" y="{y}" width="92" height="56" rx="18" fill="#111B2E" />
+      <rect x="{x + 12}" y="{y + 12}" width="6" height="30" rx="3" fill="{accent}" />
+      <text x="{x + 28}" y="{y + 23}" font-size="11" font-weight="600" fill="#94A3B8" letter-spacing="0.6">{escape(label.upper())}</text>
+      <text x="{x + 28}" y="{y + 44}" font-size="24" font-weight="700" fill="#F8FAFC">{escape(value)}</text>
     </g>
     """.strip()
 
 
-def draw_language_breakdown(language_breakdown: list[dict]) -> str:
+def draw_language_mix(language_breakdown: list[dict]) -> str:
     if not language_breakdown:
         return """
-        <text x="592" y="178" font-size="16" fill="#94A3B8">No public repo language data yet.</text>
+        <text x="524" y="256" font-size="16" fill="#94A3B8">No public repo language data yet.</text>
         """.strip()
 
     breakdown_total = sum(item["percent"] for item in language_breakdown) or 1
-    legend_items = []
-    stacked_segments = []
-    bar_x = 592
-    bar_y = 184
-    bar_width = 360
+    bar_x = 524
+    bar_y = 246
+    bar_width = 476
     current_x = bar_x
+
     raw_widths = [bar_width * (item["percent"] / breakdown_total) for item in language_breakdown]
     segment_widths = [int(width) for width in raw_widths]
     remaining_pixels = bar_width - sum(segment_widths)
@@ -320,170 +329,172 @@ def draw_language_breakdown(language_breakdown: list[dict]) -> str:
     for index, _ in remainders[:remaining_pixels]:
         segment_widths[index] += 1
 
+    segments = [f'<rect x="{bar_x}" y="{bar_y}" width="{bar_width}" height="14" rx="7" fill="#172033" />']
     for item, width in zip(language_breakdown, segment_widths):
-        language = item["name"]
-        accent = LANGUAGE_COLORS.get(language, "#94A3B8")
-        stacked_segments.append(
+        accent = LANGUAGE_COLORS.get(item["name"], "#94A3B8")
+        segments.append(
             f'<rect x="{current_x}" y="{bar_y}" width="{width}" height="14" rx="7" fill="{accent}" />'
         )
         current_x += width
 
+    tiles = []
+    tile_width = 166
+    tile_height = 38
+    gap_x = 12
+    gap_y = 12
+    start_y = 280
+
     for index, item in enumerate(language_breakdown):
-        column = index % 2
-        row = index // 2
-        x = 592 + column * 190
-        y = 236 + row * 42
+        column = index % 3
+        row = index // 3
+        x = 524 + column * (tile_width + gap_x)
+        y = start_y + row * (tile_height + gap_y)
         accent = LANGUAGE_COLORS.get(item["name"], "#94A3B8")
-        legend_items.append(
+        tiles.append(
             f"""
             <g>
-              <circle cx="{x + 8}" cy="{y - 5}" r="7" fill="{accent}" />
-              <text x="{x + 24}" y="{y}" font-size="17" font-weight="600" fill="#E2E8F0">{escape(item["name"])}</text>
-              <text x="{x + 168}" y="{y}" font-size="14" text-anchor="end" fill="#94A3B8">{item["percent"]:.2f}%</text>
+              <rect x="{x}" y="{y}" width="{tile_width}" height="{tile_height}" rx="16" fill="#111B2E" />
+              <rect x="{x + 12}" y="{y + 10}" width="7" height="18" rx="3" fill="{accent}" />
+              <text x="{x + 29}" y="{y + 16}" font-size="10.5" font-weight="600" fill="#94A3B8">{escape(item["name"])}</text>
+              <text x="{x + 29}" y="{y + 32}" font-size="19" font-weight="700" fill="#F8FAFC">{item["percent"]:.2f}%</text>
             </g>
             """.strip()
         )
 
+    return "\n".join([*segments, *tiles])
+
+
+def draw_build_tempo(weekly_totals: list[dict]) -> str:
+    if not weekly_totals:
+        return """
+        <text x="84" y="474" font-size="16" fill="#94A3B8">Tempo chart appears after tracked contribution activity.</text>
+        """.strip()
+
+    chart_left = 84
+    chart_right = 1016
+    chart_top = 452
+    chart_bottom = 500
+    chart_height = chart_bottom - chart_top
+    totals = [item["total"] for item in weekly_totals]
+    max_total = max(totals) or 1
+    step = (chart_right - chart_left) / (len(weekly_totals) - 1) if len(weekly_totals) > 1 else 0
+
+    points: list[tuple[float, float, int, str]] = []
+    for index, week in enumerate(weekly_totals):
+        x = chart_left + step * index
+        total = week["total"]
+        normalized = total / max_total if max_total else 0
+        y = chart_bottom - (normalized * chart_height) if total else chart_bottom - 2
+        points.append((x, y, total, week["start"]))
+
+    line_path = "M " + " L ".join(f"{x:.2f} {y:.2f}" for x, y, _, _ in points)
+    area_path = (
+        f"M {points[0][0]:.2f} {chart_bottom:.2f} "
+        + " L ".join(f"{x:.2f} {y:.2f}" for x, y, _, _ in points)
+        + f" L {points[-1][0]:.2f} {chart_bottom:.2f} Z"
+    )
+
+    labels = []
+    month_indices = {0, 4, 8, len(points) - 1}
+    for index, (x, y, total, start_date) in enumerate(points):
+        accent = "#F97316" if total == max_total and total > 0 else "#60A5FA"
+        labels.append(
+            f'<circle cx="{x:.2f}" cy="{y:.2f}" r="4.5" fill="#0F172A" stroke="{accent}" stroke-width="3" />'
+        )
+        if total > 0:
+            labels.append(
+                f'<text x="{x:.2f}" y="{y - 12:.2f}" font-size="11" font-weight="600" text-anchor="middle" fill="#E2E8F0">{total}</text>'
+            )
+        if index in month_indices:
+            labels.append(
+                f'<text x="{x:.2f}" y="520" font-size="12" text-anchor="middle" fill="#64748B">{date.fromisoformat(start_date).strftime("%b")}</text>'
+            )
+
+    grid = [
+        '<line x1="84" y1="500" x2="1016" y2="500" stroke="#1E293B" />',
+        '<line x1="84" y1="476" x2="1016" y2="476" stroke="#142033" />',
+        '<line x1="84" y1="452" x2="1016" y2="452" stroke="#142033" />',
+    ]
+
     return "\n".join(
         [
-            f'<rect x="{bar_x}" y="{bar_y}" width="{bar_width}" height="14" rx="7" fill="#172033" />',
-            *stacked_segments,
-            *legend_items,
+            *grid,
+            f'<path d="{area_path}" fill="url(#tempoFill)" opacity="0.9" />',
+            f'<path d="{line_path}" fill="none" stroke="url(#tempoStroke)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />',
+            *labels,
         ]
     )
 
 
-def draw_weekly_chart(weekly_totals: list[dict]) -> str:
-    if not weekly_totals:
-        return """
-        <text x="56" y="446" font-size="16" fill="#94A3B8">Contribution chart will appear after your first tracked activity.</text>
-        """.strip()
-
-    chart = []
-    chart_left = 64
-    chart_bottom = 482
-    bar_width = 58
-    gap = 22
-    bar_max_height = 116
-    totals = [item["total"] for item in weekly_totals]
-    max_total = max(totals) or 1
-    accents = ["#2563EB", "#38BDF8", "#F97316", "#EC4899"]
-
-    for index, week in enumerate(weekly_totals):
-        x = chart_left + index * (bar_width + gap)
-        height = max(8, int((week["total"] / max_total) * bar_max_height)) if week["total"] else 8
-        y = chart_bottom - height
-        color = accents[index % len(accents)]
-        label_date = date.fromisoformat(week["start"])
-        show_month = index in {0, 4, 8, len(weekly_totals) - 1}
-        month_label = label_date.strftime("%b") if show_month else ""
-        value_label = (
-            f'<text x="{x + (bar_width / 2)}" y="{y - 10}" font-size="13" text-anchor="middle" fill="#CBD5E1">{week["total"]}</text>'
-            if week["total"] > 0
-            else ""
-        )
-        chart.append(
-            f"""
-            <g>
-              <rect x="{x}" y="{y}" width="{bar_width}" height="{height}" rx="18" fill="{color}" opacity="0.95" />
-              {value_label}
-              <text x="{x + (bar_width / 2)}" y="508" font-size="12" text-anchor="middle" fill="#64748B">{month_label}</text>
-            </g>
-            """.strip()
-        )
-
-    return "\n".join(chart)
-
-
-def get_contribution_note(profile: dict) -> str:
-    if profile["source_mode"] == "github-graphql" and profile["has_restricted_contributions"]:
-        return "public + private activity"
-    if profile["source_mode"] == "github-graphql":
-        return "token-synced activity"
-    return "public activity only"
-
-
-def get_source_tag(profile: dict) -> str:
-    if profile["source_mode"] == "github-graphql" and profile["has_restricted_contributions"]:
-        return "GitHub token sync + private"
-    if profile["source_mode"] == "github-graphql":
-        return "GitHub token sync"
-    return "GitHub public sync"
-
-
 def build_svg(profile: dict) -> str:
     now = current_datetime()
-    cards = [
-        draw_metric_card(
-            44,
-            112,
-            "365d contributions",
-            format_number(profile["contributions_365d"]),
-            "#2563EB",
-            get_contribution_note(profile),
-        ),
-        draw_metric_card(
-            278,
-            112,
-            "active days",
-            format_number(profile["active_days"]),
-            "#EC4899",
-            "days with at least one contribution",
-        ),
-        draw_metric_card(
-            44,
-            242,
-            "public repos",
-            format_number(profile["public_repos"]),
-            "#F97316",
-            f"building since {profile['joined_year']}",
-        ),
-        draw_metric_card(
-            278,
-            242,
-            "stars earned",
-            format_number(profile["stars_earned"]),
-            "#7C3AED",
-            f"peak day: {format_number(profile['peak_day'])}",
-        ),
-    ]
-
     source_tag = get_source_tag(profile)
     updated_label = now.strftime("%d %b %Y | %I:%M %p")
 
-    return f"""<svg width="1100" height="540" viewBox="0 0 1100 540" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+    micro_stats = [
+        draw_micro_stat(256, 188, "active", format_number(profile["active_days"]), "#EC4899"),
+        draw_micro_stat(358, 188, "repos", format_number(profile["public_repos"]), "#F97316"),
+        draw_micro_stat(256, 254, "stars", format_number(profile["stars_earned"]), "#7C3AED"),
+        draw_micro_stat(358, 254, "peak", format_number(profile["peak_day"]), "#38BDF8"),
+    ]
+
+    peak_week = max((week["total"] for week in profile["weekly_totals"]), default=0)
+
+    return f"""<svg width="1100" height="560" viewBox="0 0 1100 560" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc" style="font-family:'Segoe UI','Trebuchet MS',sans-serif;">
   <title id="title">Live GitHub profile overview for {escape(profile["name"])}</title>
-  <desc id="desc">Automatically refreshed GitHub stats showing contributions, repositories, stars, languages, and recent weekly activity.</desc>
+  <desc id="desc">Automatically refreshed GitHub stats showing contributions, repositories, stars, language mix, and recent build tempo.</desc>
   <defs>
     <linearGradient id="hero" x1="40" y1="24" x2="1060" y2="520" gradientUnits="userSpaceOnUse">
       <stop stop-color="#0F172A" />
       <stop offset="0.5" stop-color="#111827" />
       <stop offset="1" stop-color="#050816" />
     </linearGradient>
+    <linearGradient id="tempoFill" x1="0" y1="430" x2="0" y2="500" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2563EB" stop-opacity="0.35" />
+      <stop offset="1" stop-color="#2563EB" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient id="tempoStroke" x1="84" y1="470" x2="1016" y2="470" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#38BDF8" />
+      <stop offset="0.55" stop-color="#2563EB" />
+      <stop offset="1" stop-color="#EC4899" />
+    </linearGradient>
   </defs>
 
-  <rect x="10" y="10" width="1080" height="520" rx="30" fill="url(#hero)" stroke="#1E293B" />
-  <rect x="38" y="34" width="132" height="34" rx="17" fill="#111C31" stroke="#22304A" />
-  <text x="60" y="56" font-size="13" font-weight="700" fill="#60A5FA" letter-spacing="1.4">DEV PULSE</text>
-  <text x="38" y="94" font-size="36" font-weight="700" fill="#F8FAFC">{escape(profile["name"])}</text>
-  <text x="38" y="118" font-size="16" fill="#94A3B8">full-stack energy, live GitHub signal, zero mock stats</text>
+  <rect x="10" y="10" width="1080" height="540" rx="30" fill="url(#hero)" stroke="#1E293B" />
+  <circle cx="986" cy="114" r="104" fill="#2563EB" opacity="0.08" />
+  <circle cx="124" cy="500" r="96" fill="#F97316" opacity="0.07" />
+  <circle cx="954" cy="470" r="116" fill="#EC4899" opacity="0.06" />
 
-  <rect x="822" y="34" width="230" height="34" rx="17" fill="#111C31" stroke="#22304A" />
-  <text x="842" y="56" font-size="12" font-weight="600" fill="#E2E8F0">{escape(source_tag)}</text>
-  <text x="822" y="92" font-size="13" fill="#64748B">last refresh: {escape(updated_label)}</text>
+  <rect x="44" y="34" width="154" height="32" rx="16" fill="#0F1B33" stroke="#22304A" />
+  <text x="66" y="54" font-size="12" font-weight="700" fill="#60A5FA" letter-spacing="1.2">LIVE RECEIPTS</text>
+  <text x="44" y="100" font-size="34" font-weight="700" fill="#F8FAFC">live build receipts</text>
+  <text x="44" y="126" font-size="15" fill="#94A3B8">real GitHub data, auto-refreshed, zero fake flex.</text>
 
-  {"".join(cards)}
+  <rect x="856" y="34" width="180" height="32" rx="16" fill="#0F1B33" stroke="#22304A" />
+  <text x="876" y="54" font-size="12" font-weight="700" fill="#E2E8F0">{escape(source_tag)}</text>
+  <text x="856" y="92" font-size="13" fill="#64748B">last refresh: {escape(updated_label)}</text>
 
-  <rect x="546" y="112" width="510" height="242" rx="26" fill="#101827" stroke="#1E293B" />
-  <text x="592" y="148" font-size="24" font-weight="700" fill="#F8FAFC">Language Mix</text>
-  <text x="592" y="170" font-size="14" fill="#94A3B8">actual percentages from your public repos</text>
-  {draw_language_breakdown(profile["language_breakdown"])}
+  <rect x="44" y="146" width="430" height="224" rx="28" fill="#0D1526" stroke="#1E293B" />
+  <text x="68" y="182" font-size="12" font-weight="700" fill="#64748B" letter-spacing="1.2">THIS YEAR</text>
+  <text x="68" y="268" font-size="92" font-weight="800" fill="#F8FAFC">{format_number(profile["contributions_365d"])}</text>
+  <text x="72" y="298" font-size="20" font-weight="700" fill="#CBD5E1">contributions</text>
+  <text x="68" y="324" font-size="14" fill="#94A3B8">{escape(get_contribution_note(profile))}</text>
+  <text x="68" y="346" font-size="13" fill="#64748B">shipping publicly since {profile["joined_year"]}</text>
+  {"".join(micro_stats)}
 
-  <rect x="38" y="382" width="1018" height="118" rx="26" fill="#101827" stroke="#1E293B" />
-  <text x="56" y="418" font-size="24" font-weight="700" fill="#F8FAFC">Shipping Rhythm</text>
-  <text x="56" y="440" font-size="14" fill="#94A3B8">real weekly contributions from the last 12 weeks</text>
-  <line x1="56" y1="482" x2="1028" y2="482" stroke="#1E293B" />
-  {draw_weekly_chart(profile["weekly_totals"])}
+  <rect x="500" y="146" width="556" height="224" rx="28" fill="#0D1526" stroke="#1E293B" />
+  <text x="524" y="182" font-size="12" font-weight="700" fill="#64748B" letter-spacing="1.2">STACK TAPE</text>
+  <text x="524" y="208" font-size="26" font-weight="700" fill="#F8FAFC">actual language mix</text>
+  <text x="524" y="228" font-size="14" fill="#94A3B8">only the real repo languages make the lineup.</text>
+  {draw_language_mix(profile["language_breakdown"])}
+
+  <rect x="44" y="390" width="1012" height="140" rx="28" fill="#0D1526" stroke="#1E293B" />
+  <text x="68" y="424" font-size="12" font-weight="700" fill="#64748B" letter-spacing="1.2">BUILD TEMPO</text>
+  <text x="68" y="448" font-size="24" font-weight="700" fill="#F8FAFC">recent shipping curve</text>
+  <text x="68" y="468" font-size="14" fill="#94A3B8">last 12 weeks of contribution movement</text>
+  <rect x="890" y="412" width="136" height="30" rx="15" fill="#111B2E" />
+  <text x="958" y="432" font-size="12" font-weight="700" text-anchor="middle" fill="#E2E8F0">peak week {peak_week}</text>
+  {draw_build_tempo(profile["weekly_totals"])}
 </svg>
 """.strip()
 

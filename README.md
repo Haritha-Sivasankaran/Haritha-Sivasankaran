@@ -17,22 +17,11 @@ Haritha-Sivasankaran
   <img src="https://img.shields.io/badge/AI%20SIDE%20QUESTS-111827?style=for-the-badge&labelColor=020617&color=7C3AED" alt="AI side quests" />
 </p>
 
-```js
-const haritha = {
-  ships: ["products with personality", "smooth user flows", "systems that scale"],
-  cares_about: ["clean visuals", "reliable logic", "good developer experience"],
-  avoids: ["messy UX", "repeated manual work", "boring builds"]
-};
-```
+## Player Build
 
-## Current Vibe
+<img width="100%" src="./assets/profile-build.svg" alt="Haritha build mode card" />
 
-- Building interfaces that feel clean, fast, and actually intentional.
-- Writing logic that still holds up once the UI gets real usage.
-- Using automation the second repetitive work starts getting annoying.
-- Exploring AI and data ideas that are useful enough to keep shipping.
-
-## Dev Pulse
+## Build Receipts
 
 <img width="100%" src="./assets/profile-overview.svg" alt="Live GitHub profile stats for Haritha" />
 

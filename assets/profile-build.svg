@@ -1,0 +1,59 @@
+<svg width="1100" height="420" viewBox="0 0 1100 420" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Haritha build mode profile card</title>
+  <desc id="desc">A custom GitHub profile panel showing Haritha's frontend, backend, automation, and builder personality in a Gen Z inspired style.</desc>
+  <defs>
+    <linearGradient id="bg" x1="44" y1="28" x2="1048" y2="392" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#09111F" />
+      <stop offset="0.55" stop-color="#111827" />
+      <stop offset="1" stop-color="#050816" />
+    </linearGradient>
+    <linearGradient id="shine" x1="76" y1="70" x2="1020" y2="70" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2563EB" />
+      <stop offset="0.33" stop-color="#EC4899" />
+      <stop offset="0.66" stop-color="#F97316" />
+      <stop offset="1" stop-color="#7C3AED" />
+    </linearGradient>
+  </defs>
+
+  <rect x="10" y="10" width="1080" height="400" rx="30" fill="url(#bg)" stroke="#1E293B" />
+  <rect x="42" y="34" width="168" height="34" rx="17" fill="#0F1B33" stroke="#22304A" />
+  <text x="64" y="56" font-size="13" font-weight="700" fill="#60A5FA" letter-spacing="1.4">BUILD MODE</text>
+
+  <text x="42" y="102" font-size="34" font-weight="700" fill="#F8FAFC">full-stack, but make it feel expensive</text>
+  <text x="42" y="128" font-size="16" fill="#94A3B8">less copy-paste aura, more actual personality, cleaner shipping energy.</text>
+
+  <rect x="42" y="150" width="1016" height="8" rx="4" fill="#0B1324" />
+  <rect x="42" y="150" width="1016" height="8" rx="4" fill="url(#shine)" opacity="0.95" />
+
+  <rect x="42" y="184" width="478" height="176" rx="24" fill="#0D1526" stroke="#1E293B" />
+  <rect x="66" y="208" width="122" height="28" rx="14" fill="#111C31" stroke="#22304A" />
+  <text x="89" y="227" font-size="12" font-weight="700" fill="#E2E8F0" letter-spacing="1.1">PROFILE.EXE</text>
+
+  <text x="66" y="264" font-size="16" fill="#64748B">frontend</text>
+  <text x="170" y="264" font-size="18" font-weight="600" fill="#F8FAFC">clean layouts, smooth interactions, not-template-looking UI</text>
+
+  <text x="66" y="298" font-size="16" fill="#64748B">backend</text>
+  <text x="170" y="298" font-size="18" font-weight="600" fill="#F8FAFC">logic that behaves under pressure and still makes sense later</text>
+
+  <text x="66" y="332" font-size="16" fill="#64748B">workflow</text>
+  <text x="170" y="332" font-size="18" font-weight="600" fill="#F8FAFC">if it gets repetitive, it gets automated</text>
+
+  <rect x="546" y="184" width="512" height="176" rx="24" fill="#0D1526" stroke="#1E293B" />
+  <rect x="570" y="208" width="132" height="28" rx="14" fill="#111C31" stroke="#22304A" />
+  <text x="594" y="227" font-size="12" font-weight="700" fill="#E2E8F0" letter-spacing="1.1">OPEN TABS</text>
+
+  <rect x="570" y="254" width="464" height="24" rx="12" fill="#121D31" />
+  <text x="590" y="271" font-size="15" font-weight="600" fill="#60A5FA">tab_01</text>
+  <text x="674" y="271" font-size="15" fill="#E2E8F0">making frontends feel polished instead of default</text>
+
+  <rect x="570" y="286" width="464" height="24" rx="12" fill="#121D31" />
+  <text x="590" y="303" font-size="15" font-weight="600" fill="#EC4899">tab_02</text>
+  <text x="674" y="303" font-size="15" fill="#E2E8F0">wiring backend flows that do not fold on real usage</text>
+
+  <rect x="570" y="318" width="464" height="24" rx="12" fill="#121D31" />
+  <text x="590" y="335" font-size="15" font-weight="600" fill="#F97316">tab_03</text>
+  <text x="674" y="335" font-size="15" fill="#E2E8F0">building shortcuts for future me before boredom hits</text>
+
+  <rect x="42" y="378" width="1016" height="18" rx="9" fill="#0F1B33" />
+  <text x="553" y="391" text-anchor="middle" font-size="13" font-weight="600" fill="#CBD5E1">design with taste. write logic with discipline. ship with builder brain on.</text>
+</svg>

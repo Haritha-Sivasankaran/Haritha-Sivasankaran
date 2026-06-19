@@ -5,23 +5,23 @@ from pathlib import Path
 
 # Define icons to fetch (Simple Icons names)
 ICONS = {
-    "python": {"label": "Python", "x": 80, "y": 50, "size": 34, "opacity": 0.8, "rot": 12, "anim": 1},
-    "javascript": {"label": "JavaScript", "x": 160, "y": 130, "size": 32, "opacity": 0.85, "rot": -8, "anim": 2},
-    "html5": {"label": "HTML5", "x": 320, "y": 130, "size": 30, "opacity": 0.75, "rot": 5, "anim": 3},
-    "css3": {"label": "CSS3", "x": 80, "y": 130, "size": 30, "opacity": 0.75, "rot": -10, "anim": 4},
-    "java": {"label": "Java", "x": 160, "y": 50, "size": 30, "opacity": 0.7, "rot": 10, "anim": 1},
-    "typescript": {"label": "TypeScript", "x": 240, "y": 115, "size": 34, "opacity": 0.85, "rot": -5, "anim": 2},
-    "react": {"label": "React", "x": 240, "y": 45, "size": 38, "opacity": 0.9, "rot": 15, "anim": 3},
-    "nodedotjs": {"label": "Node.js", "x": 320, "y": 50, "size": 34, "opacity": 0.8, "rot": 8, "anim": 4},
+    "python": {"label": "Python", "x": 80, "y": 50, "size": 34, "opacity": 0.8, "anim": 1},
+    "javascript": {"label": "JavaScript", "x": 160, "y": 130, "size": 32, "opacity": 0.85, "anim": 2},
+    "html5": {"label": "HTML5", "x": 320, "y": 130, "size": 30, "opacity": 0.75, "anim": 3},
+    "css3": {"label": "CSS3", "x": 80, "y": 130, "size": 30, "opacity": 0.75, "anim": 4},
+    "java": {"label": "Java", "x": 160, "y": 50, "size": 30, "opacity": 0.7, "anim": 1},
+    "typescript": {"label": "TypeScript", "x": 240, "y": 115, "size": 34, "opacity": 0.85, "anim": 2},
+    "react": {"label": "React", "x": 240, "y": 45, "size": 38, "opacity": 0.9, "anim": 3},
+    "nodedotjs": {"label": "Node.js", "x": 320, "y": 50, "size": 34, "opacity": 0.8, "anim": 4},
     
-    "nextdotjs": {"label": "Next.js", "x": 680, "y": 50, "size": 38, "opacity": 0.9, "rot": -15, "anim": 1},
-    "tailwindcss": {"label": "Tailwind CSS", "x": 820, "y": 130, "size": 32, "opacity": 0.85, "rot": 8, "anim": 2},
-    "vite": {"label": "Vite", "x": 920, "y": 50, "size": 34, "opacity": 0.8, "rot": -10, "anim": 3},
-    "docker": {"label": "Docker", "x": 750, "y": 130, "size": 36, "opacity": 0.85, "rot": 12, "anim": 4},
-    "git": {"label": "Git", "x": 680, "y": 130, "size": 30, "opacity": 0.75, "rot": -8, "anim": 1},
-    "github": {"label": "GitHub", "x": 820, "y": 50, "size": 34, "opacity": 0.8, "rot": 5, "anim": 2},
-    "visualstudiocode": {"label": "VS Code", "x": 920, "y": 130, "size": 32, "opacity": 0.85, "rot": 10, "anim": 3},
-    "jupyter": {"label": "Jupyter", "x": 750, "y": 50, "size": 30, "opacity": 0.7, "rot": -5, "anim": 4}
+    "nextdotjs": {"label": "Next.js", "x": 680, "y": 50, "size": 38, "opacity": 0.9, "anim": 1},
+    "tailwindcss": {"label": "Tailwind CSS", "x": 820, "y": 130, "size": 32, "opacity": 0.85, "anim": 2},
+    "vite": {"label": "Vite", "x": 920, "y": 50, "size": 34, "opacity": 0.8, "anim": 3},
+    "docker": {"label": "Docker", "x": 750, "y": 130, "size": 36, "opacity": 0.85, "anim": 4},
+    "git": {"label": "Git", "x": 680, "y": 130, "size": 30, "opacity": 0.75, "anim": 1},
+    "github": {"label": "GitHub", "x": 820, "y": 50, "size": 34, "opacity": 0.8, "anim": 2},
+    "visualstudiocode": {"label": "VS Code", "x": 920, "y": 130, "size": 32, "opacity": 0.85, "anim": 3},
+    "jupyter": {"label": "Jupyter", "x": 750, "y": 50, "size": 30, "opacity": 0.7, "anim": 4}
 }
 
 def get_base64_icon(name: str) -> str:
@@ -102,19 +102,16 @@ def main():
         y = info["y"]
         size = info["size"]
         opacity = info["opacity"]
-        rot = info["rot"]
         anim = info["anim"]
-        half_size = size / 2
         
-        # Nested structure: 
-        # Outer group translates to (x, y) and applies initial rotation.
-        # Inner group animates float independently.
+        # Calculate top-left based on center coordinates
+        img_x = x - (size / 2)
+        img_y = y - (size / 2)
+        
+        # Position directly on the <image> element using x and y.
+        # This completely bypasses any sanitizer issues with <g transform="..." >.
         icon_elem = f"""
-  <g transform="translate({x}, {y}) rotate({rot})">
-    <g class="float-icon-{anim}">
-      <image href="{b64}" x="-{half_size}" y="-{half_size}" width="{size}" height="{size}" opacity="{opacity}" />
-    </g>
-  </g>"""
+  <image class="float-icon-{anim}" href="{b64}" x="{img_x}" y="{img_y}" width="{size}" height="{size}" opacity="{opacity}" />"""
         icon_elements.append(icon_elem)
 
     icons_str = "".join(icon_elements)
@@ -134,24 +131,24 @@ def main():
 
   <style>
     @keyframes float1 {{
-      0% {{ transform: translateY(0px) rotate(0deg); }}
-      50% {{ transform: translateY(-5px) rotate(1deg); }}
-      100% {{ transform: translateY(0px) rotate(0deg); }}
+      0% {{ transform: translateY(0px); }}
+      50% {{ transform: translateY(-6px); }}
+      100% {{ transform: translateY(0px); }}
     }}
     @keyframes float2 {{
-      0% {{ transform: translateY(0px) rotate(0deg); }}
-      50% {{ transform: translateY(-7px) rotate(-1.5deg); }}
-      100% {{ transform: translateY(0px) rotate(0deg); }}
+      0% {{ transform: translateY(0px); }}
+      50% {{ transform: translateY(-9px); }}
+      100% {{ transform: translateY(0px); }}
     }}
     @keyframes float3 {{
-      0% {{ transform: translateY(0px) rotate(0deg); }}
-      50% {{ transform: translateY(5px) rotate(1deg); }}
-      100% {{ transform: translateY(0px) rotate(0deg); }}
+      0% {{ transform: translateY(0px); }}
+      50% {{ transform: translateY(6px); }}
+      100% {{ transform: translateY(0px); }}
     }}
     @keyframes float4 {{
-      0% {{ transform: translateY(0px) rotate(0deg); }}
-      50% {{ transform: translateY(7px) rotate(-1deg); }}
-      100% {{ transform: translateY(0px) rotate(0deg); }}
+      0% {{ transform: translateY(0px); }}
+      50% {{ transform: translateY(9px); }}
+      100% {{ transform: translateY(0px); }}
     }}
     .float-icon-1 {{ animation: float1 5s ease-in-out infinite; }}
     .float-icon-2 {{ animation: float2 6.5s ease-in-out infinite; }}
@@ -202,9 +199,10 @@ def main():
   <text x="500" y="100" text-anchor="middle" dominant-baseline="middle" class="title" filter="url(#shadow)">Haritha Sivasankaran</text>
 </svg>"""
 
-    banner_path = Path("assets/profile-banner.svg")
+    # Generate v2 file to bypass cache
+    banner_path = Path("assets/profile-banner-v2.svg")
     banner_path.write_text(svg_content, encoding="utf-8")
-    print("OK: Banner SVG generated successfully at assets/profile-banner.svg!")
+    print("OK: Banner SVG generated successfully at assets/profile-banner-v2.svg!")
 
 if __name__ == "__main__":
     main()

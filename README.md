@@ -3,7 +3,7 @@ For this README to appear on your GitHub profile, the repository name must be ex
 Haritha-Sivasankaran
 -->
 
-<img width="100%" src="./assets/profile-banner.svg" alt="Haritha Sivasankaran" />
+<img width="100%" src="./assets/profile-banner-v2.svg" alt="Haritha Sivasankaran" />
 
 <p align="center">
   <img src="https://img.shields.io/badge/FULL%20STACK-111827?style=for-the-badge&labelColor=020617&color=2563EB" alt="Full stack" />

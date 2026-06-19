@@ -12,10 +12,6 @@ Haritha-Sivasankaran
 </p>
 
 <p align="center">
-  <a href="https://github.com/Haritha-Sivasankaran?tab=followers">
-    <img src="https://img.shields.io/github/followers/Haritha-Sivasankaran?style=for-the-badge&logo=github&label=Followers" alt="GitHub followers" />
-  </a>
-  <img src="https://komarev.com/ghpvc/?username=Haritha-Sivasankaran&style=for-the-badge&color=0E7490" alt="Profile views" />
   <img src="https://img.shields.io/badge/Focus-Backend%20%7C%20Automation%20%7C%20AI-111827?style=for-the-badge&labelColor=0F172A&color=2563EB" alt="Focus areas" />
 </p>
 

@@ -209,7 +209,7 @@ def main():
   <text x="500" y="90" text-anchor="middle" dominant-baseline="middle" class="title" filter="url(#shadow)">Haritha Sivasankaran</text>
 
   <!-- LinkedIn Redirect Icon directly under the name -->
-  <a href="https://www.linkedin.com/in/haritha-sivasankaran-a0234b221/" target="_blank">
+  <a href="https://www.linkedin.com/in/haritha-sivasankaran/" target="_blank">
     <image href="{linkedin_b64}" x="487" y="125" width="26" height="26" opacity="0.95" style="cursor: pointer;" />
   </a>
 </svg>"""

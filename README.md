@@ -3,7 +3,7 @@ For this README to appear on your GitHub profile, the repository name must be ex
 Haritha-Sivasankaran
 -->
 
-[<img width="100%" src="./assets/profile-banner-v4.svg" alt="Haritha Sivasankaran" />](https://www.linkedin.com/in/haritha-sivasankaran-a0234b221/)
+[<img width="100%" src="./assets/profile-banner-v4.svg" alt="Haritha Sivasankaran" />](https://www.linkedin.com/in/haritha-sivasankaran/)
 
 <p align="center">
   <img src="https://img.shields.io/badge/FULL%20STACK-111827?style=for-the-badge&labelColor=020617&color=2563EB" alt="Full stack" />
@@ -19,7 +19,7 @@ Haritha-Sivasankaran
 
 ## Build Receipts
 
-<img width="100%" src="./assets/profile-overview.svg?t=1781906306" alt="Live GitHub profile stats for Haritha" />
+<img width="100%" src="./assets/profile-overview.svg?t=1781906346" alt="Live GitHub profile stats for Haritha" />
 
 <p align="center">
   <sub>real data | auto-refreshes every 6 hours | updates on profile repo pushes</sub>
@@ -32,7 +32,7 @@ Haritha-Sivasankaran
 ## Connect
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/haritha-sivasankaran-a0234b221/" target="_blank">
+  <a href="https://www.linkedin.com/in/haritha-sivasankaran/" target="_blank">
     <img src="https://img.shields.io/badge/CONNECT%20ON%20LINKEDIN-0077B5?style=for-the-badge&logo=linkedin&logoColor=white&labelColor=020617" alt="LinkedIn" />
   </a>
 </p>

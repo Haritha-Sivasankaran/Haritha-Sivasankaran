@@ -3,25 +3,27 @@ import json
 import urllib.request
 from pathlib import Path
 
-# Define icons to fetch (Simple Icons names)
+# Define icons to fetch (Simple Icons names) with updated coordinates
 ICONS = {
-    "python": {"label": "Python", "x": 80, "y": 50, "size": 34, "opacity": 0.8, "anim": 1},
-    "javascript": {"label": "JavaScript", "x": 160, "y": 130, "size": 32, "opacity": 0.85, "anim": 2},
-    "html5": {"label": "HTML5", "x": 320, "y": 130, "size": 30, "opacity": 0.75, "anim": 3},
-    "css3": {"label": "CSS3", "x": 80, "y": 130, "size": 30, "opacity": 0.75, "anim": 4},
-    "java": {"label": "Java", "x": 160, "y": 50, "size": 30, "opacity": 0.7, "anim": 1},
-    "typescript": {"label": "TypeScript", "x": 240, "y": 115, "size": 34, "opacity": 0.85, "anim": 2},
-    "react": {"label": "React", "x": 240, "y": 45, "size": 38, "opacity": 0.9, "anim": 3},
-    "nodedotjs": {"label": "Node.js", "x": 320, "y": 50, "size": 34, "opacity": 0.8, "anim": 4},
+    # Top Row (8 icons)
+    "python": {"label": "Python", "x": 90, "y": 45, "size": 34, "opacity": 0.8, "anim": 1},
+    "java": {"label": "Java", "x": 210, "y": 55, "size": 30, "opacity": 0.7, "anim": 2},
+    "typescript": {"label": "TypeScript", "x": 330, "y": 45, "size": 34, "opacity": 0.85, "anim": 3},
+    "git": {"label": "Git", "x": 450, "y": 50, "size": 30, "opacity": 0.75, "anim": 4},
+    "docker": {"label": "Docker", "x": 550, "y": 50, "size": 36, "opacity": 0.85, "anim": 1},
+    "nextdotjs": {"label": "Next.js", "x": 670, "y": 45, "size": 38, "opacity": 0.9, "anim": 2},
+    "jupyter": {"label": "Jupyter", "x": 790, "y": 55, "size": 30, "opacity": 0.7, "anim": 3},
+    "vite": {"label": "Vite", "x": 910, "y": 45, "size": 34, "opacity": 0.8, "anim": 4},
     
-    "nextdotjs": {"label": "Next.js", "x": 680, "y": 50, "size": 38, "opacity": 0.9, "anim": 1},
-    "tailwindcss": {"label": "Tailwind CSS", "x": 820, "y": 130, "size": 32, "opacity": 0.85, "anim": 2},
-    "vite": {"label": "Vite", "x": 920, "y": 50, "size": 34, "opacity": 0.8, "anim": 3},
-    "docker": {"label": "Docker", "x": 750, "y": 130, "size": 36, "opacity": 0.85, "anim": 4},
-    "git": {"label": "Git", "x": 680, "y": 130, "size": 30, "opacity": 0.75, "anim": 1},
-    "github": {"label": "GitHub", "x": 820, "y": 50, "size": 34, "opacity": 0.8, "anim": 2},
-    "visualstudiocode": {"label": "VS Code", "x": 920, "y": 130, "size": 32, "opacity": 0.85, "anim": 3},
-    "jupyter": {"label": "Jupyter", "x": 750, "y": 50, "size": 30, "opacity": 0.7, "anim": 4}
+    # Bottom Row (8 icons)
+    "css3": {"label": "CSS3", "x": 90, "y": 135, "size": 30, "opacity": 0.75, "anim": 1},
+    "javascript": {"label": "JavaScript", "x": 210, "y": 125, "size": 32, "opacity": 0.85, "anim": 2},
+    "html5": {"label": "HTML5", "x": 330, "y": 135, "size": 30, "opacity": 0.75, "anim": 3},
+    "react": {"label": "React", "x": 450, "y": 130, "size": 38, "opacity": 0.9, "anim": 4},
+    "nodedotjs": {"label": "Node.js", "x": 550, "y": 130, "size": 34, "opacity": 0.8, "anim": 1},
+    "tailwindcss": {"label": "Tailwind CSS", "x": 670, "y": 135, "size": 32, "opacity": 0.85, "anim": 2},
+    "visualstudiocode": {"label": "VS Code", "x": 790, "y": 125, "size": 32, "opacity": 0.85, "anim": 3},
+    "github": {"label": "GitHub", "x": 910, "y": 135, "size": 34, "opacity": 0.8, "anim": 4}
 }
 
 def get_base64_icon(name: str) -> str:
@@ -108,8 +110,6 @@ def main():
         img_x = x - (size / 2)
         img_y = y - (size / 2)
         
-        # Position directly on the <image> element using x and y.
-        # This completely bypasses any sanitizer issues with <g transform="..." >.
         icon_elem = f"""
   <image class="float-icon-{anim}" href="{b64}" x="{img_x}" y="{img_y}" width="{size}" height="{size}" opacity="{opacity}" />"""
         icon_elements.append(icon_elem)
@@ -199,10 +199,10 @@ def main():
   <text x="500" y="100" text-anchor="middle" dominant-baseline="middle" class="title" filter="url(#shadow)">Haritha Sivasankaran</text>
 </svg>"""
 
-    # Generate v2 file to bypass cache
-    banner_path = Path("assets/profile-banner-v2.svg")
+    # Generate v3 file to bypass cache
+    banner_path = Path("assets/profile-banner-v3.svg")
     banner_path.write_text(svg_content, encoding="utf-8")
-    print("OK: Banner SVG generated successfully at assets/profile-banner-v2.svg!")
+    print("OK: Banner SVG generated successfully at assets/profile-banner-v3.svg!")
 
 if __name__ == "__main__":
     main()

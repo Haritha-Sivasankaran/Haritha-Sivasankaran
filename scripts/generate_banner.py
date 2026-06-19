@@ -90,6 +90,14 @@ def main():
             else:
                 print(f"FAIL: {label} failed.")
 
+    # Ensure LinkedIn is also fetched and cached
+    if "linkedin" not in encoded_icons:
+        linkedin_b64 = get_base64_icon("linkedin")
+        if linkedin_b64:
+            encoded_icons["linkedin"] = linkedin_b64
+            missing_fetched = True
+            print("OK: LinkedIn icon encoded successfully.")
+
     if missing_fetched:
         with open("scripts/banner_icons_cache.json", "w", encoding="utf-8") as f:
             json.dump(encoded_icons, f, indent=2)
@@ -115,6 +123,8 @@ def main():
         icon_elements.append(icon_elem)
 
     icons_str = "".join(icon_elements)
+    
+    linkedin_b64 = encoded_icons.get("linkedin", "")
 
     svg_content = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 220" width="1000" height="220">
   <defs>
@@ -196,13 +206,18 @@ def main():
   {icons_str}
 
   <!-- Developer Name -->
-  <text x="500" y="100" text-anchor="middle" dominant-baseline="middle" class="title" filter="url(#shadow)">Haritha Sivasankaran</text>
+  <text x="500" y="90" text-anchor="middle" dominant-baseline="middle" class="title" filter="url(#shadow)">Haritha Sivasankaran</text>
+
+  <!-- LinkedIn Redirect Icon directly under the name -->
+  <a href="https://www.linkedin.com/in/haritha-sivasankaran-a0234b221/" target="_blank">
+    <image href="{linkedin_b64}" x="487" y="125" width="26" height="26" opacity="0.95" style="cursor: pointer;" />
+  </a>
 </svg>"""
 
-    # Generate v3 file to bypass cache
-    banner_path = Path("assets/profile-banner-v3.svg")
+    # Generate v4 file to bypass cache
+    banner_path = Path("assets/profile-banner-v4.svg")
     banner_path.write_text(svg_content, encoding="utf-8")
-    print("OK: Banner SVG generated successfully at assets/profile-banner-v3.svg!")
+    print("OK: Banner SVG generated successfully at assets/profile-banner-v4.svg!")
 
 if __name__ == "__main__":
     main()

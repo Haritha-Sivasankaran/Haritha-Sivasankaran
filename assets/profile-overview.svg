@@ -38,7 +38,7 @@
   <!-- Right Details -->
   <rect x="916" y="44" width="140" height="22" rx="4" fill="#1E2030" stroke="#000000" stroke-width="2" />
   <text x="986" y="59" font-size="10.5" font-weight="800" fill="#00E5FF" text-anchor="middle" class="font-mono">TOKEN SYNC + PRIVATE</text>
-  <text x="1056" y="96" font-size="12" font-weight="700" fill="#64748B" class="font-mono" text-anchor="end">LAST REFRESH: 26 JUN 2026 | 08:02 PM</text>
+  <text x="1056" y="96" font-size="12" font-weight="700" fill="#64748B" class="font-mono" text-anchor="end">LAST REFRESH: 27 JUN 2026 | 01:23 AM</text>
 
   <!-- ================= WINDOW 1: STATS ================= -->
   <!-- Shadow -->
@@ -54,7 +54,7 @@
   <circle cx="420" cy="163" r="6" fill="#10B981" stroke="#000" stroke-width="1.5" />
 
   <!-- Content -->
-  <text x="68" y="275" font-size="78" font-weight="800" fill="#FFFFFF" class="font-sans">350</text>
+  <text x="68" y="275" font-size="78" font-weight="800" fill="#FFFFFF" class="font-sans">355</text>
   <text x="70" y="305" font-size="18" font-weight="700" fill="#CBD5E1" class="font-sans">contributions</text>
   <text x="70" y="328" font-size="12" font-weight="500" fill="#94A3B8" class="font-sans">public + private activity</text>
   <text x="70" y="348" font-size="11" font-weight="500" fill="#64748B" class="font-sans">shipping publicly since 2021</text>
@@ -63,7 +63,7 @@
       <rect x="256" y="188" width="92" height="56" rx="4" fill="#1E2030" stroke="#000000" stroke-width="2" />
       <rect x="264" y="196" width="4" height="40" rx="1" fill="#FF007F" />
       <text x="274" y="210" font-size="9" font-weight="700" fill="#94A3B8" letter-spacing="0.6" class="font-mono">ACTIVE</text>
-      <text x="274" y="232" font-size="20" font-weight="800" fill="#F8FAFC" class="font-sans">31</text>
+      <text x="274" y="232" font-size="20" font-weight="800" fill="#F8FAFC" class="font-sans">32</text>
     </g><g>
       <rect x="361" y="191" width="92" height="56" rx="4" fill="#000000" />
       <rect x="358" y="188" width="92" height="56" rx="4" fill="#1E2030" stroke="#000000" stroke-width="2" />
@@ -172,8 +172,8 @@
   <line x1="84" y1="500" x2="1016" y2="500" stroke="#000" stroke-width="2" />
 <line x1="84" y1="476" x2="1016" y2="476" stroke="#1E2030" stroke-dasharray="3,3" />
 <line x1="84" y1="452" x2="1016" y2="452" stroke="#1E2030" stroke-dasharray="3,3" />
-<path d="M 84.00 500.00 84.00 498.00 L 168.73 493.21 L 253.45 499.52 L 338.18 498.00 L 422.91 498.00 L 507.64 498.00 L 592.36 487.39 L 677.09 457.33 L 761.82 488.85 L 846.55 467.52 L 931.27 452.00 L 1016.00 487.39 L 1016.00 500.00 Z" fill="url(#tempoFill)" opacity="0.9" />
-<path d="M 84.00 498.00 L 168.73 493.21 L 253.45 499.52 L 338.18 498.00 L 422.91 498.00 L 507.64 498.00 L 592.36 487.39 L 677.09 457.33 L 761.82 488.85 L 846.55 467.52 L 931.27 452.00 L 1016.00 487.39" fill="none" stroke="url(#tempoStroke)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M 84.00 500.00 84.00 498.00 L 168.73 493.21 L 253.45 499.52 L 338.18 498.00 L 422.91 498.00 L 507.64 498.00 L 592.36 487.39 L 677.09 457.33 L 761.82 488.85 L 846.55 467.52 L 931.27 452.00 L 1016.00 484.97 L 1016.00 500.00 Z" fill="url(#tempoFill)" opacity="0.9" />
+<path d="M 84.00 498.00 L 168.73 493.21 L 253.45 499.52 L 338.18 498.00 L 422.91 498.00 L 507.64 498.00 L 592.36 487.39 L 677.09 457.33 L 761.82 488.85 L 846.55 467.52 L 931.27 452.00 L 1016.00 484.97" fill="none" stroke="url(#tempoStroke)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
 <circle cx="84.00" cy="498.00" r="4.5" fill="#090a0f" stroke="#00E5FF" stroke-width="3" />
 <text x="84.00" y="522" font-size="11" font-weight="700" text-anchor="middle" fill="#64748B" class="font-mono">APR</text>
 <circle cx="168.73" cy="493.21" r="4.5" fill="#090a0f" stroke="#00E5FF" stroke-width="3" />
@@ -195,7 +195,7 @@
 <text x="846.55" y="455.52" font-size="11" font-weight="700" text-anchor="middle" fill="#00FF66" class="font-mono">67</text>
 <circle cx="931.27" cy="452.00" r="4.5" fill="#090a0f" stroke="#FF007F" stroke-width="3" />
 <text x="931.27" y="440.00" font-size="11" font-weight="700" text-anchor="middle" fill="#00FF66" class="font-mono">99</text>
-<circle cx="1016.00" cy="487.39" r="4.5" fill="#090a0f" stroke="#00E5FF" stroke-width="3" />
-<text x="1016.00" y="475.39" font-size="11" font-weight="700" text-anchor="middle" fill="#00FF66" class="font-mono">26</text>
+<circle cx="1016.00" cy="484.97" r="4.5" fill="#090a0f" stroke="#00E5FF" stroke-width="3" />
+<text x="1016.00" y="472.97" font-size="11" font-weight="700" text-anchor="middle" fill="#00FF66" class="font-mono">31</text>
 <text x="1016.00" y="522" font-size="11" font-weight="700" text-anchor="middle" fill="#64748B" class="font-mono">JUN</text>
 </svg>

@@ -1,45 +1,50 @@
 {
   "username": "Haritha-Sivasankaran",
   "name": "Haritha Sivasankaran",
-  "source_mode": "github-public",
-  "generated_at": "2026-07-06T01:53:17.473848+05:30",
+  "source_mode": "github-graphql",
+  "generated_at": "2026-07-06T02:03:58.175153+05:30",
   "timezone": "Asia/Calcutta",
-  "contributions_365d": 409,
-  "public_contributions": 409,
-  "private_contributions": 0,
-  "active_days": 39,
-  "peak_day": 47,
-  "public_repos": 16,
-  "private_repos": 0,
+  "contributions_365d": 777,
+  "public_contributions": 411,
+  "private_contributions": 366,
+  "active_days": 40,
+  "peak_day": 46,
+  "public_repos": 12,
+  "private_repos": 7,
   "stars_earned": 2,
   "joined_year": 2021,
-  "has_restricted_contributions": false,
-  "restricted_contributions": 0,
+  "has_restricted_contributions": true,
+  "restricted_contributions": 366,
   "language_breakdown": [
     {
       "name": "Jupyter Notebook",
       "bytes": 439263,
-      "percent": 77.87
+      "percent": 21.47
+    },
+    {
+      "name": "JavaScript",
+      "bytes": 343820,
+      "percent": 16.81
+    },
+    {
+      "name": "TypeScript",
+      "bytes": 335281,
+      "percent": 16.39
     },
     {
       "name": "Python",
-      "bytes": 104776,
-      "percent": 18.57
-    },
-    {
-      "name": "HTML",
-      "bytes": 9574,
-      "percent": 1.7
-    },
-    {
-      "name": "CSS",
-      "bytes": 6737,
-      "percent": 1.19
+      "bytes": 306063,
+      "percent": 14.96
     },
     {
       "name": "Java",
-      "bytes": 3754,
-      "percent": 0.67
+      "bytes": 299696,
+      "percent": 14.65
+    },
+    {
+      "name": "HTML",
+      "bytes": 203899,
+      "percent": 9.97
     }
   ],
   "weekly_totals": [
@@ -89,22 +94,22 @@
     },
     {
       "start": "2026-07-05",
-      "total": 11
+      "total": 13
     }
   ],
   "longest_streak": 8,
   "weekday_counts": [
-    44,
-    35,
+    45,
+    36,
     44,
     63,
-    79,
-    79,
+    77,
+    81,
     65
   ],
-  "top_repo_name": "TransitPulse",
-  "top_repo_lang": "Python",
-  "top_track_name": "enhanced_submission_blend.py",
-  "focus_repo_name": "TransitPulse2.0",
-  "focus_repo_lang": "Java"
+  "top_repo_name": "Obsidian-Chess",
+  "top_repo_lang": "JavaScript",
+  "top_track_name": "CHANGELOG.md",
+  "focus_repo_name": "TransitPulse-2.0",
+  "focus_repo_lang": "JavaScript"
 }

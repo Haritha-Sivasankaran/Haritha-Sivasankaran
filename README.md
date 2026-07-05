@@ -5,9 +5,6 @@ Haritha-Sivasankaran
 
 <img width="100%" src="./assets/profile-banner-v5.svg" alt="Haritha Sivasankaran" />
 
-<p align="center">
-  <strong>Full-stack developer focused on polished interfaces, reliable backend flows, automation, and practical data-driven apps.</strong>
-</p>
 
 <p align="center">
   <a href="https://www.linkedin.com/in/haritha-sivasankaran/" target="_blank">

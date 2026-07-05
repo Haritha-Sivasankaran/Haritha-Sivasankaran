@@ -12,13 +12,6 @@ Haritha-Sivasankaran
   </a>
 </p>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/FULL%20STACK-111827?style=for-the-badge&labelColor=020617&color=3B82F6" alt="Full stack" />
-  <img src="https://img.shields.io/badge/FRONTEND-111827?style=for-the-badge&labelColor=020617&color=6366F1" alt="Frontend" />
-  <img src="https://img.shields.io/badge/BACKEND-111827?style=for-the-badge&labelColor=020617&color=0EA5E9" alt="Backend" />
-  <img src="https://img.shields.io/badge/AUTOMATION-111827?style=for-the-badge&labelColor=020617&color=8B5CF6" alt="Automation" />
-  <img src="https://img.shields.io/badge/AI%20INTEGRATION-111827?style=for-the-badge&labelColor=020617&color=8B5CF6" alt="AI Integration" />
-</p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/React-111827?style=for-the-badge&logo=react&logoColor=61DAFB&labelColor=020617" alt="React" />

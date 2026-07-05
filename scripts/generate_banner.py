@@ -1,5 +1,6 @@
 import base64
 import json
+import re
 import urllib.request
 from pathlib import Path
 
@@ -27,7 +28,7 @@ ICONS = {
 }
 
 def get_base64_icon(name: str) -> str:
-    url = f"https://cdn.simpleicons.org/{name}"  # Get colored icons
+    url = f"https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/{name}.svg"
     try:
         req = urllib.request.Request(
             url, 
@@ -36,31 +37,14 @@ def get_base64_icon(name: str) -> str:
         with urllib.request.urlopen(req, timeout=5) as response:
             svg_data = response.read()
             if b"<svg" in svg_data:
-                encoded = base64.b64encode(svg_data).decode("utf-8")
-                return f"data:image/svg+xml;base64,{encoded}"
-    except Exception:
-        pass
-
-    # Fallback to jsDelivr if CDN fails/404s
-    url_fallback = f"https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/{name}.svg"
-    try:
-        req = urllib.request.Request(
-            url_fallback, 
-            headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
-        )
-        with urllib.request.urlopen(req, timeout=5) as response:
-            svg_data = response.read()
-            if b"<svg" in svg_data:
                 svg_text = svg_data.decode("utf-8")
-                # Style fallback icons to white
-                if "fill=" not in svg_text:
-                    svg_text = svg_text.replace("<svg ", '<svg fill="#ffffff" ')
-                else:
-                    svg_text = svg_text.replace('fill="#000"', 'fill="#ffffff"').replace('fill="currentColor"', 'fill="#ffffff"')
+                # Format to uniform clean white (#F8FAFC)
+                svg_text = re.sub(r'fill="[^"]+"', '', svg_text)
+                svg_text = svg_text.replace("<svg ", '<svg fill="#F8FAFC" ')
                 encoded = base64.b64encode(svg_text.encode("utf-8")).decode("utf-8")
                 return f"data:image/svg+xml;base64,{encoded}"
     except Exception as e:
-        print(f"Failed to fetch {name} from fallback: {e}")
+        print(f"Error fetching icon {name}: {e}")
     return ""
 
 def main():
@@ -128,18 +112,34 @@ def main():
 
     svg_content = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 220" width="1000" height="220">
   <defs>
+    <linearGradient id="pageBg" x1="0" y1="0" x2="1000" y2="220" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#040408" />
+      <stop offset="0.55" stop-color="#07070F" />
+      <stop offset="1" stop-color="#020205" />
+    </linearGradient>
+
     <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#0F172A" />
-      <stop offset="45%" stop-color="#2563EB" />
-      <stop offset="100%" stop-color="#EC4899" />
+      <stop offset="0%" stop-color="#3B82F6" />
+      <stop offset="50%" stop-color="#8B5CF6" />
+      <stop offset="100%" stop-color="#00E5FF" />
     </linearGradient>
     
+    <pattern id="gridPattern" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 H 0 V 32" fill="none" stroke="#1E1B4B" stroke-width="1.2" stroke-opacity="0.22" />
+    </pattern>
+
+    <filter id="blurGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="24" />
+    </filter>
+
     <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="2" dy="4" stdDeviation="4" flood-opacity="0.3" />
+      <feDropShadow dx="2" dy="4" stdDeviation="4" flood-opacity="0.3" flood-color="#000000" />
     </filter>
   </defs>
 
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Sora:wght@800&amp;display=swap');
+    
     @keyframes float1 {{
       0% {{ transform: translateY(0px); }}
       50% {{ transform: translateY(-6px); }}
@@ -166,18 +166,30 @@ def main():
     .float-icon-4 {{ animation: float4 7.2s ease-in-out infinite; }}
     
     .title {{
-      font-family: system-ui, -apple-system, sans-serif;
+      font-family: 'Sora', -apple-system, sans-serif;
       font-weight: 800;
       fill: #ffffff;
       font-size: 42px;
+      letter-spacing: -0.5px;
       text-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
     }}
   </style>
 
-  <!-- Animated Waving Background Layers from capsule-render -->
+  <!-- Background Base matching profile pages -->
+  <rect width="1000" height="220" rx="20" fill="url(#pageBg)" />
+  <rect width="1000" height="220" rx="20" fill="url(#gridPattern)" />
+
+  <!-- Ambient Glow Backdrops -->
+  <circle cx="150" cy="110" r="120" fill="#3B82F6" opacity="0.10" filter="url(#blurGlow)" />
+  <circle cx="850" cy="110" r="140" fill="#8B5CF6" opacity="0.10" filter="url(#blurGlow)" />
+  <circle cx="500" cy="110" r="100" fill="#00E5FF" opacity="0.06" filter="url(#blurGlow)" />
+
+  <rect x="1.5" y="1.5" width="997" height="217" rx="18.5" stroke="#131326" stroke-width="1.4" fill="none" />
+
+  <!-- Animated Waving Background Layers -->
   <g>
     <!-- Wave 1 (Back wave) -->
-    <path d="M0 0 L 0 140 Q 250 180 500 150 T 1000 175 L 1000 0 Z" fill="url(#bgGradient)" opacity="0.45">
+    <path d="M0 0 L 0 140 Q 250 180 500 150 T 1000 175 L 1000 0 Z" fill="url(#bgGradient)" opacity="0.05">
       <animate
           attributeName="d"
           dur="20s"
@@ -189,7 +201,7 @@ def main():
           values="M0 0 L 0 140 Q 250 180 500 150 T 1000 175 L 1000 0 Z; M0 0 L 0 165 Q 250 180 500 160 T 1000 150 L 1000 0 Z; M0 0 L 0 185 Q 250 155 500 185 T 1000 150 L 1000 0 Z; M0 0 L 0 140 Q 250 180 500 150 T 1000 175 L 1000 0 Z" />
     </path>
     <!-- Wave 2 (Front wave) -->
-    <path d="M0 0 L 0 155 Q 250 200 500 170 T 1000 180 L 1000 0 Z" fill="url(#bgGradient)" opacity="0.65">
+    <path d="M0 0 L 0 155 Q 250 200 500 170 T 1000 180 L 1000 0 Z" fill="url(#bgGradient)" opacity="0.08">
       <animate
           attributeName="d"
           dur="20s"
@@ -206,7 +218,7 @@ def main():
   {icons_str}
 
   <!-- Developer Name -->
-  <text x="500" y="100" text-anchor="middle" dominant-baseline="middle" class="title" filter="url(#shadow)">Haritha Sivasankaran</text>
+  <text x="500" y="115" text-anchor="middle" dominant-baseline="middle" class="title" filter="url(#shadow)">Haritha Sivasankaran</text>
 </svg>"""
 
     # Generate v5 file to bypass cache

@@ -1,0 +1,179 @@
+<svg width="1100" height="600" viewBox="0 0 1100 600" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Developer Wrapped Report</title>
+  <desc id="desc">A dark premium yearly developer stats report using only blue, purple, and white accents.</desc>
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&amp;family=Sora:wght@500;600;700;800&amp;display=swap');
+      .font-sans { font-family: 'Sora', -apple-system, BlinkMacSystemFont, sans-serif; }
+      .font-mono { font-family: 'IBM Plex Mono', monospace; }
+    </style>
+    <linearGradient id="pageBg" x1="0" y1="0" x2="1100" y2="600" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#040408" />
+      <stop offset="0.55" stop-color="#07070F" />
+      <stop offset="1" stop-color="#020205" />
+    </linearGradient>
+    <linearGradient id="cardBg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#0A0A15" />
+      <stop offset="1" stop-color="#05050A" />
+    </linearGradient>
+    <linearGradient id="cardBorder" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#3B82F6" stop-opacity="0.4" />
+      <stop offset="0.5" stop-color="#8B5CF6" stop-opacity="0.25" />
+      <stop offset="1" stop-color="#00E5FF" stop-opacity="0.1" />
+    </linearGradient>
+    <radialGradient id="auraGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.32" />
+      <stop offset="70%" stop-color="#3B82F6" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#0A0A15" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="bluePurpleGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#3B82F6" />
+      <stop offset="1" stop-color="#8B5CF6" />
+    </linearGradient>
+    <pattern id="gridPattern" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 H 0 V 32" fill="none" stroke="#1E1B4B" stroke-width="1.2" stroke-opacity="0.22" />
+    </pattern>
+    <filter id="blurGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="32" />
+    </filter>
+  </defs>
+
+  <rect width="1100" height="600" rx="20" fill="url(#pageBg)" />
+  <rect width="1100" height="600" rx="20" fill="url(#gridPattern)" />
+  <circle cx="160" cy="180" r="180" fill="#3B82F6" opacity="0.10" filter="url(#blurGlow)" />
+  <circle cx="940" cy="420" r="220" fill="#8B5CF6" opacity="0.10" filter="url(#blurGlow)" />
+  <circle cx="550" cy="300" r="160" fill="#00E5FF" opacity="0.06" filter="url(#blurGlow)" />
+  <rect x="1.5" y="1.5" width="1097" height="597" rx="18.5" stroke="#131326" stroke-width="1.4" />
+
+  <text x="60" y="62" font-size="10.5" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">2026 DEVELOPER WRAPPED</text>
+  <text x="60" y="102" font-size="44" font-weight="800" fill="#FFFFFF" class="font-sans">your year in code.</text>
+  <text x="1040" y="62" font-size="9.5" font-weight="700" fill="#94A3B8" class="font-mono" text-anchor="end">LAST REFRESHED ON 06 JUL 2026</text>
+
+  <!-- CARD 1: TOP LANGUAGES -->
+  <rect x="60" y="140" width="310" height="240" rx="26" fill="url(#cardBg)" stroke="url(#cardBorder)" stroke-width="1.5" />
+  <text x="80" y="174" font-size="9" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">01 / TOP LANGUAGES</text>
+  
+  <text x="80" y="218" font-size="13" font-weight="700" fill="#8B5CF6" class="font-mono">#1</text>
+  <text x="105" y="218" font-size="16" font-weight="800" fill="#FFFFFF" class="font-sans">Python</text>
+  
+  <text x="80" y="258" font-size="13" font-weight="700" fill="#6366F1" class="font-mono">#2</text>
+  <text x="105" y="258" font-size="16" font-weight="800" fill="#E2E8F0" class="font-sans">Java</text>
+  
+  <text x="80" y="298" font-size="13" font-weight="700" fill="#3B82F6" class="font-mono">#3</text>
+  <text x="105" y="298" font-size="16" font-weight="800" fill="#E2E8F0" class="font-sans">React</text>
+
+  <!-- CARD 2: CODING AURA -->
+  <rect x="395" y="140" width="310" height="240" rx="26" fill="url(#cardBg)" stroke="url(#cardBorder)" stroke-width="1.5" />
+  <rect x="396.5" y="141.5" width="307" height="237" rx="24.5" fill="url(#auraGlow)" />
+  <text x="415" y="174" font-size="9" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">02 / CODING AURA</text>
+  <text x="415" y="230" font-size="28" font-weight="800" fill="#FFFFFF" class="font-sans">Deep Sync &amp;</text>
+  <text x="415" y="265" font-size="28" font-weight="800" fill="#8B5CF6" class="font-sans">Flow State</text>
+  <text x="415" y="305" font-size="11" font-weight="600" fill="#94A3B8" class="font-sans">responsive interfaces &amp; backend streams</text>
+
+  <!-- CARD 3: DEVELOPER STYLE -->
+  <rect x="730" y="140" width="310" height="240" rx="26" fill="url(#cardBg)" stroke="url(#cardBorder)" stroke-width="1.5" />
+  <text x="750" y="174" font-size="9" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">03 / DEVELOPER STYLE</text>
+  <text x="750" y="230" font-size="32" font-weight="800" fill="#FFFFFF" class="font-sans">The Architect</text>
+  <text x="750" y="260" font-size="12" font-weight="600" fill="#3B82F6" class="font-sans">Full Stack Engineer</text>
+  <text x="750" y="295" font-size="12" font-weight="500" fill="#94A3B8" class="font-sans">
+    <tspan x="750" dy="0">Designing reliable Spring Boot backend layers</tspan>
+    <tspan x="750" dy="18">integrated with React frontend nodes.</tspan>
+  </text>
+
+  <!-- CARD 4: PEAK RHYTHM -->
+  <rect x="60" y="405" width="465" height="140" rx="26" fill="url(#cardBg)" stroke="url(#cardBorder)" stroke-width="1.5" />
+  <text x="80" y="434" font-size="9" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">04 / PEAK RHYTHM</text>
+  
+  <text x="80" y="468" font-size="9.5" font-weight="700" fill="#94A3B8" class="font-mono">WEEKLY MOMENTUM</text>
+  <text x="80" y="502" font-size="28" font-weight="800" fill="#FFFFFF" class="font-sans">Friday Release</text>
+  <text x="80" y="522" font-size="11" font-weight="600" fill="#3B82F6" class="font-sans">Friday is peak commit time</text>
+
+  <g transform="translate(340, 435)">
+    <rect x="0" y="23" width="12" height="27" rx="3" fill="#3B82F6" opacity="0.4" />
+    <text x="6" y="62" font-size="8" font-weight="700" fill="#94A3B8" text-anchor="middle" class="font-mono">M</text>
+    <rect x="20" y="28" width="12" height="22" rx="3" fill="#3B82F6" opacity="0.6" />
+    <text x="26" y="62" font-size="8" font-weight="700" fill="#94A3B8" text-anchor="middle" class="font-mono">T</text>
+    <rect x="40" y="23" width="12" height="27" rx="3" fill="url(#bluePurpleGrad)" opacity="1.0" />
+    <text x="46" y="62" font-size="8" font-weight="700" fill="#94A3B8" text-anchor="middle" class="font-mono">W</text>
+    <rect x="60" y="11" width="12" height="39" rx="3" fill="#8B5CF6" opacity="0.7" />
+    <text x="66" y="62" font-size="8" font-weight="700" fill="#94A3B8" text-anchor="middle" class="font-mono">T</text>
+    <rect x="80" y="0" width="12" height="50" rx="3" fill="url(#bluePurpleGrad)" opacity="1.0" />
+    <text x="86" y="62" font-size="8" font-weight="700" fill="#FFFFFF" text-anchor="middle" class="font-mono">F</text>
+    <rect x="100" y="0" width="12" height="50" rx="3" fill="#3B82F6" opacity="0.3" />
+    <text x="106" y="62" font-size="8" font-weight="700" fill="#94A3B8" text-anchor="middle" class="font-mono">S</text>
+    <rect x="120" y="9" width="12" height="41" rx="3" fill="#3B82F6" opacity="0.2" />
+    <text x="126" y="62" font-size="8" font-weight="700" fill="#94A3B8" text-anchor="middle" class="font-mono">S</text>
+  </g>
+
+  <!-- CARD 5: TOP CODING TRACK -->
+  <rect x="550" y="405" width="490" height="140" rx="26" fill="url(#cardBg)" stroke="url(#cardBorder)" stroke-width="1.5" />
+  <text x="580" y="434" font-size="9" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">05 / TOP CODING TRACK</text>
+
+  <text x="580" y="465" font-size="15" font-weight="800" fill="#FFFFFF" class="font-sans">enhanced_submission_blend.py</text>
+  <text x="580" y="487" font-size="11" font-weight="600" fill="#8B5CF6" class="font-sans">143 updates | Repository: TransitPulse</text>
+
+  <!-- Playback Controls -->
+  <g transform="translate(895, 475)">
+    <!-- Shuffle -->
+    <path d="M -44 -4 L -40 -4 L -34 4 L -30 4" stroke="#94A3B8" stroke-width="1.2" stroke-linecap="round" />
+    <path d="M -44 4 L -40 4 L -37 1 M -33 -3 L -30 -4" stroke="#94A3B8" stroke-width="1.2" stroke-linecap="round" />
+    <path d="M -32 2 L -30 4 L -32 6" fill="none" stroke="#94A3B8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M -32 -6 L -30 -4 L -32 -2" fill="none" stroke="#94A3B8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+
+    <!-- Prev -->
+    <path d="M -20 0 L -12 6 L -12 -6 Z" fill="#94A3B8" />
+    <rect x="-22" y="-6" width="2" height="12" fill="#94A3B8" />
+
+    <!-- Play/Pause -->
+    <circle cx="2" cy="0" r="13" fill="#FFFFFF" />
+    <rect x="-2" y="-4.5" width="2.2" height="9" fill="#040408" />
+    <rect x="3.2" y="-4.5" width="2.2" height="9" fill="#040408" />
+
+    <!-- Next -->
+    <path d="M 18 0 L 26 6 L 26 -6 Z" fill="#94A3B8" />
+    <rect x="26" y="-6" width="2" height="12" fill="#94A3B8" />
+
+    <!-- Repeat -->
+    <path d="M 38 -4 A 5 5 0 1 1 38 4" fill="none" stroke="#94A3B8" stroke-width="1.2" stroke-linecap="round" />
+    <path d="M 36 -6 L 39 -4 L 36 -2" fill="none" stroke="#94A3B8" stroke-width="1.2" stroke-linecap="round" />
+  </g>
+
+  <!-- Heart/Like Icon -->
+  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#8B5CF6" fill-opacity="0.85" transform="translate(805, 473) scale(0.65)" />
+
+  <!-- Progress Bar & Sound Wave Equalizer -->
+  <g transform="translate(580, 514)">
+    <rect x="0" y="0" width="280" height="4" rx="2" fill="#131326" />
+    <rect x="0" y="0" width="190" height="4" rx="2" fill="url(#bluePurpleGrad)" />
+    <circle cx="190" cy="2" r="4.5" fill="#FFFFFF" />
+  </g>
+
+  <!-- Sound Equalizer Graphic overlay -->
+  <g fill-opacity="0.75" transform="translate(780, 498)">
+    <rect x="0" y="4" width="2" height="8" rx="1" fill="#8B5CF6" />
+    <rect x="4" y="0" width="2" height="12" rx="1" fill="#3B82F6" />
+    <rect x="8" y="7" width="2" height="5" rx="1" fill="#00E5FF" />
+    <rect x="12" y="2" width="2" height="10" rx="1" fill="#8B5CF6" />
+    <rect x="16" y="9" width="2" height="3" rx="1" fill="#3B82F6" />
+    <rect x="20" y="5" width="2" height="7" rx="1" fill="#00E5FF" />
+    <rect x="24" y="1" width="2" height="11" rx="1" fill="#8B5CF6" />
+    <rect x="28" y="8" width="2" height="4" rx="1" fill="#3B82F6" />
+  </g>
+
+  <!-- Turntable Deck Aura Glow -->
+  <circle cx="980" cy="475" r="46" fill="url(#auraGlow)" opacity="0.6" />
+
+  <!-- Spinning Vinyl Record -->
+  <g transform="translate(980, 475)">
+    <circle cx="0" cy="0" r="30" fill="#0D0D18" stroke="#1E1E38" stroke-width="1.5" />
+    <circle cx="0" cy="0" r="24" fill="none" stroke="#16162B" stroke-width="1" />
+    <circle cx="0" cy="0" r="18" fill="none" stroke="#16162B" stroke-width="1" />
+    <circle cx="0" cy="0" r="12" fill="none" stroke="#16162B" stroke-width="1" />
+    <circle cx="0" cy="0" r="9" fill="#8B5CF6" />
+    <circle cx="0" cy="0" r="2.5" fill="#040408" />
+  </g>
+
+  <!-- FOOTER -->
+  <line x1="60" y1="565" x2="1040" y2="565" stroke="#131326" stroke-width="1" />
+  <text x="1040" y="582" font-size="9.5" font-weight="800" fill="#8B5CF6" letter-spacing="1" class="font-mono" text-anchor="end">SHIPPED IN 2026</text>
+</svg>

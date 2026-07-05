@@ -1,58 +1,48 @@
 {
   "username": "Haritha-Sivasankaran",
   "name": "Haritha Sivasankaran",
-  "source_mode": "github-graphql",
-  "generated_at": "2026-06-21T15:25:17.686676+05:30",
+  "source_mode": "github-public",
+  "generated_at": "2026-07-06T01:53:17.473848+05:30",
   "timezone": "Asia/Calcutta",
-  "contributions_365d": 281,
-  "active_days": 27,
-  "peak_day": 37,
-  "public_repos": 12,
+  "contributions_365d": 409,
+  "public_contributions": 409,
+  "private_contributions": 0,
+  "active_days": 39,
+  "peak_day": 47,
+  "public_repos": 16,
+  "private_repos": 0,
   "stars_earned": 2,
   "joined_year": 2021,
-  "has_restricted_contributions": true,
-  "restricted_contributions": 239,
+  "has_restricted_contributions": false,
+  "restricted_contributions": 0,
   "language_breakdown": [
     {
       "name": "Jupyter Notebook",
       "bytes": 439263,
-      "percent": 30.09
-    },
-    {
-      "name": "TypeScript",
-      "bytes": 335281,
-      "percent": 22.97
+      "percent": 77.87
     },
     {
       "name": "Python",
-      "bytes": 224310,
-      "percent": 15.37
+      "bytes": 104776,
+      "percent": 18.57
     },
     {
       "name": "HTML",
-      "bytes": 172691,
-      "percent": 11.83
+      "bytes": 9574,
+      "percent": 1.7
+    },
+    {
+      "name": "CSS",
+      "bytes": 6737,
+      "percent": 1.19
     },
     {
       "name": "Java",
-      "bytes": 166918,
-      "percent": 11.44
-    },
-    {
-      "name": "JavaScript",
-      "bytes": 56606,
-      "percent": 3.88
+      "bytes": 3754,
+      "percent": 0.67
     }
   ],
   "weekly_totals": [
-    {
-      "start": "2026-04-05",
-      "total": 0
-    },
-    {
-      "start": "2026-04-12",
-      "total": 14
-    },
     {
       "start": "2026-04-19",
       "total": 1
@@ -83,15 +73,38 @@
     },
     {
       "start": "2026-06-07",
-      "total": 52
+      "total": 67
     },
     {
       "start": "2026-06-14",
-      "total": 71
+      "total": 99
     },
     {
       "start": "2026-06-21",
-      "total": 0
+      "total": 32
+    },
+    {
+      "start": "2026-06-28",
+      "total": 42
+    },
+    {
+      "start": "2026-07-05",
+      "total": 11
     }
-  ]
+  ],
+  "longest_streak": 8,
+  "weekday_counts": [
+    44,
+    35,
+    44,
+    63,
+    79,
+    79,
+    65
+  ],
+  "top_repo_name": "TransitPulse",
+  "top_repo_lang": "Python",
+  "top_track_name": "enhanced_submission_blend.py",
+  "focus_repo_name": "TransitPulse2.0",
+  "focus_repo_lang": "Java"
 }

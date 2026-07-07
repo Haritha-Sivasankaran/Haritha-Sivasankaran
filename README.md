@@ -37,15 +37,15 @@ Haritha-Sivasankaran
 
 ## 🎧 2026 Developer Wrapped
 
-<img width="100%" src="./assets/profile-wrapped.svg?t=1783368149" alt="Haritha's Developer Wrapped" />
+<img width="100%" src="./assets/profile-wrapped.svg?t=1783395789" alt="Haritha's Developer Wrapped" />
 
 ## 🛠️ Full Stack Overview
 
-<img width="100%" src="./assets/profile-build.svg?t=1783368149" alt="Haritha full-stack profile card" />
+<img width="100%" src="./assets/profile-build.svg?t=1783395789" alt="Haritha full-stack profile card" />
 
 ## 📊 Build Receipts
 
-<img width="100%" src="./assets/profile-overview.svg?t=1783368149" alt="Live GitHub profile stats for Haritha" />
+<img width="100%" src="./assets/profile-overview.svg?t=1783395789" alt="Live GitHub profile stats for Haritha" />
 
 <p align="center">
   <sub>real data | auto-refreshes every 6 hours | updates on profile repo pushes</sub>

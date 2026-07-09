@@ -95,7 +95,7 @@
     <text x="26" y="62" font-size="8" font-weight="700" fill="#94A3B8" text-anchor="middle" class="font-mono">T</text>
     <rect x="40" y="23" width="12" height="27" rx="3" fill="url(#bluePurpleGrad)" opacity="1.0" />
     <text x="46" y="62" font-size="8" font-weight="700" fill="#94A3B8" text-anchor="middle" class="font-mono">W</text>
-    <rect x="60" y="10" width="12" height="40" rx="3" fill="#8B5CF6" opacity="0.7" />
+    <rect x="60" y="5" width="12" height="45" rx="3" fill="#8B5CF6" opacity="0.7" />
     <text x="66" y="62" font-size="8" font-weight="700" fill="#94A3B8" text-anchor="middle" class="font-mono">T</text>
     <rect x="80" y="3" width="12" height="47" rx="3" fill="#8B5CF6" opacity="0.5" />
     <text x="86" y="62" font-size="8" font-weight="700" fill="#94A3B8" text-anchor="middle" class="font-mono">F</text>
@@ -110,7 +110,7 @@
   <text x="580" y="434" font-size="9" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">05 / TOP CODING TRACK</text>
 
   <text x="580" y="465" font-size="24" font-weight="800" fill="#FFFFFF" class="font-sans">CHANGELOG.md</text>
-  <text x="580" y="487" font-size="11" font-weight="600" fill="#8B5CF6" class="font-sans">146 updates | Repository: Obsidian-Chess</text>
+  <text x="580" y="487" font-size="11" font-weight="600" fill="#8B5CF6" class="font-sans">148 updates | Repository: Obsidian-Chess</text>
 
   <!-- Playback Controls -->
   <g transform="translate(895, 475)">

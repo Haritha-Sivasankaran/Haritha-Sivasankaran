@@ -94,12 +94,12 @@
     },
     {
       "start": "2026-07-05",
-      "total": 15
+      "total": 17
     }
   ],
   "longest_streak": 8,
   "weekday_counts": [
-    47,
+    49,
     36,
     44,
     63,

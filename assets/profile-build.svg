@@ -99,15 +99,15 @@
   <text x="178" y="450" font-size="9" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">/ PRIVATE REPO</text>
 
   <!-- Private repo name -->
-  <text x="90" y="477" font-size="22" font-weight="800" fill="#FFFFFF" class="font-sans">Obsidian</text>
+  <text x="90" y="477" font-size="22" font-weight="800" fill="#FFFFFF" class="font-sans">Obsidian-Chess</text>
 
   <!-- Language badge -->
-  <rect x="90" y="490" width="44" height="15" rx="7" fill="#3B82F6" fill-opacity="0.15" stroke="#3B82F6" stroke-opacity="0.4" stroke-width="1" />
-  <text x="112" y="500.5" font-size="7.5" font-weight="800" fill="#3B82F6" letter-spacing="1" class="font-mono" text-anchor="middle">JAVA</text>
+  <rect x="90" y="490" width="80" height="15" rx="7" fill="#3B82F6" fill-opacity="0.15" stroke="#3B82F6" stroke-opacity="0.4" stroke-width="1" />
+  <text x="130" y="500.5" font-size="7.5" font-weight="800" fill="#3B82F6" letter-spacing="1" class="font-mono" text-anchor="middle">JAVASCRIPT</text>
 
   <!-- PRIVATE badge -->
-  <rect x="142" y="490" width="52" height="15" rx="7" fill="#8B5CF6" fill-opacity="0.15" stroke="#8B5CF6" stroke-opacity="0.4" stroke-width="1" />
-  <text x="174" y="500.5" font-size="7.5" font-weight="800" fill="#8B5CF6" letter-spacing="1" class="font-mono" text-anchor="middle">PRIVATE</text>
+  <rect x="178" y="490" width="52" height="15" rx="7" fill="#8B5CF6" fill-opacity="0.15" stroke="#8B5CF6" stroke-opacity="0.4" stroke-width="1" />
+  <text x="210" y="500.5" font-size="7.5" font-weight="800" fill="#8B5CF6" letter-spacing="1" class="font-mono" text-anchor="middle">PRIVATE</text>
 
   <!-- COLUMN 2: PRIVATE GRIND — real pvt commit stats -->
 
@@ -119,10 +119,10 @@
 
   <!-- Pvt vs total ratio bar -->
   <rect x="530" y="488" width="440" height="5" rx="2.5" fill="#131326" />
-  <rect x="530" y="488" width="389" height="5" rx="2.5" fill="url(#playProgress)" />
+  <rect x="530" y="488" width="385" height="5" rx="2.5" fill="url(#playProgress)" />
 
   <!-- Ratio micro-text -->
-  <text x="530" y="508" font-size="10" font-weight="600" fill="#94A3B8" class="font-mono">deep in Obsidian · 88% of total work</text>
+  <text x="530" y="508" font-size="10" font-weight="600" fill="#94A3B8" class="font-mono">deep in Obsidian-Chess · 87% of total work</text>
 
   <!-- FOOTER -->
   <line x1="60" y1="565" x2="1040" y2="565" stroke="#131326" stroke-width="1" />

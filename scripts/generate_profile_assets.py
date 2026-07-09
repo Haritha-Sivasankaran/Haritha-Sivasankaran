@@ -324,8 +324,11 @@ def fetch_graphql_profile(login: str, from_date: date, to_date: date, token: str
         focus_repo_lang = top_repo_lang
 
     private_commits = user["contributionsCollection"]["restrictedContributionsCount"]
-    public_contributions = user["contributionsCollection"]["contributionCalendar"]["totalContributions"]
-    total_contributions = public_contributions + private_commits
+    total_contributions = user["contributionsCollection"]["contributionCalendar"]["totalContributions"]
+    if total_contributions >= private_commits:
+        public_contributions = total_contributions - private_commits
+    else:
+        public_contributions = total_contributions
 
     top_track_name = ""
     try:

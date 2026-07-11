@@ -4,30 +4,42 @@ import re
 import urllib.request
 from pathlib import Path
 
+# Organic Constellation of 22 Stack Badges
+# Sizes: L (r=22, size=24), M (r=18, size=20), S (r=14, size=16)
 ICONS = {
-    # Left Side Halo Cloud
-    "react": {"label": "React", "x": 80, "y": 55, "anim": 1, "glow": "#61DAFB", "color": "#61DAFB"},
-    "nodedotjs": {"label": "Node.js", "x": 80, "y": 110, "anim": 2, "glow": "#339933", "color": "#339933"},
-    "tailwindcss": {"label": "Tailwind CSS", "x": 80, "y": 165, "anim": 3, "glow": "#38BDF8", "color": "#38BDF8"},
-    "typescript": {"label": "TypeScript", "x": 160, "y": 45, "anim": 4, "glow": "#3178C6", "color": "#3178C6"},
-    "html5": {"label": "HTML5", "x": 160, "y": 110, "anim": 1, "glow": "#E34F26", "color": "#E34F26"},
-    "css3": {"label": "CSS3", "x": 160, "y": 175, "anim": 2, "glow": "#1572B6", "color": "#1572B6"},
-    "javascript": {"label": "JavaScript", "x": 240, "y": 50, "anim": 3, "glow": "#F7DF1E", "color": "#F7DF1E"},
-    "express": {"label": "Express", "x": 240, "y": 170, "anim": 4, "glow": "#FFFFFF", "color": "#FFFFFF"},
+    # Left Side Galaxy Cloud
+    "react": {"label": "React", "x": 90, "y": 45, "r": 22, "size": 24, "anim": 1, "glow": "#61DAFB", "color": "#61DAFB"},
+    "nodedotjs": {"label": "Node.js", "x": 65, "y": 115, "r": 18, "size": 20, "anim": 2, "glow": "#339933", "color": "#339933"},
+    "tailwindcss": {"label": "Tailwind CSS", "x": 105, "y": 180, "r": 14, "size": 16, "anim": 3, "glow": "#38BDF8", "color": "#38BDF8"},
+    
+    "typescript": {"label": "TypeScript", "x": 175, "y": 60, "r": 22, "size": 24, "anim": 4, "glow": "#3178C6", "color": "#3178C6"},
+    "html5": {"label": "HTML5", "x": 145, "y": 120, "r": 14, "size": 16, "anim": 1, "glow": "#E34F26", "color": "#E34F26"},
+    "css3": {"label": "CSS3", "x": 185, "y": 175, "r": 14, "size": 16, "anim": 2, "glow": "#1572B6", "color": "#1572B6"},
+    
+    "javascript": {"label": "JavaScript", "x": 245, "y": 85, "r": 14, "size": 16, "anim": 3, "glow": "#F7DF1E", "color": "#F7DF1E"},
+    "express": {"label": "Express", "x": 230, "y": 145, "r": 14, "size": 16, "anim": 4, "glow": "#FFFFFF", "color": "#FFFFFF"},
+    
+    "graphql": {"label": "GraphQL", "x": 315, "y": 55, "r": 14, "size": 16, "anim": 1, "glow": "#E10098", "color": "#E10098"},
+    "rabbitmq": {"label": "RabbitMQ", "x": 320, "y": 160, "r": 18, "size": 20, "anim": 2, "glow": "#FF6600", "color": "#FF6600"},
+    
+    "git": {"label": "Git", "x": 400, "y": 40, "r": 14, "size": 16, "anim": 3, "glow": "#F05032", "color": "#F05032"},
 
-    # Right Side Halo Cloud
-    "java": {"label": "Java", "x": 920, "y": 55, "anim": 2, "glow": "#EA2D2E", "color": "#EA2D2E"},
-    "python": {"label": "Python", "x": 920, "y": 110, "anim": 3, "glow": "#3776AB", "color": "#3776AB"},
-    "mysql": {"label": "MySQL", "x": 920, "y": 165, "anim": 4, "glow": "#4479A1", "color": "#4479A1"},
-    "docker": {"label": "Docker", "x": 840, "y": 45, "anim": 1, "glow": "#2496ED", "color": "#2496ED"},
-    "apachekafka": {"label": "Apache Kafka", "x": 840, "y": 110, "anim": 2, "glow": "#FFDD00", "color": "#FFFFFF"},
-    "mongodb": {"label": "MongoDB", "x": 840, "y": 175, "anim": 3, "glow": "#47A248", "color": "#47A248"},
-    "springboot": {"label": "Spring Boot", "x": 760, "y": 50, "anim": 4, "glow": "#6DB33F", "color": "#6DB33F"},
-    "postgresql": {"label": "PostgreSQL", "x": 760, "y": 170, "anim": 1, "glow": "#4169E1", "color": "#4169E1"},
-
-    # Top Center (Vertically clear of name)
-    "git": {"label": "Git", "x": 420, "y": 40, "anim": 3, "glow": "#F05032", "color": "#F05032"},
-    "nextdotjs": {"label": "Next.js", "x": 580, "y": 40, "anim": 4, "glow": "#00E5FF", "color": "#FFFFFF"}
+    # Right Side Galaxy Cloud
+    "java": {"label": "Java", "x": 910, "y": 45, "r": 22, "size": 24, "anim": 2, "glow": "#EA2D2E", "color": "#EA2D2E"},
+    "python": {"label": "Python", "x": 935, "y": 115, "r": 22, "size": 24, "anim": 3, "glow": "#3776AB", "color": "#3776AB"},
+    "mysql": {"label": "MySQL", "x": 895, "y": 180, "r": 14, "size": 16, "anim": 4, "glow": "#4479A1", "color": "#4479A1"},
+    
+    "docker": {"label": "Docker", "x": 825, "y": 60, "r": 18, "size": 20, "anim": 1, "glow": "#2496ED", "color": "#2496ED"},
+    "apachekafka": {"label": "Apache Kafka", "x": 855, "y": 120, "r": 18, "size": 20, "anim": 2, "glow": "#FFDD00", "color": "#FFFFFF"},
+    "mongodb": {"label": "MongoDB", "x": 815, "y": 175, "r": 14, "size": 16, "anim": 3, "glow": "#47A248", "color": "#47A248"},
+    
+    "springboot": {"label": "Spring Boot", "x": 755, "y": 85, "r": 18, "size": 20, "anim": 4, "glow": "#6DB33F", "color": "#6DB33F"},
+    "postgresql": {"label": "PostgreSQL", "x": 770, "y": 145, "r": 14, "size": 16, "anim": 1, "glow": "#4169E1", "color": "#4169E1"},
+    
+    "redis": {"label": "Redis", "x": 675, "y": 55, "r": 14, "size": 16, "anim": 3, "glow": "#DC382D", "color": "#DC382D"},
+    "githubactions": {"label": "GitHub Actions", "x": 685, "y": 170, "r": 14, "size": 16, "anim": 4, "glow": "#2088FF", "color": "#2088FF"},
+    
+    "nextdotjs": {"label": "Next.js", "x": 580, "y": 40, "r": 18, "size": 20, "anim": 4, "glow": "#00E5FF", "color": "#FFFFFF"}
 }
 
 def get_base64_icon(name: str, color_fallback: str) -> str:
@@ -100,6 +112,8 @@ def main():
         b64 = encoded_icons[key]
         x = info["x"]
         y = info["y"]
+        r = info["r"]
+        size = info["size"]
         anim = info["anim"]
         glow_color = info["glow"]
         
@@ -108,13 +122,13 @@ def main():
   <!-- Badge: {info['label']} -->
   <g class="float-icon-{anim}">
     <!-- Ambient Glow behind badge -->
-    <circle cx="{x}" cy="{y}" r="28" fill="{glow_color}" opacity="0.16" filter="url(#blurGlow)" />
+    <circle cx="{x}" cy="{y}" r="{r + 10}" fill="{glow_color}" opacity="0.18" filter="url(#blurGlow)" />
     
     <!-- Circular Glass Plate -->
-    <circle cx="{x}" cy="{y}" r="18" fill="#0b0b16" fill-opacity="0.8" stroke="{glow_color}" stroke-width="1.4" stroke-opacity="0.85" filter="url(#shadow)" />
+    <circle cx="{x}" cy="{y}" r="{r}" fill="#0b0b16" fill-opacity="0.8" stroke="{glow_color}" stroke-width="1.3" stroke-opacity="0.85" filter="url(#shadow)" />
     
     <!-- Centered Brand Icon -->
-    <image href="{b64}" x="{x - 10}" y="{y - 10}" width="20" height="20" />
+    <image href="{b64}" x="{x - (size/2)}" y="{y - (size/2)}" width="{size}" height="{size}" />
   </g>"""
         badge_elements.append(badge_elem)
 
@@ -151,24 +165,24 @@ def main():
     @import url('https://fonts.googleapis.com/css2?family=Sora:wght@800&amp;display=swap');
     
     @keyframes float1 {{
-      0% {{ transform: translateY(0px); }}
-      50% {{ transform: translateY(-5px); }}
-      100% {{ transform: translateY(0px); }}
+      0% {{ transform: translateY(0px) rotate(0deg); }}
+      50% {{ transform: translateY(-5px) rotate(1deg); }}
+      100% {{ transform: translateY(0px) rotate(0deg); }}
     }}
     @keyframes float2 {{
-      0% {{ transform: translateY(0px); }}
-      50% {{ transform: translateY(-8px); }}
-      100% {{ transform: translateY(0px); }}
+      0% {{ transform: translateY(0px) rotate(0deg); }}
+      50% {{ transform: translateY(-8px) rotate(-1deg); }}
+      100% {{ transform: translateY(0px) rotate(0deg); }}
     }}
     @keyframes float3 {{
-      0% {{ transform: translateY(0px); }}
-      50% {{ transform: translateY(5px); }}
-      100% {{ transform: translateY(0px); }}
+      0% {{ transform: translateY(0px) rotate(0deg); }}
+      50% {{ transform: translateY(5px) rotate(1.5deg); }}
+      100% {{ transform: translateY(0px) rotate(0deg); }}
     }}
     @keyframes float4 {{
-      0% {{ transform: translateY(0px); }}
-      50% {{ transform: translateY(8px); }}
-      100% {{ transform: translateY(0px); }}
+      0% {{ transform: translateY(0px) rotate(0deg); }}
+      50% {{ transform: translateY(8px) rotate(-1.5deg); }}
+      100% {{ transform: translateY(0px) rotate(0deg); }}
     }}
     .float-icon-1 {{ animation: float1 4.5s ease-in-out infinite; }}
     .float-icon-2 {{ animation: float2 5.8s ease-in-out infinite; }}
@@ -231,13 +245,13 @@ def main():
   <text x="500" y="105" text-anchor="middle" dominant-baseline="middle" class="title" filter="url(#shadow)">Haritha Sivasankaran</text>
   
   <!-- Subtitle / Stacks info -->
-  <text x="500" y="145" text-anchor="middle" font-family="'Sora', -apple-system, sans-serif" font-weight="600" fill="#64748B" font-size="10" letter-spacing="2.5" opacity="0.85">FULL STACK ENGINEER  •  REACT · TYPESCRIPT · JAVA · PYTHON</text>
+  <text x="500" y="145" text-anchor="middle" font-family="'Sora', -apple-system, sans-serif" font-weight="600" fill="#64748B" font-size="9" letter-spacing="2.8" opacity="0.85">FULL STACK ENGINEER  •  REACT · TYPESCRIPT · JAVA · PYTHON</text>
 </svg>"""
 
     # Generate v5 file to bypass cache
     banner_path = Path("assets/profile-banner-v5.svg")
     banner_path.write_text(svg_content, encoding="utf-8")
-    print("OK: 18 Glowing Badges Name Banner generated successfully at assets/profile-banner-v5.svg!")
+    print("OK: Constellation Name Banner generated successfully at assets/profile-banner-v5.svg!")
 
 if __name__ == "__main__":
     main()

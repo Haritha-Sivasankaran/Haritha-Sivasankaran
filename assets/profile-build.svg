@@ -55,7 +55,7 @@
       <rect width="255" height="230" rx="18" class="apple-glass-card" stroke-width="1.2" />
       <text x="20" y="28" font-size="8.5" font-weight="700" fill="#3B82F6" letter-spacing="2" class="font-mono">01 / UI &amp; LAYOUTS</text>
       <text x="20" y="65" font-size="22" font-weight="800" fill="#ffffff" class="font-sans">React + TS</text>
-      <text x="20" y="85" font-size="11" font-weight="600" fill="#3B82F6" class="font-mono">FRONTEND CORE | 47.1%</text>
+      <text x="20" y="85" font-size="11" font-weight="600" fill="#3B82F6" class="font-mono">FRONTEND CORE | 46.8%</text>
       <text x="20" y="120" font-size="11.5" fill="#94A3B8" class="font-sans">
         <tspan x="20" dy="0" fill="#fff">• React component architectures</tspan>
         <tspan x="20" dy="20">• Responsive styling layouts</tspan>
@@ -68,7 +68,7 @@
       <rect width="255" height="230" rx="18" class="apple-glass-card" stroke-width="1.2" />
       <text x="20" y="28" font-size="8.5" font-weight="700" fill="#3B82F6" letter-spacing="2" class="font-mono">02 / SERVICES &amp; ROUTING</text>
       <text x="20" y="65" font-size="22" font-weight="800" fill="#ffffff" class="font-sans">Java + Py</text>
-      <text x="20" y="85" font-size="11" font-weight="600" fill="#3B82F6" class="font-mono">BACKEND CORE | 30.6%</text>
+      <text x="20" y="85" font-size="11" font-weight="600" fill="#3B82F6" class="font-mono">BACKEND CORE | 30.8%</text>
       <text x="20" y="120" font-size="11.5" fill="#94A3B8" class="font-sans">
         <tspan x="20" dy="0" fill="#fff">• Spring Boot API networks</tspan>
         <tspan x="20" dy="20">• Apache Kafka streams</tspan>

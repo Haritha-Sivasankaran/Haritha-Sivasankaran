@@ -4,46 +4,45 @@ import re
 import urllib.request
 from pathlib import Path
 
-# Organic Constellation of 22 Stack Badges
+# Organic Constellation of 26 Stack Badges with spacious center corridor
 # Sizes: L (r=22, size=24), M (r=18, size=20), S (r=14, size=16)
 ICONS = {
-    # Left Side Galaxy Cloud
-    "react": {"label": "React", "x": 90, "y": 45, "r": 22, "size": 24, "anim": 1, "glow": "#61DAFB", "color": "#61DAFB"},
-    "nodedotjs": {"label": "Node.js", "x": 65, "y": 115, "r": 18, "size": 20, "anim": 2, "glow": "#339933", "color": "#339933"},
-    "tailwindcss": {"label": "Tailwind CSS", "x": 105, "y": 180, "r": 14, "size": 16, "anim": 3, "glow": "#38BDF8", "color": "#38BDF8"},
-    
-    "typescript": {"label": "TypeScript", "x": 175, "y": 60, "r": 22, "size": 24, "anim": 4, "glow": "#3178C6", "color": "#3178C6"},
-    "html5": {"label": "HTML5", "x": 145, "y": 120, "r": 14, "size": 16, "anim": 1, "glow": "#E34F26", "color": "#E34F26"},
-    "css3": {"label": "CSS3", "x": 185, "y": 175, "r": 14, "size": 16, "anim": 2, "glow": "#1572B6", "color": "#1572B6"},
-    
-    "javascript": {"label": "JavaScript", "x": 245, "y": 85, "r": 14, "size": 16, "anim": 3, "glow": "#F7DF1E", "color": "#F7DF1E"},
-    "express": {"label": "Express", "x": 230, "y": 145, "r": 14, "size": 16, "anim": 4, "glow": "#FFFFFF", "color": "#FFFFFF"},
-    
-    "graphql": {"label": "GraphQL", "x": 315, "y": 55, "r": 14, "size": 16, "anim": 1, "glow": "#E10098", "color": "#E10098"},
-    "rabbitmq": {"label": "RabbitMQ", "x": 320, "y": 160, "r": 18, "size": 20, "anim": 2, "glow": "#FF6600", "color": "#FF6600"},
-    
-    "git": {"label": "Git", "x": 400, "y": 40, "r": 14, "size": 16, "anim": 3, "glow": "#F05032", "color": "#F05032"},
+    # Left Side Galaxy Cloud (x <= 260)
+    "react": {"label": "React", "x": 80, "y": 45, "r": 22, "size": 24, "anim": 1, "glow": "#61DAFB", "color": "#61DAFB"},
+    "nodedotjs": {"label": "Node.js", "x": 60, "y": 110, "r": 18, "size": 20, "anim": 2, "glow": "#339933", "color": "#339933"},
+    "tailwindcss": {"label": "Tailwind CSS", "x": 90, "y": 175, "r": 14, "size": 16, "anim": 3, "glow": "#38BDF8", "color": "#38BDF8"},
+    "typescript": {"label": "TypeScript", "x": 150, "y": 55, "r": 22, "size": 24, "anim": 4, "glow": "#3178C6", "color": "#3178C6"},
+    "html5": {"label": "HTML5", "x": 130, "y": 115, "r": 14, "size": 16, "anim": 1, "glow": "#E34F26", "color": "#E34F26"},
+    "css3": {"label": "CSS3", "x": 160, "y": 175, "r": 14, "size": 16, "anim": 2, "glow": "#1572B6", "color": "#1572B6"},
+    "javascript": {"label": "JavaScript", "x": 220, "y": 75, "r": 14, "size": 16, "anim": 3, "glow": "#F7DF1E", "color": "#F7DF1E"},
+    "express": {"label": "Express", "x": 210, "y": 135, "r": 14, "size": 16, "anim": 4, "glow": "#FFFFFF", "color": "#FFFFFF"},
+    "graphql": {"label": "GraphQL", "x": 260, "y": 40, "r": 14, "size": 16, "anim": 1, "glow": "#E10098", "color": "#E10098"},
 
-    # Right Side Galaxy Cloud
-    "java": {"label": "Java", "x": 910, "y": 45, "r": 22, "size": 24, "anim": 2, "glow": "#EA2D2E", "color": "#EA2D2E"},
-    "python": {"label": "Python", "x": 935, "y": 115, "r": 22, "size": 24, "anim": 3, "glow": "#3776AB", "color": "#3776AB"},
-    "mysql": {"label": "MySQL", "x": 895, "y": 180, "r": 14, "size": 16, "anim": 4, "glow": "#4479A1", "color": "#4479A1"},
-    
-    "docker": {"label": "Docker", "x": 825, "y": 60, "r": 18, "size": 20, "anim": 1, "glow": "#2496ED", "color": "#2496ED"},
-    "apachekafka": {"label": "Apache Kafka", "x": 855, "y": 120, "r": 18, "size": 20, "anim": 2, "glow": "#FFDD00", "color": "#FFFFFF"},
-    "mongodb": {"label": "MongoDB", "x": 815, "y": 175, "r": 14, "size": 16, "anim": 3, "glow": "#47A248", "color": "#47A248"},
-    
-    "springboot": {"label": "Spring Boot", "x": 755, "y": 85, "r": 18, "size": 20, "anim": 4, "glow": "#6DB33F", "color": "#6DB33F"},
-    "postgresql": {"label": "PostgreSQL", "x": 770, "y": 145, "r": 14, "size": 16, "anim": 1, "glow": "#4169E1", "color": "#4169E1"},
-    
-    "redis": {"label": "Redis", "x": 675, "y": 55, "r": 14, "size": 16, "anim": 3, "glow": "#DC382D", "color": "#DC382D"},
-    "githubactions": {"label": "GitHub Actions", "x": 685, "y": 170, "r": 14, "size": 16, "anim": 4, "glow": "#2088FF", "color": "#2088FF"},
-    
-    "nextdotjs": {"label": "Next.js", "x": 580, "y": 40, "r": 18, "size": 20, "anim": 4, "glow": "#00E5FF", "color": "#FFFFFF"}
+    # Right Side Galaxy Cloud (x >= 740)
+    "java": {"label": "Java", "x": 920, "y": 45, "r": 22, "size": 24, "anim": 2, "glow": "#EA2D2E", "color": "#EA2D2E"},
+    "python": {"label": "Python", "x": 940, "y": 110, "r": 22, "size": 24, "anim": 3, "glow": "#3776AB", "color": "#3776AB"},
+    "mysql": {"label": "MySQL", "x": 910, "y": 175, "r": 14, "size": 16, "anim": 4, "glow": "#4479A1", "color": "#4479A1"},
+    "docker": {"label": "Docker", "x": 850, "y": 55, "r": 18, "size": 20, "anim": 1, "glow": "#2496ED", "color": "#2496ED"},
+    "apachekafka": {"label": "Apache Kafka", "x": 870, "y": 115, "r": 18, "size": 20, "anim": 2, "glow": "#FFDD00", "color": "#FFFFFF"},
+    "mongodb": {"label": "MongoDB", "x": 840, "y": 175, "r": 14, "size": 16, "anim": 3, "glow": "#47A248", "color": "#47A248"},
+    "springboot": {"label": "Spring Boot", "x": 780, "y": 75, "r": 18, "size": 20, "anim": 4, "glow": "#6DB33F", "color": "#6DB33F"},
+    "postgresql": {"label": "PostgreSQL", "x": 790, "y": 135, "r": 14, "size": 16, "anim": 1, "glow": "#4169E1", "color": "#4169E1"},
+    "redis": {"label": "Redis", "x": 740, "y": 40, "r": 14, "size": 16, "anim": 3, "glow": "#DC382D", "color": "#DC382D"},
+
+    # Top & Bottom Caps (Pushed vertically away from text corridors)
+    "git": {"label": "Git", "x": 400, "y": 32, "r": 14, "size": 16, "anim": 3, "glow": "#F05032", "color": "#F05032"},
+    "nextdotjs": {"label": "Next.js", "x": 600, "y": 32, "r": 18, "size": 20, "anim": 4, "glow": "#00E5FF", "color": "#FFFFFF"},
+    "rabbitmq": {"label": "RabbitMQ", "x": 330, "y": 192, "r": 18, "size": 20, "anim": 1, "glow": "#FF6600", "color": "#FF6600"},
+    "githubactions": {"label": "GitHub Actions", "x": 670, "y": 192, "r": 14, "size": 16, "anim": 2, "glow": "#2088FF", "color": "#2088FF"},
+
+    # Fill-in Badges for Inner Spaces
+    "fastapi": {"label": "FastAPI", "x": 330, "y": 35, "r": 14, "size": 16, "anim": 3, "glow": "#009688", "color": "#009688"},
+    "supabase": {"label": "Supabase", "x": 670, "y": 35, "r": 14, "size": 16, "anim": 1, "glow": "#3ECF8E", "color": "#3ECF8E"},
+    "prisma": {"label": "Prisma", "x": 270, "y": 185, "r": 14, "size": 16, "anim": 2, "glow": "#5A67D8", "color": "#FFFFFF"},
+    "figma": {"label": "Figma", "x": 730, "y": 185, "r": 14, "size": 16, "anim": 4, "glow": "#F24E1E", "color": "#F24E1E"}
 }
 
 def get_base64_icon(name: str, color_fallback: str) -> str:
-    # First try fetching from simpleicons colored CDN
     url = f"https://cdn.simpleicons.org/{name}"
     try:
         req = urllib.request.Request(
@@ -58,7 +57,6 @@ def get_base64_icon(name: str, color_fallback: str) -> str:
     except Exception:
         pass
 
-    # Fallback to jsdelivr raw icon & color it manually
     url_fallback = f"https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/{name}.svg"
     try:
         req = urllib.request.Request(
@@ -81,7 +79,6 @@ def main():
     print("Fetching and encoding colored icons...")
     encoded_icons = {}
     
-    # Reset cache to fetch new icons
     cache_path = Path("scripts/banner_icons_cache.json")
     if cache_path.exists():
         try:
@@ -89,7 +86,6 @@ def main():
         except Exception:
             pass
 
-    # Fetch icons
     for key, info in ICONS.items():
         label = info["label"]
         b64 = get_base64_icon(key, info["color"])
@@ -99,11 +95,9 @@ def main():
         else:
             print(f"FAIL: {label} failed.")
 
-    # Save cache
     with open(cache_path, "w", encoding="utf-8") as f:
         json.dump(encoded_icons, f, indent=2)
 
-    # SVG Construction
     badge_elements = []
     
     for key, info in ICONS.items():
@@ -117,7 +111,6 @@ def main():
         anim = info["anim"]
         glow_color = info["glow"]
         
-        # High-fidelity glassmorphic badge with brand-colored glowing border
         badge_elem = f"""
   <!-- Badge: {info['label']} -->
   <g class="float-icon-{anim}">
@@ -248,10 +241,9 @@ def main():
   <text x="500" y="145" text-anchor="middle" font-family="'Sora', -apple-system, sans-serif" font-weight="600" fill="#64748B" font-size="9" letter-spacing="2.8" opacity="0.85">FULL STACK ENGINEER  •  REACT · TYPESCRIPT · JAVA · PYTHON</text>
 </svg>"""
 
-    # Generate v5 file to bypass cache
     banner_path = Path("assets/profile-banner-v5.svg")
     banner_path.write_text(svg_content, encoding="utf-8")
-    print("OK: Constellation Name Banner generated successfully at assets/profile-banner-v5.svg!")
+    print("OK: 26-badge Constellation Name Banner generated successfully!")
 
 if __name__ == "__main__":
     main()

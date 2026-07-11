@@ -5,52 +5,41 @@ Haritha-Sivasankaran
 
 <img width="100%" src="./assets/profile-banner-v5.svg" alt="Haritha Sivasankaran" />
 
+I craft beautiful, interactive user interfaces, build high-throughput microservice networks, and develop automation scripts. Passionate about developer experience (DX), performance optimization, and high-fidelity product design.
 
-<p align="center">
-  <a href="https://www.linkedin.com/in/haritha-sivasankaran/" target="_blank">
-    <img src="https://img.shields.io/badge/LINKEDIN-0077B5?style=for-the-badge&logo=linkedin&logoColor=white&labelColor=020617" alt="LinkedIn" />
-  </a>
-</p>
+[LinkedIn](https://www.linkedin.com/in/haritha-sivasankaran/) &nbsp;•&nbsp; [Interactive Dashboard](https://Haritha-Sivasankaran.github.io/Haritha-Sivasankaran/)
 
-
-<p align="center">
-  <img src="https://img.shields.io/badge/React-111827?style=for-the-badge&logo=react&logoColor=61DAFB&labelColor=020617" alt="React" />
-  <img src="https://img.shields.io/badge/Next.js-111827?style=for-the-badge&logo=nextdotjs&logoColor=white&labelColor=020617" alt="Next.js" />
-  <img src="https://img.shields.io/badge/TypeScript-111827?style=for-the-badge&logo=typescript&logoColor=3178C6&labelColor=020617" alt="TypeScript" />
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Java-111827?style=for-the-badge&logo=openjdk&logoColor=3B82F6&labelColor=020617" alt="Java" />
-  <img src="https://img.shields.io/badge/Spring%20Boot-111827?style=for-the-badge&logo=springboot&logoColor=6DB33F&labelColor=020617" alt="Spring Boot" />
-  <img src="https://img.shields.io/badge/Node.js-111827?style=for-the-badge&logo=nodedotjs&logoColor=5FA04E&labelColor=020617" alt="Node.js" />
-  <img src="https://img.shields.io/badge/Express.js-111827?style=for-the-badge&logo=express&logoColor=white&labelColor=020617" alt="Express.js" />
-  <img src="https://img.shields.io/badge/Apache%20Kafka-111827?style=for-the-badge&logo=apachekafka&logoColor=white&labelColor=020617" alt="Apache Kafka" />
-  <img src="https://img.shields.io/badge/REST%20APIs-111827?style=for-the-badge&labelColor=020617&color=8B5CF6" alt="REST APIs" />
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/PostgreSQL-111827?style=for-the-badge&logo=postgresql&logoColor=4169E1&labelColor=020617" alt="PostgreSQL" />
-  <img src="https://img.shields.io/badge/MySQL-111827?style=for-the-badge&logo=mysql&logoColor=4479A1&labelColor=020617" alt="MySQL" />
-  <img src="https://img.shields.io/badge/MongoDB-111827?style=for-the-badge&logo=mongodb&logoColor=47A248&labelColor=020617" alt="MongoDB" />
-  <img src="https://img.shields.io/badge/Docker-111827?style=for-the-badge&logo=docker&logoColor=2496ED&labelColor=020617" alt="Docker" />
-</p>
+---
 
 ## 🎧 2026 Developer Wrapped
+*A Spotify Wrapped-themed telemetry dashboard highlighting active codebases, commit distributions, peak weekday rhythm, and developer archetype.*
 
-<img width="100%" src="./assets/profile-wrapped.svg?t=1783776374" alt="Haritha's Developer Wrapped" />
+<img width="100%" src="./assets/profile-wrapped.svg?t=1783783232" alt="Haritha's Developer Wrapped" />
 
-## 🛠️ Full Stack Overview
+---
 
-<img width="100%" src="./assets/profile-build.svg?t=1783776374" alt="Haritha full-stack profile card" />
+## 🛠️ System Stack & Memory Logs
+*An overview of my core technology stack represented as Apple Liquid Glass cards alongside ChatGPT-styled developer habits, technical preferences, and memory logs.*
 
-## 📊 Build Receipts
+<img width="100%" src="./assets/profile-build.svg?t=1783783232" alt="Haritha's System Stack & Memory Logs" />
 
-<img width="100%" src="./assets/profile-overview.svg?t=1783776374" alt="Live GitHub profile stats for Haritha" />
+---
+
+## 📊 Nothing OS Commit Tempo
+*My weekly commit activity graph, language code stack, active days, and star count styled in the retro-monochrome Nothing OS aesthetic.*
+
+<img width="100%" src="./assets/profile-overview.svg?t=1783783232" alt="Haritha's Nothing OS Commit Tempo" />
+
+---
+
+### 🎛️ Core Capabilities
+
+* **Frontend**: React, Next.js, TypeScript, JavaScript, HTML5 & CSS3, TailwindCSS, Responsive Layouts
+* **Backend**: Java, Spring Boot, Python, Node.js, Express.js, RESTful APIs, Message Brokers (Apache Kafka)
+* **DevOps & DBs**: PostgreSQL, MySQL, MongoDB, Docker, Git, GitHub Actions
+
+---
 
 <p align="center">
-  <sub>real data | auto-refreshes every 6 hours | updates on profile repo pushes</sub>
-</p>
-
-<p align="center">
-  <strong>polished UI, reliable APIs, practical automation, still shipping.</strong>
+  <sub>Data dynamically updated every 6 hours via GitHub Actions workflows.</sub>
 </p>

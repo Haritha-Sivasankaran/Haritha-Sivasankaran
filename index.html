@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Haritha Sivasankaran | Interactive Telemetry Portfolio</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Explore Haritha Sivasankaran's developer profile. Featuring custom Arc Browser layout, Nothing OS monochrome style, Spotify Wrapped stats, Apple Liquid Glass cards, and ChatGPT Memory about section.">
+  <meta name="keywords" content="Haritha Sivasankaran, Developer Profile, Software Engineer, Portfolio, Telemetry, Spotify Wrapped, Nothing OS, Apple Liquid Glass, Arc Browser">
+  <meta name="author" content="Haritha Sivasankaran">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&family=DotGothic16&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="loading-state">
+
+  <!-- Splash / Loading Screen -->
+  <div id="loader" class="loader-overlay">
+    <div class="loader-spinner"></div>
+    <div class="loader-text font-mono">INITIALIZING TELEMETRY...</div>
+  </div>
+
+  <!-- Main Web App Layout: Arc Browser Layout Shell -->
+  <div id="arc-layout" class="arc-container">
+    
+    <!-- Sidebar component -->
+    <aside class="arc-sidebar">
+      <!-- Mac Window Controls -->
+      <div class="window-controls">
+        <span class="dot close-dot" title="Close Workspace"></span>
+        <span class="dot minimize-dot"></span>
+        <span class="dot maximize-dot"></span>
+      </div>
+
+      <!-- Quick Theme Workspace switcher -->
+      <div class="workspace-switcher">
+        <button class="workspace-btn active" data-theme="arc" title="Arc Workspace Theme">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M9 3v18" /></svg>
+        </button>
+        <button class="workspace-btn" data-theme="nothing" title="Nothing OS Minimalist Theme">
+          <span class="ws-dot-red"></span>
+        </button>
+        <button class="workspace-btn" data-theme="apple" title="Apple Liquid Glass Theme">
+          <span class="ws-bubble"></span>
+        </button>
+        <button class="workspace-btn" data-theme="spotify" title="Spotify Wrapped Theme">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.565.387-.86.207-2.377-1.454-5.37-1.783-8.894-.98-.336.075-.668-.135-.744-.47-.077-.337.135-.668.47-.743 3.856-.88 7.15-.506 9.822 1.13.295.178.387.563.206.86zm1.225-2.72c-.227.367-.707.487-1.074.26-2.72-1.672-6.87-2.157-10.082-1.182-.413.125-.847-.107-.972-.52-.125-.413.108-.847.52-.972 3.676-1.114 8.243-.57 11.348 1.34.367.226.487.707.26 1.074zm.107-2.833C14.384 8.78 8.49 8.583 5.093 9.615c-.522.158-1.075-.14-1.233-.662-.158-.522.14-1.075.662-1.233 3.918-1.19 10.435-.96 14.48 1.442.47.28.623.89.344 1.36-.28.47-.89.622-1.36.342z"/></svg>
+        </button>
+      </div>
+
+      <!-- Navigation list (Arc Table of Contents Scroll Helper) -->
+      <nav class="arc-navigation">
+        <div class="nav-section-title font-mono">SECTIONS</div>
+        <ul class="nav-tabs">
+          <li class="nav-tab active" data-scroll="section-netflix">
+            <span class="tab-icon">🎭</span>
+            <span class="tab-label font-sans">Theme Switcher</span>
+          </li>
+          <li class="nav-tab" data-scroll="section-telemetry">
+            <span class="tab-icon">📊</span>
+            <span class="tab-label font-sans">Workspace Telemetry</span>
+          </li>
+          <li class="nav-tab" data-scroll="section-memory">
+            <span class="tab-icon">🧠</span>
+            <span class="tab-label font-sans">ChatGPT Memory</span>
+          </li>
+          <li class="nav-tab" data-scroll="section-projects">
+            <span class="tab-icon">🛠️</span>
+            <span class="tab-label font-sans">Liquid Glass Cards</span>
+          </li>
+          <li class="nav-tab" data-scroll="section-wrapped">
+            <span class="tab-icon">🎧</span>
+            <span class="tab-label font-sans">Spotify Wrapped</span>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Sidebar footer with profile capsule -->
+      <div class="sidebar-profile">
+        <div class="profile-avatar-mini">
+          <div class="avatar-dot"></div>
+        </div>
+        <div class="profile-meta">
+          <span class="profile-user-name font-sans">Haritha S.</span>
+          <span class="profile-user-status font-mono">active_grind</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Frame (Nested webview look) -->
+    <main class="arc-main-frame">
+      <!-- Address/URL bar simulating Arc Browser top bar -->
+      <header class="arc-url-bar">
+        <div class="navigation-arrows">
+          <button class="nav-arrow" disabled>&larr;</button>
+          <button class="nav-arrow" disabled>&rarr;</button>
+          <button class="nav-arrow" id="btn-reload">&#8635;</button>
+        </div>
+        <div class="url-input-wrapper">
+          <span class="url-protocol">haritha://</span>
+          <span id="current-url" class="url-path font-mono">portfolio.local</span>
+        </div>
+        <div class="top-bar-actions">
+          <span class="status-indicator-dot pulsing"></span>
+          <span class="status-indicator-text font-mono" id="sync-mode-label">TOKEN SYNC</span>
+        </div>
+      </header>
+
+      <!-- Content viewport containing the single continuous layout -->
+      <div class="arc-content-viewport" id="viewport-scroll-container">
+
+        <!-- A. NETFLIX PROFILE HERO SECTION (Header Style Theme Switcher) -->
+        <section id="section-netflix" class="content-block scroll-section">
+          <div class="netflix-bar-container">
+            <h2 class="netflix-bar-title font-sans">Choose Visual Profile Experience</h2>
+            <div class="profile-bar-grid">
+              
+              <!-- Nothing OS Profile -->
+              <div class="profile-bar-card" data-theme="nothing">
+                <div class="avatar-bar-wrapper nothing-avatar">
+                  <div class="dot-matrix-avatar">
+                    <span class="dot-red"></span>
+                    <div class="dot-grid"></div>
+                  </div>
+                </div>
+                <span class="profile-bar-name font-mono">Nothing OS</span>
+              </div>
+              
+              <!-- Apple Liquid Glass Profile -->
+              <div class="profile-bar-card" data-theme="apple">
+                <div class="avatar-bar-wrapper apple-avatar">
+                  <div class="liquid-bubble"></div>
+                  <div class="glass-reflection"></div>
+                </div>
+                <span class="profile-bar-name font-sans">Liquid Glass</span>
+              </div>
+              
+              <!-- Spotify Wrapped Profile -->
+              <div class="profile-bar-card" data-theme="spotify">
+                <div class="avatar-bar-wrapper spotify-avatar">
+                  <div class="vinyl-record">
+                    <div class="vinyl-grooves"></div>
+                    <div class="vinyl-center"></div>
+                  </div>
+                </div>
+                <span class="profile-bar-name font-sans">Spotify Wrapped</span>
+              </div>
+
+              <!-- Default Arc Profile -->
+              <div class="profile-bar-card active" data-theme="arc">
+                <div class="avatar-bar-wrapper arc-avatar">
+                  <div class="sidebar-avatar-glow"></div>
+                  <div class="sidebar-wireframe">
+                    <div class="wf-side"></div>
+                    <div class="wf-main"></div>
+                  </div>
+                </div>
+                <span class="profile-bar-name font-sans">Arc Browser</span>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+
+        <!-- B. TELEMETRY SECTION -->
+        <section id="section-telemetry" class="content-block scroll-section">
+          <div class="panel-header">
+            <h2 class="panel-title font-sans">Workspace Telemetry</h2>
+            <p class="panel-subtitle font-mono">REAL-TIME GITHUB GRINDMETRICS</p>
+          </div>
+
+          <!-- Hero Telemetry Banner -->
+          <div class="hero-stats-banner">
+            <div class="hero-metric-large">
+              <span class="metric-label font-mono">ANNUAL GRIND ENERGY</span>
+              <span class="metric-val font-sans" id="stat-total-contribs">0</span>
+              <span class="metric-desc font-mono">commits & contributions in last 365 days</span>
+            </div>
+            
+            <div class="hero-grid-mini">
+              <div class="mini-metric-card">
+                <span class="mini-label font-mono">ACTIVE DAYS</span>
+                <span class="mini-val font-sans" id="stat-active-days">0</span>
+              </div>
+              <div class="mini-metric-card">
+                <span class="mini-label font-mono">PEAK DAY ENERGY</span>
+                <span class="mini-val font-sans" id="stat-peak-day">0</span>
+              </div>
+              <div class="mini-metric-card">
+                <span class="mini-label font-mono">LOCKED REPOS</span>
+                <span class="mini-val font-sans" id="stat-repos-count">0</span>
+              </div>
+              <div class="mini-metric-card">
+                <span class="mini-label font-mono">STARS EARNED</span>
+                <span class="mini-val font-sans" id="stat-stars-earned">0</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Secondary Analytics Grid -->
+          <div class="analytics-grid">
+            <!-- Language mix card -->
+            <div class="analytics-card double-width" id="card-languages">
+              <h3 class="card-title font-sans">Code Frequencies</h3>
+              <p class="card-subtitle font-mono">TOP PROGRAMMING LANG STACK</p>
+              
+              <div class="language-bar-container">
+                <div class="language-bar-track" id="lang-bar-track">
+                  <!-- Generated dynamically -->
+                </div>
+              </div>
+              
+              <div class="language-list-grid" id="lang-list-grid">
+                <!-- Generated dynamically -->
+              </div>
+            </div>
+
+            <!-- Activity tempo chart -->
+            <div class="analytics-card" id="card-tempo">
+              <h3 class="card-title font-sans">Activity Tempo</h3>
+              <p class="card-subtitle font-mono">WEEKLY COMMIT MOMENTUM</p>
+              
+              <div class="tempo-chart-wrapper">
+                <svg viewBox="0 0 300 120" id="tempo-chart-svg" class="tempo-svg">
+                  <!-- SVG Graph path generated by JS -->
+                </svg>
+              </div>
+              
+              <div class="tempo-chart-legend font-mono" id="tempo-legend">
+                <span>APR</span>
+                <span>MAY</span>
+                <span>JUN</span>
+                <span>JUL</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- C. CHATGPT MEMORY SECTION -->
+        <section id="section-memory" class="content-block scroll-section">
+          <div class="panel-header">
+            <h2 class="panel-title font-sans">Memory Logs</h2>
+            <p class="panel-subtitle font-mono">CHATGPT MEMORY BANK · ABOUT DETAILS DETECTED FROM CODE</p>
+          </div>
+
+          <div class="memory-container">
+            <div class="memory-top-bar">
+              <div class="memory-status">
+                <span class="memory-shield-icon">🧠</span>
+                <span class="font-mono">Profile characteristics memorized from developer habits</span>
+              </div>
+              <button class="btn-clear-memories font-mono" id="btn-clear-memories">CLEAR ALL MEMORIES</button>
+            </div>
+
+            <!-- Add custom memory input -->
+            <div class="memory-input-card">
+              <h3 class="card-title font-sans" style="font-size: 14px; margin-bottom: 8px;">Teach the Profile a new Memory</h3>
+              <form id="add-memory-form" class="memory-form">
+                <input type="text" id="memory-input-text" placeholder="e.g. Prefers dark mode themes, writes modular typescript components, listens to lo-fi coding..." required class="font-sans">
+                <button type="submit" class="btn-submit-memory font-mono">MEMORIZE</button>
+              </form>
+            </div>
+
+            <!-- Memories category grid -->
+            <div class="memory-groups-grid">
+              
+              <!-- Category 1: Languages & Architecture -->
+              <div class="memory-group-card">
+                <div class="memory-group-header">
+                  <span class="group-icon">💻</span>
+                  <h4 class="group-title font-sans">Tech Stack & Frameworks</h4>
+                </div>
+                <ul class="memory-list" id="mem-list-tech">
+                  <!-- Generated dynamically -->
+                </ul>
+              </div>
+
+              <!-- Category 2: Coding Styles -->
+              <div class="memory-group-card">
+                <div class="memory-group-header">
+                  <span class="group-icon">⚡</span>
+                  <h4 class="group-title font-sans">Workspace Behaviours</h4>
+                </div>
+                <ul class="memory-list" id="mem-list-behavior">
+                  <!-- Generated dynamically -->
+                </ul>
+              </div>
+
+              <!-- Category 3: Personal & Hobbies -->
+              <div class="memory-group-card">
+                <div class="memory-group-header">
+                  <span class="group-icon">👤</span>
+                  <h4 class="group-title font-sans">Personal Preferences</h4>
+                </div>
+                <ul class="memory-list" id="mem-list-personal">
+                  <!-- Generated dynamically -->
+                </ul>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+
+        <!-- D. LIQUID GLASS CARDS SECTION -->
+        <section id="section-projects" class="content-block scroll-section">
+          <div class="panel-header">
+            <h2 class="panel-title font-sans">Liquid Glass Cards</h2>
+            <p class="panel-subtitle font-mono">APPLE GLASSMORPHIC DESIGN SYSTEM DEMO</p>
+          </div>
+
+          <div class="glass-gallery">
+            <p class="gallery-desc font-sans">These cards demonstrate Apple's iOS/macOS Liquid Glass aesthetic: deep background blurs, multiple drop shadows, inner borders with linear gradient highlights, and a mouse-tracking interactive reflection glare effect.</p>
+
+            <div class="glass-cards-grid">
+              
+              <!-- Card 1: TransitPulse -->
+              <div class="liquid-glass-card" id="card-pulse">
+                <div class="card-reflection"></div>
+                <div class="card-glow-glow"></div>
+                <div class="glass-content">
+                  <span class="glass-badge font-mono">01 / SHIPPED</span>
+                  <h3 class="glass-title font-sans">TransitPulse 2.0</h3>
+                  <p class="glass-body font-sans">A live public transit schedule tracker and notifications system. Powered by Node.js, Express, Kafka integration streams, and a React telemetry frontend.</p>
+                  
+                  <div class="glass-footer">
+                    <span class="glass-tech font-mono">KAFKA · NODE.JS · REACT</span>
+                    <a href="https://github.com/Haritha-Sivasankaran/TransitPulse-2.0" target="_blank" class="glass-link">&rarr;</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 2: Obsidian Chess -->
+              <div class="liquid-glass-card" id="card-chess">
+                <div class="card-reflection"></div>
+                <div class="card-glow-glow"></div>
+                <div class="glass-content">
+                  <span class="glass-badge font-mono">02 / COMPLETED</span>
+                  <h3 class="glass-title font-sans">Obsidian Chess</h3>
+                  <p class="glass-body font-sans">A local multi-variant chess engine built completely in Vanilla JavaScript, supporting AI analysis, offline play, and local custom board themes.</p>
+                  
+                  <div class="glass-footer">
+                    <span class="glass-tech font-mono">JAVASCRIPT · HTML5 · CSS</span>
+                    <a href="https://github.com/Haritha-Sivasankaran/Obsidian-Chess" target="_blank" class="glass-link">&rarr;</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 3: Portfolio -->
+              <div class="liquid-glass-card" id="card-portfolio">
+                <div class="card-reflection"></div>
+                <div class="card-glow-glow"></div>
+                <div class="glass-content">
+                  <span class="glass-badge font-mono">03 / ACTIVE</span>
+                  <h3 class="glass-title font-sans">Profile Overview</h3>
+                  <p class="glass-body font-sans">Automated GitHub profile assets generator script. Refreshes telemetry charts, activity trackers, and Wrapped statistics automatically via GitHub Actions.</p>
+                  
+                  <div class="glass-footer">
+                    <span class="glass-tech font-mono">PYTHON · SVG · ACTIONS</span>
+                    <a href="https://github.com/Haritha-Sivasankaran/Haritha-Sivasankaran" target="_blank" class="glass-link">&rarr;</a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+
+        <!-- E. SPOTIFY WRAPPED SECTION -->
+        <section id="section-wrapped" class="content-block scroll-section" style="margin-bottom: 80px;">
+          <div class="panel-header">
+            <h2 class="panel-title font-sans" style="color: #1db954;">Spotify Wrapped Stats</h2>
+            <p class="panel-subtitle font-mono" style="color: #b3b3b3;">YOUR MUSIC STYLE GRIND TELEMETRY</p>
+          </div>
+
+          <div class="wrapped-dashboard">
+            <div class="wrapped-deck-grid">
+              
+              <!-- Wrapped Card 1: Top Language Album -->
+              <div class="wrapped-card style-spotify-purple">
+                <span class="wrapped-num font-mono">#1</span>
+                <h4 class="wrapped-header font-sans">TOP CODING TRACK</h4>
+                
+                <div class="cassette-player-wrapper">
+                  <div class="cassette-body">
+                    <div class="cassette-label">
+                      <div class="cassette-label-title font-sans" id="wrapped-track-name">dspy_pipeline.py</div>
+                      <div class="cassette-label-sub font-mono" id="wrapped-track-details">128 UPDATES · ACTIVE PIPELINE</div>
+                    </div>
+                    <div class="cassette-reels">
+                      <div class="reel spinning"></div>
+                      <div class="reel spinning"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Custom audio controller simulating music player -->
+                <div class="spotify-media-controller">
+                  <div class="media-details">
+                    <span class="media-title font-sans" id="player-title">dspy_pipeline.py</span>
+                    <span class="media-artist font-mono" id="player-artist">Active Repo: Obsidian-Chess</span>
+                  </div>
+                  <div class="playback-timeline">
+                    <span class="time-elapsed font-mono" id="player-time-current">0:00</span>
+                    <div class="timeline-bar" id="timeline-scrubber">
+                      <div class="timeline-fill" id="player-progress-fill"></div>
+                      <div class="timeline-thumb" id="player-progress-thumb"></div>
+                    </div>
+                    <span class="time-total font-mono" id="player-time-total">3:42</span>
+                  </div>
+                  <div class="media-controls">
+                    <button class="media-btn" id="btn-player-shuffle" title="Shuffle">🔀</button>
+                    <button class="media-btn" id="btn-player-prev" title="Prev">⏮️</button>
+                    <button class="media-btn play-pause-btn" id="btn-player-play-pause" title="Play">▶️</button>
+                    <button class="media-btn" id="btn-player-next" title="Next">⏭️</button>
+                    <button class="media-btn" id="btn-player-repeat" title="Repeat">🔁</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Wrapped Card 2: Coding Aura -->
+              <div class="wrapped-card style-spotify-neon">
+                <span class="wrapped-num font-mono">#2</span>
+                <h4 class="wrapped-header font-sans">CODING AURA</h4>
+                
+                <div class="aura-graphic-container">
+                  <div class="aura-glow-circle purple-aura"></div>
+                  <div class="aura-glow-circle blue-aura"></div>
+                  <div class="aura-glow-circle green-aura"></div>
+                  <span class="aura-title font-sans">Deep Sync</span>
+                  <span class="aura-subtitle font-mono">focus & momentum</span>
+                </div>
+                
+                <p class="wrapped-desc font-sans">You are deep in workspace streams. You love fluid, highly-interactive frontend layouts backed by asynchronous messaging layers.</p>
+              </div>
+
+              <!-- Wrapped Card 3: Developer Archetype -->
+              <div class="wrapped-card style-spotify-pink">
+                <span class="wrapped-num font-mono">#3</span>
+                <h4 class="wrapped-header font-sans">DEVELOPER STYLE</h4>
+                
+                <div class="archetype-showcase">
+                  <span class="arch-title font-sans" id="wrapped-archetype-title">The Artisan</span>
+                  <span class="arch-sub font-mono" id="wrapped-archetype-sub">FRONTEND CRAFTER</span>
+                </div>
+                
+                <p class="wrapped-desc font-sans" id="wrapped-archetype-desc">Sculpting modern layouts with sleek interactive cues, premium glass aesthetics, and dot matrix details.</p>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Memory Updated Toast Notification -->
+  <div class="toast-notification font-sans" id="toast">
+    <span class="toast-icon">🧠</span>
+    <div class="toast-body">
+      <span class="toast-title">Memory updated</span>
+      <span class="toast-text" id="toast-text-msg">Saved details to profile memory bank.</span>
+    </div>
+  </div>
+
+  <!-- JS Logic -->
+  <script src="app.js"></script>
+</body>
+</html>

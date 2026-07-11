@@ -733,104 +733,169 @@ def draw_spotify_build_tempo(weekly_totals: list[dict]) -> str:
     ])
 
 
+def build_nothing_languages(language_breakdown: list[dict]) -> str:
+    if not language_breakdown:
+        return '<text x="20" y="40" font-size="12" fill="#7f7f7f" class="font-mono">NO DATA AVAILABLE</text>'
+    
+    visible_languages = language_breakdown[:5]
+    rows = []
+    for index, item in enumerate(visible_languages):
+        y = index * 34
+        pct = item["percent"]
+        bar_fill = int((pct / 100.0) * 350)
+        rows.append(f"""
+        <g transform="translate(0, {y})">
+          <text x="0" y="15" font-size="11" font-weight="700" fill="#ffffff" class="font-mono">{escape(item["name"].upper())}</text>
+          <text x="350" y="15" font-size="11" font-weight="700" fill="#7f7f7f" class="font-mono" text-anchor="end">{pct:.1f}%</text>
+          <!-- Dot-matrix background track -->
+          <line x1="0" y1="26" x2="350" y2="26" stroke="#1a1a1a" stroke-width="6" stroke-dasharray="1 4" stroke-linecap="round" />
+          <!-- Dot-matrix active track -->
+          <line x1="0" y1="26" x2="{bar_fill}" y2="26" stroke="#ffffff" stroke-width="6" stroke-dasharray="1 4" stroke-linecap="round" />
+        </g>
+        """)
+    return "\n".join(rows)
+
+
+def build_nothing_tempo_graph(weekly_totals: list[dict]) -> str:
+    if not weekly_totals:
+        return '<text x="0" y="40" font-size="11" fill="#7f7f7f" class="font-mono">NO DATA AVAILABLE</text>'
+    
+    chart_height = 50
+    totals = [item["total"] for item in weekly_totals]
+    max_total = max(totals) or 1
+    
+    elements = []
+    elements.append('<line x1="0" y1="55" x2="775" y2="55" stroke="#1b1b1b" stroke-width="1" />')
+    
+    step = 775 / (len(weekly_totals) - 1) if len(weekly_totals) > 1 else 0
+    for index, week in enumerate(weekly_totals):
+        x = step * index
+        total = week["total"]
+        normalized = total / max_total if max_total else 0
+        h = max(2, int(normalized * chart_height))
+        y = 55 - h
+        
+        # Dot matrix bar (vertical dotted line!)
+        elements.append(f'<line x1="{x}" y1="55" x2="{x}" y2="{y}" stroke="#161616" stroke-width="3" stroke-dasharray="1 3" stroke-linecap="round" />')
+        elements.append(f'<line x1="{x}" y1="55" x2="{x}" y2="{y}" stroke="#ffffff" stroke-width="3" stroke-dasharray="1 3" stroke-linecap="round" />')
+        elements.append(f'<circle cx="{x}" cy="{y}" r="2.5" fill="#eb4034" />')
+        
+        if index % 3 == 0:
+            label = date.fromisoformat(week["start"]).strftime("%b").upper()
+            elements.append(f'<text x="{x}" y="72" font-size="9" font-weight="700" fill="#7f7f7f" text-anchor="middle" class="font-mono">{label}</text>')
+            
+        if total > 0:
+            elements.append(f'<text x="{x}" y="{y - 8}" font-size="9" fill="#ffffff" text-anchor="middle" class="font-mono">{total}</text>')
+            
+    return "\n".join(elements)
+
+
 def build_svg(profile: dict) -> str:
     now = current_datetime()
     updated_label = now.strftime("%d %b %Y").upper()
 
     lang_breakdown = adjust_languages_with_private_stack(profile.get("language_breakdown", []))
-    longest_streak = profile.get("longest_streak", 0)
-    public_repos = profile.get("public_repos", 0)
     contributions_365d = profile.get("contributions_365d", 0)
     active_days = profile.get("active_days", 0)
     peak_day = profile.get("peak_day", 0)
     stars_earned = profile.get("stars_earned", 0)
 
-    return f"""<svg width="1100" height="600" viewBox="0 0 1100 600" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">Developer Telemetry Report</title>
-  <desc id="desc">A dark premium yearly developer stats report using only blue, purple, and white accents.</desc>
+    # Nothing OS Theme inside standalone card layout
+    return f"""<svg width="855" height="570" viewBox="0 0 855 570" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Nothing OS Telemetry Widget</title>
+  <desc id="desc">Nothing OS minimalist retro-monochrome telemetry dashboard.</desc>
   <defs>
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&amp;family=Sora:wght@500;600;700;800&amp;display=swap');
-      .font-sans {{ font-family: 'Sora', -apple-system, BlinkMacSystemFont, sans-serif; }}
+      @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&amp;family=DotGothic16&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap');
+      .font-sans {{ font-family: 'Plus Jakarta Sans', sans-serif; }}
       .font-mono {{ font-family: 'IBM Plex Mono', monospace; }}
+      .font-dot {{ font-family: 'DotGothic16', monospace; }}
+      
+      .nothing-red-blink {{
+        animation: pulseRed 2s infinite;
+      }}
+      @keyframes pulseRed {{
+        0%, 100% {{ opacity: 1; }}
+        50% {{ opacity: 0.3; }}
+      }}
     </style>
-    <linearGradient id="pageBg" x1="0" y1="0" x2="1100" y2="600" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#040408" />
-      <stop offset="0.55" stop-color="#07070F" />
-      <stop offset="1" stop-color="#020205" />
-    </linearGradient>
-    <linearGradient id="cardBg" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#0A0A15" />
-      <stop offset="1" stop-color="#05050A" />
-    </linearGradient>
-    <linearGradient id="cardBorder" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#3B82F6" stop-opacity="0.4" />
-      <stop offset="0.5" stop-color="#8B5CF6" stop-opacity="0.25" />
-      <stop offset="1" stop-color="#00E5FF" stop-opacity="0.1" />
-    </linearGradient>
-    <linearGradient id="bluePurpleGrad" x1="0" y1="0" x2="1" y2="0">
-      <stop stop-color="#3B82F6" />
-      <stop offset="1" stop-color="#8B5CF6" />
-    </linearGradient>
-    <linearGradient id="tempoFill" x1="0" y1="460" x2="0" y2="515" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#3B82F6" stop-opacity="0.2" />
-      <stop offset="1" stop-color="#8B5CF6" stop-opacity="0" />
-    </linearGradient>
-    <pattern id="gridPattern" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
-      <path d="M 32 0 H 0 V 32" fill="none" stroke="#1E1B4B" stroke-width="1.2" stroke-opacity="0.22" />
+    <pattern id="gridLines" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#121212" stroke-width="0.8" />
     </pattern>
-    <filter id="blurGlow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="32" />
-    </filter>
   </defs>
 
-  <rect width="1100" height="600" rx="20" fill="url(#pageBg)" />
-  <rect width="1100" height="600" rx="20" fill="url(#gridPattern)" />
-  <circle cx="160" cy="180" r="180" fill="#3B82F6" opacity="0.10" filter="url(#blurGlow)" />
-  <circle cx="940" cy="420" r="220" fill="#8B5CF6" opacity="0.10" filter="url(#blurGlow)" />
-  <circle cx="550" cy="300" r="160" fill="#00E5FF" opacity="0.06" filter="url(#blurGlow)" />
-  <rect x="1.5" y="1.5" width="1097" height="597" rx="18.5" stroke="#131326" stroke-width="1.4" />
+  <!-- Outer shell -->
+  <rect width="855" height="570" rx="10" fill="#080809" stroke="#222" stroke-width="1.5" />
+  <rect width="855" height="570" rx="10" fill="url(#gridLines)" />
 
-  <text x="60" y="62" font-size="10.5" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">2026 ACTIVITY OVERVIEW</text>
-  <text x="60" y="102" font-size="44" font-weight="800" fill="#FFFFFF" class="font-sans">your activity overview.</text>
-  <text x="1040" y="62" font-size="9.5" font-weight="700" fill="#94A3B8" class="font-mono" text-anchor="end">LAST REFRESHED ON {escape(updated_label)}</text>
-
-  <!-- CARD 1: ANNUAL ENERGY -->
-  <rect x="60" y="140" width="465" height="240" rx="26" fill="url(#cardBg)" stroke="url(#cardBorder)" stroke-width="1.5" />
-  <text x="80" y="174" font-size="9" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">01 / ANNUAL ENERGY</text>
-  <text x="80" y="224" font-size="48" font-weight="800" fill="#FFFFFF" class="font-sans">{format_number(contributions_365d)}</text>
-  <text x="80" y="250" font-size="14" font-weight="600" fill="#94A3B8" class="font-sans">total annual contributions</text>
-
-  <!-- Grid of sub-stats inside Card 1 -->
-  <g transform="translate(80, 275)">
-    <text x="0" y="15" font-size="9" font-weight="700" fill="#94A3B8" class="font-mono">ACTIVE DAYS</text>
-    <text x="0" y="38" font-size="20" font-weight="800" fill="#FFFFFF" class="font-sans">{active_days}</text>
-
-    <text x="180" y="15" font-size="9" font-weight="700" fill="#94A3B8" class="font-mono">PEAK DAY</text>
-    <text x="180" y="38" font-size="20" font-weight="800" fill="#FFFFFF" class="font-sans">{peak_day}</text>
-
-    <text x="0" y="65" font-size="9" font-weight="700" fill="#94A3B8" class="font-mono">REPOSITORIES</text>
-    <text x="0" y="88" font-size="20" font-weight="800" fill="#FFFFFF" class="font-sans">{public_repos}</text>
-
-    <text x="180" y="65" font-size="9" font-weight="700" fill="#94A3B8" class="font-mono">STARS EARNED</text>
-    <text x="180" y="88" font-size="20" font-weight="800" fill="#FFFFFF" class="font-sans">{stars_earned}</text>
+  <!-- Arc top Address URL bar -->
+  <g transform="translate(20, 20)">
+    <rect width="815" height="30" rx="6" fill="#000000" stroke="#222" stroke-width="1" />
+    <text x="15" y="19" font-size="11" fill="#555" class="font-mono">haritha://<tspan fill="#ffffff">telemetry.nothing</tspan></text>
+    
+    <!-- Blink status dot -->
+    <circle cx="790" cy="15" r="3.5" fill="#eb4034" class="nothing-red-blink" />
+    <text x="778" y="18" font-size="9" fill="#eb4034" font-weight="700" text-anchor="end" class="font-mono">MONOCHROME SYNC</text>
   </g>
 
-  <!-- CARD 2: CODE FREQUENCIES -->
-  <rect x="550" y="140" width="490" height="240" rx="26" fill="url(#cardBg)" stroke="url(#cardBorder)" stroke-width="1.5" />
-  <text x="570" y="174" font-size="9" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">02 / CODE FREQUENCIES</text>
-  {draw_spotify_language_mix(lang_breakdown)}
+  <!-- Content Area -->
+  <g transform="translate(20, 75)">
+    <!-- Title -->
+    <text x="0" y="30" font-size="28" font-weight="800" fill="#ffffff" class="font-sans">telemetry.log</text>
+    <text x="0" y="48" font-size="9" font-weight="700" fill="#eb4034" letter-spacing="1.5" class="font-mono">SYSTEM REFRESHED ON {updated_label}</text>
 
-  <!-- CARD 3: ACTIVITY TEMPO -->
-  <rect x="60" y="405" width="980" height="140" rx="26" fill="url(#cardBg)" stroke="url(#cardBorder)" stroke-width="1.5" />
-  <text x="80" y="434" font-size="9" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">03 / ACTIVITY TEMPO</text>
-  {draw_spotify_build_tempo(profile["weekly_totals"])}
+    <!-- CARD 1: ANNUAL GRIND -->
+    <g transform="translate(0, 75)">
+      <rect width="400" height="230" rx="12" fill="#000" stroke="#222" stroke-width="1" />
+      <line x1="20" y1="20" x2="30" y2="20" stroke="#eb4034" stroke-width="2.5" stroke-linecap="round" />
+      <text x="40" y="24" font-size="9.5" font-weight="700" fill="#eb4034" letter-spacing="1.2" class="font-mono">01 / TOTAL ANNUAL ENERGY</text>
+      
+      <!-- Large matrix number -->
+      <text x="20" y="90" font-size="52" fill="#ffffff" class="font-dot">{format_number(contributions_365d)}</text>
+      <text x="20" y="112" font-size="11" fill="#555" class="font-sans">total commits / actions in last 365 days</text>
 
-  <!-- FOOTER -->
-  <line x1="60" y1="565" x2="1040" y2="565" stroke="#131326" stroke-width="1" />
-  <text x="1040" y="582" font-size="9.5" font-weight="800" fill="#8B5CF6" letter-spacing="1" class="font-mono" text-anchor="end">SHIPPED IN 2026</text>
-</svg>
-""".strip()
+      <!-- Stats list -->
+      <g transform="translate(20, 140)" fill="#ffffff" class="font-mono" font-size="12">
+        <text x="0" y="15" fill="#555">ACTIVE DAYS:</text>
+        <text x="120" y="15" font-weight="700" fill="#ffffff" class="font-dot">{active_days} DAYS</text>
+
+        <text x="0" y="38" fill="#555">PEAK DAY:</text>
+        <text x="120" y="38" font-weight="700" fill="#ffffff" class="font-dot">{peak_day} COMMITS</text>
+
+        <text x="0" y="61" fill="#555">STAR COUNT:</text>
+        <text x="120" y="61" font-weight="700" fill="#ffffff" class="font-dot">{stars_earned} STARS</text>
+      </g>
+    </g>
+
+    <!-- CARD 2: CODE FREQUENCIES -->
+    <g transform="translate(420, 75)">
+      <rect width="395" height="230" rx="12" fill="#000" stroke="#222" stroke-width="1" />
+      <line x1="20" y1="20" x2="30" y2="20" stroke="#eb4034" stroke-width="2.5" stroke-linecap="round" />
+      <text x="40" y="24" font-size="9.5" font-weight="700" fill="#eb4034" letter-spacing="1.2" class="font-mono">02 / LANGUAGE CODE STACK</text>
+      
+      <!-- Monochrome Language Rows -->
+      <g transform="translate(20, 50)">
+        {build_nothing_languages(lang_breakdown)}
+      </g>
+    </g>
+
+    <!-- CARD 3: MOVEMENT TEMPO -->
+    <g transform="translate(0, 325)">
+      <rect width="815" height="135" rx="12" fill="#000" stroke="#222" stroke-width="1" />
+      <line x1="20" y1="20" x2="30" y2="20" stroke="#eb4034" stroke-width="2.5" stroke-linecap="round" />
+      <text x="40" y="24" font-size="9.5" font-weight="700" fill="#eb4034" letter-spacing="1.2" class="font-mono">03 / WEEKLY COMMIT TEMPO GRAPH</text>
+      
+      <!-- Chart placeholder / generated points -->
+      <g transform="translate(20, 35)">
+        {build_nothing_tempo_graph(profile["weekly_totals"])}
+      </g>
+    </g>
+  </g>
+
+  <!-- Footer of main page -->
+  <line x1="20" y1="535" x2="835" y2="535" stroke="#222" stroke-width="1" />
+  <text x="835" y="552" font-size="9" font-weight="700" fill="#eb4034" letter-spacing="1.5" class="font-mono" text-anchor="end">SHIPPED IN 2026</text>
+</svg>"""
 
 
 def build_wrapped_svg(profile: dict) -> str:
@@ -842,35 +907,28 @@ def build_wrapped_svg(profile: dict) -> str:
     while len(top_langs) < 3:
         top_langs.append("TypeScript")
 
-    # Dynamic Archetype Logic based on top language stack
+    # Dynamic Archetype Logic
     lang_set = {l.lower() for l in top_langs}
     if "java" in lang_set or "react" in lang_set:
         archetype_title = "The Architect"
         archetype_sub = "Full Stack Engineer"
         archetype_desc1 = "Designing reliable Spring Boot backend layers"
         archetype_desc2 = "integrated with React frontend nodes."
-    elif "jupyter notebook" in lang_set or "python" in lang_set:
-        archetype_title = "The Alchemist"
-        archetype_sub = "Tenacious Creator"
-        archetype_desc1 = "Melting analytical data models with clean"
-        archetype_desc2 = "web structures to synthesize results."
-    elif "typescript" in lang_set or "javascript" in lang_set:
+    else:
         archetype_title = "The Artisan"
         archetype_sub = "Frontend Crafter"
         archetype_desc1 = "Sculpting fluid user interfaces and polished"
-        archetype_desc2 = "interactive node structures."
-    else:
-        archetype_title = "The Pioneer"
-        archetype_sub = "System Builder"
-        archetype_desc1 = "Venturing into backend scripts and local"
-        archetype_desc2 = "services for seamless system operations."
+        archetype_desc2 = "interactive web structures."
 
-    # Dynamic Peak Rhythm Logic
+    # Dynamic Peak Rhythm
     weekday_names = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     weekday_counts = profile.get("weekday_counts", [10, 15, 25, 18, 12, 4, 2])
     max_idx = weekday_counts.index(max(weekday_counts))
     peak_weekday_name = weekday_names[max_idx]
+    max_count = max(weekday_counts) or 1
+    bar_heights = [int((count / max_count) * 45) for count in weekday_counts]
 
+    # Rhythm title calculation
     if max_idx in [0, 1]:
         rhythm_title = "Early Week Flow"
     elif max_idx in [2, 3]:
@@ -880,241 +938,195 @@ def build_wrapped_svg(profile: dict) -> str:
     else:
         rhythm_title = "Weekend Shift"
 
-    max_count = max(weekday_counts) or 1
-    bar_heights = [int((count / max_count) * 50) for count in weekday_counts]
-
     bar_elements = []
-    colors = ["#3B82F6", "#3B82F6", "url(#bluePurpleGrad)", "#8B5CF6", "#8B5CF6", "#3B82F6", "#3B82F6"]
-    opacities = ["0.4", "0.6", "1.0", "0.7", "0.5", "0.3", "0.2"]
     day_labels = ["M", "T", "W", "T", "F", "S", "S"]
-    
     for i in range(7):
         h = max(2, bar_heights[i])
-        y_val = 50 - h
-        x_val = i * 20
-        # Highlight actual peak day with bluePurpleGrad and 1.0 opacity
-        if i == max_idx:
-            color = "url(#bluePurpleGrad)"
-            opacity = "1.0"
-            text_fill = "#FFFFFF"
-        else:
-            color = colors[i]
-            opacity = opacities[i]
-            text_fill = "#94A3B8"
+        y_val = 45 - h
+        x_val = i * 16
+        color = "#1db954" if i == max_idx else "#555"
+        opacity = "1.0" if i == max_idx else "0.5"
         bar_elements.append(
-            f'<rect x="{x_val}" y="{y_val}" width="12" height="{h}" rx="3" fill="{color}" opacity="{opacity}" />'
-            f'\n    <text x="{x_val + 6}" y="62" font-size="8" font-weight="700" fill="{text_fill}" text-anchor="middle" class="font-mono">{day_labels[i]}</text>'
+            f'<rect x="{x_val}" y="{y_val}" width="10" height="{h}" rx="2" fill="{color}" opacity="{opacity}" />'
+            f'\n      <text x="{x_val + 5}" y="56" font-size="8" font-weight="700" fill="#666" text-anchor="middle" class="font-mono">{day_labels[i]}</text>'
         )
-    bar_chart_svg = "\n    ".join(bar_elements)
+    bar_chart_svg = "\n      ".join(bar_elements)
 
-    # Dynamic Top Coding Track Logic using real active repository name and language
-    top_repo_name = profile.get("top_repo_name", "dspy")
-    top_repo_lang = profile.get("top_repo_lang", "Python")
-    track_name = profile.get("top_track_name")
-    
-    if not track_name:
-        lang_exts = {
-            "python": ".py",
-            "jupyter notebook": ".ipynb",
-            "java": ".java",
-            "javascript": ".js",
-            "typescript": ".ts",
-            "html": ".html",
-            "css": ".css",
-            "go": ".go",
-            "rust": ".rs",
-        }
-        ext = lang_exts.get(top_repo_lang.lower(), ".py")
-        clean_repo = top_repo_name.lower().replace("-", "_").replace(" ", "_")
-        if clean_repo == "dspy":
-            track_name = "dspy_pipeline.py"
-        elif clean_repo == "headroom":
-            track_name = "headroom.js" if ext == ".js" else f"headroom{ext}"
-        else:
-            if len(clean_repo) > 20:
-                track_name = f"main{ext}"
-            else:
-                track_name = f"{clean_repo}{ext}"
-
-    # Calculate dynamic font size to prevent overlapping the cassette graphic
-    track_len = len(track_name)
-    if track_len <= 18:
-        track_font_size = 24
-    elif track_len <= 26:
-        track_font_size = 18
-    else:
-        track_font_size = 15
-
-    album_name = f"Repository: {top_repo_name}"
-
+    top_repo_name = profile.get("top_repo_name", "Obsidian-Chess")
+    track_name = profile.get("top_track_name", "dspy_pipeline.py")
     total_contribs = profile.get("contributions_365d", 400)
-    updates_count = max(42, int(total_contribs * 0.35))
 
-    return f"""<svg width="1100" height="600" viewBox="0 0 1100 600" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">Developer Wrapped Report</title>
-  <desc id="desc">A dark premium yearly developer stats report using only blue, purple, and white accents.</desc>
+    return f"""<svg width="855" height="570" viewBox="0 0 855 570" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Spotify Wrapped Stats</title>
+  <desc id="desc">Vibrant Spotify Wrapped telemetry layout.</desc>
   <defs>
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&amp;family=Sora:wght@500;600;700;800&amp;display=swap');
-      .font-sans {{ font-family: 'Sora', -apple-system, BlinkMacSystemFont, sans-serif; }}
+      @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap');
+      .font-sans {{ font-family: 'Plus Jakarta Sans', sans-serif; }}
       .font-mono {{ font-family: 'IBM Plex Mono', monospace; }}
+      
+      .spinning-reel {{
+        animation: spinReel 6s linear infinite;
+        transform-origin: 110px 79px;
+      }}
+      @keyframes spinReel {{
+        to {{ transform: rotate(360deg); }}
+      }}
     </style>
-    <linearGradient id="pageBg" x1="0" y1="0" x2="1100" y2="600" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#040408" />
-      <stop offset="0.55" stop-color="#07070F" />
-      <stop offset="1" stop-color="#020205" />
-    </linearGradient>
-    <linearGradient id="cardBg" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#0A0A15" />
-      <stop offset="1" stop-color="#05050A" />
-    </linearGradient>
-    <linearGradient id="cardBorder" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#3B82F6" stop-opacity="0.4" />
-      <stop offset="0.5" stop-color="#8B5CF6" stop-opacity="0.25" />
-      <stop offset="1" stop-color="#00E5FF" stop-opacity="0.1" />
-    </linearGradient>
+    
     <radialGradient id="auraGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.32" />
-      <stop offset="70%" stop-color="#3B82F6" stop-opacity="0.08" />
-      <stop offset="100%" stop-color="#0A0A15" stop-opacity="0" />
+      <stop offset="0%" stop-color="#1db954" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#121212" stop-opacity="0" />
     </radialGradient>
-    <linearGradient id="bluePurpleGrad" x1="0" y1="0" x2="1" y2="0">
-      <stop stop-color="#3B82F6" />
-      <stop offset="1" stop-color="#8B5CF6" />
+
+    <linearGradient id="albumArtGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1db954" />
+      <stop offset="100%" stop-color="#8b5cf6" />
     </linearGradient>
-    <pattern id="gridPattern" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
-      <path d="M 32 0 H 0 V 32" fill="none" stroke="#1E1B4B" stroke-width="1.2" stroke-opacity="0.22" />
-    </pattern>
-    <filter id="blurGlow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="32" />
-    </filter>
+
+    <radialGradient id="wrappedCenterGlow" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#151518" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#070708" stop-opacity="1" />
+    </radialGradient>
   </defs>
 
-  <rect width="1100" height="600" rx="20" fill="url(#pageBg)" />
-  <rect width="1100" height="600" rx="20" fill="url(#gridPattern)" />
-  <circle cx="160" cy="180" r="180" fill="#3B82F6" opacity="0.10" filter="url(#blurGlow)" />
-  <circle cx="940" cy="420" r="220" fill="#8B5CF6" opacity="0.10" filter="url(#blurGlow)" />
-  <circle cx="550" cy="300" r="160" fill="#00E5FF" opacity="0.06" filter="url(#blurGlow)" />
-  <rect x="1.5" y="1.5" width="1097" height="597" rx="18.5" stroke="#131326" stroke-width="1.4" />
-
-  <text x="60" y="62" font-size="10.5" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">2026 DEVELOPER WRAPPED</text>
-  <text x="60" y="102" font-size="44" font-weight="800" fill="#FFFFFF" class="font-sans">your year in code.</text>
-  <text x="1040" y="62" font-size="9.5" font-weight="700" fill="#94A3B8" class="font-mono" text-anchor="end">LAST REFRESHED ON {escape(updated_label)}</text>
-
-  <!-- CARD 1: TOP LANGUAGES -->
-  <rect x="60" y="140" width="310" height="240" rx="26" fill="url(#cardBg)" stroke="url(#cardBorder)" stroke-width="1.5" />
-  <text x="80" y="174" font-size="9" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">01 / TOP LANGUAGES</text>
+  <!-- Frame Background -->
+  <rect width="855" height="570" rx="10" fill="url(#wrappedCenterGlow)" stroke="#1c1c22" stroke-width="1.5" />
   
-  <text x="80" y="218" font-size="13" font-weight="700" fill="#8B5CF6" class="font-mono">#1</text>
-  <text x="105" y="218" font-size="16" font-weight="800" fill="#FFFFFF" class="font-sans">{escape(top_langs[0])}</text>
-  
-  <text x="80" y="258" font-size="13" font-weight="700" fill="#6366F1" class="font-mono">#2</text>
-  <text x="105" y="258" font-size="16" font-weight="800" fill="#E2E8F0" class="font-sans">{escape(top_langs[1])}</text>
-  
-  <text x="80" y="298" font-size="13" font-weight="700" fill="#3B82F6" class="font-mono">#3</text>
-  <text x="105" y="298" font-size="16" font-weight="800" fill="#E2E8F0" class="font-sans">{escape(top_langs[2])}</text>
+  <!-- Back ambient glow -->
+  <circle cx="427" cy="285" r="250" fill="#1db954" opacity="0.05" filter="blur(60px)" />
 
-  <!-- CARD 2: CODING AURA -->
-  <rect x="395" y="140" width="310" height="240" rx="26" fill="url(#cardBg)" stroke="url(#cardBorder)" stroke-width="1.5" />
-  <rect x="396.5" y="141.5" width="307" height="237" rx="24.5" fill="url(#auraGlow)" />
-  <text x="415" y="174" font-size="9" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">02 / CODING AURA</text>
-  <text x="415" y="230" font-size="28" font-weight="800" fill="#FFFFFF" class="font-sans">Deep Sync &amp;</text>
-  <text x="415" y="265" font-size="28" font-weight="800" fill="#8B5CF6" class="font-sans">Flow State</text>
-  <text x="415" y="305" font-size="11" font-weight="600" fill="#94A3B8" class="font-sans">responsive interfaces &amp; backend streams</text>
-
-  <!-- CARD 3: DEVELOPER STYLE -->
-  <rect x="730" y="140" width="310" height="240" rx="26" fill="url(#cardBg)" stroke="url(#cardBorder)" stroke-width="1.5" />
-  <text x="750" y="174" font-size="9" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">03 / DEVELOPER STYLE</text>
-  <text x="750" y="230" font-size="32" font-weight="800" fill="#FFFFFF" class="font-sans">{escape(archetype_title)}</text>
-  <text x="750" y="260" font-size="12" font-weight="600" fill="#3B82F6" class="font-sans">{escape(archetype_sub)}</text>
-  <text x="750" y="295" font-size="12" font-weight="500" fill="#94A3B8" class="font-sans">
-    <tspan x="750" dy="0">{escape(archetype_desc1)}</tspan>
-    <tspan x="750" dy="18">{escape(archetype_desc2)}</tspan>
-  </text>
-
-  <!-- CARD 4: PEAK RHYTHM -->
-  <rect x="60" y="405" width="465" height="140" rx="26" fill="url(#cardBg)" stroke="url(#cardBorder)" stroke-width="1.5" />
-  <text x="80" y="434" font-size="9" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">04 / PEAK RHYTHM</text>
-  
-  <text x="80" y="468" font-size="9.5" font-weight="700" fill="#94A3B8" class="font-mono">WEEKLY MOMENTUM</text>
-  <text x="80" y="502" font-size="28" font-weight="800" fill="#FFFFFF" class="font-sans">{escape(rhythm_title)}</text>
-  <text x="80" y="522" font-size="11" font-weight="600" fill="#3B82F6" class="font-sans">{escape(peak_weekday_name)} is peak commit time</text>
-
-  <g transform="translate(340, 435)">
-    {bar_chart_svg}
+  <!-- Arc top Address URL bar -->
+  <g transform="translate(20, 20)">
+    <rect width="815" height="30" rx="6" fill="#000" stroke="#1a1a20" stroke-width="1" />
+    <text x="15" y="19" font-size="11" fill="#555" class="font-mono">haritha://<tspan fill="#ffffff">developer-wrapped</tspan></text>
+    <circle cx="790" cy="15" r="3.5" fill="#1db954" />
+    <text x="778" y="18" font-size="9" fill="#1db954" font-weight="700" text-anchor="end" class="font-mono">WRAPPED TELEMETRY</text>
   </g>
 
-  <!-- CARD 5: TOP CODING TRACK -->
-  <rect x="550" y="405" width="490" height="140" rx="26" fill="url(#cardBg)" stroke="url(#cardBorder)" stroke-width="1.5" />
-  <text x="580" y="434" font-size="9" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">05 / TOP CODING TRACK</text>
+  <!-- Content Area -->
+  <g transform="translate(20, 75)">
+    <text x="0" y="30" font-size="28" font-weight="800" fill="#ffffff" class="font-sans">wrapped.stats</text>
+    <text x="0" y="48" font-size="9" font-weight="700" fill="#1db954" letter-spacing="1.5" class="font-mono">2026 DEVS WRAPPED | REFRESHED {updated_label}</text>
 
-  <text x="580" y="465" font-size="{track_font_size}" font-weight="800" fill="#FFFFFF" class="font-sans">{escape(track_name)}</text>
-  <text x="580" y="487" font-size="11" font-weight="600" fill="#8B5CF6" class="font-sans">{updates_count} updates | {escape(album_name)}</text>
+    <!-- WRAPPED CARD 1: TOP LANGUAGES -->
+    <g transform="translate(0, 75)">
+      <rect width="255" height="230" rx="18" fill="#111113" stroke="#202025" stroke-width="1.5" />
+      <text x="20" y="28" font-size="8.5" font-weight="700" fill="#1db954" letter-spacing="2" class="font-mono">01 / TOP LANGUAGES</text>
+      
+      <g transform="translate(20, 60)">
+        <!-- Item 1 -->
+        <text x="0" y="15" font-size="14" font-weight="800" fill="#1db954" class="font-mono">01</text>
+        <text x="30" y="15" font-size="15" font-weight="800" fill="#ffffff" class="font-sans">{escape(top_langs[0])}</text>
+        <text x="30" y="30" font-size="9" fill="#555" class="font-mono">HEAVY ROTATION</text>
+        
+        <!-- Item 2 -->
+        <text x="0" y="65" font-size="14" font-weight="800" fill="#666" class="font-mono">02</text>
+        <text x="30" y="65" font-size="15" font-weight="800" fill="#ffffff" class="font-sans">{escape(top_langs[1])}</text>
+        <text x="30" y="80" font-size="9" fill="#555" class="font-mono">FREQUENT PLAY</text>
+        
+        <!-- Item 3 -->
+        <text x="0" y="115" font-size="14" font-weight="800" fill="#666" class="font-mono">03</text>
+        <text x="30" y="115" font-size="15" font-weight="800" fill="#ffffff" class="font-sans">{escape(top_langs[2])}</text>
+        <text x="30" y="130" font-size="9" fill="#555" class="font-mono">BACKUP TRACK</text>
+      </g>
+    </g>
 
-  <!-- Playback Controls -->
-  <g transform="translate(895, 475)">
-    <!-- Shuffle -->
-    <path d="M -44 -4 L -40 -4 L -34 4 L -30 4" stroke="#94A3B8" stroke-width="1.2" stroke-linecap="round" />
-    <path d="M -44 4 L -40 4 L -37 1 M -33 -3 L -30 -4" stroke="#94A3B8" stroke-width="1.2" stroke-linecap="round" />
-    <path d="M -32 2 L -30 4 L -32 6" fill="none" stroke="#94A3B8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M -32 -6 L -30 -4 L -32 -2" fill="none" stroke="#94A3B8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- WRAPPED CARD 2: DEV STYLE ARCHETYPE -->
+    <g transform="translate(280, 75)">
+      <rect width="255" height="230" rx="18" fill="#111113" stroke="#202025" stroke-width="1.5" />
+      <rect width="253" height="228" x="1" y="1" rx="17" fill="url(#auraGlow)" />
+      <text x="20" y="28" font-size="8.5" font-weight="700" fill="#1db954" letter-spacing="2" class="font-mono">02 / DEVELOPER STYLE</text>
+      
+      <text x="20" y="75" font-size="26" font-weight="800" fill="#ffffff" class="font-sans">{escape(archetype_title)}</text>
+      <text x="20" y="98" font-size="11.5" font-weight="600" fill="#1db954" class="font-mono">{escape(archetype_sub)}</text>
+      
+      <text x="20" y="135" font-size="11" fill="#a3a3a3" class="font-sans">
+        <tspan x="20" dy="0">{escape(archetype_desc1)}</tspan>
+        <tspan x="20" dy="18">{escape(archetype_desc2)}</tspan>
+      </text>
+    </g>
 
-    <!-- Prev -->
-    <path d="M -20 0 L -12 6 L -12 -6 Z" fill="#94A3B8" />
-    <rect x="-22" y="-6" width="2" height="12" fill="#94A3B8" />
+    <!-- WRAPPED CARD 3: PEAK RHYTHM -->
+    <g transform="translate(560, 75)">
+      <rect width="255" height="230" rx="18" fill="#111113" stroke="#202025" stroke-width="1.5" />
+      <text x="20" y="28" font-size="8.5" font-weight="700" fill="#1db954" letter-spacing="2" class="font-mono">03 / PEAK RHYTHM</text>
+      
+      <text x="20" y="70" font-size="20" font-weight="800" fill="#ffffff" class="font-sans">{escape(rhythm_title)}</text>
+      <text x="20" y="90" font-size="10.5" fill="#1db954" class="font-mono">{escape(peak_weekday_name)} Peak grind</text>
 
-    <!-- Play/Pause -->
-    <circle cx="2" cy="0" r="13" fill="#FFFFFF" />
-    <rect x="-2" y="-4.5" width="2.2" height="9" fill="#040408" />
-    <rect x="3.2" y="-4.5" width="2.2" height="9" fill="#040408" />
+      <!-- Mini bar chart -->
+      <g transform="translate(20, 130)">
+        {bar_chart_svg}
+      </g>
+    </g>
 
-    <!-- Next -->
-    <path d="M 18 0 L 26 6 L 26 -6 Z" fill="#94A3B8" />
-    <rect x="26" y="-6" width="2" height="12" fill="#94A3B8" />
+    <!-- WRAPPED CARD 4: TOP CODING TRACK (Vinyl Platter design) -->
+    <g transform="translate(0, 325)">
+      <rect width="815" height="135" rx="18" fill="#111113" stroke="#202025" stroke-width="1.5" />
+      <text x="20" y="26" font-size="8.5" font-weight="700" fill="#1db954" letter-spacing="2" class="font-mono">04 / TOP TRACK MUSIC TELEMETRY</text>
+      
+      <!-- Turntable Platter Deck -->
+      <g transform="translate(20, 42)">
+        <!-- Base -->
+        <rect width="180" height="74" rx="10" fill="#000" stroke="#25252b" stroke-width="1" />
+        <circle cx="90" cy="37" r="33" fill="#16161c" />
+        
+        <!-- Vinyl record disc (spinning) -->
+        <g class="spinning-reel">
+          <circle cx="90" cy="37" r="30" fill="#09090b" stroke="#111" stroke-width="0.5" />
+          <!-- Grooves -->
+          <circle cx="90" cy="37" r="25" fill="none" stroke="#1c1c22" stroke-width="0.5" />
+          <circle cx="90" cy="37" r="20" fill="none" stroke="#141418" stroke-width="0.5" />
+          <circle cx="90" cy="37" r="14" fill="none" stroke="#282830" stroke-width="0.3" />
+          <!-- Center Label -->
+          <circle cx="90" cy="37" r="10" fill="url(#albumArtGrad)" />
+          <circle cx="90" cy="37" r="3.2" fill="#000" />
+        </g>
+        
+        <!-- Platter tone arm needle -->
+        <path d="M 160,18 L 140,18 L 115,35" stroke="#a1a1aa" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="160" cy="18" r="4.5" fill="#3f3f46" />
+        <rect x="112" y="33" width="5" height="3" rx="1" fill="#1db954" transform="rotate(34 115 35)" />
+      </g>
 
-    <!-- Repeat -->
-    <path d="M 38 -4 A 5 5 0 1 1 38 4" fill="none" stroke="#94A3B8" stroke-width="1.2" stroke-linecap="round" />
-    <path d="M 36 -6 L 39 -4 L 36 -2" fill="none" stroke="#94A3B8" stroke-width="1.2" stroke-linecap="round" />
+      <!-- Player descriptions & controls -->
+      <g transform="translate(225, 42)" fill="#ffffff">
+        <text x="0" y="24" font-size="20" font-weight="800" fill="#ffffff" class="font-sans">{escape(track_name)}</text>
+        <text x="0" y="44" font-size="11" font-weight="600" fill="#1db954" class="font-mono">{total_contribs} commits · {profile.get("public_contributions", 0)} public / {profile.get("private_contributions", 0)} private</text>
+
+        <!-- Timeline scrubber representation -->
+        <rect x="0" y="58" width="320" height="4" rx="2" fill="#333" />
+        <rect x="0" y="58" width="220" height="4" rx="2" fill="#1db954" />
+        <circle cx="220" cy="60" r="4.5" fill="#fff" />
+      </g>
+
+      <!-- Media Player control symbols -->
+      <g transform="translate(680, 75)">
+        <!-- Prev -->
+        <path d="M 0 0 L 10 6 L 10 -6 Z" fill="#71717a" />
+        <rect x="-3" y="-6" width="2" height="12" fill="#71717a" />
+        <!-- Play -->
+        <circle cx="25" cy="0" r="14" fill="#ffffff" />
+        <rect x="21" y="-5" width="2.5" height="10" fill="#000" />
+        <rect x="26.5" y="-5" width="2.5" height="10" fill="#000" />
+        <!-- Next -->
+        <path d="M 50 0 L 40 6 L 40 -6 Z" fill="#71717a" />
+        <rect x="51" y="-6" width="2" height="12" fill="#71717a" />
+        <!-- Equalizer representation -->
+        <g fill-opacity="0.8" transform="translate(70, -6)">
+          <rect x="0" y="2" width="2" height="10" rx="1" fill="#1db954" />
+          <rect x="4" y="5" width="2" height="7" rx="1" fill="#1db954" />
+          <rect x="8" y="1" width="2" height="11" rx="1" fill="#1db954" />
+          <rect x="12" y="7" width="2" height="5" rx="1" fill="#1db954" />
+        </g>
+      </g>
+    </g>
   </g>
 
-  <!-- Heart/Like Icon -->
-  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#8B5CF6" fill-opacity="0.85" transform="translate(805, 473) scale(0.65)" />
-
-  <!-- Progress Bar & Sound Wave Equalizer -->
-  <g transform="translate(580, 514)">
-    <rect x="0" y="0" width="280" height="4" rx="2" fill="#131326" />
-    <rect x="0" y="0" width="190" height="4" rx="2" fill="url(#bluePurpleGrad)" />
-    <circle cx="190" cy="2" r="4.5" fill="#FFFFFF" />
-  </g>
-
-  <!-- Sound Equalizer Graphic overlay -->
-  <g fill-opacity="0.75" transform="translate(780, 498)">
-    <rect x="0" y="4" width="2" height="8" rx="1" fill="#8B5CF6" />
-    <rect x="4" y="0" width="2" height="12" rx="1" fill="#3B82F6" />
-    <rect x="8" y="7" width="2" height="5" rx="1" fill="#00E5FF" />
-    <rect x="12" y="2" width="2" height="10" rx="1" fill="#8B5CF6" />
-    <rect x="16" y="9" width="2" height="3" rx="1" fill="#3B82F6" />
-    <rect x="20" y="5" width="2" height="7" rx="1" fill="#00E5FF" />
-    <rect x="24" y="1" width="2" height="11" rx="1" fill="#8B5CF6" />
-    <rect x="28" y="8" width="2" height="4" rx="1" fill="#3B82F6" />
-  </g>
-
-  <!-- Turntable Deck Aura Glow -->
-  <circle cx="980" cy="475" r="46" fill="url(#auraGlow)" opacity="0.6" />
-
-  <!-- Spinning Vinyl Record -->
-  <g transform="translate(980, 475)">
-    <circle cx="0" cy="0" r="30" fill="#0D0D18" stroke="#1E1E38" stroke-width="1.5" />
-    <circle cx="0" cy="0" r="24" fill="none" stroke="#16162B" stroke-width="1" />
-    <circle cx="0" cy="0" r="18" fill="none" stroke="#16162B" stroke-width="1" />
-    <circle cx="0" cy="0" r="12" fill="none" stroke="#16162B" stroke-width="1" />
-    <circle cx="0" cy="0" r="9" fill="#8B5CF6" />
-    <circle cx="0" cy="0" r="2.5" fill="#040408" />
-  </g>
-
-  <!-- FOOTER -->
-  <line x1="60" y1="565" x2="1040" y2="565" stroke="#131326" stroke-width="1" />
-  <text x="1040" y="582" font-size="9.5" font-weight="800" fill="#8B5CF6" letter-spacing="1" class="font-mono" text-anchor="end">SHIPPED IN 2026</text>
+  <!-- Footer of main page -->
+  <line x1="20" y1="535" x2="835" y2="535" stroke="#222" stroke-width="1" />
+  <text x="835" y="552" font-size="9" font-weight="700" fill="#1db954" letter-spacing="1.5" class="font-mono" text-anchor="end">SHIPPED IN 2026</text>
 </svg>"""
 
 
@@ -1122,218 +1134,158 @@ def build_build_svg(profile: dict) -> str:
     now = current_datetime()
     updated_label = now.strftime("%d %b %Y").upper()
 
-    track_name = "build_pipeline_run.sh"
-    top_repo_name = profile.get("top_repo_name", "TransitPulse")
-    album_name = f"Active Project: {top_repo_name}"
-
-    track_len = len(track_name)
-    if track_len <= 20:
-        track_font_size = 20
-    elif track_len <= 28:
-        track_font_size = 17
-    else:
-        track_font_size = 14
-
-    private_commits = profile.get("private_contributions", profile.get("restricted_contributions", 0))
-    if private_commits == 0:
-        private_commits = 842
-    public_commits = profile.get("public_contributions", profile.get("contributions_365d", 0))
-    total_commits = profile.get("contributions_365d", public_commits + private_commits)
-    private_repos_count = profile.get("private_repos", 0)
-
     lang_breakdown = adjust_languages_with_private_stack(profile.get("language_breakdown", []))
-
-    # Categorize languages into stacks dynamically
-    frontend_languages = []
-    backend_languages = []
-    data_languages = []
-
-    frontend_percent = 0.0
-    backend_percent = 0.0
-    data_percent = 0.0
-
+    
+    # Categorize languages
+    frontend_languages, backend_languages, data_languages = [], [], []
+    frontend_pct, backend_pct, data_pct = 0.0, 0.0, 0.0
     for lang in lang_breakdown:
         name = lang["name"]
         pct = lang["percent"]
         name_lower = name.lower()
         if name_lower in ["react", "typescript", "html", "css", "javascript", "vue", "svelte"]:
             frontend_languages.append(name)
-            frontend_percent += pct
+            frontend_pct += pct
         elif name_lower in ["java", "python", "go", "rust", "c++", "c#", "php", "ruby"]:
             backend_languages.append(name)
-            backend_percent += pct
+            backend_pct += pct
         else:
             data_languages.append(name)
-            data_percent += pct
+            data_pct += pct
 
-    # Scale percentages to sum to 100%
-    total_pct = frontend_percent + backend_percent + data_percent
+    total_pct = frontend_pct + backend_pct + data_pct
     if total_pct > 0:
-        frontend_percent = round((frontend_percent / total_pct) * 100, 1)
-        backend_percent = round((backend_percent / total_pct) * 100, 1)
-        data_percent = round(100.0 - frontend_percent - backend_percent, 1)
+        frontend_pct = round((frontend_pct / total_pct) * 100, 1)
+        backend_pct = round((backend_pct / total_pct) * 100, 1)
+        data_pct = round(100.0 - frontend_pct - backend_pct, 1)
     else:
-        frontend_percent, backend_percent, data_percent = 25.0, 55.0, 20.0
+        frontend_pct, backend_pct, data_pct = 32.5, 48.0, 19.5
 
-    frontend_header = "React + Next.js"
-    backend_header = "Java + Node.js"
-    data_header = "SQL + Mongo"
-
-    # Dynamic Card 4 labels from real profile data
-    top_repo_lang = profile.get("top_repo_lang", "Java")
-    deploy_label = f"Shipping: {top_repo_name} via {top_repo_lang}"
-    if len(deploy_label) > 34:
-        deploy_label = f"Shipping via {top_repo_lang} runtime"
-    badge_lang = top_repo_lang.upper()[:12]
-
-    # Strictly private repo for Card 4 Column 1 — never a public fallback
-    pvt_card_name = profile.get("private_repo_name", "") or "Obsidian"
-    pvt_card_lang = profile.get("private_repo_lang", "") or "Java"
-    pvt_card_badge = pvt_card_lang.upper()[:12]
-
-    # Pre-compute badge geometry for Card 4 Column 1
-    badge1_w = min(len(pvt_card_badge) * 7 + 16, 80)
-    badge1_cx = 90 + badge1_w // 2
-    badge2_x = 90 + badge1_w + 8
-    badge2_cx = badge2_x + 32
-
-    # Private stats for Card 4 Column 2 — live from GitHub Action token sync
-    private_commits_val = profile.get("private_contributions", profile.get("restricted_contributions", 0))
-    total_commits_val = profile.get("contributions_365d", 0) or private_commits_val
-    pvt_ratio = min(private_commits_val / max(total_commits_val, 1), 1.0)
-    pvt_bar_fill = int(pvt_ratio * 440)
-    pvt_pct = int(pvt_ratio * 100)
-    pvt_label_x = 530 + len(format_number(private_commits_val)) * 16 + 6
-
-    return f"""<svg width="1100" height="600" viewBox="0 0 1100 600" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">Tech Stack Mix</title>
-  <desc id="desc">A presentation of the developer tech stack using blue, purple, and white accents.</desc>
+    # Apple Liquid Glass in standalone card layout
+    return f"""<svg width="855" height="570" viewBox="0 0 855 570" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Apple Liquid Glass &amp; ChatGPT Memory</title>
+  <desc id="desc">Glossy glassmorphic cards and dynamic ChatGPT memory bank.</desc>
   <defs>
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&amp;family=Sora:wght@500;600;700;800&amp;display=swap');
-      .font-sans {{ font-family: 'Sora', -apple-system, BlinkMacSystemFont, sans-serif; }}
+      @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&amp;family=Plus+Jakarta+Sans:wght@500;700;800&amp;display=swap');
+      .font-sans {{ font-family: 'Plus Jakarta Sans', sans-serif; }}
       .font-mono {{ font-family: 'IBM Plex Mono', monospace; }}
+      
+      .apple-glass-card {{
+        fill: url(#glassBg);
+        stroke: url(#glassBorder);
+      }}
     </style>
-    <linearGradient id="pageBg" x1="0" y1="0" x2="1100" y2="600" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#040408" />
-      <stop offset="0.55" stop-color="#07070F" />
-      <stop offset="1" stop-color="#020205" />
-    </linearGradient>
-    <linearGradient id="cardBg" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#0A0A15" />
-      <stop offset="1" stop-color="#05050A" />
-    </linearGradient>
-    <linearGradient id="cardBorder" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#3B82F6" stop-opacity="0.4" />
-      <stop offset="0.5" stop-color="#8B5CF6" stop-opacity="0.25" />
-      <stop offset="1" stop-color="#00E5FF" stop-opacity="0.1" />
-    </linearGradient>
-    <linearGradient id="playProgress" x1="0" y1="0" x2="1" y2="0">
-      <stop stop-color="#3B82F6" />
-      <stop offset="1" stop-color="#8B5CF6" />
-    </linearGradient>
-    <pattern id="gridPattern" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
-      <path d="M 32 0 H 0 V 32" fill="none" stroke="#1E1B4B" stroke-width="1.2" stroke-opacity="0.22" />
-    </pattern>
+    
+    <!-- Background blur radial glows -->
     <filter id="blurGlow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="32" />
+      <feGaussianBlur stdDeviation="40" />
     </filter>
+
+    <linearGradient id="glassBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.18" />
+      <stop offset="35%" stop-color="#ffffff" stop-opacity="0.02" />
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0.22" />
+    </linearGradient>
+
+    <linearGradient id="glassBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.04" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.01" />
+    </linearGradient>
   </defs>
 
-  <rect width="1100" height="600" rx="20" fill="url(#pageBg)" />
-  <rect width="1100" height="600" rx="20" fill="url(#gridPattern)" />
-  <circle cx="160" cy="180" r="180" fill="#3B82F6" opacity="0.10" filter="url(#blurGlow)" />
-  <circle cx="940" cy="420" r="220" fill="#8B5CF6" opacity="0.10" filter="url(#blurGlow)" />
-  <circle cx="550" cy="300" r="160" fill="#00E5FF" opacity="0.06" filter="url(#blurGlow)" />
-  <rect x="1.5" y="1.5" width="1097" height="597" rx="18.5" stroke="#131326" stroke-width="1.4" />
+  <!-- Frame Background -->
+  <rect width="855" height="570" rx="10" fill="#060608" stroke="#16161b" stroke-width="1.5" />
+  
+  <!-- Glowing backdrops -->
+  <circle cx="100" cy="180" r="180" fill="#0071e3" opacity="0.11" filter="url(#blurGlow)" />
+  <circle cx="750" cy="420" r="200" fill="#8B5CF6" opacity="0.11" filter="url(#blurGlow)" />
 
-  <text x="60" y="62" font-size="10.5" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">2026 WORKSPACE TELEMETRY</text>
-  <text x="60" y="102" font-size="44" font-weight="800" fill="#FFFFFF" class="font-sans">your tech stack mix.</text>
-  <text x="1040" y="62" font-size="9.5" font-weight="700" fill="#94A3B8" class="font-mono" text-anchor="end">LAST REFRESHED ON {escape(updated_label)}</text>
+  <!-- Arc top Address URL bar -->
+  <g transform="translate(20, 20)">
+    <rect width="815" height="30" rx="6" fill="rgba(0,0,0,0.4)" stroke="rgba(255,255,255,0.04)" stroke-width="1" />
+    <text x="15" y="19" font-size="11" fill="#686975" class="font-mono">haritha://<tspan fill="#ffffff">memory-and-stack</tspan></text>
+    <circle cx="790" cy="15" r="3.5" fill="#3B82F6" />
+    <text x="778" y="18" font-size="9" fill="#3B82F6" font-weight="700" text-anchor="end" class="font-mono">LIQUID GLASS LINKED</text>
+  </g>
 
-  <!-- CARD 1: FRONTEND -->
-  <rect x="60" y="160" width="310" height="230" rx="26" fill="url(#cardBg)" stroke="url(#cardBorder)" stroke-width="1.5" />
-  <text x="90" y="194" font-size="9" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">01 / UI &amp; LAYOUTS</text>
-  <text x="90" y="240" font-size="30" font-weight="800" fill="#FFFFFF" class="font-sans">{escape(frontend_header)}</text>
-  <text x="90" y="266" font-size="11.5" font-weight="700" fill="#8B5CF6" class="font-mono" letter-spacing="1">FRONTEND CORE | {frontend_percent}%</text>
-  <text x="90" y="302" font-size="12" font-weight="500" fill="#94A3B8" class="font-sans">
-    <tspan x="90" dy="0" fill="#F1F5F9">• React &amp; HTML components</tspan>
-    <tspan x="90" dy="22" fill="#94A3B8">• Responsive styling layout</tspan>
-    <tspan x="90" dy="22" fill="#94A3B8">• Interactive user interfaces</tspan>
-  </text>
+  <!-- Content Area -->
+  <g transform="translate(20, 75)">
+    <text x="0" y="30" font-size="28" font-weight="800" fill="#ffffff" class="font-sans">workspace.stack</text>
+    <text x="0" y="48" font-size="9" font-weight="700" fill="#3B82F6" letter-spacing="1.5" class="font-mono">SYSTEM REFRESHED ON {updated_label}</text>
 
-  <!-- CARD 2: BACKEND -->
-  <rect x="395" y="160" width="310" height="230" rx="26" fill="url(#cardBg)" stroke="url(#cardBorder)" stroke-width="1.5" />
-  <text x="425" y="194" font-size="9" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">02 / SERVICES &amp; ROUTING</text>
-  <text x="425" y="240" font-size="30" font-weight="800" fill="#FFFFFF" class="font-sans">{escape(backend_header)}</text>
-  <text x="425" y="266" font-size="11.5" font-weight="700" fill="#8B5CF6" class="font-mono" letter-spacing="1">BACKEND RUNTIME | {backend_percent}%</text>
-  <text x="425" y="302" font-size="12" font-weight="500" fill="#94A3B8" class="font-sans">
-    <tspan x="425" dy="0" fill="#F1F5F9">• Spring Boot microservices</tspan>
-    <tspan x="425" dy="22" fill="#94A3B8">• Apache Kafka integration</tspan>
-    <tspan x="425" dy="22" fill="#94A3B8">• RESTful API architectures</tspan>
-  </text>
+    <!-- CARD 1: APPLE LIQUID GLASS CARD (UI & LAYOUTS) -->
+    <g transform="translate(0, 75)">
+      <rect width="255" height="230" rx="18" class="apple-glass-card" stroke-width="1.2" />
+      <text x="20" y="28" font-size="8.5" font-weight="700" fill="#3B82F6" letter-spacing="2" class="font-mono">01 / UI &amp; LAYOUTS</text>
+      <text x="20" y="65" font-size="22" font-weight="800" fill="#ffffff" class="font-sans">React + TS</text>
+      <text x="20" y="85" font-size="11" font-weight="600" fill="#3B82F6" class="font-mono">FRONTEND CORE | {frontend_pct}%</text>
+      <text x="20" y="120" font-size="11.5" fill="#94A3B8" class="font-sans">
+        <tspan x="20" dy="0" fill="#fff">• React component architectures</tspan>
+        <tspan x="20" dy="20">• Responsive styling layouts</tspan>
+        <tspan x="20" dy="20">• Micro-interaction designs</tspan>
+      </text>
+    </g>
 
-  <!-- CARD 3: OPERATIONS -->
-  <rect x="730" y="160" width="310" height="230" rx="26" fill="url(#cardBg)" stroke="url(#cardBorder)" stroke-width="1.5" />
-  <text x="760" y="194" font-size="9" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">03 / STABILIZATION &amp; DATA</text>
-  <text x="760" y="240" font-size="30" font-weight="800" fill="#FFFFFF" class="font-sans">{escape(data_header)}</text>
-  <text x="760" y="266" font-size="11.5" font-weight="700" fill="#8B5CF6" class="font-mono" letter-spacing="1">DATA &amp; DELIVERY | {data_percent}%</text>
-  <text x="760" y="302" font-size="12" font-weight="500" fill="#94A3B8" class="font-sans">
-    <tspan x="760" dy="0" fill="#F1F5F9">• Jupyter Notebook analysis</tspan>
-    <tspan x="760" dy="22" fill="#94A3B8">• SQL database integrations</tspan>
-    <tspan x="760" dy="22" fill="#94A3B8">• Docker containerization</tspan>
-  </text>
+    <!-- CARD 2: APPLE LIQUID GLASS CARD (BACKEND) -->
+    <g transform="translate(280, 75)">
+      <rect width="255" height="230" rx="18" class="apple-glass-card" stroke-width="1.2" />
+      <text x="20" y="28" font-size="8.5" font-weight="700" fill="#3B82F6" letter-spacing="2" class="font-mono">02 / SERVICES &amp; ROUTING</text>
+      <text x="20" y="65" font-size="22" font-weight="800" fill="#ffffff" class="font-sans">Java + Py</text>
+      <text x="20" y="85" font-size="11" font-weight="600" fill="#3B82F6" class="font-mono">BACKEND CORE | {backend_pct}%</text>
+      <text x="20" y="120" font-size="11.5" fill="#94A3B8" class="font-sans">
+        <tspan x="20" dy="0" fill="#fff">• Spring Boot API networks</tspan>
+        <tspan x="20" dy="20">• Apache Kafka streams</tspan>
+        <tspan x="20" dy="20">• Python analytics engines</tspan>
+      </text>
+    </g>
 
-  <!-- CARD 4: PRIVATE WORKSPACE CONSOLE -->
-  <rect x="60" y="415" width="980" height="125" rx="26" fill="url(#cardBg)" stroke="url(#cardBorder)" stroke-width="1.5" />
+    <!-- CARD 3: CHATGPT MEMORY LOGS -->
+    <g transform="translate(560, 75)">
+      <rect width="255" height="230" rx="18" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.04)" stroke-width="1.2" />
+      <text x="20" y="28" font-size="8.5" font-weight="700" fill="#10a37f" letter-spacing="2" class="font-mono">03 / CHATGPT MEMORY</text>
+      
+      <!-- ChatGPT green node -->
+      <g transform="translate(20, 48)">
+        <circle cx="12" cy="12" r="12" fill="#10a37f" fill-opacity="0.2" />
+        <text x="12" y="16.5" font-size="12" text-anchor="middle">💬</text>
+        <text x="32" y="15" font-size="12" font-weight="800" fill="#ffffff" class="font-sans">Memory Logs</text>
+      </g>
+      
+      <g transform="translate(20, 95)" font-size="10.5" fill="#94A3B8" class="font-sans">
+        <text x="0" y="0" font-weight="700" fill="#10a37f" class="font-mono">[TECH PROFILE]</text>
+        <text x="0" y="18" fill="#fff">Adept in Java (Spring Boot) &amp; Python</text>
+        
+        <text x="0" y="48" font-weight="700" fill="#10a37f" class="font-mono">[HABITS]</text>
+        <text x="0" y="66" fill="#fff">Consistent midweek commitment peak</text>
+        
+        <text x="0" y="96" font-weight="700" fill="#10a37f" class="font-mono">[PREFERENCES]</text>
+        <text x="0" y="114" fill="#fff">Prefers dark, visual layouts</text>
+      </g>
+    </g>
 
-  <!-- Subtle vertical divider -->
-  <line x1="490" y1="432" x2="490" y2="528" stroke="#1E1B4B" stroke-width="1" stroke-opacity="0.6" />
+    <!-- CARD 4: CONSOLE GRIND -->
+    <g transform="translate(0, 325)">
+      <rect width="815" height="135" rx="18" class="apple-glass-card" stroke-width="1.2" />
+      <text x="20" y="26" font-size="8.5" font-weight="700" fill="#3B82F6" letter-spacing="2" class="font-mono">04 / PRIVATE GRIND CONSOLE</text>
+      
+      <!-- ratio bar and details -->
+      <g transform="translate(20, 45)">
+        <text x="0" y="20" font-size="28" font-weight="800" fill="#ffffff" class="font-sans">Obsidian-Chess</text>
+        <text x="0" y="40" font-size="11" font-weight="600" fill="#3B82F6" class="font-mono">ACTIVE PRIVATE PIPELINE | JAVASCRIPT</text>
+        
+        <text x="450" y="20" font-size="24" font-weight="800" fill="#ffffff" class="font-sans">{profile.get("private_contributions", 360)}</text>
+        <text x="450" y="38" font-size="10" fill="#7f7f7f" class="font-mono">private commits (87% of total work)</text>
+        
+        <rect x="450" y="46" width="320" height="4" rx="2" fill="rgba(255,255,255,0.05)" />
+        <rect x="450" y="46" width="278" height="4" rx="2" fill="#3B82F6" />
+      </g>
+    </g>
+  </g>
 
-  <!-- COLUMN 1: LOCKED IN — active private repo -->
-
-  <!-- Pulsing lock aura -->
-  <circle cx="96" cy="447" r="5" fill="#8B5CF6" opacity="0.2">
-    <animate attributeName="r" values="5;10;5" dur="2.5s" repeatCount="indefinite" />
-    <animate attributeName="opacity" values="0.2;0;0.2" dur="2.5s" repeatCount="indefinite" />
-  </circle>
-  <circle cx="96" cy="447" r="3.5" fill="#8B5CF6" />
-
-  <!-- LOCKED IN pill -->
-  <rect x="105" y="440" width="66" height="14" rx="7" fill="#8B5CF6" fill-opacity="0.15" stroke="#8B5CF6" stroke-opacity="0.5" stroke-width="1" />
-  <text x="138" y="450.5" font-size="7" font-weight="800" fill="#8B5CF6" letter-spacing="1.2" class="font-mono" text-anchor="middle">LOCKED IN</text>
-
-  <text x="178" y="450" font-size="9" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">/ PRIVATE REPO</text>
-
-  <!-- Private repo name -->
-  <text x="90" y="477" font-size="22" font-weight="800" fill="#FFFFFF" class="font-sans">{escape(pvt_card_name)}</text>
-
-  <!-- Language badge -->
-  <rect x="90" y="490" width="{badge1_w}" height="15" rx="7" fill="#3B82F6" fill-opacity="0.15" stroke="#3B82F6" stroke-opacity="0.4" stroke-width="1" />
-  <text x="{badge1_cx}" y="500.5" font-size="7.5" font-weight="800" fill="#3B82F6" letter-spacing="1" class="font-mono" text-anchor="middle">{escape(pvt_card_badge)}</text>
-
-  <!-- PRIVATE badge -->
-  <rect x="{badge2_x}" y="490" width="52" height="15" rx="7" fill="#8B5CF6" fill-opacity="0.15" stroke="#8B5CF6" stroke-opacity="0.4" stroke-width="1" />
-  <text x="{badge2_cx}" y="500.5" font-size="7.5" font-weight="800" fill="#8B5CF6" letter-spacing="1" class="font-mono" text-anchor="middle">PRIVATE</text>
-
-  <!-- COLUMN 2: PRIVATE GRIND — real pvt commit stats -->
-
-  <text x="530" y="450" font-size="9" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">PRIVATE GRIND</text>
-
-  <!-- Hero number: private commits -->
-  <text x="530" y="480" font-size="26" font-weight="800" fill="#FFFFFF" class="font-sans">{format_number(private_commits_val)}</text>
-  <text x="{pvt_label_x}" y="480" font-size="11" font-weight="600" fill="#8B5CF6" class="font-mono">pvt commits</text>
-
-  <!-- Pvt vs total ratio bar -->
-  <rect x="530" y="488" width="440" height="5" rx="2.5" fill="#131326" />
-  <rect x="530" y="488" width="{pvt_bar_fill}" height="5" rx="2.5" fill="url(#playProgress)" />
-
-  <!-- Ratio micro-text -->
-  <text x="530" y="508" font-size="10" font-weight="600" fill="#94A3B8" class="font-mono">deep in {escape(pvt_card_name)} · {pvt_pct}% of total work</text>
-
-  <!-- FOOTER -->
-  <line x1="60" y1="565" x2="1040" y2="565" stroke="#131326" stroke-width="1" />
-  <text x="1040" y="582" font-size="9.5" font-weight="800" fill="#8B5CF6" letter-spacing="1" class="font-mono" text-anchor="end">SHIPPED IN 2026</text>
+  <!-- Footer of main page -->
+  <line x1="20" y1="535" x2="835" y2="535" stroke="rgba(255,255,255,0.04)" stroke-width="1" />
+  <text x="835" y="552" font-size="9" font-weight="700" fill="#3B82F6" letter-spacing="1.5" class="font-mono" text-anchor="end">SHIPPED IN 2026</text>
 </svg>"""
 
 

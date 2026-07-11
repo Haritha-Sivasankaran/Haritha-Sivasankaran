@@ -1,130 +1,125 @@
-<svg width="1100" height="600" viewBox="0 0 1100 600" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">Tech Stack Mix</title>
-  <desc id="desc">A presentation of the developer tech stack using blue, purple, and white accents.</desc>
+<svg width="855" height="570" viewBox="0 0 855 570" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Apple Liquid Glass &amp; ChatGPT Memory</title>
+  <desc id="desc">Glossy glassmorphic cards and dynamic ChatGPT memory bank.</desc>
   <defs>
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&amp;family=Sora:wght@500;600;700;800&amp;display=swap');
-      .font-sans { font-family: 'Sora', -apple-system, BlinkMacSystemFont, sans-serif; }
+      @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&amp;family=Plus+Jakarta+Sans:wght@500;700;800&amp;display=swap');
+      .font-sans { font-family: 'Plus Jakarta Sans', sans-serif; }
       .font-mono { font-family: 'IBM Plex Mono', monospace; }
+      
+      .apple-glass-card {
+        fill: url(#glassBg);
+        stroke: url(#glassBorder);
+      }
     </style>
-    <linearGradient id="pageBg" x1="0" y1="0" x2="1100" y2="600" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#040408" />
-      <stop offset="0.55" stop-color="#07070F" />
-      <stop offset="1" stop-color="#020205" />
-    </linearGradient>
-    <linearGradient id="cardBg" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#0A0A15" />
-      <stop offset="1" stop-color="#05050A" />
-    </linearGradient>
-    <linearGradient id="cardBorder" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#3B82F6" stop-opacity="0.4" />
-      <stop offset="0.5" stop-color="#8B5CF6" stop-opacity="0.25" />
-      <stop offset="1" stop-color="#00E5FF" stop-opacity="0.1" />
-    </linearGradient>
-    <linearGradient id="playProgress" x1="0" y1="0" x2="1" y2="0">
-      <stop stop-color="#3B82F6" />
-      <stop offset="1" stop-color="#8B5CF6" />
-    </linearGradient>
-    <pattern id="gridPattern" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
-      <path d="M 32 0 H 0 V 32" fill="none" stroke="#1E1B4B" stroke-width="1.2" stroke-opacity="0.22" />
-    </pattern>
+    
+    <!-- Background blur radial glows -->
     <filter id="blurGlow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="32" />
+      <feGaussianBlur stdDeviation="40" />
     </filter>
+
+    <linearGradient id="glassBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.18" />
+      <stop offset="35%" stop-color="#ffffff" stop-opacity="0.02" />
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0.22" />
+    </linearGradient>
+
+    <linearGradient id="glassBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.04" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.01" />
+    </linearGradient>
   </defs>
 
-  <rect width="1100" height="600" rx="20" fill="url(#pageBg)" />
-  <rect width="1100" height="600" rx="20" fill="url(#gridPattern)" />
-  <circle cx="160" cy="180" r="180" fill="#3B82F6" opacity="0.10" filter="url(#blurGlow)" />
-  <circle cx="940" cy="420" r="220" fill="#8B5CF6" opacity="0.10" filter="url(#blurGlow)" />
-  <circle cx="550" cy="300" r="160" fill="#00E5FF" opacity="0.06" filter="url(#blurGlow)" />
-  <rect x="1.5" y="1.5" width="1097" height="597" rx="18.5" stroke="#131326" stroke-width="1.4" />
+  <!-- Frame Background -->
+  <rect width="855" height="570" rx="10" fill="#060608" stroke="#16161b" stroke-width="1.5" />
+  
+  <!-- Glowing backdrops -->
+  <circle cx="100" cy="180" r="180" fill="#0071e3" opacity="0.11" filter="url(#blurGlow)" />
+  <circle cx="750" cy="420" r="200" fill="#8B5CF6" opacity="0.11" filter="url(#blurGlow)" />
 
-  <text x="60" y="62" font-size="10.5" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">2026 WORKSPACE TELEMETRY</text>
-  <text x="60" y="102" font-size="44" font-weight="800" fill="#FFFFFF" class="font-sans">your tech stack mix.</text>
-  <text x="1040" y="62" font-size="9.5" font-weight="700" fill="#94A3B8" class="font-mono" text-anchor="end">LAST REFRESHED ON 11 JUL 2026</text>
+  <!-- Arc top Address URL bar -->
+  <g transform="translate(20, 20)">
+    <rect width="815" height="30" rx="6" fill="rgba(0,0,0,0.4)" stroke="rgba(255,255,255,0.04)" stroke-width="1" />
+    <text x="15" y="19" font-size="11" fill="#686975" class="font-mono">haritha://<tspan fill="#ffffff">memory-and-stack</tspan></text>
+    <circle cx="790" cy="15" r="3.5" fill="#3B82F6" />
+    <text x="778" y="18" font-size="9" fill="#3B82F6" font-weight="700" text-anchor="end" class="font-mono">LIQUID GLASS LINKED</text>
+  </g>
 
-  <!-- CARD 1: FRONTEND -->
-  <rect x="60" y="160" width="310" height="230" rx="26" fill="url(#cardBg)" stroke="url(#cardBorder)" stroke-width="1.5" />
-  <text x="90" y="194" font-size="9" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">01 / UI &amp; LAYOUTS</text>
-  <text x="90" y="240" font-size="30" font-weight="800" fill="#FFFFFF" class="font-sans">React + Next.js</text>
-  <text x="90" y="266" font-size="11.5" font-weight="700" fill="#8B5CF6" class="font-mono" letter-spacing="1">FRONTEND CORE | 45.8%</text>
-  <text x="90" y="302" font-size="12" font-weight="500" fill="#94A3B8" class="font-sans">
-    <tspan x="90" dy="0" fill="#F1F5F9">• React &amp; HTML components</tspan>
-    <tspan x="90" dy="22" fill="#94A3B8">• Responsive styling layout</tspan>
-    <tspan x="90" dy="22" fill="#94A3B8">• Interactive user interfaces</tspan>
-  </text>
+  <!-- Content Area -->
+  <g transform="translate(20, 75)">
+    <text x="0" y="30" font-size="28" font-weight="800" fill="#ffffff" class="font-sans">workspace.stack</text>
+    <text x="0" y="48" font-size="9" font-weight="700" fill="#3B82F6" letter-spacing="1.5" class="font-mono">SYSTEM REFRESHED ON 11 JUL 2026</text>
 
-  <!-- CARD 2: BACKEND -->
-  <rect x="395" y="160" width="310" height="230" rx="26" fill="url(#cardBg)" stroke="url(#cardBorder)" stroke-width="1.5" />
-  <text x="425" y="194" font-size="9" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">02 / SERVICES &amp; ROUTING</text>
-  <text x="425" y="240" font-size="30" font-weight="800" fill="#FFFFFF" class="font-sans">Java + Node.js</text>
-  <text x="425" y="266" font-size="11.5" font-weight="700" fill="#8B5CF6" class="font-mono" letter-spacing="1">BACKEND RUNTIME | 31.4%</text>
-  <text x="425" y="302" font-size="12" font-weight="500" fill="#94A3B8" class="font-sans">
-    <tspan x="425" dy="0" fill="#F1F5F9">• Spring Boot microservices</tspan>
-    <tspan x="425" dy="22" fill="#94A3B8">• Apache Kafka integration</tspan>
-    <tspan x="425" dy="22" fill="#94A3B8">• RESTful API architectures</tspan>
-  </text>
+    <!-- CARD 1: APPLE LIQUID GLASS CARD (UI & LAYOUTS) -->
+    <g transform="translate(0, 75)">
+      <rect width="255" height="230" rx="18" class="apple-glass-card" stroke-width="1.2" />
+      <text x="20" y="28" font-size="8.5" font-weight="700" fill="#3B82F6" letter-spacing="2" class="font-mono">01 / UI &amp; LAYOUTS</text>
+      <text x="20" y="65" font-size="22" font-weight="800" fill="#ffffff" class="font-sans">React + TS</text>
+      <text x="20" y="85" font-size="11" font-weight="600" fill="#3B82F6" class="font-mono">FRONTEND CORE | 45.8%</text>
+      <text x="20" y="120" font-size="11.5" fill="#94A3B8" class="font-sans">
+        <tspan x="20" dy="0" fill="#fff">• React component architectures</tspan>
+        <tspan x="20" dy="20">• Responsive styling layouts</tspan>
+        <tspan x="20" dy="20">• Micro-interaction designs</tspan>
+      </text>
+    </g>
 
-  <!-- CARD 3: OPERATIONS -->
-  <rect x="730" y="160" width="310" height="230" rx="26" fill="url(#cardBg)" stroke="url(#cardBorder)" stroke-width="1.5" />
-  <text x="760" y="194" font-size="9" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">03 / STABILIZATION &amp; DATA</text>
-  <text x="760" y="240" font-size="30" font-weight="800" fill="#FFFFFF" class="font-sans">SQL + Mongo</text>
-  <text x="760" y="266" font-size="11.5" font-weight="700" fill="#8B5CF6" class="font-mono" letter-spacing="1">DATA &amp; DELIVERY | 22.8%</text>
-  <text x="760" y="302" font-size="12" font-weight="500" fill="#94A3B8" class="font-sans">
-    <tspan x="760" dy="0" fill="#F1F5F9">• Jupyter Notebook analysis</tspan>
-    <tspan x="760" dy="22" fill="#94A3B8">• SQL database integrations</tspan>
-    <tspan x="760" dy="22" fill="#94A3B8">• Docker containerization</tspan>
-  </text>
+    <!-- CARD 2: APPLE LIQUID GLASS CARD (BACKEND) -->
+    <g transform="translate(280, 75)">
+      <rect width="255" height="230" rx="18" class="apple-glass-card" stroke-width="1.2" />
+      <text x="20" y="28" font-size="8.5" font-weight="700" fill="#3B82F6" letter-spacing="2" class="font-mono">02 / SERVICES &amp; ROUTING</text>
+      <text x="20" y="65" font-size="22" font-weight="800" fill="#ffffff" class="font-sans">Java + Py</text>
+      <text x="20" y="85" font-size="11" font-weight="600" fill="#3B82F6" class="font-mono">BACKEND CORE | 31.4%</text>
+      <text x="20" y="120" font-size="11.5" fill="#94A3B8" class="font-sans">
+        <tspan x="20" dy="0" fill="#fff">• Spring Boot API networks</tspan>
+        <tspan x="20" dy="20">• Apache Kafka streams</tspan>
+        <tspan x="20" dy="20">• Python analytics engines</tspan>
+      </text>
+    </g>
 
-  <!-- CARD 4: PRIVATE WORKSPACE CONSOLE -->
-  <rect x="60" y="415" width="980" height="125" rx="26" fill="url(#cardBg)" stroke="url(#cardBorder)" stroke-width="1.5" />
+    <!-- CARD 3: CHATGPT MEMORY LOGS -->
+    <g transform="translate(560, 75)">
+      <rect width="255" height="230" rx="18" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.04)" stroke-width="1.2" />
+      <text x="20" y="28" font-size="8.5" font-weight="700" fill="#10a37f" letter-spacing="2" class="font-mono">03 / CHATGPT MEMORY</text>
+      
+      <!-- ChatGPT green node -->
+      <g transform="translate(20, 48)">
+        <circle cx="12" cy="12" r="12" fill="#10a37f" fill-opacity="0.2" />
+        <text x="12" y="16.5" font-size="12" text-anchor="middle">💬</text>
+        <text x="32" y="15" font-size="12" font-weight="800" fill="#ffffff" class="font-sans">Memory Logs</text>
+      </g>
+      
+      <g transform="translate(20, 95)" font-size="10.5" fill="#94A3B8" class="font-sans">
+        <text x="0" y="0" font-weight="700" fill="#10a37f" class="font-mono">[TECH PROFILE]</text>
+        <text x="0" y="18" fill="#fff">Adept in Java (Spring Boot) &amp; Python</text>
+        
+        <text x="0" y="48" font-weight="700" fill="#10a37f" class="font-mono">[HABITS]</text>
+        <text x="0" y="66" fill="#fff">Consistent midweek commitment peak</text>
+        
+        <text x="0" y="96" font-weight="700" fill="#10a37f" class="font-mono">[PREFERENCES]</text>
+        <text x="0" y="114" fill="#fff">Prefers dark, visual layouts</text>
+      </g>
+    </g>
 
-  <!-- Subtle vertical divider -->
-  <line x1="490" y1="432" x2="490" y2="528" stroke="#1E1B4B" stroke-width="1" stroke-opacity="0.6" />
+    <!-- CARD 4: CONSOLE GRIND -->
+    <g transform="translate(0, 325)">
+      <rect width="815" height="135" rx="18" class="apple-glass-card" stroke-width="1.2" />
+      <text x="20" y="26" font-size="8.5" font-weight="700" fill="#3B82F6" letter-spacing="2" class="font-mono">04 / PRIVATE GRIND CONSOLE</text>
+      
+      <!-- ratio bar and details -->
+      <g transform="translate(20, 45)">
+        <text x="0" y="20" font-size="28" font-weight="800" fill="#ffffff" class="font-sans">Obsidian-Chess</text>
+        <text x="0" y="40" font-size="11" font-weight="600" fill="#3B82F6" class="font-mono">ACTIVE PRIVATE PIPELINE | JAVASCRIPT</text>
+        
+        <text x="450" y="20" font-size="24" font-weight="800" fill="#ffffff" class="font-sans">377</text>
+        <text x="450" y="38" font-size="10" fill="#7f7f7f" class="font-mono">private commits (87% of total work)</text>
+        
+        <rect x="450" y="46" width="320" height="4" rx="2" fill="rgba(255,255,255,0.05)" />
+        <rect x="450" y="46" width="278" height="4" rx="2" fill="#3B82F6" />
+      </g>
+    </g>
+  </g>
 
-  <!-- COLUMN 1: LOCKED IN — active private repo -->
-
-  <!-- Pulsing lock aura -->
-  <circle cx="96" cy="447" r="5" fill="#8B5CF6" opacity="0.2">
-    <animate attributeName="r" values="5;10;5" dur="2.5s" repeatCount="indefinite" />
-    <animate attributeName="opacity" values="0.2;0;0.2" dur="2.5s" repeatCount="indefinite" />
-  </circle>
-  <circle cx="96" cy="447" r="3.5" fill="#8B5CF6" />
-
-  <!-- LOCKED IN pill -->
-  <rect x="105" y="440" width="66" height="14" rx="7" fill="#8B5CF6" fill-opacity="0.15" stroke="#8B5CF6" stroke-opacity="0.5" stroke-width="1" />
-  <text x="138" y="450.5" font-size="7" font-weight="800" fill="#8B5CF6" letter-spacing="1.2" class="font-mono" text-anchor="middle">LOCKED IN</text>
-
-  <text x="178" y="450" font-size="9" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">/ PRIVATE REPO</text>
-
-  <!-- Private repo name -->
-  <text x="90" y="477" font-size="22" font-weight="800" fill="#FFFFFF" class="font-sans">Obsidian-Chess</text>
-
-  <!-- Language badge -->
-  <rect x="90" y="490" width="80" height="15" rx="7" fill="#3B82F6" fill-opacity="0.15" stroke="#3B82F6" stroke-opacity="0.4" stroke-width="1" />
-  <text x="130" y="500.5" font-size="7.5" font-weight="800" fill="#3B82F6" letter-spacing="1" class="font-mono" text-anchor="middle">JAVASCRIPT</text>
-
-  <!-- PRIVATE badge -->
-  <rect x="178" y="490" width="52" height="15" rx="7" fill="#8B5CF6" fill-opacity="0.15" stroke="#8B5CF6" stroke-opacity="0.4" stroke-width="1" />
-  <text x="210" y="500.5" font-size="7.5" font-weight="800" fill="#8B5CF6" letter-spacing="1" class="font-mono" text-anchor="middle">PRIVATE</text>
-
-  <!-- COLUMN 2: PRIVATE GRIND — real pvt commit stats -->
-
-  <text x="530" y="450" font-size="9" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">PRIVATE GRIND</text>
-
-  <!-- Hero number: private commits -->
-  <text x="530" y="480" font-size="26" font-weight="800" fill="#FFFFFF" class="font-sans">377</text>
-  <text x="584" y="480" font-size="11" font-weight="600" fill="#8B5CF6" class="font-mono">pvt commits</text>
-
-  <!-- Pvt vs total ratio bar -->
-  <rect x="530" y="488" width="440" height="5" rx="2.5" fill="#131326" />
-  <rect x="530" y="488" width="386" height="5" rx="2.5" fill="url(#playProgress)" />
-
-  <!-- Ratio micro-text -->
-  <text x="530" y="508" font-size="10" font-weight="600" fill="#94A3B8" class="font-mono">deep in Obsidian-Chess · 87% of total work</text>
-
-  <!-- FOOTER -->
-  <line x1="60" y1="565" x2="1040" y2="565" stroke="#131326" stroke-width="1" />
-  <text x="1040" y="582" font-size="9.5" font-weight="800" fill="#8B5CF6" letter-spacing="1" class="font-mono" text-anchor="end">SHIPPED IN 2026</text>
+  <!-- Footer of main page -->
+  <line x1="20" y1="535" x2="835" y2="535" stroke="rgba(255,255,255,0.04)" stroke-width="1" />
+  <text x="835" y="552" font-size="9" font-weight="700" fill="#3B82F6" letter-spacing="1.5" class="font-mono" text-anchor="end">SHIPPED IN 2026</text>
 </svg>

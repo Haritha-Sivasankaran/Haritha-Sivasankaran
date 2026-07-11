@@ -1,179 +1,185 @@
-<svg width="1100" height="600" viewBox="0 0 1100 600" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">Developer Wrapped Report</title>
-  <desc id="desc">A dark premium yearly developer stats report using only blue, purple, and white accents.</desc>
+<svg width="855" height="570" viewBox="0 0 855 570" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Spotify Wrapped Stats</title>
+  <desc id="desc">Vibrant Spotify Wrapped telemetry layout.</desc>
   <defs>
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&amp;family=Sora:wght@500;600;700;800&amp;display=swap');
-      .font-sans { font-family: 'Sora', -apple-system, BlinkMacSystemFont, sans-serif; }
+      @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap');
+      .font-sans { font-family: 'Plus Jakarta Sans', sans-serif; }
       .font-mono { font-family: 'IBM Plex Mono', monospace; }
+      
+      .spinning-reel {
+        animation: spinReel 6s linear infinite;
+        transform-origin: 110px 79px;
+      }
+      @keyframes spinReel {
+        to { transform: rotate(360deg); }
+      }
     </style>
-    <linearGradient id="pageBg" x1="0" y1="0" x2="1100" y2="600" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#040408" />
-      <stop offset="0.55" stop-color="#07070F" />
-      <stop offset="1" stop-color="#020205" />
-    </linearGradient>
-    <linearGradient id="cardBg" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#0A0A15" />
-      <stop offset="1" stop-color="#05050A" />
-    </linearGradient>
-    <linearGradient id="cardBorder" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#3B82F6" stop-opacity="0.4" />
-      <stop offset="0.5" stop-color="#8B5CF6" stop-opacity="0.25" />
-      <stop offset="1" stop-color="#00E5FF" stop-opacity="0.1" />
-    </linearGradient>
+    
     <radialGradient id="auraGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.32" />
-      <stop offset="70%" stop-color="#3B82F6" stop-opacity="0.08" />
-      <stop offset="100%" stop-color="#0A0A15" stop-opacity="0" />
+      <stop offset="0%" stop-color="#1db954" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#121212" stop-opacity="0" />
     </radialGradient>
-    <linearGradient id="bluePurpleGrad" x1="0" y1="0" x2="1" y2="0">
-      <stop stop-color="#3B82F6" />
-      <stop offset="1" stop-color="#8B5CF6" />
+
+    <linearGradient id="albumArtGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1db954" />
+      <stop offset="100%" stop-color="#8b5cf6" />
     </linearGradient>
-    <pattern id="gridPattern" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
-      <path d="M 32 0 H 0 V 32" fill="none" stroke="#1E1B4B" stroke-width="1.2" stroke-opacity="0.22" />
-    </pattern>
-    <filter id="blurGlow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="32" />
-    </filter>
+
+    <radialGradient id="wrappedCenterGlow" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#151518" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#070708" stop-opacity="1" />
+    </radialGradient>
   </defs>
 
-  <rect width="1100" height="600" rx="20" fill="url(#pageBg)" />
-  <rect width="1100" height="600" rx="20" fill="url(#gridPattern)" />
-  <circle cx="160" cy="180" r="180" fill="#3B82F6" opacity="0.10" filter="url(#blurGlow)" />
-  <circle cx="940" cy="420" r="220" fill="#8B5CF6" opacity="0.10" filter="url(#blurGlow)" />
-  <circle cx="550" cy="300" r="160" fill="#00E5FF" opacity="0.06" filter="url(#blurGlow)" />
-  <rect x="1.5" y="1.5" width="1097" height="597" rx="18.5" stroke="#131326" stroke-width="1.4" />
-
-  <text x="60" y="62" font-size="10.5" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">2026 DEVELOPER WRAPPED</text>
-  <text x="60" y="102" font-size="44" font-weight="800" fill="#FFFFFF" class="font-sans">your year in code.</text>
-  <text x="1040" y="62" font-size="9.5" font-weight="700" fill="#94A3B8" class="font-mono" text-anchor="end">LAST REFRESHED ON 11 JUL 2026</text>
-
-  <!-- CARD 1: TOP LANGUAGES -->
-  <rect x="60" y="140" width="310" height="240" rx="26" fill="url(#cardBg)" stroke="url(#cardBorder)" stroke-width="1.5" />
-  <text x="80" y="174" font-size="9" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">01 / TOP LANGUAGES</text>
+  <!-- Frame Background -->
+  <rect width="855" height="570" rx="10" fill="url(#wrappedCenterGlow)" stroke="#1c1c22" stroke-width="1.5" />
   
-  <text x="80" y="218" font-size="13" font-weight="700" fill="#8B5CF6" class="font-mono">#1</text>
-  <text x="105" y="218" font-size="16" font-weight="800" fill="#FFFFFF" class="font-sans">Python</text>
-  
-  <text x="80" y="258" font-size="13" font-weight="700" fill="#6366F1" class="font-mono">#2</text>
-  <text x="105" y="258" font-size="16" font-weight="800" fill="#E2E8F0" class="font-sans">React</text>
-  
-  <text x="80" y="298" font-size="13" font-weight="700" fill="#3B82F6" class="font-mono">#3</text>
-  <text x="105" y="298" font-size="16" font-weight="800" fill="#E2E8F0" class="font-sans">Java</text>
+  <!-- Back ambient glow -->
+  <circle cx="427" cy="285" r="250" fill="#1db954" opacity="0.05" filter="blur(60px)" />
 
-  <!-- CARD 2: CODING AURA -->
-  <rect x="395" y="140" width="310" height="240" rx="26" fill="url(#cardBg)" stroke="url(#cardBorder)" stroke-width="1.5" />
-  <rect x="396.5" y="141.5" width="307" height="237" rx="24.5" fill="url(#auraGlow)" />
-  <text x="415" y="174" font-size="9" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">02 / CODING AURA</text>
-  <text x="415" y="230" font-size="28" font-weight="800" fill="#FFFFFF" class="font-sans">Deep Sync &amp;</text>
-  <text x="415" y="265" font-size="28" font-weight="800" fill="#8B5CF6" class="font-sans">Flow State</text>
-  <text x="415" y="305" font-size="11" font-weight="600" fill="#94A3B8" class="font-sans">responsive interfaces &amp; backend streams</text>
-
-  <!-- CARD 3: DEVELOPER STYLE -->
-  <rect x="730" y="140" width="310" height="240" rx="26" fill="url(#cardBg)" stroke="url(#cardBorder)" stroke-width="1.5" />
-  <text x="750" y="174" font-size="9" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">03 / DEVELOPER STYLE</text>
-  <text x="750" y="230" font-size="32" font-weight="800" fill="#FFFFFF" class="font-sans">The Architect</text>
-  <text x="750" y="260" font-size="12" font-weight="600" fill="#3B82F6" class="font-sans">Full Stack Engineer</text>
-  <text x="750" y="295" font-size="12" font-weight="500" fill="#94A3B8" class="font-sans">
-    <tspan x="750" dy="0">Designing reliable Spring Boot backend layers</tspan>
-    <tspan x="750" dy="18">integrated with React frontend nodes.</tspan>
-  </text>
-
-  <!-- CARD 4: PEAK RHYTHM -->
-  <rect x="60" y="405" width="465" height="140" rx="26" fill="url(#cardBg)" stroke="url(#cardBorder)" stroke-width="1.5" />
-  <text x="80" y="434" font-size="9" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">04 / PEAK RHYTHM</text>
-  
-  <text x="80" y="468" font-size="9.5" font-weight="700" fill="#94A3B8" class="font-mono">WEEKLY MOMENTUM</text>
-  <text x="80" y="502" font-size="28" font-weight="800" fill="#FFFFFF" class="font-sans">Weekend Shift</text>
-  <text x="80" y="522" font-size="11" font-weight="600" fill="#3B82F6" class="font-sans">Saturday is peak commit time</text>
-
-  <g transform="translate(340, 435)">
-    <rect x="0" y="21" width="12" height="29" rx="3" fill="#3B82F6" opacity="0.4" />
-    <text x="6" y="62" font-size="8" font-weight="700" fill="#94A3B8" text-anchor="middle" class="font-mono">M</text>
-    <rect x="20" y="29" width="12" height="21" rx="3" fill="#3B82F6" opacity="0.6" />
-    <text x="26" y="62" font-size="8" font-weight="700" fill="#94A3B8" text-anchor="middle" class="font-mono">T</text>
-    <rect x="40" y="24" width="12" height="26" rx="3" fill="url(#bluePurpleGrad)" opacity="1.0" />
-    <text x="46" y="62" font-size="8" font-weight="700" fill="#94A3B8" text-anchor="middle" class="font-mono">W</text>
-    <rect x="60" y="6" width="12" height="44" rx="3" fill="#8B5CF6" opacity="0.7" />
-    <text x="66" y="62" font-size="8" font-weight="700" fill="#94A3B8" text-anchor="middle" class="font-mono">T</text>
-    <rect x="80" y="5" width="12" height="45" rx="3" fill="#8B5CF6" opacity="0.5" />
-    <text x="86" y="62" font-size="8" font-weight="700" fill="#94A3B8" text-anchor="middle" class="font-mono">F</text>
-    <rect x="100" y="0" width="12" height="50" rx="3" fill="url(#bluePurpleGrad)" opacity="1.0" />
-    <text x="106" y="62" font-size="8" font-weight="700" fill="#FFFFFF" text-anchor="middle" class="font-mono">S</text>
-    <rect x="120" y="12" width="12" height="38" rx="3" fill="#3B82F6" opacity="0.2" />
-    <text x="126" y="62" font-size="8" font-weight="700" fill="#94A3B8" text-anchor="middle" class="font-mono">S</text>
+  <!-- Arc top Address URL bar -->
+  <g transform="translate(20, 20)">
+    <rect width="815" height="30" rx="6" fill="#000" stroke="#1a1a20" stroke-width="1" />
+    <text x="15" y="19" font-size="11" fill="#555" class="font-mono">haritha://<tspan fill="#ffffff">developer-wrapped</tspan></text>
+    <circle cx="790" cy="15" r="3.5" fill="#1db954" />
+    <text x="778" y="18" font-size="9" fill="#1db954" font-weight="700" text-anchor="end" class="font-mono">WRAPPED TELEMETRY</text>
   </g>
 
-  <!-- CARD 5: TOP CODING TRACK -->
-  <rect x="550" y="405" width="490" height="140" rx="26" fill="url(#cardBg)" stroke="url(#cardBorder)" stroke-width="1.5" />
-  <text x="580" y="434" font-size="9" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">05 / TOP CODING TRACK</text>
+  <!-- Content Area -->
+  <g transform="translate(20, 75)">
+    <text x="0" y="30" font-size="28" font-weight="800" fill="#ffffff" class="font-sans">wrapped.stats</text>
+    <text x="0" y="48" font-size="9" font-weight="700" fill="#1db954" letter-spacing="1.5" class="font-mono">2026 DEVS WRAPPED | REFRESHED 11 JUL 2026</text>
 
-  <text x="580" y="465" font-size="24" font-weight="800" fill="#FFFFFF" class="font-sans">CHANGELOG.md</text>
-  <text x="580" y="487" font-size="11" font-weight="600" fill="#8B5CF6" class="font-sans">150 updates | Repository: Obsidian-Chess</text>
+    <!-- WRAPPED CARD 1: TOP LANGUAGES -->
+    <g transform="translate(0, 75)">
+      <rect width="255" height="230" rx="18" fill="#111113" stroke="#202025" stroke-width="1.5" />
+      <text x="20" y="28" font-size="8.5" font-weight="700" fill="#1db954" letter-spacing="2" class="font-mono">01 / TOP LANGUAGES</text>
+      
+      <g transform="translate(20, 60)">
+        <!-- Item 1 -->
+        <text x="0" y="15" font-size="14" font-weight="800" fill="#1db954" class="font-mono">01</text>
+        <text x="30" y="15" font-size="15" font-weight="800" fill="#ffffff" class="font-sans">Python</text>
+        <text x="30" y="30" font-size="9" fill="#555" class="font-mono">HEAVY ROTATION</text>
+        
+        <!-- Item 2 -->
+        <text x="0" y="65" font-size="14" font-weight="800" fill="#666" class="font-mono">02</text>
+        <text x="30" y="65" font-size="15" font-weight="800" fill="#ffffff" class="font-sans">React</text>
+        <text x="30" y="80" font-size="9" fill="#555" class="font-mono">FREQUENT PLAY</text>
+        
+        <!-- Item 3 -->
+        <text x="0" y="115" font-size="14" font-weight="800" fill="#666" class="font-mono">03</text>
+        <text x="30" y="115" font-size="15" font-weight="800" fill="#ffffff" class="font-sans">Java</text>
+        <text x="30" y="130" font-size="9" fill="#555" class="font-mono">BACKUP TRACK</text>
+      </g>
+    </g>
 
-  <!-- Playback Controls -->
-  <g transform="translate(895, 475)">
-    <!-- Shuffle -->
-    <path d="M -44 -4 L -40 -4 L -34 4 L -30 4" stroke="#94A3B8" stroke-width="1.2" stroke-linecap="round" />
-    <path d="M -44 4 L -40 4 L -37 1 M -33 -3 L -30 -4" stroke="#94A3B8" stroke-width="1.2" stroke-linecap="round" />
-    <path d="M -32 2 L -30 4 L -32 6" fill="none" stroke="#94A3B8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M -32 -6 L -30 -4 L -32 -2" fill="none" stroke="#94A3B8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- WRAPPED CARD 2: DEV STYLE ARCHETYPE -->
+    <g transform="translate(280, 75)">
+      <rect width="255" height="230" rx="18" fill="#111113" stroke="#202025" stroke-width="1.5" />
+      <rect width="253" height="228" x="1" y="1" rx="17" fill="url(#auraGlow)" />
+      <text x="20" y="28" font-size="8.5" font-weight="700" fill="#1db954" letter-spacing="2" class="font-mono">02 / DEVELOPER STYLE</text>
+      
+      <text x="20" y="75" font-size="26" font-weight="800" fill="#ffffff" class="font-sans">The Architect</text>
+      <text x="20" y="98" font-size="11.5" font-weight="600" fill="#1db954" class="font-mono">Full Stack Engineer</text>
+      
+      <text x="20" y="135" font-size="11" fill="#a3a3a3" class="font-sans">
+        <tspan x="20" dy="0">Designing reliable Spring Boot backend layers</tspan>
+        <tspan x="20" dy="18">integrated with React frontend nodes.</tspan>
+      </text>
+    </g>
 
-    <!-- Prev -->
-    <path d="M -20 0 L -12 6 L -12 -6 Z" fill="#94A3B8" />
-    <rect x="-22" y="-6" width="2" height="12" fill="#94A3B8" />
+    <!-- WRAPPED CARD 3: PEAK RHYTHM -->
+    <g transform="translate(560, 75)">
+      <rect width="255" height="230" rx="18" fill="#111113" stroke="#202025" stroke-width="1.5" />
+      <text x="20" y="28" font-size="8.5" font-weight="700" fill="#1db954" letter-spacing="2" class="font-mono">03 / PEAK RHYTHM</text>
+      
+      <text x="20" y="70" font-size="20" font-weight="800" fill="#ffffff" class="font-sans">Weekend Shift</text>
+      <text x="20" y="90" font-size="10.5" fill="#1db954" class="font-mono">Saturday Peak grind</text>
 
-    <!-- Play/Pause -->
-    <circle cx="2" cy="0" r="13" fill="#FFFFFF" />
-    <rect x="-2" y="-4.5" width="2.2" height="9" fill="#040408" />
-    <rect x="3.2" y="-4.5" width="2.2" height="9" fill="#040408" />
+      <!-- Mini bar chart -->
+      <g transform="translate(20, 130)">
+        <rect x="0" y="19" width="10" height="26" rx="2" fill="#555" opacity="0.5" />
+      <text x="5" y="56" font-size="8" font-weight="700" fill="#666" text-anchor="middle" class="font-mono">M</text>
+      <rect x="16" y="26" width="10" height="19" rx="2" fill="#555" opacity="0.5" />
+      <text x="21" y="56" font-size="8" font-weight="700" fill="#666" text-anchor="middle" class="font-mono">T</text>
+      <rect x="32" y="22" width="10" height="23" rx="2" fill="#555" opacity="0.5" />
+      <text x="37" y="56" font-size="8" font-weight="700" fill="#666" text-anchor="middle" class="font-mono">W</text>
+      <rect x="48" y="6" width="10" height="39" rx="2" fill="#555" opacity="0.5" />
+      <text x="53" y="56" font-size="8" font-weight="700" fill="#666" text-anchor="middle" class="font-mono">T</text>
+      <rect x="64" y="4" width="10" height="41" rx="2" fill="#555" opacity="0.5" />
+      <text x="69" y="56" font-size="8" font-weight="700" fill="#666" text-anchor="middle" class="font-mono">F</text>
+      <rect x="80" y="0" width="10" height="45" rx="2" fill="#1db954" opacity="1.0" />
+      <text x="85" y="56" font-size="8" font-weight="700" fill="#666" text-anchor="middle" class="font-mono">S</text>
+      <rect x="96" y="11" width="10" height="34" rx="2" fill="#555" opacity="0.5" />
+      <text x="101" y="56" font-size="8" font-weight="700" fill="#666" text-anchor="middle" class="font-mono">S</text>
+      </g>
+    </g>
 
-    <!-- Next -->
-    <path d="M 18 0 L 26 6 L 26 -6 Z" fill="#94A3B8" />
-    <rect x="26" y="-6" width="2" height="12" fill="#94A3B8" />
+    <!-- WRAPPED CARD 4: TOP CODING TRACK (Vinyl Platter design) -->
+    <g transform="translate(0, 325)">
+      <rect width="815" height="135" rx="18" fill="#111113" stroke="#202025" stroke-width="1.5" />
+      <text x="20" y="26" font-size="8.5" font-weight="700" fill="#1db954" letter-spacing="2" class="font-mono">04 / TOP TRACK MUSIC TELEMETRY</text>
+      
+      <!-- Turntable Platter Deck -->
+      <g transform="translate(20, 42)">
+        <!-- Base -->
+        <rect width="180" height="74" rx="10" fill="#000" stroke="#25252b" stroke-width="1" />
+        <circle cx="90" cy="37" r="33" fill="#16161c" />
+        
+        <!-- Vinyl record disc (spinning) -->
+        <g class="spinning-reel">
+          <circle cx="90" cy="37" r="30" fill="#09090b" stroke="#111" stroke-width="0.5" />
+          <!-- Grooves -->
+          <circle cx="90" cy="37" r="25" fill="none" stroke="#1c1c22" stroke-width="0.5" />
+          <circle cx="90" cy="37" r="20" fill="none" stroke="#141418" stroke-width="0.5" />
+          <circle cx="90" cy="37" r="14" fill="none" stroke="#282830" stroke-width="0.3" />
+          <!-- Center Label -->
+          <circle cx="90" cy="37" r="10" fill="url(#albumArtGrad)" />
+          <circle cx="90" cy="37" r="3.2" fill="#000" />
+        </g>
+        
+        <!-- Platter tone arm needle -->
+        <path d="M 160,18 L 140,18 L 115,35" stroke="#a1a1aa" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="160" cy="18" r="4.5" fill="#3f3f46" />
+        <rect x="112" y="33" width="5" height="3" rx="1" fill="#1db954" transform="rotate(34 115 35)" />
+      </g>
 
-    <!-- Repeat -->
-    <path d="M 38 -4 A 5 5 0 1 1 38 4" fill="none" stroke="#94A3B8" stroke-width="1.2" stroke-linecap="round" />
-    <path d="M 36 -6 L 39 -4 L 36 -2" fill="none" stroke="#94A3B8" stroke-width="1.2" stroke-linecap="round" />
+      <!-- Player descriptions & controls -->
+      <g transform="translate(225, 42)" fill="#ffffff">
+        <text x="0" y="24" font-size="20" font-weight="800" fill="#ffffff" class="font-sans">CHANGELOG.md</text>
+        <text x="0" y="44" font-size="11" font-weight="600" fill="#1db954" class="font-mono">429 commits · 52 public / 377 private</text>
+
+        <!-- Timeline scrubber representation -->
+        <rect x="0" y="58" width="320" height="4" rx="2" fill="#333" />
+        <rect x="0" y="58" width="220" height="4" rx="2" fill="#1db954" />
+        <circle cx="220" cy="60" r="4.5" fill="#fff" />
+      </g>
+
+      <!-- Media Player control symbols -->
+      <g transform="translate(680, 75)">
+        <!-- Prev -->
+        <path d="M 0 0 L 10 6 L 10 -6 Z" fill="#71717a" />
+        <rect x="-3" y="-6" width="2" height="12" fill="#71717a" />
+        <!-- Play -->
+        <circle cx="25" cy="0" r="14" fill="#ffffff" />
+        <rect x="21" y="-5" width="2.5" height="10" fill="#000" />
+        <rect x="26.5" y="-5" width="2.5" height="10" fill="#000" />
+        <!-- Next -->
+        <path d="M 50 0 L 40 6 L 40 -6 Z" fill="#71717a" />
+        <rect x="51" y="-6" width="2" height="12" fill="#71717a" />
+        <!-- Equalizer representation -->
+        <g fill-opacity="0.8" transform="translate(70, -6)">
+          <rect x="0" y="2" width="2" height="10" rx="1" fill="#1db954" />
+          <rect x="4" y="5" width="2" height="7" rx="1" fill="#1db954" />
+          <rect x="8" y="1" width="2" height="11" rx="1" fill="#1db954" />
+          <rect x="12" y="7" width="2" height="5" rx="1" fill="#1db954" />
+        </g>
+      </g>
+    </g>
   </g>
 
-  <!-- Heart/Like Icon -->
-  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#8B5CF6" fill-opacity="0.85" transform="translate(805, 473) scale(0.65)" />
-
-  <!-- Progress Bar & Sound Wave Equalizer -->
-  <g transform="translate(580, 514)">
-    <rect x="0" y="0" width="280" height="4" rx="2" fill="#131326" />
-    <rect x="0" y="0" width="190" height="4" rx="2" fill="url(#bluePurpleGrad)" />
-    <circle cx="190" cy="2" r="4.5" fill="#FFFFFF" />
-  </g>
-
-  <!-- Sound Equalizer Graphic overlay -->
-  <g fill-opacity="0.75" transform="translate(780, 498)">
-    <rect x="0" y="4" width="2" height="8" rx="1" fill="#8B5CF6" />
-    <rect x="4" y="0" width="2" height="12" rx="1" fill="#3B82F6" />
-    <rect x="8" y="7" width="2" height="5" rx="1" fill="#00E5FF" />
-    <rect x="12" y="2" width="2" height="10" rx="1" fill="#8B5CF6" />
-    <rect x="16" y="9" width="2" height="3" rx="1" fill="#3B82F6" />
-    <rect x="20" y="5" width="2" height="7" rx="1" fill="#00E5FF" />
-    <rect x="24" y="1" width="2" height="11" rx="1" fill="#8B5CF6" />
-    <rect x="28" y="8" width="2" height="4" rx="1" fill="#3B82F6" />
-  </g>
-
-  <!-- Turntable Deck Aura Glow -->
-  <circle cx="980" cy="475" r="46" fill="url(#auraGlow)" opacity="0.6" />
-
-  <!-- Spinning Vinyl Record -->
-  <g transform="translate(980, 475)">
-    <circle cx="0" cy="0" r="30" fill="#0D0D18" stroke="#1E1E38" stroke-width="1.5" />
-    <circle cx="0" cy="0" r="24" fill="none" stroke="#16162B" stroke-width="1" />
-    <circle cx="0" cy="0" r="18" fill="none" stroke="#16162B" stroke-width="1" />
-    <circle cx="0" cy="0" r="12" fill="none" stroke="#16162B" stroke-width="1" />
-    <circle cx="0" cy="0" r="9" fill="#8B5CF6" />
-    <circle cx="0" cy="0" r="2.5" fill="#040408" />
-  </g>
-
-  <!-- FOOTER -->
-  <line x1="60" y1="565" x2="1040" y2="565" stroke="#131326" stroke-width="1" />
-  <text x="1040" y="582" font-size="9.5" font-weight="800" fill="#8B5CF6" letter-spacing="1" class="font-mono" text-anchor="end">SHIPPED IN 2026</text>
+  <!-- Footer of main page -->
+  <line x1="20" y1="535" x2="835" y2="535" stroke="#222" stroke-width="1" />
+  <text x="835" y="552" font-size="9" font-weight="700" fill="#1db954" letter-spacing="1.5" class="font-mono" text-anchor="end">SHIPPED IN 2026</text>
 </svg>

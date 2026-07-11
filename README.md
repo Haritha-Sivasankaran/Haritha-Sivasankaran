@@ -5,8 +5,6 @@ Haritha-Sivasankaran
 
 <img width="100%" src="./assets/profile-banner-v5.svg" alt="Haritha Sivasankaran" />
 
-Hi, I'm Haritha Sivasankaran. I build full-stack experiences across React, TypeScript, Java, Spring Boot, Python automation, and data-backed workflows. I like clean UI, dependable backend systems, developer experience, and dashboards with a little main-character energy.
-
 **Current signal:** Full-stack builder | React, TypeScript, Java, Python
 
 [LinkedIn](https://www.linkedin.com/in/haritha-sivasankaran/) &nbsp;•&nbsp; [Interactive Dashboard](https://Haritha-Sivasankaran.github.io/Haritha-Sivasankaran/)

@@ -51,13 +51,13 @@
   <!-- CARD 1: ANNUAL ENERGY -->
   <rect x="60" y="140" width="465" height="240" rx="26" fill="url(#cardBg)" stroke="url(#cardBorder)" stroke-width="1.5" />
   <text x="80" y="174" font-size="9" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">01 / ANNUAL ENERGY</text>
-  <text x="80" y="224" font-size="48" font-weight="800" fill="#FFFFFF" class="font-sans">425</text>
+  <text x="80" y="224" font-size="48" font-weight="800" fill="#FFFFFF" class="font-sans">429</text>
   <text x="80" y="250" font-size="14" font-weight="600" fill="#94A3B8" class="font-sans">total annual contributions</text>
 
   <!-- Grid of sub-stats inside Card 1 -->
   <g transform="translate(80, 275)">
     <text x="0" y="15" font-size="9" font-weight="700" fill="#94A3B8" class="font-mono">ACTIVE DAYS</text>
-    <text x="0" y="38" font-size="20" font-weight="800" fill="#FFFFFF" class="font-sans">41</text>
+    <text x="0" y="38" font-size="20" font-weight="800" fill="#FFFFFF" class="font-sans">42</text>
 
     <text x="180" y="15" font-size="9" font-weight="700" fill="#94A3B8" class="font-mono">PEAK DAY</text>
     <text x="180" y="38" font-size="20" font-weight="800" fill="#FFFFFF" class="font-sans">46</text>
@@ -127,8 +127,8 @@
   <text x="80" y="434" font-size="9" font-weight="800" fill="#8B5CF6" letter-spacing="2" class="font-mono">03 / ACTIVITY TEMPO</text>
   <line x1="80" y1="515" x2="1020" y2="515" stroke="#131326" stroke-width="1" />
 <line x1="80" y1="460" x2="1020" y2="460" stroke="#131326" stroke-opacity="0.5" stroke-dasharray="4,4" />
-<path d="M 100.00 515.00 100.00 514.44 L 181.82 513.00 L 263.64 513.00 L 345.45 513.00 L 427.27 500.56 L 509.09 466.11 L 590.91 502.22 L 672.73 477.78 L 754.55 460.00 L 836.36 497.22 L 918.18 491.67 L 1000.00 500.00 L 1000.00 515.00 Z" fill="url(#tempoFill)" opacity="0.15" />
-<path d="M 100.00 514.44 L 181.82 513.00 L 263.64 513.00 L 345.45 513.00 L 427.27 500.56 L 509.09 466.11 L 590.91 502.22 L 672.73 477.78 L 754.55 460.00 L 836.36 497.22 L 918.18 491.67 L 1000.00 500.00" fill="none" stroke="url(#bluePurpleGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M 100.00 515.00 100.00 514.44 L 181.82 513.00 L 263.64 513.00 L 345.45 513.00 L 427.27 500.56 L 509.09 466.11 L 590.91 502.22 L 672.73 477.78 L 754.55 460.00 L 836.36 497.22 L 918.18 491.67 L 1000.00 497.78 L 1000.00 515.00 Z" fill="url(#tempoFill)" opacity="0.15" />
+<path d="M 100.00 514.44 L 181.82 513.00 L 263.64 513.00 L 345.45 513.00 L 427.27 500.56 L 509.09 466.11 L 590.91 502.22 L 672.73 477.78 L 754.55 460.00 L 836.36 497.22 L 918.18 491.67 L 1000.00 497.78" fill="none" stroke="url(#bluePurpleGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
 <circle cx="100.00" cy="514.44" r="4" fill="#040408" stroke="#3B82F6" stroke-width="2.5" />
 <text x="100.00" y="504.44" font-size="10" font-weight="700" text-anchor="middle" fill="#FFFFFF" class="font-mono">1</text>
 <text x="100.00" y="534" font-size="10" font-weight="700" text-anchor="middle" fill="#94A3B8" class="font-mono">APR</text>
@@ -152,8 +152,8 @@
 <text x="836.36" y="534" font-size="10" font-weight="700" text-anchor="middle" fill="#94A3B8" class="font-mono">JUN</text>
 <circle cx="918.18" cy="491.67" r="4" fill="#040408" stroke="#3B82F6" stroke-width="2.5" />
 <text x="918.18" y="481.67" font-size="10" font-weight="700" text-anchor="middle" fill="#FFFFFF" class="font-mono">42</text>
-<circle cx="1000.00" cy="500.00" r="4" fill="#040408" stroke="#8B5CF6" stroke-width="2.5" />
-<text x="1000.00" y="490.00" font-size="10" font-weight="700" text-anchor="middle" fill="#FFFFFF" class="font-mono">27</text>
+<circle cx="1000.00" cy="497.78" r="4" fill="#040408" stroke="#8B5CF6" stroke-width="2.5" />
+<text x="1000.00" y="487.78" font-size="10" font-weight="700" text-anchor="middle" fill="#FFFFFF" class="font-mono">31</text>
 <text x="1000.00" y="534" font-size="10" font-weight="700" text-anchor="middle" fill="#94A3B8" class="font-mono">JUL</text>
 
   <!-- FOOTER -->

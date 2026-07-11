@@ -4,50 +4,36 @@ import re
 import urllib.request
 from pathlib import Path
 
-# Organic Constellation of 30 Stack Badges
+# Curated constellation of 22 stack badges
 # Sizes: L (r=22, size=24), M (r=18, size=20), S (r=14, size=16)
 ICONS = {
-    # Left Outer Galaxy Cloud (x <= 220)
-    "react": {"label": "React", "x": 80, "y": 45, "r": 22, "size": 24, "anim": 1, "glow": "#61DAFB", "color": "#61DAFB"},
-    "nodedotjs": {"label": "Node.js", "x": 60, "y": 110, "r": 18, "size": 20, "anim": 2, "glow": "#339933", "color": "#339933"},
-    "tailwindcss": {"label": "Tailwind CSS", "x": 90, "y": 175, "r": 14, "size": 16, "anim": 3, "glow": "#38BDF8", "color": "#38BDF8"},
-    "typescript": {"label": "TypeScript", "x": 150, "y": 55, "r": 22, "size": 24, "anim": 4, "glow": "#3178C6", "color": "#3178C6"},
-    "html5": {"label": "HTML5", "x": 130, "y": 115, "r": 14, "size": 16, "anim": 1, "glow": "#E34F26", "color": "#E34F26"},
-    "css3": {"label": "CSS3", "x": 160, "y": 175, "r": 14, "size": 16, "anim": 2, "glow": "#1572B6", "color": "#1572B6"},
-    "javascript": {"label": "JavaScript", "x": 220, "y": 75, "r": 14, "size": 16, "anim": 3, "glow": "#F7DF1E", "color": "#F7DF1E"},
-    "express": {"label": "Express", "x": 210, "y": 135, "r": 14, "size": 16, "anim": 4, "glow": "#FFFFFF", "color": "#FFFFFF"},
+    # Frontend cluster
+    "react": {"label": "React", "x": 86, "y": 66, "r": 19, "size": 21, "anim": 1, "glow": "#61DAFB", "color": "#61DAFB"},
+    "typescript": {"label": "TypeScript", "x": 166, "y": 45, "r": 18, "size": 20, "anim": 4, "glow": "#3178C6", "color": "#3178C6"},
+    "javascript": {"label": "JavaScript", "x": 245, "y": 76, "r": 14, "size": 16, "anim": 3, "glow": "#F7DF1E", "color": "#F7DF1E"},
+    "tailwindcss": {"label": "Tailwind CSS", "x": 104, "y": 157, "r": 14, "size": 16, "anim": 3, "glow": "#38BDF8", "color": "#38BDF8"},
+    "html5": {"label": "HTML5", "x": 48, "y": 118, "r": 13, "size": 15, "anim": 1, "glow": "#E34F26", "color": "#E34F26"},
+    "css3": {"label": "CSS3", "x": 178, "y": 176, "r": 13, "size": 15, "anim": 2, "glow": "#1572B6", "color": "#1572B6"},
+    "figma": {"label": "Figma", "x": 268, "y": 156, "r": 13, "size": 15, "anim": 4, "glow": "#F24E1E", "color": "#F24E1E"},
+    "nextdotjs": {"label": "Next.js", "x": 314, "y": 45, "r": 14, "size": 16, "anim": 4, "glow": "#00E5FF", "color": "#FFFFFF"},
 
-    # Left Inner Halos (Fills the gap between outer cloud and name)
-    "graphql": {"label": "GraphQL", "x": 260, "y": 40, "r": 14, "size": 16, "anim": 1, "glow": "#E10098", "color": "#E10098"},
-    "kubernetes": {"label": "Kubernetes", "x": 255, "y": 105, "r": 14, "size": 16, "anim": 2, "glow": "#326CE5", "color": "#326CE5"},
-    "linux": {"label": "Linux", "x": 280, "y": 145, "r": 14, "size": 16, "anim": 3, "glow": "#FCC624", "color": "#FCC624"},
+    # Backend and data cluster
+    "java": {"label": "Java", "x": 914, "y": 66, "r": 19, "size": 21, "anim": 2, "glow": "#EA2D2E", "color": "#EA2D2E"},
+    "springboot": {"label": "Spring Boot", "x": 836, "y": 45, "r": 17, "size": 19, "anim": 4, "glow": "#6DB33F", "color": "#6DB33F"},
+    "python": {"label": "Python", "x": 925, "y": 154, "r": 19, "size": 21, "anim": 3, "glow": "#3776AB", "color": "#3776AB"},
+    "docker": {"label": "Docker", "x": 840, "y": 174, "r": 16, "size": 18, "anim": 1, "glow": "#2496ED", "color": "#2496ED"},
+    "postgresql": {"label": "PostgreSQL", "x": 760, "y": 82, "r": 14, "size": 16, "anim": 1, "glow": "#4169E1", "color": "#4169E1"},
+    "mysql": {"label": "MySQL", "x": 958, "y": 112, "r": 13, "size": 15, "anim": 4, "glow": "#4479A1", "color": "#4479A1"},
+    "mongodb": {"label": "MongoDB", "x": 784, "y": 144, "r": 13, "size": 15, "anim": 3, "glow": "#47A248", "color": "#47A248"},
+    "apachekafka": {"label": "Apache Kafka", "x": 716, "y": 154, "r": 14, "size": 16, "anim": 2, "glow": "#FFDD00", "color": "#FFFFFF"},
 
-    # Right Outer Galaxy Cloud (x >= 780)
-    "java": {"label": "Java", "x": 920, "y": 45, "r": 22, "size": 24, "anim": 2, "glow": "#EA2D2E", "color": "#EA2D2E"},
-    "python": {"label": "Python", "x": 940, "y": 110, "r": 22, "size": 24, "anim": 3, "glow": "#3776AB", "color": "#3776AB"},
-    "mysql": {"label": "MySQL", "x": 910, "y": 175, "r": 14, "size": 16, "anim": 4, "glow": "#4479A1", "color": "#4479A1"},
-    "docker": {"label": "Docker", "x": 850, "y": 55, "r": 18, "size": 20, "anim": 1, "glow": "#2496ED", "color": "#2496ED"},
-    "apachekafka": {"label": "Apache Kafka", "x": 870, "y": 115, "r": 18, "size": 20, "anim": 2, "glow": "#FFDD00", "color": "#FFFFFF"},
-    "mongodb": {"label": "MongoDB", "x": 840, "y": 175, "r": 14, "size": 16, "anim": 3, "glow": "#47A248", "color": "#47A248"},
-    "springboot": {"label": "Spring Boot", "x": 780, "y": 75, "r": 18, "size": 20, "anim": 4, "glow": "#6DB33F", "color": "#6DB33F"},
-    "postgresql": {"label": "PostgreSQL", "x": 790, "y": 135, "r": 14, "size": 16, "anim": 1, "glow": "#4169E1", "color": "#4169E1"},
-
-    # Right Inner Halos (Fills the gap between outer cloud and name)
-    "redis": {"label": "Redis", "x": 740, "y": 40, "r": 14, "size": 16, "anim": 3, "glow": "#DC382D", "color": "#DC382D"},
-    "amazonwebservices": {"label": "AWS", "x": 745, "y": 105, "r": 14, "size": 16, "anim": 4, "glow": "#FF9900", "color": "#FF9900"},
-    "jest": {"label": "Jest", "x": 720, "y": 145, "r": 14, "size": 16, "anim": 1, "glow": "#C21325", "color": "#C21325"},
-
-    # Top & Bottom Caps (Pushed vertically away from text corridors)
-    "git": {"label": "Git", "x": 400, "y": 32, "r": 14, "size": 16, "anim": 3, "glow": "#F05032", "color": "#F05032"},
-    "nextdotjs": {"label": "Next.js", "x": 600, "y": 32, "r": 18, "size": 20, "anim": 4, "glow": "#00E5FF", "color": "#FFFFFF"},
-    "rabbitmq": {"label": "RabbitMQ", "x": 330, "y": 192, "r": 18, "size": 20, "anim": 1, "glow": "#FF6600", "color": "#FF6600"},
-    "githubactions": {"label": "GitHub Actions", "x": 670, "y": 192, "r": 14, "size": 16, "anim": 2, "glow": "#2088FF", "color": "#2088FF"},
-
-    # Inner Corner Fill-ins
-    "fastapi": {"label": "FastAPI", "x": 330, "y": 35, "r": 14, "size": 16, "anim": 3, "glow": "#009688", "color": "#009688"},
-    "supabase": {"label": "Supabase", "x": 670, "y": 35, "r": 14, "size": 16, "anim": 1, "glow": "#3ECF8E", "color": "#3ECF8E"},
-    "prisma": {"label": "Prisma", "x": 270, "y": 185, "r": 14, "size": 16, "anim": 2, "glow": "#5A67D8", "color": "#FFFFFF"},
-    "figma": {"label": "Figma", "x": 730, "y": 185, "r": 14, "size": 16, "anim": 4, "glow": "#F24E1E", "color": "#F24E1E"}
+    # Tooling accents near the edges of the center frame
+    "nodedotjs": {"label": "Node.js", "x": 318, "y": 176, "r": 14, "size": 16, "anim": 2, "glow": "#339933", "color": "#339933"},
+    "git": {"label": "Git", "x": 390, "y": 30, "r": 12, "size": 14, "anim": 3, "glow": "#F05032", "color": "#F05032"},
+    "postman": {"label": "Postman", "x": 610, "y": 30, "r": 12, "size": 14, "anim": 1, "glow": "#FF6C37", "color": "#FF6C37"},
+    "githubactions": {"label": "GitHub Actions", "x": 682, "y": 176, "r": 13, "size": 15, "anim": 2, "glow": "#2088FF", "color": "#2088FF"},
+    "amazonwebservices": {"label": "AWS", "x": 686, "y": 48, "r": 13, "size": 15, "anim": 4, "glow": "#FF9900", "color": "#FF9900"},
+    "rabbitmq": {"label": "RabbitMQ", "x": 390, "y": 190, "r": 13, "size": 15, "anim": 1, "glow": "#FF6600", "color": "#FF6600"}
 }
 
 def get_base64_icon(name: str, color_fallback: str) -> str:
@@ -83,18 +69,28 @@ def get_base64_icon(name: str, color_fallback: str) -> str:
         print(f"Error fetching fallback icon for {name}: {e}")
     return ""
 
+def load_icon_cache(cache_path: Path) -> dict:
+    if not cache_path.exists():
+        return {}
+    try:
+        with open(cache_path, "r", encoding="utf-8") as f:
+            cached = json.load(f)
+        if isinstance(cached, dict):
+            return cached
+    except Exception as e:
+        print(f"Could not read existing icon cache: {e}")
+    return {}
+
 def main():
-    print("Fetching and encoding colored icons...")
-    encoded_icons = {}
+    print("Preparing encoded icon cache...")
     
     cache_path = Path("scripts/banner_icons_cache.json")
-    if cache_path.exists():
-        try:
-            cache_path.unlink()
-        except Exception:
-            pass
+    encoded_icons = load_icon_cache(cache_path)
 
     for key, info in ICONS.items():
+        if key in encoded_icons:
+            continue
+
         label = info["label"]
         b64 = get_base64_icon(key, info["color"])
         if b64:
@@ -163,7 +159,7 @@ def main():
   </defs>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Sora:wght@800&amp;display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&amp;display=swap');
     
     @keyframes float1 {{
       0% {{ transform: translateY(0px) rotate(0deg); }}
@@ -194,9 +190,26 @@ def main():
       font-family: 'Sora', -apple-system, sans-serif;
       font-weight: 800;
       fill: #ffffff;
-      font-size: 42px;
-      letter-spacing: -0.5px;
+      font-size: 40px;
+      letter-spacing: -0.8px;
+      paint-order: stroke;
+      stroke: #05070f;
+      stroke-width: 3px;
       text-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
+    }}
+    .role-pill-text {{
+      font-family: 'Sora', -apple-system, sans-serif;
+      font-weight: 800;
+      fill: #BAE6FD;
+      font-size: 10px;
+      letter-spacing: 1.6px;
+    }}
+    .stack-line {{
+      font-family: 'Sora', -apple-system, sans-serif;
+      font-weight: 700;
+      fill: #CBD5E1;
+      font-size: 8px;
+      letter-spacing: 2px;
     }}
   </style>
 
@@ -239,19 +252,26 @@ def main():
     </path>
   </g>
 
+  <!-- Center identity glass panel -->
+  <rect x="245" y="50" width="510" height="128" rx="30" fill="#050A14" fill-opacity="0.76" stroke="#7DD3FC" stroke-opacity="0.12" />
+  <rect x="267" y="66" width="466" height="92" rx="24" fill="#0B1220" fill-opacity="0.52" stroke="#FFFFFF" stroke-opacity="0.06" />
+  <path d="M295 154 H705" stroke="url(#bgGradient)" stroke-width="1.2" stroke-opacity="0.22" stroke-linecap="round" />
+  <rect x="381" y="112" width="238" height="27" rx="13.5" fill="#0EA5E9" fill-opacity="0.10" stroke="#38BDF8" stroke-opacity="0.20" />
+
   <!-- Glowing Tech Stack Badges Halo -->
   {badges_str}
 
   <!-- Developer Name -->
-  <text x="500" y="105" text-anchor="middle" dominant-baseline="middle" class="title" filter="url(#shadow)">Haritha Sivasankaran</text>
+  <text x="500" y="91" text-anchor="middle" dominant-baseline="middle" class="title" filter="url(#shadow)">Haritha Sivasankaran</text>
   
-  <!-- Subtitle / Stacks info -->
-  <text x="500" y="145" text-anchor="middle" font-family="'Sora', -apple-system, sans-serif" font-weight="600" fill="#64748B" font-size="9" letter-spacing="2.8" opacity="0.85">FULL STACK ENGINEER  •  REACT · TYPESCRIPT · JAVA · PYTHON</text>
+  <!-- Current role and stack -->
+  <text x="500" y="130" text-anchor="middle" class="role-pill-text">SYSTEMS ENGINEER @ TCS</text>
+  <text x="500" y="164" text-anchor="middle" class="stack-line">FULL-STACK BUILDER | REACT | TYPESCRIPT | JAVA | PYTHON</text>
 </svg>"""
 
     banner_path = Path("assets/profile-banner-v5.svg")
     banner_path.write_text(svg_content, encoding="utf-8")
-    print("OK: 30-badge Constellation Name Banner generated successfully!")
+    print("OK: 22-badge clean profile banner generated successfully!")
 
 if __name__ == "__main__":
     main()

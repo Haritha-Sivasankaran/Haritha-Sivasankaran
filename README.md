@@ -5,7 +5,9 @@ Haritha-Sivasankaran
 
 <img width="100%" src="./assets/profile-banner-v5.svg" alt="Haritha Sivasankaran" />
 
-I craft beautiful, interactive user interfaces, build high-throughput microservice networks, and develop automation scripts. Passionate about developer experience (DX), performance optimization, and high-fidelity product design.
+Hi, I'm Haritha Sivasankaran. I build full-stack experiences across React, TypeScript, Java, Spring Boot, Python automation, and data-backed workflows. I like clean UI, dependable backend systems, developer experience, and dashboards with a little main-character energy.
+
+**Current signal:** Full-stack builder | React, TypeScript, Java, Python
 
 [LinkedIn](https://www.linkedin.com/in/haritha-sivasankaran/) &nbsp;•&nbsp; [Interactive Dashboard](https://Haritha-Sivasankaran.github.io/Haritha-Sivasankaran/)
 
@@ -14,21 +16,21 @@ I craft beautiful, interactive user interfaces, build high-throughput microservi
 ## 🎧 2026 Developer Wrapped
 *A Spotify Wrapped-themed telemetry dashboard highlighting active codebases, commit distributions, peak weekday rhythm, and developer archetype.*
 
-<img width="100%" src="./assets/profile-wrapped.svg?t=1783784139" alt="Haritha's Developer Wrapped" />
+<img width="100%" src="./assets/profile-wrapped.svg?t=1783784171" alt="Haritha's Developer Wrapped" />
 
 ---
 
 ## 🛠️ System Stack & Memory Logs
 *An overview of my core technology stack represented as Apple Liquid Glass cards alongside ChatGPT-styled developer habits, technical preferences, and memory logs.*
 
-<img width="100%" src="./assets/profile-build.svg?t=1783784139" alt="Haritha's System Stack & Memory Logs" />
+<img width="100%" src="./assets/profile-build.svg?t=1783784171" alt="Haritha's System Stack & Memory Logs" />
 
 ---
 
 ## 📊 Nothing OS Commit Tempo
 *My weekly commit activity graph, language code stack, active days, and star count styled in the retro-monochrome Nothing OS aesthetic.*
 
-<img width="100%" src="./assets/profile-overview.svg?t=1783784139" alt="Haritha's Nothing OS Commit Tempo" />
+<img width="100%" src="./assets/profile-overview.svg?t=1783784171" alt="Haritha's Nothing OS Commit Tempo" />
 
 ---
 

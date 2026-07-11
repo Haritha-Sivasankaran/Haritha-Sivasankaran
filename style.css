@@ -181,9 +181,17 @@ h1, h2, h3, h4 {
 .netflix-bar-title {
   font-size: 18px;
   font-weight: 600;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   color: var(--text-primary);
   letter-spacing: -0.01em;
+}
+
+.profile-role-line {
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+  margin-bottom: 18px;
 }
 
 .profile-bar-grid {

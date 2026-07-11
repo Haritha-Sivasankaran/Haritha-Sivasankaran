@@ -4,224 +4,206 @@ import re
 import urllib.request
 from pathlib import Path
 
-# Cache path for icons if needed (retaining original structure)
-CACHE_DIR = Path("scripts")
-CACHE_DIR.mkdir(parents=True, exist_ok=True)
-cache_path = CACHE_DIR / "banner_icons_cache.json"
+ICONS = {
+    "react": {"label": "React", "x": 150, "y": 140, "size": 34, "opacity": 0.8, "anim": 1},
+    "typescript": {"label": "TypeScript", "x": 270, "y": 75, "size": 32, "opacity": 0.8, "anim": 2},
+    "python": {"label": "Python", "x": 380, "y": 150, "size": 34, "opacity": 0.8, "anim": 3},
+    "java": {"label": "Java", "x": 620, "y": 150, "size": 36, "opacity": 0.8, "anim": 4},
+    "docker": {"label": "Docker", "x": 730, "y": 75, "size": 34, "opacity": 0.8, "anim": 1},
+    "apachekafka": {"label": "Apache Kafka", "x": 850, "y": 140, "size": 32, "opacity": 0.8, "anim": 2}
+}
+
+def get_base64_icon(name: str) -> str:
+    url = f"https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/{name}.svg"
+    try:
+        req = urllib.request.Request(
+            url, 
+            headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
+        )
+        with urllib.request.urlopen(req, timeout=5) as response:
+            svg_data = response.read()
+            if b"<svg" in svg_data:
+                svg_text = svg_data.decode("utf-8")
+                # Format to uniform clean white (#F8FAFC)
+                svg_text = re.sub(r'fill="[^"]+"', '', svg_text)
+                svg_text = svg_text.replace("<svg ", '<svg fill="#F8FAFC" ')
+                encoded = base64.b64encode(svg_text.encode("utf-8")).decode("utf-8")
+                return f"data:image/svg+xml;base64,{encoded}"
+    except Exception as e:
+        print(f"Error fetching icon {name}: {e}")
+    return ""
 
 def main():
-    # Netflix profile avatars definitions (drawn in raw vectors inside the SVG)
-    svg_content = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 320" width="1000" height="320">
+    print("Fetching and encoding icons...")
+    encoded_icons = {}
+    
+    # Try to load cache first to save network calls
+    cache_path = Path("scripts/banner_icons_cache.json")
+    if cache_path.exists():
+        try:
+            with open(cache_path, "r", encoding="utf-8") as f:
+                encoded_icons = json.load(f)
+            print("Loaded icons from cache.")
+        except Exception:
+            pass
+
+    # Fetch missing icons
+    missing_fetched = False
+    for key, info in ICONS.items():
+        if key not in encoded_icons:
+            label = info["label"]
+            b64 = get_base64_icon(key)
+            if b64:
+                encoded_icons[key] = b64
+                missing_fetched = True
+                print(f"OK: {label} encoded successfully.")
+            else:
+                print(f"FAIL: {label} failed.")
+
+    if missing_fetched:
+        with open("scripts/banner_icons_cache.json", "w", encoding="utf-8") as f:
+            json.dump(encoded_icons, f, indent=2)
+
+    # SVG Construction
+    icon_elements = []
+    for key, info in ICONS.items():
+        if key not in encoded_icons:
+            continue
+        b64 = encoded_icons[key]
+        x = info["x"]
+        y = info["y"]
+        size = info["size"]
+        opacity = info["opacity"]
+        anim = info["anim"]
+        
+        # Calculate top-left based on center coordinates
+        img_x = x - (size / 2)
+        img_y = y - (size / 2)
+        
+        icon_elem = f"""
+  <image class="float-icon-{anim}" href="{b64}" x="{img_x}" y="{img_y}" width="{size}" height="{size}" opacity="{opacity}" />"""
+        icon_elements.append(icon_elem)
+
+    icons_str = "".join(icon_elements)
+
+    svg_content = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 220" width="1000" height="220">
   <defs>
-    <linearGradient id="pageBg" x1="0" y1="0" x2="1000" y2="320" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#050505" />
-      <stop offset="0.5" stop-color="#0b0b0f" />
-      <stop offset="1" stop-color="#040406" />
+    <linearGradient id="pageBg" x1="0" y1="0" x2="1000" y2="220" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#040408" />
+      <stop offset="0.55" stop-color="#07070F" />
+      <stop offset="1" stop-color="#020205" />
     </linearGradient>
 
-    <!-- Glass gradients -->
-    <linearGradient id="appleGlass" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.9" />
-      <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0.9" />
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3B82F6" />
+      <stop offset="50%" stop-color="#8B5CF6" />
+      <stop offset="100%" stop-color="#00E5FF" />
     </linearGradient>
-    <linearGradient id="appleBubble" cx="30%" cy="30%" r="70%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.5" />
-      <stop offset="60%" stop-color="#0071e3" stop-opacity="0.8" />
-      <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0.9" />
-    </linearGradient>
+    
+    <pattern id="gridPattern" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 H 0 V 32" fill="none" stroke="#1E1B4B" stroke-width="1.2" stroke-opacity="0.22" />
+    </pattern>
 
-    <!-- Glow filters -->
-    <filter id="glowNothing" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="6" result="blur" />
-      <feMerge>
-        <feMergeNode in="blur" />
-        <feMergeNode in="SourceGraphic" />
-      </feMerge>
+    <filter id="blurGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="24" />
     </filter>
-    <filter id="glowSpotify" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="8" result="blur" />
-      <feMerge>
-        <feMergeNode in="blur" />
-        <feMergeNode in="SourceGraphic" />
-      </feMerge>
+
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="2" dy="4" stdDeviation="4" flood-opacity="0.3" flood-color="#000000" />
     </filter>
   </defs>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&amp;family=DotGothic16&amp;family=IBM+Plex+Mono:wght@600&amp;display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Sora:wght@800&amp;display=swap');
     
-    .title-who {
-      font-family: 'Plus Jakarta Sans', sans-serif;
+    @keyframes float1 {{
+      0% {{ transform: translateY(0px); }}
+      50% {{ transform: translateY(-6px); }}
+      100% {{ transform: translateY(0px); }}
+    }}
+    @keyframes float2 {{
+      0% {{ transform: translateY(0px); }}
+      50% {{ transform: translateY(-9px); }}
+      100% {{ transform: translateY(0px); }}
+    }}
+    @keyframes float3 {{
+      0% {{ transform: translateY(0px); }}
+      50% {{ transform: translateY(6px); }}
+      100% {{ transform: translateY(0px); }}
+    }}
+    @keyframes float4 {{
+      0% {{ transform: translateY(0px); }}
+      50% {{ transform: translateY(9px); }}
+      100% {{ transform: translateY(0px); }}
+    }}
+    .float-icon-1 {{ animation: float1 5s ease-in-out infinite; }}
+    .float-icon-2 {{ animation: float2 6.5s ease-in-out infinite; }}
+    .float-icon-3 {{ animation: float3 5.8s ease-in-out infinite; }}
+    .float-icon-4 {{ animation: float4 7.2s ease-in-out infinite; }}
+    
+    .title {{
+      font-family: 'Sora', -apple-system, sans-serif;
       font-weight: 800;
       fill: #ffffff;
-      font-size: 34px;
+      font-size: 42px;
       letter-spacing: -0.5px;
-    }
-    
-    .profile-card {
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      cursor: pointer;
-    }
-    
-    .profile-card:hover {
-      transform: translateY(-8px);
-    }
-    
-    .avatar-border {
-      stroke: transparent;
-      stroke-width: 3;
-      transition: stroke 0.25s, filter 0.25s;
-    }
-    
-    .profile-card:hover .avatar-border {
-      stroke: #ffffff;
-      filter: drop-shadow(0 4px 12px rgba(255, 255, 255, 0.25));
-    }
-    
-    .card-nothing:hover .avatar-border {
-      stroke: #eb4034;
-      filter: drop-shadow(0 4px 15px rgba(235, 64, 52, 0.4));
-    }
-    
-    .card-spotify:hover .avatar-border {
-      stroke: #1db954;
-      filter: drop-shadow(0 4px 15px rgba(29, 185, 84, 0.4));
-    }
-    
-    .card-apple:hover .avatar-border {
-      stroke: #0071e3;
-      filter: drop-shadow(0 4px 15px rgba(0, 113, 227, 0.4));
-    }
-    
-    .card-arc:hover .avatar-border {
-      stroke: #8b5cf6;
-      filter: drop-shadow(0 4px 15px rgba(139, 92, 246, 0.4));
-    }
-
-    .label-text {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 500;
-      fill: #7f7f7f;
-      font-size: 14px;
-      transition: fill 0.25s;
-    }
-    
-    .profile-card:hover .label-text {
-      fill: #ffffff;
-    }
-    
-    .card-nothing:hover .label-text {
-      fill: #eb4034;
-      font-family: 'DotGothic16', sans-serif;
-    }
-    
-    .card-spotify:hover .label-text {
-      fill: #1db954;
-    }
-    
-    .card-apple:hover .label-text {
-      fill: #3B82F6;
-    }
-    
-    .card-arc:hover .label-text {
-      fill: #8b5cf6;
-    }
-    
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.2; }
-    }
-    .nothing-red-dot {
-      animation: blink 1.5s infinite;
-    }
+      text-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
+    }}
   </style>
 
-  <!-- Background Base -->
-  <rect width="1000" height="320" rx="16" fill="url(#pageBg)" />
-  <rect width="997" height="317" x="1.5" y="1.5" rx="14.5" stroke="rgba(255,255,255,0.04)" stroke-width="1.4" fill="none" />
+  <!-- Background Base matching profile pages -->
+  <rect width="1000" height="220" rx="20" fill="url(#pageBg)" />
+  <rect width="1000" height="220" rx="20" fill="url(#gridPattern)" />
 
-  <!-- Title Text -->
-  <text x="500" y="65" text-anchor="middle" class="title-who">Who is exploring Haritha's workspace?</text>
+  <!-- Ambient Glow Backdrops -->
+  <circle cx="150" cy="110" r="120" fill="#3B82F6" opacity="0.10" filter="url(#blurGlow)" />
+  <circle cx="850" cy="110" r="140" fill="#8B5CF6" opacity="0.10" filter="url(#blurGlow)" />
+  <circle cx="500" cy="110" r="100" fill="#00E5FF" opacity="0.06" filter="url(#blurGlow)" />
 
-  <!-- PROFILE 1: NOTHING OS (MONOCHROME RETRO MATRIX) -->
-  <a href="#-build-receipts" class="profile-card card-nothing">
-    <g transform="translate(180, 100)">
-      <!-- Avatar frame -->
-      <rect x="0" y="0" width="110" height="110" rx="8" fill="#000000" stroke="#222" stroke-width="1" />
-      <!-- Grid dots -->
-      <pattern id="matrixPattern" width="6" height="6" patternUnits="userSpaceOnUse">
-        <circle cx="3" cy="3" r="0.8" fill="#444" />
-      </pattern>
-      <rect x="5" y="5" width="100" height="100" fill="url(#matrixPattern)" />
-      <!-- Blinking LED indicator -->
-      <circle cx="55" cy="55" r="4.5" fill="#eb4034" filter="url(#glowNothing)" class="nothing-red-dot" />
-      <!-- Outer hover border overlay -->
-      <rect x="0" y="0" width="110" height="110" rx="8" fill="none" class="avatar-border" />
-      <!-- Label -->
-      <text x="55" y="135" text-anchor="middle" class="label-text">Nothing OS</text>
-    </g>
-  </a>
+  <rect x="1.5" y="1.5" width="997" height="217" rx="18.5" stroke="#131326" stroke-width="1.4" fill="none" />
 
-  <!-- PROFILE 2: APPLE LIQUID GLASS (TRANSLUCENT GLOW) -->
-  <a href="#-full-stack-overview" class="profile-card card-apple">
-    <g transform="translate(340, 100)">
-      <!-- Avatar frame -->
-      <rect x="0" y="0" width="110" height="110" rx="22" fill="#0c0d12" stroke="#1e293b" stroke-width="1" />
-      <!-- Glossy bubble -->
-      <circle cx="55" cy="55" r="30" fill="url(#appleBubble)" />
-      <!-- Glass glare layer -->
-      <path d="M 25 35 Q 55 45 85 35 Q 70 20 55 20 T 25 35" fill="#ffffff" fill-opacity="0.15" />
-      <!-- Outer hover border overlay -->
-      <rect x="0" y="0" width="110" height="110" rx="22" fill="none" class="avatar-border" />
-      <!-- Label -->
-      <text x="55" y="135" text-anchor="middle" class="label-text">Liquid Glass</text>
-    </g>
-  </a>
+  <!-- Animated Waving Background Layers -->
+  <g>
+    <!-- Wave 1 (Back wave) -->
+    <path d="M0 0 L 0 140 Q 250 180 500 150 T 1000 175 L 1000 0 Z" fill="url(#bgGradient)" opacity="0.05">
+      <animate
+          attributeName="d"
+          dur="20s"
+          repeatCount="indefinite"
+          keyTimes="0;0.333;0.667;1"
+          calcMode="spline"
+          keySplines="0.2 0 0.2 1;0.2 0 0.2 1;0.2 0 0.2 1"
+          begin="0s"
+          values="M0 0 L 0 140 Q 250 180 500 150 T 1000 175 L 1000 0 Z; M0 0 L 0 165 Q 250 180 500 160 T 1000 150 L 1000 0 Z; M0 0 L 0 185 Q 250 155 500 185 T 1000 150 L 1000 0 Z; M0 0 L 0 140 Q 250 180 500 150 T 1000 175 L 1000 0 Z" />
+    </path>
+    <!-- Wave 2 (Front wave) -->
+    <path d="M0 0 L 0 155 Q 250 200 500 170 T 1000 180 L 1000 0 Z" fill="url(#bgGradient)" opacity="0.08">
+      <animate
+          attributeName="d"
+          dur="20s"
+          repeatCount="indefinite"
+          keyTimes="0;0.333;0.667;1"
+          calcMode="spline"
+          keySplines="0.2 0 0.2 1;0.2 0 0.2 1;0.2 0 0.2 1"
+          begin="-10s"
+          values="M0 0 L 0 155 Q 250 200 500 170 T 1000 180 L 1000 0 Z; M0 0 L 0 170 Q 250 140 500 140 T 1000 160 L 1000 0 Z; M0 0 L 0 165 Q 250 145 500 170 T 1000 185 L 1000 0 Z; M0 0 L 0 155 Q 250 200 500 170 T 1000 180 L 1000 0 Z" />
+    </path>
+  </g>
 
-  <!-- PROFILE 3: SPOTIFY WRAPPED (MUSIC PLAYER WIDGET) -->
-  <a href="#-2026-developer-wrapped" class="profile-card card-spotify">
-    <g transform="translate(500, 100)">
-      <!-- Avatar frame -->
-      <rect x="0" y="0" width="110" height="110" rx="12" fill="#121212" stroke="#282828" stroke-width="1" />
-      <!-- Vinyl record visual -->
-      <circle cx="55" cy="55" r="36" fill="#000000" />
-      <circle cx="55" cy="55" r="28" fill="none" stroke="#282828" stroke-width="1" stroke-dasharray="3 3" />
-      <circle cx="55" cy="55" r="20" fill="none" stroke="#282828" stroke-width="1" />
-      <circle cx="55" cy="55" r="10" fill="#1db954" />
-      <circle cx="55" cy="55" r="2.5" fill="#121212" />
-      <!-- Outer hover border overlay -->
-      <rect x="0" y="0" width="110" height="110" rx="12" fill="none" class="avatar-border" />
-      <!-- Label -->
-      <text x="55" y="135" text-anchor="middle" class="label-text">Wrapped</text>
-    </g>
-  </a>
+  <!-- Floating Tech Stack Icons -->
+  {icons_str}
 
-  <!-- PROFILE 4: ARC BROWSER (SIDEBAR FRAME) -->
-  <a href="https://www.linkedin.com/in/haritha-sivasankaran/" target="_blank" class="profile-card card-arc">
-    <g transform="translate(660, 100)">
-      <!-- Avatar frame -->
-      <rect x="0" y="0" width="110" height="110" rx="12" fill="#181824" stroke="#2d2d3d" stroke-width="1" />
-      <!-- Simulated Arc Sidebar wireframe -->
-      <rect x="10" y="10" width="24" height="90" rx="4" fill="#242435" />
-      <rect x="42" y="10" width="58" height="90" rx="4" fill="#11111a" />
-      <!-- Mini circles representing workspace tabs inside sidebar -->
-      <circle cx="22" cy="22" r="3.5" fill="#8b5cf6" />
-      <circle cx="22" cy="34" r="3.5" fill="#10b981" />
-      <circle cx="22" cy="46" r="3.5" fill="#3B82F6" />
-      <!-- Outer hover border overlay -->
-      <rect x="0" y="0" width="110" height="110" rx="12" fill="none" class="avatar-border" />
-      <!-- Label -->
-      <text x="55" y="135" text-anchor="middle" class="label-text">Arc Sidebar</text>
-    </g>
-  </a>
+  <!-- Developer Name -->
+  <text x="500" y="105" text-anchor="middle" dominant-baseline="middle" class="title" filter="url(#shadow)">Haritha Sivasankaran</text>
+  
+  <!-- Subtitle / Stacks info -->
+  <text x="500" y="145" text-anchor="middle" font-family="'Sora', -apple-system, sans-serif" font-weight="600" fill="#94A3B8" font-size="13" letter-spacing="1.5" opacity="0.85">FULL STACK ENGINEER  •  SLEEK FRONTENDS &amp; HIGH-PERFORMANCE BACKENDS</text>
+</svg>"""
 
-</svg>
-"""
-
-    # Generate banner SVG
+    # Generate v5 file to bypass cache
     banner_path = Path("assets/profile-banner-v5.svg")
     banner_path.write_text(svg_content, encoding="utf-8")
-    print("OK: Netflix Profile Selector Banner generated successfully at assets/profile-banner-v5.svg!")
+    print("OK: Name and Tech Stack Banner generated successfully at assets/profile-banner-v5.svg!")
 
 if __name__ == "__main__":
     main()

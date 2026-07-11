@@ -5,13 +5,29 @@ import urllib.request
 from pathlib import Path
 
 ICONS = {
-    # Left Side: React and TypeScript (Brand colors)
-    "react": {"label": "React", "x": 140, "y": 110, "size": 52, "opacity": 0.95, "anim": 1, "glow": "#61DAFB", "color": "#61DAFB"},
-    "typescript": {"label": "TypeScript", "x": 240, "y": 110, "size": 44, "opacity": 0.95, "anim": 2, "glow": "#3178C6", "color": "#3178C6"},
+    # Left Side Halo Cloud
+    "react": {"label": "React", "x": 80, "y": 55, "anim": 1, "glow": "#61DAFB", "color": "#61DAFB"},
+    "nodedotjs": {"label": "Node.js", "x": 80, "y": 110, "anim": 2, "glow": "#339933", "color": "#339933"},
+    "tailwindcss": {"label": "Tailwind CSS", "x": 80, "y": 165, "anim": 3, "glow": "#38BDF8", "color": "#38BDF8"},
+    "typescript": {"label": "TypeScript", "x": 160, "y": 45, "anim": 4, "glow": "#3178C6", "color": "#3178C6"},
+    "html5": {"label": "HTML5", "x": 160, "y": 110, "anim": 1, "glow": "#E34F26", "color": "#E34F26"},
+    "css3": {"label": "CSS3", "x": 160, "y": 175, "anim": 2, "glow": "#1572B6", "color": "#1572B6"},
+    "javascript": {"label": "JavaScript", "x": 240, "y": 50, "anim": 3, "glow": "#F7DF1E", "color": "#F7DF1E"},
+    "express": {"label": "Express", "x": 240, "y": 170, "anim": 4, "glow": "#FFFFFF", "color": "#FFFFFF"},
 
-    # Right Side: Python and Java (Brand colors)
-    "python": {"label": "Python", "x": 760, "y": 110, "size": 46, "opacity": 0.95, "anim": 3, "glow": "#3776AB", "color": "#3776AB"},
-    "java": {"label": "Java", "x": 860, "y": 110, "size": 52, "opacity": 0.95, "anim": 4, "glow": "#EA2D2E", "color": "#EA2D2E"}
+    # Right Side Halo Cloud
+    "java": {"label": "Java", "x": 920, "y": 55, "anim": 2, "glow": "#EA2D2E", "color": "#EA2D2E"},
+    "python": {"label": "Python", "x": 920, "y": 110, "anim": 3, "glow": "#3776AB", "color": "#3776AB"},
+    "mysql": {"label": "MySQL", "x": 920, "y": 165, "anim": 4, "glow": "#4479A1", "color": "#4479A1"},
+    "docker": {"label": "Docker", "x": 840, "y": 45, "anim": 1, "glow": "#2496ED", "color": "#2496ED"},
+    "apachekafka": {"label": "Apache Kafka", "x": 840, "y": 110, "anim": 2, "glow": "#FFDD00", "color": "#FFFFFF"},
+    "mongodb": {"label": "MongoDB", "x": 840, "y": 175, "anim": 3, "glow": "#47A248", "color": "#47A248"},
+    "springboot": {"label": "Spring Boot", "x": 760, "y": 50, "anim": 4, "glow": "#6DB33F", "color": "#6DB33F"},
+    "postgresql": {"label": "PostgreSQL", "x": 760, "y": 170, "anim": 1, "glow": "#4169E1", "color": "#4169E1"},
+
+    # Top Center (Vertically clear of name)
+    "git": {"label": "Git", "x": 420, "y": 40, "anim": 3, "glow": "#F05032", "color": "#F05032"},
+    "nextdotjs": {"label": "Next.js", "x": 580, "y": 40, "anim": 4, "glow": "#00E5FF", "color": "#FFFFFF"}
 }
 
 def get_base64_icon(name: str, color_fallback: str) -> str:
@@ -53,7 +69,7 @@ def main():
     print("Fetching and encoding colored icons...")
     encoded_icons = {}
     
-    # Force refresh cache
+    # Reset cache to fetch new icons
     cache_path = Path("scripts/banner_icons_cache.json")
     if cache_path.exists():
         try:
@@ -67,7 +83,7 @@ def main():
         b64 = get_base64_icon(key, info["color"])
         if b64:
             encoded_icons[key] = b64
-            print(f"OK: {label} colored logo encoded.")
+            print(f"OK: {label} logo encoded.")
         else:
             print(f"FAIL: {label} failed.")
 
@@ -76,8 +92,7 @@ def main():
         json.dump(encoded_icons, f, indent=2)
 
     # SVG Construction
-    icon_elements = []
-    glow_elements = []
+    badge_elements = []
     
     for key, info in ICONS.items():
         if key not in encoded_icons:
@@ -85,26 +100,25 @@ def main():
         b64 = encoded_icons[key]
         x = info["x"]
         y = info["y"]
-        size = info["size"]
-        opacity = info["opacity"]
         anim = info["anim"]
         glow_color = info["glow"]
         
-        # Calculate top-left based on center coordinates
-        img_x = x - (size / 2)
-        img_y = y - (size / 2)
-        
-        # Subtle matching brand color glow behind each icon
-        glow_elem = f"""
-  <circle cx="{x}" cy="{y}" r="{size + 20}" fill="{glow_color}" opacity="0.08" filter="url(#blurGlow)" />"""
-        glow_elements.append(glow_elem)
-        
-        icon_elem = f"""
-  <image class="float-icon-{anim}" href="{b64}" x="{img_x}" y="{img_y}" width="{size}" height="{size}" opacity="{opacity}" />"""
-        icon_elements.append(icon_elem)
+        # High-fidelity glassmorphic badge with brand-colored glowing border
+        badge_elem = f"""
+  <!-- Badge: {info['label']} -->
+  <g class="float-icon-{anim}">
+    <!-- Ambient Glow behind badge -->
+    <circle cx="{x}" cy="{y}" r="28" fill="{glow_color}" opacity="0.16" filter="url(#blurGlow)" />
+    
+    <!-- Circular Glass Plate -->
+    <circle cx="{x}" cy="{y}" r="18" fill="#0b0b16" fill-opacity="0.8" stroke="{glow_color}" stroke-width="1.4" stroke-opacity="0.85" filter="url(#shadow)" />
+    
+    <!-- Centered Brand Icon -->
+    <image href="{b64}" x="{x - 10}" y="{y - 10}" width="20" height="20" />
+  </g>"""
+        badge_elements.append(badge_elem)
 
-    glows_str = "".join(glow_elements)
-    icons_str = "".join(icon_elements)
+    badges_str = "".join(badge_elements)
 
     svg_content = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 220" width="1000" height="220">
   <defs>
@@ -124,12 +138,12 @@ def main():
       <path d="M 32 0 H 0 V 32" fill="none" stroke="#1E1B4B" stroke-width="1.2" stroke-opacity="0.22" />
     </pattern>
 
-    <filter id="blurGlow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="20" />
+    <filter id="blurGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="12" />
     </filter>
 
-    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="2" dy="4" stdDeviation="4" flood-opacity="0.3" flood-color="#000000" />
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.5" flood-color="#000000" />
     </filter>
   </defs>
 
@@ -210,23 +224,20 @@ def main():
     </path>
   </g>
 
-  <!-- Brand Glow Spots -->
-  {glows_str}
-
-  <!-- Floating Tech Stack Icons -->
-  {icons_str}
+  <!-- Glowing Tech Stack Badges Halo -->
+  {badges_str}
 
   <!-- Developer Name -->
   <text x="500" y="105" text-anchor="middle" dominant-baseline="middle" class="title" filter="url(#shadow)">Haritha Sivasankaran</text>
   
   <!-- Subtitle / Stacks info -->
-  <text x="500" y="145" text-anchor="middle" font-family="'Sora', -apple-system, sans-serif" font-weight="600" fill="#94A3B8" font-size="13" letter-spacing="1.5" opacity="0.85">FULL STACK ENGINEER  •  SLEEK FRONTENDS &amp; HIGH-PERFORMANCE BACKENDS</text>
+  <text x="500" y="145" text-anchor="middle" font-family="'Sora', -apple-system, sans-serif" font-weight="600" fill="#64748B" font-size="10" letter-spacing="2.5" opacity="0.85">FULL STACK ENGINEER  •  REACT · TYPESCRIPT · JAVA · PYTHON</text>
 </svg>"""
 
     # Generate v5 file to bypass cache
     banner_path = Path("assets/profile-banner-v5.svg")
     banner_path.write_text(svg_content, encoding="utf-8")
-    print("OK: 4 Colored Stack Logos Name Banner generated successfully at assets/profile-banner-v5.svg!")
+    print("OK: 18 Glowing Badges Name Banner generated successfully at assets/profile-banner-v5.svg!")
 
 if __name__ == "__main__":
     main()

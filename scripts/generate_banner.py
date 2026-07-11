@@ -5,23 +5,18 @@ import urllib.request
 from pathlib import Path
 
 ICONS = {
-    # Left Side Icons (completely clear of the name area: x=280 to x=720)
-    "nextdotjs": {"label": "Next.js", "x": 80, "y": 60, "size": 32, "opacity": 0.8, "anim": 1},
-    "react": {"label": "React", "x": 90, "y": 150, "size": 34, "opacity": 0.8, "anim": 2},
-    "typescript": {"label": "TypeScript", "x": 190, "y": 50, "size": 32, "opacity": 0.8, "anim": 3},
-    "postgresql": {"label": "PostgreSQL", "x": 180, "y": 150, "size": 32, "opacity": 0.8, "anim": 4},
-    "python": {"label": "Python", "x": 260, "y": 160, "size": 34, "opacity": 0.8, "anim": 1},
+    # Left Side: React and TypeScript (Brand colors)
+    "react": {"label": "React", "x": 140, "y": 110, "size": 52, "opacity": 0.95, "anim": 1, "glow": "#61DAFB", "color": "#61DAFB"},
+    "typescript": {"label": "TypeScript", "x": 240, "y": 110, "size": 44, "opacity": 0.95, "anim": 2, "glow": "#3178C6", "color": "#3178C6"},
 
-    # Right Side Icons (completely clear of the name area: x=280 to x=720)
-    "java": {"label": "Java", "x": 740, "y": 160, "size": 36, "opacity": 0.8, "anim": 2},
-    "mongodb": {"label": "MongoDB", "x": 820, "y": 150, "size": 32, "opacity": 0.8, "anim": 3},
-    "docker": {"label": "Docker", "x": 810, "y": 50, "size": 34, "opacity": 0.8, "anim": 4},
-    "apachekafka": {"label": "Apache Kafka", "x": 910, "y": 150, "size": 32, "opacity": 0.8, "anim": 1},
-    "springboot": {"label": "Spring Boot", "x": 920, "y": 60, "size": 32, "opacity": 0.8, "anim": 2}
+    # Right Side: Python and Java (Brand colors)
+    "python": {"label": "Python", "x": 760, "y": 110, "size": 46, "opacity": 0.95, "anim": 3, "glow": "#3776AB", "color": "#3776AB"},
+    "java": {"label": "Java", "x": 860, "y": 110, "size": 52, "opacity": 0.95, "anim": 4, "glow": "#EA2D2E", "color": "#EA2D2E"}
 }
 
-def get_base64_icon(name: str) -> str:
-    url = f"https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/{name}.svg"
+def get_base64_icon(name: str, color_fallback: str) -> str:
+    # First try fetching from simpleicons colored CDN
+    url = f"https://cdn.simpleicons.org/{name}"
     try:
         req = urllib.request.Request(
             url, 
@@ -30,49 +25,60 @@ def get_base64_icon(name: str) -> str:
         with urllib.request.urlopen(req, timeout=5) as response:
             svg_data = response.read()
             if b"<svg" in svg_data:
+                encoded = base64.b64encode(svg_data).decode("utf-8")
+                return f"data:image/svg+xml;base64,{encoded}"
+    except Exception:
+        pass
+
+    # Fallback to jsdelivr raw icon & color it manually
+    url_fallback = f"https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/{name}.svg"
+    try:
+        req = urllib.request.Request(
+            url_fallback, 
+            headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
+        )
+        with urllib.request.urlopen(req, timeout=5) as response:
+            svg_data = response.read()
+            if b"<svg" in svg_data:
                 svg_text = svg_data.decode("utf-8")
-                # Format to uniform clean white (#F8FAFC)
                 svg_text = re.sub(r'fill="[^"]+"', '', svg_text)
-                svg_text = svg_text.replace("<svg ", '<svg fill="#F8FAFC" ')
+                svg_text = svg_text.replace("<svg ", f'<svg fill="{color_fallback}" ')
                 encoded = base64.b64encode(svg_text.encode("utf-8")).decode("utf-8")
                 return f"data:image/svg+xml;base64,{encoded}"
     except Exception as e:
-        print(f"Error fetching icon {name}: {e}")
+        print(f"Error fetching fallback icon for {name}: {e}")
     return ""
 
 def main():
-    print("Fetching and encoding icons...")
+    print("Fetching and encoding colored icons...")
     encoded_icons = {}
     
-    # Try to load cache first to save network calls
+    # Force refresh cache
     cache_path = Path("scripts/banner_icons_cache.json")
     if cache_path.exists():
         try:
-            with open(cache_path, "r", encoding="utf-8") as f:
-                encoded_icons = json.load(f)
-            print("Loaded icons from cache.")
+            cache_path.unlink()
         except Exception:
             pass
 
-    # Fetch missing icons
-    missing_fetched = False
+    # Fetch icons
     for key, info in ICONS.items():
-        if key not in encoded_icons:
-            label = info["label"]
-            b64 = get_base64_icon(key)
-            if b64:
-                encoded_icons[key] = b64
-                missing_fetched = True
-                print(f"OK: {label} encoded successfully.")
-            else:
-                print(f"FAIL: {label} failed.")
+        label = info["label"]
+        b64 = get_base64_icon(key, info["color"])
+        if b64:
+            encoded_icons[key] = b64
+            print(f"OK: {label} colored logo encoded.")
+        else:
+            print(f"FAIL: {label} failed.")
 
-    if missing_fetched:
-        with open("scripts/banner_icons_cache.json", "w", encoding="utf-8") as f:
-            json.dump(encoded_icons, f, indent=2)
+    # Save cache
+    with open(cache_path, "w", encoding="utf-8") as f:
+        json.dump(encoded_icons, f, indent=2)
 
     # SVG Construction
     icon_elements = []
+    glow_elements = []
+    
     for key, info in ICONS.items():
         if key not in encoded_icons:
             continue
@@ -82,15 +88,22 @@ def main():
         size = info["size"]
         opacity = info["opacity"]
         anim = info["anim"]
+        glow_color = info["glow"]
         
         # Calculate top-left based on center coordinates
         img_x = x - (size / 2)
         img_y = y - (size / 2)
         
+        # Subtle matching brand color glow behind each icon
+        glow_elem = f"""
+  <circle cx="{x}" cy="{y}" r="{size + 20}" fill="{glow_color}" opacity="0.08" filter="url(#blurGlow)" />"""
+        glow_elements.append(glow_elem)
+        
         icon_elem = f"""
   <image class="float-icon-{anim}" href="{b64}" x="{img_x}" y="{img_y}" width="{size}" height="{size}" opacity="{opacity}" />"""
         icon_elements.append(icon_elem)
 
+    glows_str = "".join(glow_elements)
     icons_str = "".join(icon_elements)
 
     svg_content = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 220" width="1000" height="220">
@@ -112,7 +125,7 @@ def main():
     </pattern>
 
     <filter id="blurGlow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="24" />
+      <feGaussianBlur stdDeviation="20" />
     </filter>
 
     <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
@@ -125,28 +138,28 @@ def main():
     
     @keyframes float1 {{
       0% {{ transform: translateY(0px); }}
-      50% {{ transform: translateY(-6px); }}
+      50% {{ transform: translateY(-5px); }}
       100% {{ transform: translateY(0px); }}
     }}
     @keyframes float2 {{
       0% {{ transform: translateY(0px); }}
-      50% {{ transform: translateY(-9px); }}
+      50% {{ transform: translateY(-8px); }}
       100% {{ transform: translateY(0px); }}
     }}
     @keyframes float3 {{
       0% {{ transform: translateY(0px); }}
-      50% {{ transform: translateY(6px); }}
+      50% {{ transform: translateY(5px); }}
       100% {{ transform: translateY(0px); }}
     }}
     @keyframes float4 {{
       0% {{ transform: translateY(0px); }}
-      50% {{ transform: translateY(9px); }}
+      50% {{ transform: translateY(8px); }}
       100% {{ transform: translateY(0px); }}
     }}
-    .float-icon-1 {{ animation: float1 5s ease-in-out infinite; }}
-    .float-icon-2 {{ animation: float2 6.5s ease-in-out infinite; }}
-    .float-icon-3 {{ animation: float3 5.8s ease-in-out infinite; }}
-    .float-icon-4 {{ animation: float4 7.2s ease-in-out infinite; }}
+    .float-icon-1 {{ animation: float1 4.5s ease-in-out infinite; }}
+    .float-icon-2 {{ animation: float2 5.8s ease-in-out infinite; }}
+    .float-icon-3 {{ animation: float3 5.2s ease-in-out infinite; }}
+    .float-icon-4 {{ animation: float4 6.5s ease-in-out infinite; }}
     
     .title {{
       font-family: 'Sora', -apple-system, sans-serif;
@@ -197,6 +210,9 @@ def main():
     </path>
   </g>
 
+  <!-- Brand Glow Spots -->
+  {glows_str}
+
   <!-- Floating Tech Stack Icons -->
   {icons_str}
 
@@ -210,7 +226,7 @@ def main():
     # Generate v5 file to bypass cache
     banner_path = Path("assets/profile-banner-v5.svg")
     banner_path.write_text(svg_content, encoding="utf-8")
-    print("OK: Name and Tech Stack Banner generated successfully at assets/profile-banner-v5.svg!")
+    print("OK: 4 Colored Stack Logos Name Banner generated successfully at assets/profile-banner-v5.svg!")
 
 if __name__ == "__main__":
     main()

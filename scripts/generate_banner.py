@@ -5,12 +5,19 @@ import urllib.request
 from pathlib import Path
 
 ICONS = {
-    "react": {"label": "React", "x": 150, "y": 140, "size": 34, "opacity": 0.8, "anim": 1},
-    "typescript": {"label": "TypeScript", "x": 270, "y": 75, "size": 32, "opacity": 0.8, "anim": 2},
-    "python": {"label": "Python", "x": 380, "y": 150, "size": 34, "opacity": 0.8, "anim": 3},
-    "java": {"label": "Java", "x": 620, "y": 150, "size": 36, "opacity": 0.8, "anim": 4},
-    "docker": {"label": "Docker", "x": 730, "y": 75, "size": 34, "opacity": 0.8, "anim": 1},
-    "apachekafka": {"label": "Apache Kafka", "x": 850, "y": 140, "size": 32, "opacity": 0.8, "anim": 2}
+    # Left Side Icons (completely clear of the name area: x=280 to x=720)
+    "nextdotjs": {"label": "Next.js", "x": 80, "y": 60, "size": 32, "opacity": 0.8, "anim": 1},
+    "react": {"label": "React", "x": 90, "y": 150, "size": 34, "opacity": 0.8, "anim": 2},
+    "typescript": {"label": "TypeScript", "x": 190, "y": 50, "size": 32, "opacity": 0.8, "anim": 3},
+    "postgresql": {"label": "PostgreSQL", "x": 180, "y": 150, "size": 32, "opacity": 0.8, "anim": 4},
+    "python": {"label": "Python", "x": 260, "y": 160, "size": 34, "opacity": 0.8, "anim": 1},
+
+    # Right Side Icons (completely clear of the name area: x=280 to x=720)
+    "java": {"label": "Java", "x": 740, "y": 160, "size": 36, "opacity": 0.8, "anim": 2},
+    "mongodb": {"label": "MongoDB", "x": 820, "y": 150, "size": 32, "opacity": 0.8, "anim": 3},
+    "docker": {"label": "Docker", "x": 810, "y": 50, "size": 34, "opacity": 0.8, "anim": 4},
+    "apachekafka": {"label": "Apache Kafka", "x": 910, "y": 150, "size": 32, "opacity": 0.8, "anim": 1},
+    "springboot": {"label": "Spring Boot", "x": 920, "y": 60, "size": 32, "opacity": 0.8, "anim": 2}
 }
 
 def get_base64_icon(name: str) -> str:

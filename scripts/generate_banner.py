@@ -4,10 +4,10 @@ import re
 import urllib.request
 from pathlib import Path
 
-# Organic Constellation of 26 Stack Badges with spacious center corridor
+# Organic Constellation of 30 Stack Badges
 # Sizes: L (r=22, size=24), M (r=18, size=20), S (r=14, size=16)
 ICONS = {
-    # Left Side Galaxy Cloud (x <= 260)
+    # Left Outer Galaxy Cloud (x <= 220)
     "react": {"label": "React", "x": 80, "y": 45, "r": 22, "size": 24, "anim": 1, "glow": "#61DAFB", "color": "#61DAFB"},
     "nodedotjs": {"label": "Node.js", "x": 60, "y": 110, "r": 18, "size": 20, "anim": 2, "glow": "#339933", "color": "#339933"},
     "tailwindcss": {"label": "Tailwind CSS", "x": 90, "y": 175, "r": 14, "size": 16, "anim": 3, "glow": "#38BDF8", "color": "#38BDF8"},
@@ -16,9 +16,13 @@ ICONS = {
     "css3": {"label": "CSS3", "x": 160, "y": 175, "r": 14, "size": 16, "anim": 2, "glow": "#1572B6", "color": "#1572B6"},
     "javascript": {"label": "JavaScript", "x": 220, "y": 75, "r": 14, "size": 16, "anim": 3, "glow": "#F7DF1E", "color": "#F7DF1E"},
     "express": {"label": "Express", "x": 210, "y": 135, "r": 14, "size": 16, "anim": 4, "glow": "#FFFFFF", "color": "#FFFFFF"},
-    "graphql": {"label": "GraphQL", "x": 260, "y": 40, "r": 14, "size": 16, "anim": 1, "glow": "#E10098", "color": "#E10098"},
 
-    # Right Side Galaxy Cloud (x >= 740)
+    # Left Inner Halos (Fills the gap between outer cloud and name)
+    "graphql": {"label": "GraphQL", "x": 260, "y": 40, "r": 14, "size": 16, "anim": 1, "glow": "#E10098", "color": "#E10098"},
+    "kubernetes": {"label": "Kubernetes", "x": 255, "y": 105, "r": 14, "size": 16, "anim": 2, "glow": "#326CE5", "color": "#326CE5"},
+    "linux": {"label": "Linux", "x": 280, "y": 145, "r": 14, "size": 16, "anim": 3, "glow": "#FCC624", "color": "#FCC624"},
+
+    # Right Outer Galaxy Cloud (x >= 780)
     "java": {"label": "Java", "x": 920, "y": 45, "r": 22, "size": 24, "anim": 2, "glow": "#EA2D2E", "color": "#EA2D2E"},
     "python": {"label": "Python", "x": 940, "y": 110, "r": 22, "size": 24, "anim": 3, "glow": "#3776AB", "color": "#3776AB"},
     "mysql": {"label": "MySQL", "x": 910, "y": 175, "r": 14, "size": 16, "anim": 4, "glow": "#4479A1", "color": "#4479A1"},
@@ -27,7 +31,11 @@ ICONS = {
     "mongodb": {"label": "MongoDB", "x": 840, "y": 175, "r": 14, "size": 16, "anim": 3, "glow": "#47A248", "color": "#47A248"},
     "springboot": {"label": "Spring Boot", "x": 780, "y": 75, "r": 18, "size": 20, "anim": 4, "glow": "#6DB33F", "color": "#6DB33F"},
     "postgresql": {"label": "PostgreSQL", "x": 790, "y": 135, "r": 14, "size": 16, "anim": 1, "glow": "#4169E1", "color": "#4169E1"},
+
+    # Right Inner Halos (Fills the gap between outer cloud and name)
     "redis": {"label": "Redis", "x": 740, "y": 40, "r": 14, "size": 16, "anim": 3, "glow": "#DC382D", "color": "#DC382D"},
+    "amazonwebservices": {"label": "AWS", "x": 745, "y": 105, "r": 14, "size": 16, "anim": 4, "glow": "#FF9900", "color": "#FF9900"},
+    "jest": {"label": "Jest", "x": 720, "y": 145, "r": 14, "size": 16, "anim": 1, "glow": "#C21325", "color": "#C21325"},
 
     # Top & Bottom Caps (Pushed vertically away from text corridors)
     "git": {"label": "Git", "x": 400, "y": 32, "r": 14, "size": 16, "anim": 3, "glow": "#F05032", "color": "#F05032"},
@@ -35,7 +43,7 @@ ICONS = {
     "rabbitmq": {"label": "RabbitMQ", "x": 330, "y": 192, "r": 18, "size": 20, "anim": 1, "glow": "#FF6600", "color": "#FF6600"},
     "githubactions": {"label": "GitHub Actions", "x": 670, "y": 192, "r": 14, "size": 16, "anim": 2, "glow": "#2088FF", "color": "#2088FF"},
 
-    # Fill-in Badges for Inner Spaces
+    # Inner Corner Fill-ins
     "fastapi": {"label": "FastAPI", "x": 330, "y": 35, "r": 14, "size": 16, "anim": 3, "glow": "#009688", "color": "#009688"},
     "supabase": {"label": "Supabase", "x": 670, "y": 35, "r": 14, "size": 16, "anim": 1, "glow": "#3ECF8E", "color": "#3ECF8E"},
     "prisma": {"label": "Prisma", "x": 270, "y": 185, "r": 14, "size": 16, "anim": 2, "glow": "#5A67D8", "color": "#FFFFFF"},
@@ -243,7 +251,7 @@ def main():
 
     banner_path = Path("assets/profile-banner-v5.svg")
     banner_path.write_text(svg_content, encoding="utf-8")
-    print("OK: 26-badge Constellation Name Banner generated successfully!")
+    print("OK: 30-badge Constellation Name Banner generated successfully!")
 
 if __name__ == "__main__":
     main()

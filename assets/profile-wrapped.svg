@@ -101,11 +101,11 @@
       <g transform="translate(20, 130)">
         <rect x="0" y="21" width="10" height="24" rx="2" fill="#555" opacity="0.5" />
       <text x="5" y="56" font-size="8" font-weight="700" fill="#666" text-anchor="middle" class="font-mono">M</text>
-      <rect x="16" y="27" width="10" height="18" rx="2" fill="#555" opacity="0.5" />
+      <rect x="16" y="28" width="10" height="17" rx="2" fill="#555" opacity="0.5" />
       <text x="21" y="56" font-size="8" font-weight="700" fill="#666" text-anchor="middle" class="font-mono">T</text>
-      <rect x="32" y="23" width="10" height="22" rx="2" fill="#555" opacity="0.5" />
+      <rect x="32" y="24" width="10" height="21" rx="2" fill="#555" opacity="0.5" />
       <text x="37" y="56" font-size="8" font-weight="700" fill="#666" text-anchor="middle" class="font-mono">W</text>
-      <rect x="48" y="8" width="10" height="37" rx="2" fill="#555" opacity="0.5" />
+      <rect x="48" y="9" width="10" height="36" rx="2" fill="#555" opacity="0.5" />
       <text x="53" y="56" font-size="8" font-weight="700" fill="#666" text-anchor="middle" class="font-mono">T</text>
       <rect x="64" y="7" width="10" height="38" rx="2" fill="#555" opacity="0.5" />
       <text x="69" y="56" font-size="8" font-weight="700" fill="#666" text-anchor="middle" class="font-mono">F</text>
@@ -148,7 +148,7 @@
       <!-- Player descriptions & controls -->
       <g transform="translate(225, 42)" fill="#ffffff">
         <text x="0" y="24" font-size="20" font-weight="800" fill="#ffffff" class="font-sans">CHANGELOG.md</text>
-        <text x="0" y="44" font-size="11" font-weight="600" fill="#1db954" class="font-mono">435 commits · 58 public / 377 private</text>
+        <text x="0" y="44" font-size="11" font-weight="600" fill="#1db954" class="font-mono">436 commits · 59 public / 377 private</text>
 
         <!-- Timeline scrubber representation -->
         <rect x="0" y="58" width="320" height="4" rx="2" fill="#333" />

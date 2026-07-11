@@ -14,21 +14,21 @@ Haritha-Sivasankaran
 ## 🎧 2026 Developer Wrapped
 *A Spotify Wrapped-themed telemetry dashboard highlighting active codebases, commit distributions, peak weekday rhythm, and developer archetype.*
 
-<img width="100%" src="./assets/profile-wrapped.svg?t=1783786878" alt="Haritha's Developer Wrapped" />
+<img width="100%" src="./assets/profile-wrapped.svg?t=1783787214" alt="Haritha's Developer Wrapped" />
 
 ---
 
 ## 🛠️ System Stack & Memory Logs
 *An overview of my core technology stack represented as Apple Liquid Glass cards alongside ChatGPT-styled developer habits, technical preferences, and memory logs.*
 
-<img width="100%" src="./assets/profile-build.svg?t=1783786878" alt="Haritha's System Stack & Memory Logs" />
+<img width="100%" src="./assets/profile-build.svg?t=1783787214" alt="Haritha's System Stack & Memory Logs" />
 
 ---
 
 ## 📊 Nothing OS Commit Tempo
 *My weekly commit activity graph, language code stack, active days, and star count styled in the retro-monochrome Nothing OS aesthetic.*
 
-<img width="100%" src="./assets/profile-overview.svg?t=1783786878" alt="Haritha's Nothing OS Commit Tempo" />
+<img width="100%" src="./assets/profile-overview.svg?t=1783787214" alt="Haritha's Nothing OS Commit Tempo" />
 
 ---
 

@@ -7,7 +7,7 @@ Haritha-Sivasankaran
 
 <p align="center">
   <a href="https://www.linkedin.com/in/haritha-sivasankaran/" target="_blank">
-    <img src="./assets/linkedin-badge.svg" alt="LinkedIn" height="40" />
+    <img src="./assets/linkedin-badge.svg" alt="LinkedIn Connect" width="420" />
   </a>
 </p>
 

@@ -1234,7 +1234,7 @@ def build_build_svg(profile: dict) -> str:
       <text x="20" y="65" font-size="22" font-weight="800" fill="#ffffff" class="font-sans">Java + Py</text>
       <text x="20" y="85" font-size="11" font-weight="600" fill="#3B82F6" class="font-mono">BACKEND CORE | {backend_pct}%</text>
       <text x="20" y="120" font-size="11.5" fill="#94A3B8" class="font-sans">
-        <tspan x="20" dy="0" fill="#fff">• Spring Boot & Spring AI</tspan>
+        <tspan x="20" dy="0" fill="#fff">• Spring Boot &amp; Spring AI</tspan>
         <tspan x="20" dy="20">• Apache Kafka streams</tspan>
         <tspan x="20" dy="20">• Python analytics engines</tspan>
       </text>

@@ -10,7 +10,7 @@ Haritha-Sivasankaran
     <img src="./assets/linkedin-badge.svg" alt="LinkedIn" height="40" />
   </a>
 </p>
----
+
 
 ## 🎧 2026 Developer Wrapped
 

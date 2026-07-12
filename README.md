@@ -5,7 +5,6 @@ Haritha-Sivasankaran
 
 <img width="100%" src="./assets/profile-banner-v5.svg" alt="Haritha Sivasankaran" />
 
-**Current signal:** Full-stack builder | React, TypeScript, Java, Python
 
 <a href="https://www.linkedin.com/in/haritha-sivasankaran/" target="_blank">
   <img src="./assets/linkedin-badge.svg" alt="LinkedIn" height="40" />
@@ -15,19 +14,19 @@ Haritha-Sivasankaran
 
 ## 🎧 2026 Developer Wrapped
 
-<img width="100%" src="./assets/profile-wrapped.svg?t=1783890686" alt="Haritha's Developer Wrapped" />
+<img width="100%" src="./assets/profile-wrapped.svg?t=1783891029" alt="Haritha's Developer Wrapped" />
 
 ---
 
 ## 🛠️ System Stack & Memory Logs
 
-<img width="100%" src="./assets/profile-build.svg?t=1783890686" alt="Haritha's System Stack & Memory Logs" />
+<img width="100%" src="./assets/profile-build.svg?t=1783891029" alt="Haritha's System Stack & Memory Logs" />
 
 ---
 
 ## 📊 Nothing OS Commit Tempo
 
-<img width="100%" src="./assets/profile-overview.svg?t=1783890686" alt="Haritha's Nothing OS Commit Tempo" />
+<img width="100%" src="./assets/profile-overview.svg?t=1783891029" alt="Haritha's Nothing OS Commit Tempo" />
 
 ---
 

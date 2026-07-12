@@ -50,7 +50,7 @@
     <text x="0" y="30" font-size="28" font-weight="800" fill="#ffffff" class="font-sans">workspace.stack</text>
     <text x="0" y="48" font-size="9" font-weight="700" fill="#3B82F6" letter-spacing="1.5" class="font-mono">SYSTEM REFRESHED ON 13 JUL 2026</text>
 
-    <!-- CARD 1: APPLE LIQUID GLASS CARD (UI & LAYOUTS) -->
+    <!-- CARD 1: APPLE LIQUID GLASS CARD (UI and LAYOUTS) -->
     <g transform="translate(0, 75)">
       <rect width="255" height="230" rx="18" class="apple-glass-card" stroke-width="1.2" />
       <text x="20" y="28" font-size="8.5" font-weight="700" fill="#3B82F6" letter-spacing="2" class="font-mono">01 / UI &amp; LAYOUTS</text>

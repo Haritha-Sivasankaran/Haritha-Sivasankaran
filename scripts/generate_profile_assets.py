@@ -1090,7 +1090,7 @@ def build_wrapped_svg(profile: dict) -> str:
         <rect x="112" y="33" width="5" height="3" rx="1" fill="#1db954" transform="rotate(34 115 35)" />
       </g>
 
-      <!-- Player descriptions & controls -->
+      <!-- Player descriptions and controls -->
       <g transform="translate(225, 42)" fill="#ffffff">
         <text x="0" y="24" font-size="20" font-weight="800" fill="#ffffff" class="font-sans">{escape(track_name)}</text>
         <text x="0" y="44" font-size="11" font-weight="600" fill="#1db954" class="font-mono">{total_contribs} commits · {profile.get("public_contributions", 0)} public / {profile.get("private_contributions", 0)} private</text>
@@ -1214,7 +1214,7 @@ def build_build_svg(profile: dict) -> str:
     <text x="0" y="30" font-size="28" font-weight="800" fill="#ffffff" class="font-sans">workspace.stack</text>
     <text x="0" y="48" font-size="9" font-weight="700" fill="#3B82F6" letter-spacing="1.5" class="font-mono">SYSTEM REFRESHED ON {updated_label}</text>
 
-    <!-- CARD 1: APPLE LIQUID GLASS CARD (UI & LAYOUTS) -->
+    <!-- CARD 1: APPLE LIQUID GLASS CARD (UI and LAYOUTS) -->
     <g transform="translate(0, 75)">
       <rect width="255" height="230" rx="18" class="apple-glass-card" stroke-width="1.2" />
       <text x="20" y="28" font-size="8.5" font-weight="700" fill="#3B82F6" letter-spacing="2" class="font-mono">01 / UI &amp; LAYOUTS</text>

@@ -1,41 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 96" width="420" height="96">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 44" width="240" height="44">
   <defs>
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&amp;display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;700&amp;display=swap');
       
-      .term-prompt {
-        font-family: 'Fira Code', monospace;
+      .term-text {
+        font-family: 'IBM Plex Mono', monospace;
         font-weight: 500;
-        font-size: 10px;
-        fill: #5c6370;
+        font-size: 11px;
+        fill: #E2E8F0;
       }
-      .term-cmd {
-        font-family: 'Fira Code', monospace;
-        font-weight: 500;
-        font-size: 10px;
-        fill: #abb2bf;
-      }
-      .kw { fill: #c678dd; } /* npx */
-      .func { fill: #61afef; } /* connect-linkedin */
-      
-      .term-output {
-        font-family: 'Fira Code', monospace;
-        font-size: 9.5px;
-        fill: #5c6370;
-      }
-      .term-success {
-        font-family: 'Fira Code', monospace;
-        font-size: 9.5px;
-        fill: #abb2bf;
-      }
-      .check { fill: #98c379; }
-      .status { fill: #56b6c2; font-weight: 700; }
+      .term-prompt { fill: #64748B; }
+      .term-cmd { fill: #38BDF8; }
+      .term-arg { fill: #34D399; }
       
       .cursor {
-        fill: #528bff;
+        fill: #34D399;
         animation: blink 1s step-end infinite;
       }
-      
       .glowing-border {
         animation: pulseBorder 4s infinite ease-in-out;
       }
@@ -44,37 +25,31 @@
         0%, 100% { opacity: 1; }
         50% { opacity: 0; }
       }
-      
       @keyframes pulseBorder {
-        0%, 100% { stroke: #1e2430; }
-        50% { stroke: #3e4451; }
+        0%, 100% { stroke: #1e293b; }
+        50% { stroke: #38bdf8; filter: drop-shadow(0 0 2px rgba(56, 189, 248, 0.3)); }
       }
     </style>
+    
+    <linearGradient id="termBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0a0b10" />
+      <stop offset="100%" stop-color="#050608" />
+    </linearGradient>
   </defs>
 
-  <!-- Terminal Window Base -->
-  <rect x="1" y="1" width="418" height="94" rx="8" fill="#0c0e14" stroke="#1e2430" stroke-width="1.2" class="glowing-border" />
+  <!-- Terminal Card Base -->
+  <rect x="1" y="1" width="238" height="42" rx="8" fill="url(#termBg)" stroke="#1e293b" stroke-width="1.2" class="glowing-border" />
 
-  <!-- Terminal Header Bar -->
-  <path d="M 1,9 A 8,8 0 0 1 9,1 L 411,1 A 8,8 0 0 1 419,9 L 419,24 L 1,24 Z" fill="#161b22" />
-  <line x1="1" y1="24" x2="419" y2="24" stroke="#1e2430" stroke-width="1" />
+  <!-- macOS Window Controls (Terminal Vibe) -->
+  <circle cx="16" cy="22" r="3" fill="#EF4444" />
+  <circle cx="26" cy="22" r="3" fill="#F59E0B" />
+  <circle cx="36" cy="22" r="3" fill="#10B981" />
 
-  <!-- macOS Style Window Dots -->
-  <circle cx="15" cy="12" r="3.5" fill="#EF4444" />
-  <circle cx="27" cy="12" r="3.5" fill="#F59E0B" />
-  <circle cx="39" cy="12" r="3.5" fill="#10B981" />
-
-  <!-- Prompt Command Line -->
-  <text x="16" y="44" class="term-cmd">
-    <span class="term-prompt">haritha:~$ </span><tspan class="kw">npx</tspan> <tspan class="func">connect-linkedin</tspan>
+  <!-- Terminal Prompt & Command -->
+  <text x="50" y="26" class="term-text">
+    <tspan class="term-prompt">$ </tspan>npx <tspan class="term-cmd">haritha</tspan> <tspan class="term-arg">--connect</tspan>
   </text>
-  
-  <!-- Blinking Cursor -->
-  <rect x="210" y="34" width="6" height="12" class="cursor" />
 
-  <!-- Terminal Output Lines -->
-  <text x="16" y="62" class="term-output">Connecting to linkedin.com/in/haritha-sivasankaran...</text>
-  <text x="16" y="78" class="term-success">
-    <tspan class="check">✔</tspan> Connection established. [<tspan class="status">active</tspan>]
-  </text>
+  <!-- Blinking Terminal Cursor -->
+  <rect x="210" y="14" width="6" height="13" class="cursor" />
 </svg>

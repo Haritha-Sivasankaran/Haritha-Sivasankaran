@@ -5,11 +5,11 @@ Haritha-Sivasankaran
 
 <img width="100%" src="./assets/profile-banner-v5.svg" alt="Haritha Sivasankaran" />
 
-
-<a href="https://www.linkedin.com/in/haritha-sivasankaran/" target="_blank">
-  <img src="./assets/linkedin-badge.svg" alt="LinkedIn" height="40" />
-</a>
-
+<p align="center">
+  <a href="https://www.linkedin.com/in/haritha-sivasankaran/" target="_blank">
+    <img src="./assets/linkedin-badge.svg" alt="LinkedIn" height="40" />
+  </a>
+</p>
 ---
 
 ## 🎧 2026 Developer Wrapped

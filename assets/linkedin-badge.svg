@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230 44" width="230" height="44">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap');
+      .btn-text {
+        font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+        font-weight: 800;
+        font-size: 10px;
+        fill: #F8FAFC;
+        letter-spacing: 1.5px;
+      }
+      .glowing-border {
+        animation: pulseBorder 3s infinite ease-in-out;
+      }
+      .glowing-logo {
+        animation: pulseLogo 3s infinite ease-in-out;
+      }
+      @keyframes pulseBorder {
+        0%, 100% {
+          stroke: rgba(0, 119, 181, 0.4);
+          filter: drop-shadow(0 0 1px rgba(0, 119, 181, 0.2));
+        }
+        50% {
+          stroke: rgba(0, 119, 181, 0.95);
+          filter: drop-shadow(0 0 6px rgba(0, 119, 181, 0.7));
+        }
+      }
+      @keyframes pulseLogo {
+        0%, 100% { opacity: 0.85; fill: #0077b5; }
+        50% { opacity: 1.0; fill: #00a0dc; }
+      }
+    </style>
+    
+    <linearGradient id="btnBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050814" />
+      <stop offset="100%" stop-color="#0a1124" />
+    </linearGradient>
+  </defs>
+
+  <!-- Button Base -->
+  <rect x="1.5" y="1.5" width="227" height="41" rx="12" fill="url(#btnBg)" stroke="rgba(0, 119, 181, 0.4)" stroke-width="1.5" class="glowing-border" />
+
+  <!-- LinkedIn Logo -->
+  <g transform="translate(16, 10)">
+    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" fill="#0077b5" class="glowing-logo" />
+  </g>
+
+  <!-- Text -->
+  <text x="52" y="26" class="btn-text">CONNECT ON LINKEDIN</text>
+
+  <!-- Animated Green Status Dot -->
+  <circle cx="204" cy="22" r="3" fill="#10B981" />
+  <circle cx="204" cy="22" r="6" fill="#10B981" fill-opacity="0.2">
+    <animate attributeName="r" values="3;7;3" dur="2.4s" repeatCount="indefinite" />
+    <animate attributeName="fill-opacity" values="0.6;0;0.6" dur="2.4s" repeatCount="indefinite" />
+  </circle>
+</svg>

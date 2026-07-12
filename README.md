@@ -7,7 +7,9 @@ Haritha-Sivasankaran
 
 **Current signal:** Full-stack builder | React, TypeScript, Java, Python
 
-[LinkedIn](https://www.linkedin.com/in/haritha-sivasankaran/) &nbsp;•&nbsp; [Interactive Dashboard](https://Haritha-Sivasankaran.github.io/Haritha-Sivasankaran/)
+<a href="https://www.linkedin.com/in/haritha-sivasankaran/" target="_blank">
+  <img src="./assets/linkedin-badge.svg" alt="LinkedIn" height="40" />
+</a>
 
 ---
 

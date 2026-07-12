@@ -53,4 +53,16 @@ jobs:
           git push
 
       - name: Purge Camo Cache
-        uses: kevincobain2000/action-camo-purge@v1
+        run: |
+          echo "Locating Camo URLs on the repository page..."
+          URLS=$(curl -sSL "https://github.com/${{ github.repository }}/tree/${{ github.ref_name }}" | grep -Eo "https://camo.githubusercontent.com/[a-zA-Z0-9./?=_%:-]*" || true)
+          if [ -n "$URLS" ]; then
+            # Deduplicate URLs
+            UNIQUE_URLS=$(echo "$URLS" | sort -u)
+            for url in $UNIQUE_URLS; do
+              echo "Purging: $url"
+              curl -s -o /dev/null -X PURGE "$url" || true
+            done
+          else
+            echo "No Camo URLs detected."
+          fi

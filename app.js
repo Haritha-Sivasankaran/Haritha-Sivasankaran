@@ -50,14 +50,17 @@ const LANGUAGE_COLORS = {
   "Jupyter Notebook": "#10B981",
   "React": "#60A5FA",
   "MySQL": "#22C55E",
+  "Angular": "#DD0031",
+  "Vue": "#4FC08D",
+  "Svelte": "#FF3E00",
 };
 
 // Initial Memories in ChatGPT Bank
 let memoryBank = {
   tech: [
-    "Adept in Java (Spring Boot) and Python (data analytics & automation).",
-    "Primary frontend tool is React with TypeScript & modular CSS layouts.",
-    "Configures Docker containers and handles PostgreSQL database integrations."
+    "Adept in Java (Spring Boot & Spring AI) and Python (data analytics & automation).",
+    "Frontend tools include React, Angular, Vue.js, Svelte, and Next.js with TypeScript.",
+    "Handles Bitbucket/GitLab pipelines, Docker containers, and Ansible playbook deployments."
   ],
   behavior: [
     "Shows consistent midweek commitment peak (Wednesdays and Thursdays).",

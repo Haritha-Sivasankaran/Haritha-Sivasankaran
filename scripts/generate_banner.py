@@ -16,6 +16,9 @@ ICONS = {
     "css3": {"label": "CSS3", "x": 178, "y": 176, "r": 13, "size": 15, "anim": 2, "glow": "#1572B6", "color": "#1572B6"},
     "figma": {"label": "Figma", "x": 268, "y": 156, "r": 13, "size": 15, "anim": 4, "glow": "#F24E1E", "color": "#F24E1E"},
     "nextdotjs": {"label": "Next.js", "x": 314, "y": 45, "r": 14, "size": 16, "anim": 4, "glow": "#00E5FF", "color": "#FFFFFF"},
+    "angular": {"label": "Angular", "x": 130, "y": 110, "r": 14, "size": 16, "anim": 1, "glow": "#DD0031", "color": "#DD0031"},
+    "vuedotjs": {"label": "Vue.js", "x": 216, "y": 126, "r": 14, "size": 16, "anim": 2, "glow": "#4FC08D", "color": "#4FC08D"},
+    "svelte": {"label": "Svelte", "x": 50, "y": 180, "r": 13, "size": 15, "anim": 3, "glow": "#FF3E00", "color": "#FF3E00"},
 
     # Backend and data cluster
     "java": {"label": "Java", "x": 914, "y": 66, "r": 19, "size": 21, "anim": 2, "glow": "#EA2D2E", "color": "#EA2D2E"},
@@ -26,6 +29,7 @@ ICONS = {
     "mysql": {"label": "MySQL", "x": 958, "y": 112, "r": 13, "size": 15, "anim": 4, "glow": "#4479A1", "color": "#4479A1"},
     "mongodb": {"label": "MongoDB", "x": 784, "y": 144, "r": 13, "size": 15, "anim": 3, "glow": "#47A248", "color": "#47A248"},
     "apachekafka": {"label": "Apache Kafka", "x": 716, "y": 154, "r": 14, "size": 16, "anim": 2, "glow": "#FFDD00", "color": "#FFFFFF"},
+    "spring": {"label": "Spring AI", "x": 870, "y": 105, "r": 14, "size": 16, "anim": 2, "glow": "#6DB33F", "color": "#6DB33F"},
 
     # Tooling accents near the edges of the center frame
     "nodedotjs": {"label": "Node.js", "x": 318, "y": 176, "r": 14, "size": 16, "anim": 2, "glow": "#339933", "color": "#339933"},
@@ -33,7 +37,10 @@ ICONS = {
     "postman": {"label": "Postman", "x": 610, "y": 30, "r": 12, "size": 14, "anim": 1, "glow": "#FF6C37", "color": "#FF6C37"},
     "githubactions": {"label": "GitHub Actions", "x": 682, "y": 176, "r": 13, "size": 15, "anim": 2, "glow": "#2088FF", "color": "#2088FF"},
     "amazonwebservices": {"label": "AWS", "x": 686, "y": 48, "r": 13, "size": 15, "anim": 4, "glow": "#FF9900", "color": "#FF9900"},
-    "rabbitmq": {"label": "RabbitMQ", "x": 390, "y": 190, "r": 13, "size": 15, "anim": 1, "glow": "#FF6600", "color": "#FF6600"}
+    "rabbitmq": {"label": "RabbitMQ", "x": 390, "y": 190, "r": 13, "size": 15, "anim": 1, "glow": "#FF6600", "color": "#FF6600"},
+    "bitbucket": {"label": "Bitbucket", "x": 460, "y": 30, "r": 12, "size": 14, "anim": 3, "glow": "#0052CC", "color": "#0052CC"},
+    "gitlab": {"label": "GitLab", "x": 540, "y": 30, "r": 12, "size": 14, "anim": 1, "glow": "#FC6D26", "color": "#FC6D26"},
+    "ansible": {"label": "Ansible", "x": 610, "y": 190, "r": 13, "size": 15, "anim": 4, "glow": "#EE0000", "color": "#FFFFFF"}
 }
 
 def get_base64_icon(name: str, color_fallback: str) -> str:

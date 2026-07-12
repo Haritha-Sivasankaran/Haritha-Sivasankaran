@@ -1221,8 +1221,8 @@ def build_build_svg(profile: dict) -> str:
       <text x="20" y="65" font-size="22" font-weight="800" fill="#ffffff" class="font-sans">React + TS</text>
       <text x="20" y="85" font-size="11" font-weight="600" fill="#3B82F6" class="font-mono">FRONTEND CORE | {frontend_pct}%</text>
       <text x="20" y="120" font-size="11.5" fill="#94A3B8" class="font-sans">
-        <tspan x="20" dy="0" fill="#fff">• React component architectures</tspan>
-        <tspan x="20" dy="20">• Responsive styling layouts</tspan>
+        <tspan x="20" dy="0" fill="#fff">• React, Svelte, Vue, Angular</tspan>
+        <tspan x="20" dy="20">• Next.js layout architectures</tspan>
         <tspan x="20" dy="20">• Micro-interaction designs</tspan>
       </text>
     </g>
@@ -1234,7 +1234,7 @@ def build_build_svg(profile: dict) -> str:
       <text x="20" y="65" font-size="22" font-weight="800" fill="#ffffff" class="font-sans">Java + Py</text>
       <text x="20" y="85" font-size="11" font-weight="600" fill="#3B82F6" class="font-mono">BACKEND CORE | {backend_pct}%</text>
       <text x="20" y="120" font-size="11.5" fill="#94A3B8" class="font-sans">
-        <tspan x="20" dy="0" fill="#fff">• Spring Boot API networks</tspan>
+        <tspan x="20" dy="0" fill="#fff">• Spring Boot & Spring AI</tspan>
         <tspan x="20" dy="20">• Apache Kafka streams</tspan>
         <tspan x="20" dy="20">• Python analytics engines</tspan>
       </text>
@@ -1254,10 +1254,10 @@ def build_build_svg(profile: dict) -> str:
       
       <g transform="translate(20, 95)" font-size="10.5" fill="#94A3B8" class="font-sans">
         <text x="0" y="0" font-weight="700" fill="#10a37f" class="font-mono">[TECH PROFILE]</text>
-        <text x="0" y="18" fill="#fff">Adept in Java (Spring Boot) &amp; Python</text>
+        <text x="0" y="18" fill="#fff">Adept in Spring Boot/AI &amp; Python</text>
         
         <text x="0" y="48" font-weight="700" fill="#10a37f" class="font-mono">[HABITS]</text>
-        <text x="0" y="66" fill="#fff">Consistent midweek commitment peak</text>
+        <text x="0" y="66" fill="#fff">Bitbucket, GitLab, Ansible CI deploy</text>
         
         <text x="0" y="96" font-weight="700" fill="#10a37f" class="font-mono">[PREFERENCES]</text>
         <text x="0" y="114" fill="#fff">Prefers dark, visual layouts</text>

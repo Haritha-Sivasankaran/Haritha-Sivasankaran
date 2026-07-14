@@ -39,7 +39,7 @@
   <g transform="translate(20, 75)">
     <!-- Title -->
     <text x="0" y="30" font-size="28" font-weight="800" fill="#ffffff" class="font-sans">telemetry.log</text>
-    <text x="0" y="48" font-size="9" font-weight="700" fill="#eb4034" letter-spacing="1.5" class="font-mono">SYSTEM REFRESHED ON 14 JUL 2026</text>
+    <text x="0" y="48" font-size="9" font-weight="700" fill="#eb4034" letter-spacing="1.5" class="font-mono">SYSTEM REFRESHED ON 15 JUL 2026</text>
 
     <!-- CARD 1: ANNUAL GRIND -->
     <g transform="translate(0, 75)">

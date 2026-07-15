@@ -49,7 +49,7 @@
   <!-- Content Area -->
   <g transform="translate(20, 75)">
     <text x="0" y="30" font-size="28" font-weight="800" fill="#ffffff" class="font-sans">wrapped.stats</text>
-    <text x="0" y="48" font-size="9" font-weight="700" fill="#1db954" letter-spacing="1.5" class="font-mono">2026 DEVS WRAPPED | REFRESHED 15 JUL 2026</text>
+    <text x="0" y="48" font-size="9" font-weight="700" fill="#1db954" letter-spacing="1.5" class="font-mono">2026 DEVS WRAPPED | REFRESHED 16 JUL 2026</text>
 
     <!-- WRAPPED CARD 1: TOP LANGUAGES -->
     <g transform="translate(0, 75)">

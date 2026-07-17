@@ -2,10 +2,10 @@
   "username": "Haritha-Sivasankaran",
   "name": "Haritha Sivasankaran",
   "source_mode": "github-graphql",
-  "generated_at": "2026-07-17T19:15:15.502741+05:30",
+  "generated_at": "2026-07-18T00:45:25.969283+05:30",
   "timezone": "Asia/Calcutta",
-  "contributions_365d": 461,
-  "public_contributions": 84,
+  "contributions_365d": 467,
+  "public_contributions": 90,
   "private_contributions": 377,
   "active_days": 44,
   "peak_day": 46,
@@ -17,34 +17,34 @@
   "restricted_contributions": 377,
   "language_breakdown": [
     {
+      "name": "HTML",
+      "bytes": 554097,
+      "percent": 22.12
+    },
+    {
       "name": "Jupyter Notebook",
       "bytes": 439263,
-      "percent": 19.16
+      "percent": 17.53
     },
     {
       "name": "JavaScript",
       "bytes": 389023,
-      "percent": 16.97
-    },
-    {
-      "name": "HTML",
-      "bytes": 348347,
-      "percent": 15.19
+      "percent": 15.53
     },
     {
       "name": "TypeScript",
       "bytes": 335281,
-      "percent": 14.62
+      "percent": 13.38
     },
     {
       "name": "Java",
-      "bytes": 317043,
-      "percent": 13.83
+      "bytes": 323621,
+      "percent": 12.92
     },
     {
       "name": "Python",
       "bytes": 305369,
-      "percent": 13.32
+      "percent": 12.19
     }
   ],
   "weekly_totals": [
@@ -94,7 +94,7 @@
     },
     {
       "start": "2026-07-12",
-      "total": 19
+      "total": 25
     }
   ],
   "longest_streak": 8,
@@ -103,7 +103,7 @@
     36,
     44,
     74,
-    78,
+    84,
     97,
     65
   ],

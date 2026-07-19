@@ -2,12 +2,12 @@
   "username": "Haritha-Sivasankaran",
   "name": "Haritha Sivasankaran",
   "source_mode": "github-graphql",
-  "generated_at": "2026-07-19T00:39:46.032790+05:30",
+  "generated_at": "2026-07-19T08:44:30.556454+05:30",
   "timezone": "Asia/Calcutta",
-  "contributions_365d": 467,
-  "public_contributions": 90,
+  "contributions_365d": 473,
+  "public_contributions": 96,
   "private_contributions": 377,
-  "active_days": 44,
+  "active_days": 45,
   "peak_day": 46,
   "public_repos": 11,
   "private_repos": 7,
@@ -18,33 +18,33 @@
   "language_breakdown": [
     {
       "name": "HTML",
-      "bytes": 554097,
-      "percent": 22.12
+      "bytes": 594311,
+      "percent": 22.77
     },
     {
       "name": "Jupyter Notebook",
       "bytes": 439263,
-      "percent": 17.53
+      "percent": 16.83
     },
     {
       "name": "JavaScript",
       "bytes": 389023,
-      "percent": 15.53
+      "percent": 14.9
+    },
+    {
+      "name": "Java",
+      "bytes": 388626,
+      "percent": 14.89
     },
     {
       "name": "TypeScript",
       "bytes": 335281,
-      "percent": 13.38
-    },
-    {
-      "name": "Java",
-      "bytes": 323621,
-      "percent": 12.92
+      "percent": 12.84
     },
     {
       "name": "Python",
       "bytes": 305369,
-      "percent": 12.19
+      "percent": 11.7
     }
   ],
   "weekly_totals": [
@@ -94,7 +94,7 @@
     },
     {
       "start": "2026-07-19",
-      "total": 0
+      "total": 6
     }
   ],
   "longest_streak": 8,
@@ -105,7 +105,7 @@
     74,
     84,
     97,
-    65
+    71
   ],
   "top_repo_name": "Obsidian-Chess",
   "top_repo_lang": "JavaScript",

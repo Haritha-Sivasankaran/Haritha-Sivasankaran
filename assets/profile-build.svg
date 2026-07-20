@@ -48,7 +48,7 @@
   <!-- Content Area -->
   <g transform="translate(20, 75)">
     <text x="0" y="30" font-size="28" font-weight="800" fill="#ffffff" class="font-sans">workspace.stack</text>
-    <text x="0" y="48" font-size="9" font-weight="700" fill="#3B82F6" letter-spacing="1.5" class="font-mono">SYSTEM REFRESHED ON 20 JUL 2026</text>
+    <text x="0" y="48" font-size="9" font-weight="700" fill="#3B82F6" letter-spacing="1.5" class="font-mono">SYSTEM REFRESHED ON 21 JUL 2026</text>
 
     <!-- CARD 1: APPLE LIQUID GLASS CARD (UI and LAYOUTS) -->
     <g transform="translate(0, 75)">

@@ -2,7 +2,7 @@
   "username": "Haritha-Sivasankaran",
   "name": "Haritha Sivasankaran",
   "source_mode": "github-graphql",
-  "generated_at": "2026-08-29T21:55:52.325501+05:30",
+  "generated_at": "2026-08-30T02:09:26.773082+05:30",
   "timezone": "Asia/Calcutta",
   "contributions_365d": 473,
   "public_contributions": 96,
@@ -49,10 +49,6 @@
   ],
   "weekly_totals": [
     {
-      "start": "2026-06-07",
-      "total": 67
-    },
-    {
       "start": "2026-06-14",
       "total": 99
     },
@@ -94,6 +90,10 @@
     },
     {
       "start": "2026-08-23",
+      "total": 0
+    },
+    {
+      "start": "2026-08-30",
       "total": 0
     }
   ],

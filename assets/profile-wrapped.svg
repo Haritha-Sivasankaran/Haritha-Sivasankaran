@@ -59,12 +59,12 @@
       <g transform="translate(20, 60)">
         <!-- Item 1 -->
         <text x="0" y="15" font-size="14" font-weight="800" fill="#1db954" class="font-mono">01</text>
-        <text x="30" y="15" font-size="15" font-weight="800" fill="#ffffff" class="font-sans">Python</text>
+        <text x="30" y="15" font-size="15" font-weight="800" fill="#ffffff" class="font-sans">React</text>
         <text x="30" y="30" font-size="9" fill="#555" class="font-mono">HEAVY ROTATION</text>
         
         <!-- Item 2 -->
         <text x="0" y="65" font-size="14" font-weight="800" fill="#666" class="font-mono">02</text>
-        <text x="30" y="65" font-size="15" font-weight="800" fill="#ffffff" class="font-sans">React</text>
+        <text x="30" y="65" font-size="15" font-weight="800" fill="#ffffff" class="font-sans">Python</text>
         <text x="30" y="80" font-size="9" fill="#555" class="font-mono">FREQUENT PLAY</text>
         
         <!-- Item 3 -->
@@ -101,7 +101,7 @@
       <g transform="translate(20, 130)">
         <rect x="0" y="13" width="10" height="32" rx="2" fill="#555" opacity="0.5" />
       <text x="5" y="56" font-size="8" font-weight="700" fill="#666" text-anchor="middle" class="font-mono">M</text>
-      <rect x="16" y="29" width="10" height="16" rx="2" fill="#555" opacity="0.5" />
+      <rect x="16" y="14" width="10" height="31" rx="2" fill="#555" opacity="0.5" />
       <text x="21" y="56" font-size="8" font-weight="700" fill="#666" text-anchor="middle" class="font-mono">T</text>
       <rect x="32" y="25" width="10" height="20" rx="2" fill="#555" opacity="0.5" />
       <text x="37" y="56" font-size="8" font-weight="700" fill="#666" text-anchor="middle" class="font-mono">W</text>
@@ -148,7 +148,7 @@
       <!-- Player descriptions and controls -->
       <g transform="translate(225, 42)" fill="#ffffff">
         <text x="0" y="24" font-size="20" font-weight="800" fill="#ffffff" class="font-sans">README.md</text>
-        <text x="0" y="44" font-size="11" font-weight="600" fill="#1db954" class="font-mono">483 commits · 96 public / 387 private</text>
+        <text x="0" y="44" font-size="11" font-weight="600" fill="#1db954" class="font-mono">514 commits · 96 public / 418 private</text>
 
         <!-- Timeline scrubber representation -->
         <rect x="0" y="58" width="320" height="4" rx="2" fill="#333" />

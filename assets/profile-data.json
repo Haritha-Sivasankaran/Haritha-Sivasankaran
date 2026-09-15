@@ -2,49 +2,49 @@
   "username": "Haritha-Sivasankaran",
   "name": "Haritha Sivasankaran",
   "source_mode": "github-graphql",
-  "generated_at": "2026-09-15T09:32:36.597935+05:30",
+  "generated_at": "2026-09-15T16:51:54.813533+05:30",
   "timezone": "Asia/Calcutta",
-  "contributions_365d": 483,
+  "contributions_365d": 514,
   "public_contributions": 96,
-  "private_contributions": 387,
-  "active_days": 48,
+  "private_contributions": 418,
+  "active_days": 49,
   "peak_day": 46,
   "public_repos": 11,
   "private_repos": 8,
   "stars_earned": 2,
   "joined_year": 2021,
   "has_restricted_contributions": true,
-  "restricted_contributions": 387,
+  "restricted_contributions": 418,
   "language_breakdown": [
     {
       "name": "HTML",
-      "bytes": 594311,
-      "percent": 22.77
+      "bytes": 984171,
+      "percent": 26.32
+    },
+    {
+      "name": "JavaScript",
+      "bytes": 656050,
+      "percent": 17.55
+    },
+    {
+      "name": "TypeScript",
+      "bytes": 525239,
+      "percent": 14.05
     },
     {
       "name": "Jupyter Notebook",
       "bytes": 439263,
-      "percent": 16.83
+      "percent": 11.75
     },
     {
-      "name": "JavaScript",
-      "bytes": 389023,
-      "percent": 14.9
+      "name": "CSS",
+      "bytes": 426519,
+      "percent": 11.41
     },
     {
       "name": "Java",
       "bytes": 388626,
-      "percent": 14.89
-    },
-    {
-      "name": "TypeScript",
-      "bytes": 335281,
-      "percent": 12.84
-    },
-    {
-      "name": "Python",
-      "bytes": 305369,
-      "percent": 11.7
+      "percent": 10.39
     }
   ],
   "weekly_totals": [
@@ -94,13 +94,13 @@
     },
     {
       "start": "2026-09-13",
-      "total": 0
+      "total": 31
     }
   ],
   "longest_streak": 8,
   "weekday_counts": [
     71,
-    36,
+    67,
     44,
     76,
     84,
@@ -108,7 +108,7 @@
     75
   ],
   "top_repo_name": "Frontend-Development",
-  "top_repo_lang": "Java",
+  "top_repo_lang": "HTML",
   "top_track_name": "README.md",
   "focus_repo_name": "Obsidian-Chess",
   "focus_repo_lang": "JavaScript"

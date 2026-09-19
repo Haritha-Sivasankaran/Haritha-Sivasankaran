@@ -268,11 +268,11 @@
     </text>
     <!-- Prompt 2 -->
     <text x="0" y="490">
-      <tspan fill="#38BDF8" font-weight="700">haritha@workspace</tspan><tspan fill="#8B949E">:</tspan><tspan fill="#79C0FF">~/systems</tspan><tspan fill="#C9D1D9">$ </tspan><tspan fill="#7EE787">echo "Ready to build impactful distributed systems."</tspan>
+      <tspan fill="#38BDF8" font-weight="700">haritha@workspace</tspan><tspan fill="#8B949E">:</tspan><tspan fill="#79C0FF">~/systems</tspan><tspan fill="#C9D1D9">$ </tspan><tspan fill="#7EE787">npx haritha --connect</tspan>
     </text>
     <!-- Output 2 -->
     <text x="0" y="504">
-      <tspan fill="#E6EDF3">Ready to build impactful distributed systems.</tspan>
+      <tspan fill="#79C0FF">↳ LinkedIn</tspan><tspan fill="#8B949E">: https://linkedin.com/in/haritha-sivasankaran</tspan> <tspan fill="#3FB950">[READY]</tspan>
       <tspan fill="#38BDF8" class="cursor"> █</tspan>
     </text>
   </g>

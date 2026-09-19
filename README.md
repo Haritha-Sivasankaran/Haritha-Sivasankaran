@@ -64,7 +64,7 @@ I have a strong affinity for event-driven architectures with **Apache Kafka**, r
 ### Live Workspace Telemetry
 
 <p align="center">
-  <img width="100%" src="./assets/profile-overview.svg?t=1789812163" alt="Haritha's Commit Tempo & Telemetry" />
+  <img width="100%" src="./assets/profile-overview.svg?t=1789812258" alt="Haritha's Commit Tempo & Telemetry" />
 </p>
 
 <p align="center">

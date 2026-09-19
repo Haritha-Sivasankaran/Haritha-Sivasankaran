@@ -113,19 +113,6 @@
   <text x="195" y="57" fill="#6E7681" class="ui-font" font-size="12">×</text>
   <line x1="211" y1="42" x2="211" y2="64" stroke="#21262D" stroke-width="1" />
 
-  <!-- Tab 2: transit_pulse.kafka -->
-  <rect x="211" y="36" width="170" height="34" fill="#0D1117" />
-  <circle cx="225" cy="53" r="5" fill="#FF8800" />
-  <text x="237" y="58" fill="#8B949E" class="ui-font">transit_pulse.kafka</text>
-  <line x1="381" y1="42" x2="381" y2="64" stroke="#21262D" stroke-width="1" />
-
-  <!-- Tab 3: chess_engine.js -->
-  <rect x="381" y="36" width="155" height="34" fill="#0D1117" />
-  <rect x="395" y="47" width="13" height="13" rx="2" fill="#F7DF1E" />
-  <text x="401.5" y="57" font-size="8.5" font-weight="700" fill="#000000" text-anchor="middle" font-family="monospace">JS</text>
-  <text x="415" y="58" fill="#8B949E" class="ui-font">chess_engine.js</text>
-  <line x1="536" y1="42" x2="536" y2="64" stroke="#21262D" stroke-width="1" />
-
   <!-- Breadcrumb Bar -->
   <rect x="46" y="70" width="874" height="22" fill="#10151C" />
   <line x1="46" y1="92" x2="920" y2="92" stroke="#21262D" stroke-width="1" />
@@ -151,8 +138,6 @@
     <text x="80" y="302">11</text>
     <text x="80" y="321">12</text>
     <text x="80" y="340">13</text>
-    <text x="80" y="359">14</text>
-    <text x="80" y="378">15</text>
   </g>
 
   <!-- Syntax-Highlighted Code Lines -->
@@ -207,35 +192,20 @@
       <tspan class="prop">infrastructure</tspan><tspan class="punc">: [</tspan><tspan class="str">"Docker"</tspan><tspan class="punc">, </tspan><tspan class="str">"PostgreSQL"</tspan><tspan class="punc">, </tspan><tspan class="str">"MongoDB"</tspan><tspan class="punc">, </tspan><tspan class="str">"GitHub Actions"</tspan><tspan class="punc">, </tspan><tspan class="str">"Linux"</tspan><tspan class="punc">],</tspan>
     </text>
 
-    <!-- Line 11: Production Systems -->
+    <!-- Line 11: Focus -->
     <text x="16" y="302">
-      <tspan class="prop">shippedSystems</tspan><tspan class="punc">: {</tspan>
+      <tspan class="prop">focus</tspan><tspan class="punc">: </tspan><tspan class="str">"Building resilient distributed systems &amp; responsive web platforms"</tspan><tspan class="punc">,</tspan>
     </text>
 
-    <!-- Line 12 -->
-    <text x="32" y="321">
-      <tspan class="prop">transitPulse</tspan><tspan class="punc">: </tspan><tspan class="str">"Real-time GTFS transit telemetry via Kafka partitions &amp; React"</tspan><tspan class="punc">,</tspan>
-    </text>
-
-    <!-- Line 13 -->
-    <text x="32" y="340">
-      <tspan class="prop">obsidianChess</tspan><tspan class="punc">: </tspan><tspan class="str">"Zero-dependency chess engine with minimax alpha-beta pruning"</tspan>
-    </text>
-
-    <!-- Line 14 -->
-    <text x="16" y="359">
-      <tspan class="punc">},</tspan>
-    </text>
-
-    <!-- Line 15: Status with Blinking Cursor -->
-    <text x="16" y="378">
+    <!-- Line 12: Status with Blinking Cursor -->
+    <text x="16" y="321">
       <tspan class="prop">availableForShipping</tspan><tspan class="punc">: </tspan><tspan class="bool">true</tspan>
     </text>
     <!-- Blinking Cursor -->
-    <rect x="188" y="366" width="2" height="15" fill="#38BDF8" class="cursor" />
+    <rect x="188" y="309" width="2" height="15" fill="#38BDF8" class="cursor" />
 
-    <!-- Line 16: Closing bracket -->
-    <text x="0" y="396">
+    <!-- Line 13: Closing bracket -->
+    <text x="0" y="340">
       <tspan class="punc">};</tspan>
     </text>
   </g>
@@ -260,11 +230,11 @@
   <g class="code-font" transform="translate(60, 0)">
     <!-- Prompt 1 -->
     <text x="0" y="452">
-      <tspan fill="#38BDF8" font-weight="700">haritha@workspace</tspan><tspan fill="#8B949E">:</tspan><tspan fill="#79C0FF">~/systems</tspan><tspan fill="#C9D1D9">$ </tspan><tspan fill="#E6EDF3">kafka-console-consumer --topic transit-fleet --from-beginning</tspan>
+      <tspan fill="#38BDF8" font-weight="700">haritha@workspace</tspan><tspan fill="#8B949E">:</tspan><tspan fill="#79C0FF">~/systems</tspan><tspan fill="#C9D1D9">$ </tspan><tspan fill="#E6EDF3">systemctl status developer.service</tspan>
     </text>
     <!-- Output 1 -->
     <text x="0" y="471">
-      <tspan fill="#3FB950">[CONNECTED]</tspan> <tspan fill="#8B949E">broker:9092 · 12 partitions synchronized · latency: 14ms · consumer-group: transit-pulse</tspan>
+      <tspan fill="#3FB950">● developer.service</tspan> <tspan fill="#8B949E">- Full-Stack Engineering Node · 0 errors · 0 warnings · optimal</tspan>
     </text>
     <!-- Prompt 2 -->
     <text x="0" y="490">

@@ -1,0 +1,306 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 540" width="920" height="540">
+  <defs>
+    <!-- Background Linear Gradient -->
+    <linearGradient id="windowBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0E1117" />
+      <stop offset="100%" stop-color="#080A0E" />
+    </linearGradient>
+
+    <!-- Glowing Accents -->
+    <filter id="tabGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap');
+
+      .code-font {
+        font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace;
+        font-size: 12px;
+        line-height: 18px;
+      }
+      .ui-font {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-size: 11px;
+      }
+
+      /* Syntax Highlighting */
+      .kw { fill: #FF7B72; font-weight: 600; }        /* Keywords (import, export, const) */
+      .mod { fill: #FFA657; }                        /* Modules / Packages */
+      .str { fill: #A5D6FF; }                        /* Strings */
+      .prop { fill: #7EE787; }                       /* Object properties */
+      .type { fill: #79C0FF; font-weight: 600; }      /* Types / Interfaces */
+      .num { fill: #D2A8FF; }                        /* Numbers */
+      .bool { fill: #FF7B72; font-weight: 600; }     /* Boolean */
+      .comm { fill: #8B949E; font-style: italic; }   /* Comments */
+      .punc { fill: #C9D1D9; }                       /* Brackets / Punctuation */
+      .fn { fill: #D2A8FF; font-weight: 600; }       /* Functions */
+
+      /* Blinking Cursor Animation */
+      .cursor {
+        animation: cursorBlink 1s infinite step-start;
+      }
+      @keyframes cursorBlink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+      }
+
+      /* Pulsing Dot Animation */
+      .status-pulse {
+        animation: pulseDot 2s infinite ease-in-out;
+      }
+      @keyframes pulseDot {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.4; transform: scale(0.85); }
+      }
+    </style>
+  </defs>
+
+  <!-- Window Frame -->
+  <rect width="920" height="540" rx="12" fill="url(#windowBg)" stroke="#30363D" stroke-width="1.5" />
+
+  <!-- Window Title Bar -->
+  <rect width="920" height="36" rx="12" fill="#161B22" />
+  <rect y="24" width="920" height="12" fill="#161B22" />
+  <line x1="0" y1="36" x2="920" y2="36" stroke="#21262D" stroke-width="1" />
+
+  <!-- Window Controls (macOS Dots) -->
+  <circle cx="20" cy="18" r="5.5" fill="#EC6A5E" />
+  <circle cx="38" cy="18" r="5.5" fill="#F4BF4F" />
+  <circle cx="56" cy="18" r="5.5" fill="#61C554" />
+
+  <!-- Window Title Center -->
+  <text x="460" y="22" fill="#8B949E" text-anchor="middle" class="ui-font" font-weight="500">
+    Haritha Sivasankaran — Code Workspace [Visual Studio Code]
+  </text>
+
+  <!-- Left Activity Bar -->
+  <rect y="36" width="46" height="480" fill="#0D1117" />
+  <line x1="46" y1="36" x2="46" y2="516" stroke="#21262D" stroke-width="1" />
+
+  <!-- Activity Bar Icons -->
+  <!-- Explorer (Active) -->
+  <rect x="0" y="44" width="2" height="24" fill="#38BDF8" />
+  <path d="M 17 50 L 29 50 L 29 62 L 17 62 Z" fill="none" stroke="#FFFFFF" stroke-width="1.6" />
+  <path d="M 17 54 L 29 54" stroke="#FFFFFF" stroke-width="1.4" />
+  <!-- Search -->
+  <circle cx="23" cy="85" r="4.5" fill="none" stroke="#6E7681" stroke-width="1.5" />
+  <line x1="26.5" y1="88.5" x2="30" y2="92" stroke="#6E7681" stroke-width="1.5" stroke-linecap="round" />
+  <!-- Source Control with Badge -->
+  <circle cx="21" cy="116" r="2.5" fill="none" stroke="#6E7681" stroke-width="1.5" />
+  <circle cx="26" cy="122" r="2.5" fill="none" stroke="#6E7681" stroke-width="1.5" />
+  <path d="M 21 118.5 L 21 126 M 21 123.5 L 23.5 122" fill="none" stroke="#6E7681" stroke-width="1.5" />
+  <circle cx="31" cy="113" r="3" fill="#38BDF8" />
+  <!-- Extensions -->
+  <rect x="18" y="146" width="5" height="5" fill="#6E7681" />
+  <rect x="25" y="146" width="5" height="5" fill="#6E7681" />
+  <rect x="18" y="153" width="5" height="5" fill="#6E7681" />
+  <!-- Settings Bottom Gear -->
+  <circle cx="23" cy="496" r="3.5" fill="none" stroke="#6E7681" stroke-width="1.5" />
+  <path d="M 23 490 L 23 502 M 17 496 L 29 496" stroke="#6E7681" stroke-width="1.2" />
+
+  <!-- Tabs Bar -->
+  <rect x="46" y="36" width="874" height="34" fill="#0D1117" />
+  <line x1="46" y1="70" x2="920" y2="70" stroke="#21262D" stroke-width="1" />
+
+  <!-- Tab 1: engineer.ts (Active Tab) -->
+  <rect x="46" y="36" width="165" height="34" fill="#161B22" />
+  <line x1="46" y1="36" x2="211" y2="36" stroke="#38BDF8" stroke-width="2.5" />
+  <rect x="58" y="47" width="13" height="13" rx="2" fill="#3178C6" />
+  <text x="64.5" y="57" font-size="8.5" font-weight="700" fill="#FFFFFF" text-anchor="middle" font-family="monospace">TS</text>
+  <text x="78" y="58" fill="#E6EDF3" class="ui-font" font-weight="600">engineer.ts</text>
+  <text x="195" y="57" fill="#6E7681" class="ui-font" font-size="12">×</text>
+  <line x1="211" y1="42" x2="211" y2="64" stroke="#21262D" stroke-width="1" />
+
+  <!-- Tab 2: transit_pulse.kafka -->
+  <rect x="211" y="36" width="170" height="34" fill="#0D1117" />
+  <circle cx="225" cy="53" r="5" fill="#FF8800" />
+  <text x="237" y="58" fill="#8B949E" class="ui-font">transit_pulse.kafka</text>
+  <line x1="381" y1="42" x2="381" y2="64" stroke="#21262D" stroke-width="1" />
+
+  <!-- Tab 3: chess_engine.js -->
+  <rect x="381" y="36" width="155" height="34" fill="#0D1117" />
+  <rect x="395" y="47" width="13" height="13" rx="2" fill="#F7DF1E" />
+  <text x="401.5" y="57" font-size="8.5" font-weight="700" fill="#000000" text-anchor="middle" font-family="monospace">JS</text>
+  <text x="415" y="58" fill="#8B949E" class="ui-font">chess_engine.js</text>
+  <line x1="536" y1="42" x2="536" y2="64" stroke="#21262D" stroke-width="1" />
+
+  <!-- Breadcrumb Bar -->
+  <rect x="46" y="70" width="874" height="22" fill="#10151C" />
+  <line x1="46" y1="92" x2="920" y2="92" stroke="#21262D" stroke-width="1" />
+  <text x="60" y="85" fill="#6E7681" class="ui-font" font-size="10">
+    portfolio <tspan fill="#484F58">&gt;</tspan> src <tspan fill="#484F58">&gt;</tspan> systems <tspan fill="#484F58">&gt;</tspan> <tspan fill="#8B949E">engineer.ts</tspan> <tspan fill="#484F58">&gt;</tspan> <tspan fill="#79C0FF">HarithaProfile</tspan>
+  </text>
+
+  <!-- Code Editor Body -->
+  <!-- Line Numbers Column -->
+  <rect x="46" y="92" width="44" height="308" fill="#0E1117" />
+  <line x1="90" y1="92" x2="90" y2="400" stroke="#1F242C" stroke-width="1" />
+  <g class="code-font" fill="#484F58" text-anchor="end">
+    <text x="80" y="112">1</text>
+    <text x="80" y="131">2</text>
+    <text x="80" y="150">3</text>
+    <text x="80" y="169">4</text>
+    <text x="80" y="188">5</text>
+    <text x="80" y="207">6</text>
+    <text x="80" y="226">7</text>
+    <text x="80" y="245">8</text>
+    <text x="80" y="264">9</text>
+    <text x="80" y="283">10</text>
+    <text x="80" y="302">11</text>
+    <text x="80" y="321">12</text>
+    <text x="80" y="340">13</text>
+    <text x="80" y="359">14</text>
+    <text x="80" y="378">15</text>
+  </g>
+
+  <!-- Syntax-Highlighted Code Lines -->
+  <g class="code-font" transform="translate(104, 0)">
+    <!-- Line 1 -->
+    <text x="0" y="112">
+      <tspan class="kw">import</tspan> <tspan class="punc">{</tspan> <tspan class="type">FullStackEngineer</tspan><tspan class="punc">, </tspan><tspan class="type">DistributedSystems</tspan> <tspan class="punc">} </tspan><tspan class="kw">from</tspan> <tspan class="str">"@haritha/architecture"</tspan><tspan class="punc">;</tspan>
+    </text>
+
+    <!-- Line 2: Comment -->
+    <text x="0" y="131">
+      <tspan class="comm">// High-throughput event streaming, distributed pipelines &amp; modern interfaces</tspan>
+    </text>
+
+    <!-- Line 3: Object Declaration -->
+    <text x="0" y="150">
+      <tspan class="kw">export const</tspan> <tspan class="fn">haritha</tspan><tspan class="punc">: </tspan><tspan class="type">FullStackEngineer</tspan> <tspan class="punc">= {</tspan>
+    </text>
+
+    <!-- Line 4 -->
+    <text x="16" y="169">
+      <tspan class="prop">name</tspan><tspan class="punc">: </tspan><tspan class="str">"Haritha Sivasankaran"</tspan><tspan class="punc">,</tspan>
+    </text>
+
+    <!-- Line 5 -->
+    <text x="16" y="188">
+      <tspan class="prop">role</tspan><tspan class="punc">: </tspan><tspan class="str">"Full-Stack Software Engineer"</tspan><tspan class="punc">,</tspan>
+    </text>
+
+    <!-- Line 6: Core Languages -->
+    <text x="16" y="207">
+      <tspan class="prop">languages</tspan><tspan class="punc">: [</tspan><tspan class="str">"TypeScript"</tspan><tspan class="punc">, </tspan><tspan class="str">"Java"</tspan><tspan class="punc">, </tspan><tspan class="str">"Python"</tspan><tspan class="punc">, </tspan><tspan class="str">"JavaScript"</tspan><tspan class="punc">, </tspan><tspan class="str">"SQL"</tspan><tspan class="punc">],</tspan>
+    </text>
+
+    <!-- Line 7: Frontend Stack -->
+    <text x="16" y="226">
+      <tspan class="prop">frontend</tspan><tspan class="punc">: [</tspan><tspan class="str">"React"</tspan><tspan class="punc">, </tspan><tspan class="str">"Next.js"</tspan><tspan class="punc">, </tspan><tspan class="str">"TailwindCSS"</tspan><tspan class="punc">, </tspan><tspan class="str">"Svelte"</tspan><tspan class="punc">, </tspan><tspan class="str">"Vue.js"</tspan><tspan class="punc">],</tspan>
+    </text>
+
+    <!-- Line 8: Backend & AI -->
+    <text x="16" y="245">
+      <tspan class="prop">backend</tspan><tspan class="punc">: [</tspan><tspan class="str">"Spring Boot"</tspan><tspan class="punc">, </tspan><tspan class="str">"Spring AI"</tspan><tspan class="punc">, </tspan><tspan class="str">"Node.js"</tspan><tspan class="punc">, </tspan><tspan class="str">"Express.js"</tspan><tspan class="punc">, </tspan><tspan class="str">"REST APIs"</tspan><tspan class="punc">],</tspan>
+    </text>
+
+    <!-- Line 9: Messaging & Streams -->
+    <text x="16" y="264">
+      <tspan class="prop">messaging</tspan><tspan class="punc">: [</tspan><tspan class="str">"Apache Kafka"</tspan><tspan class="punc">, </tspan><tspan class="str">"RabbitMQ"</tspan><tspan class="punc">, </tspan><tspan class="str">"WebSockets"</tspan><tspan class="punc">],</tspan>
+    </text>
+
+    <!-- Line 10: Databases & DevOps -->
+    <text x="16" y="283">
+      <tspan class="prop">infrastructure</tspan><tspan class="punc">: [</tspan><tspan class="str">"Docker"</tspan><tspan class="punc">, </tspan><tspan class="str">"PostgreSQL"</tspan><tspan class="punc">, </tspan><tspan class="str">"MongoDB"</tspan><tspan class="punc">, </tspan><tspan class="str">"GitHub Actions"</tspan><tspan class="punc">, </tspan><tspan class="str">"Linux"</tspan><tspan class="punc">],</tspan>
+    </text>
+
+    <!-- Line 11: Production Systems -->
+    <text x="16" y="302">
+      <tspan class="prop">shippedSystems</tspan><tspan class="punc">: {</tspan>
+    </text>
+
+    <!-- Line 12 -->
+    <text x="32" y="321">
+      <tspan class="prop">transitPulse</tspan><tspan class="punc">: </tspan><tspan class="str">"Real-time GTFS transit telemetry via Kafka partitions &amp; React"</tspan><tspan class="punc">,</tspan>
+    </text>
+
+    <!-- Line 13 -->
+    <text x="32" y="340">
+      <tspan class="prop">obsidianChess</tspan><tspan class="punc">: </tspan><tspan class="str">"Zero-dependency chess engine with minimax alpha-beta pruning"</tspan>
+    </text>
+
+    <!-- Line 14 -->
+    <text x="16" y="359">
+      <tspan class="punc">},</tspan>
+    </text>
+
+    <!-- Line 15: Status with Blinking Cursor -->
+    <text x="16" y="378">
+      <tspan class="prop">availableForShipping</tspan><tspan class="punc">: </tspan><tspan class="bool">true</tspan>
+    </text>
+    <!-- Blinking Cursor -->
+    <rect x="188" y="366" width="2" height="15" fill="#38BDF8" class="cursor" />
+
+    <!-- Line 16: Closing bracket -->
+    <text x="0" y="396">
+      <tspan class="punc">};</tspan>
+    </text>
+  </g>
+
+  <!-- Terminal Divider -->
+  <line x1="46" y1="408" x2="920" y2="408" stroke="#30363D" stroke-width="1.5" />
+
+  <!-- Terminal Pane -->
+  <rect x="46" y="408" width="874" height="108" fill="#080B10" />
+
+  <!-- Terminal Tabs Header -->
+  <rect x="46" y="408" width="874" height="24" fill="#12161F" />
+  <line x1="46" y1="432" x2="920" y2="432" stroke="#21262D" stroke-width="1" />
+
+  <text x="60" y="424" fill="#6E7681" class="ui-font" font-weight="600">PROBLEMS <tspan fill="#38BDF8">0</tspan></text>
+  <text x="145" y="424" fill="#6E7681" class="ui-font" font-weight="600">OUTPUT</text>
+  <text x="210" y="424" fill="#6E7681" class="ui-font" font-weight="600">DEBUG CONSOLE</text>
+  <text x="320" y="424" fill="#38BDF8" class="ui-font" font-weight="700">TERMINAL</text>
+  <line x1="316" y1="431" x2="385" y2="431" stroke="#38BDF8" stroke-width="2" />
+
+  <!-- Terminal Output Lines -->
+  <g class="code-font" transform="translate(60, 0)">
+    <!-- Prompt 1 -->
+    <text x="0" y="452">
+      <tspan fill="#38BDF8" font-weight="700">haritha@workspace</tspan><tspan fill="#8B949E">:</tspan><tspan fill="#79C0FF">~/systems</tspan><tspan fill="#C9D1D9">$ </tspan><tspan fill="#E6EDF3">kafka-console-consumer --topic transit-fleet --from-beginning</tspan>
+    </text>
+    <!-- Output 1 -->
+    <text x="0" y="471">
+      <tspan fill="#3FB950">[CONNECTED]</tspan> <tspan fill="#8B949E">broker:9092 · 12 partitions synchronized · latency: 14ms · consumer-group: transit-pulse</tspan>
+    </text>
+    <!-- Prompt 2 -->
+    <text x="0" y="490">
+      <tspan fill="#38BDF8" font-weight="700">haritha@workspace</tspan><tspan fill="#8B949E">:</tspan><tspan fill="#79C0FF">~/systems</tspan><tspan fill="#C9D1D9">$ </tspan><tspan fill="#7EE787">echo "Ready to build impactful distributed systems."</tspan>
+    </text>
+    <!-- Output 2 -->
+    <text x="0" y="504">
+      <tspan fill="#E6EDF3">Ready to build impactful distributed systems.</tspan>
+      <tspan fill="#38BDF8" class="cursor"> █</tspan>
+    </text>
+  </g>
+
+  <!-- Status Bar -->
+  <rect y="516" width="920" height="24" rx="0" fill="#161B22" />
+  <rect y="528" width="920" height="12" rx="12" fill="#161B22" />
+  <line x1="0" y1="516" x2="920" y2="516" stroke="#21262D" stroke-width="1" />
+
+  <!-- Status Bar Left Items -->
+  <g transform="translate(14, 532)" class="ui-font">
+    <!-- Git Branch -->
+    <path d="M 4 2 A 1.5 1.5 0 0 1 5.5 3.5 A 1.5 1.5 0 0 1 4.2 4.9 L 4.2 8.1 A 1.5 1.5 0 0 1 5.5 9.5 A 1.5 1.5 0 0 1 4 11 A 1.5 1.5 0 0 1 2.5 9.5 A 1.5 1.5 0 0 1 3.8 8.1 L 3.8 4.9 A 1.5 1.5 0 0 1 2.5 3.5 A 1.5 1.5 0 0 1 4 2 Z" fill="#8B949E" />
+    <text x="12" y="8" fill="#E6EDF3" font-weight="600">main*</text>
+
+    <!-- Sync Indicator -->
+    <circle cx="58" cy="4.5" r="3.5" fill="#3FB950" class="status-pulse" />
+    <text x="66" y="8" fill="#8B949E">Synced</text>
+
+    <!-- Errors and Warnings -->
+    <text x="120" y="8" fill="#8B949E">⨂ 0  ⚠ 0</text>
+
+    <!-- Live Port -->
+    <text x="175" y="8" fill="#79C0FF">Port: 3000</text>
+  </g>
+
+  <!-- Status Bar Right Items -->
+  <g transform="translate(906, 532)" class="ui-font" text-anchor="end" fill="#8B949E">
+    <text x="0" y="8">Ln 15, Col 28  ·  Spaces: 2  ·  UTF-8  ·  TypeScript React  ·  Prettier ✔</text>
+  </g>
+</svg>

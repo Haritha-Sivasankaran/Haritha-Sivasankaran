@@ -17,49 +17,15 @@ Haritha-Sivasankaran
   </a>
 </p>
 
-```bash
-haritha@github:~$ npx haritha --overview
+<div align="center">
+  <img width="100%" src="./assets/developer-workspace.svg" alt="Haritha's Developer Workspace" />
+</div>
 
-╭────────────────────────────────────────────────────────────────────────╮
-│  HARITHA SIVASANKARAN                                                  │
-│  Full-Stack Software Engineer · Distributed Systems & Web Platforms    │
-╰────────────────────────────────────────────────────────────────────────╯
-
-[SYSINFO]
-  ● Uptime        : Active builder since 2021
-  ● Focus         : Distributed architectures & responsive web applications
-  ● Status        : Ready to ship high-impact software
-
-[CORE_STACK]
-  ● Languages     : TypeScript · JavaScript · Java · Python · SQL · HTML5/CSS3
-  ● Frontend      : React · Next.js · Tailwind CSS · Angular · Vue.js · Svelte
-  ● Backend & AI  : Spring Boot · Spring AI · Node.js · Express.js · REST APIs
-  ● Data & Stream : Apache Kafka · RabbitMQ · PostgreSQL · MySQL · MongoDB
-  ● DevOps & Tools: Docker · GitHub Actions · Git · Linux · Postman · Ansible
-
-[SHIPPED_PROJECTS]
-  01. TransitPulse-2.0    [Apache Kafka · Node.js · React · WebSockets]
-      ↳ High-frequency transit tracking & live event streaming engine
-      ↳ https://github.com/Haritha-Sivasankaran/TransitPulse-2.0
-
-  02. Obsidian-Chess      [Vanilla JS · HTML5 Canvas · Game AI]
-      ↳ Offline-first chess engine with minimax alpha-beta pruning
-      ↳ https://github.com/Haritha-Sivasankaran/Obsidian-Chess
-
-  03. Telemetry-Engine    [Python 3.12 · GitHub GraphQL · SVG]
-      ↳ Automated telemetry ingestion pipeline and interactive dashboard
-      ↳ https://github.com/Haritha-Sivasankaran/Haritha-Sivasankaran
-
-[ENDPOINTS]
-  ● LinkedIn      : https://linkedin.com/in/haritha-sivasankaran
-  ● Dashboard     : https://Haritha-Sivasankaran.github.io/Haritha-Sivasankaran
-  ● GitHub        : https://github.com/Haritha-Sivasankaran
-
-haritha@github:~$ █
-```
+<br />
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/haritha-sivasankaran/">LinkedIn</a> &nbsp;&bull;&nbsp;
-  <a href="https://github.com/Haritha-Sivasankaran">GitHub</a> &nbsp;&bull;&nbsp;
-  <a href="https://Haritha-Sivasankaran.github.io/Haritha-Sivasankaran/">Interactive Telemetry Dashboard</a>
+  <a href="https://github.com/Haritha-Sivasankaran/TransitPulse-2.0"><b>TransitPulse 2.0</b></a> &nbsp;&bull;&nbsp;
+  <a href="https://github.com/Haritha-Sivasankaran/Obsidian-Chess"><b>Obsidian Chess</b></a> &nbsp;&bull;&nbsp;
+  <a href="https://Haritha-Sivasankaran.github.io/Haritha-Sivasankaran/"><b>Interactive Telemetry Dashboard</b></a> &nbsp;&bull;&nbsp;
+  <a href="https://www.linkedin.com/in/haritha-sivasankaran/"><b>LinkedIn</b></a>
 </p>

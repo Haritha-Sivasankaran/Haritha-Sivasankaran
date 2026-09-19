@@ -129,7 +129,7 @@ I am a full-stack engineer focused on architecting resilient backend services, e
 ### 📊 Live Workspace Telemetry
 
 <p align="center">
-  <img width="100%" src="./assets/profile-overview.svg?t=1789811550" alt="Haritha's Workspace Telemetry" />
+  <img width="100%" src="./assets/profile-overview.svg?t=1789811706" alt="Haritha's Workspace Telemetry" />
 </p>
 
 <p align="center">

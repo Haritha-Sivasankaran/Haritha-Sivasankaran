@@ -28,7 +28,6 @@ haritha@github:~$ npx haritha --overview
 [SYSINFO]
   ● Uptime        : Active builder since 2021
   ● Focus         : Distributed architectures & responsive web applications
-  ● Location      : Bangalore, India (IST)
   ● Status        : Ready to ship high-impact software
 
 [CORE_STACK]

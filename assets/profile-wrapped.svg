@@ -49,7 +49,7 @@
   <!-- Content Area -->
   <g transform="translate(20, 75)">
     <text x="0" y="30" font-size="28" font-weight="800" fill="#ffffff" class="font-sans">wrapped.stats</text>
-    <text x="0" y="48" font-size="9" font-weight="700" fill="#1db954" letter-spacing="1.5" class="font-mono">2026 DEVS WRAPPED | REFRESHED 23 OCT 2026</text>
+    <text x="0" y="48" font-size="9" font-weight="700" fill="#1db954" letter-spacing="1.5" class="font-mono">2026 DEVS WRAPPED | REFRESHED 24 OCT 2026</text>
 
     <!-- WRAPPED CARD 1: TOP LANGUAGES -->
     <g transform="translate(0, 75)">
@@ -147,8 +147,8 @@
 
       <!-- Player descriptions and controls -->
       <g transform="translate(225, 42)" fill="#ffffff">
-        <text x="0" y="24" font-size="20" font-weight="800" fill="#ffffff" class="font-sans">CHANGELOG.md</text>
-        <text x="0" y="44" font-size="11" font-weight="600" fill="#1db954" class="font-mono">557 commits · 139 public / 418 private</text>
+        <text x="0" y="24" font-size="20" font-weight="800" fill="#ffffff" class="font-sans">README.md</text>
+        <text x="0" y="44" font-size="11" font-weight="600" fill="#1db954" class="font-mono">557 commits · 105 public / 452 private</text>
 
         <!-- Timeline scrubber representation -->
         <rect x="0" y="58" width="320" height="4" rx="2" fill="#333" />

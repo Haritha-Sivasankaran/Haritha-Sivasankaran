@@ -2,64 +2,52 @@
   "username": "Haritha-Sivasankaran",
   "name": "Haritha Sivasankaran",
   "source_mode": "github-graphql",
-  "generated_at": "2026-11-06T19:26:17.286227+05:30",
-  "timezone": "Asia/Calcutta",
-  "contributions_365d": 558,
-  "public_contributions": 106,
-  "private_contributions": 452,
-  "active_days": 54,
+  "generated_at": "2026-11-22T01:16:23.382414+05:30",
+  "timezone": "Asia/Kolkata",
+  "contributions_365d": 575,
+  "public_contributions": 27,
+  "private_contributions": 548,
+  "active_days": 58,
   "peak_day": 46,
-  "public_repos": 11,
-  "private_repos": 8,
+  "public_repos": 10,
+  "private_repos": 10,
   "stars_earned": 2,
   "joined_year": 2021,
   "has_restricted_contributions": true,
-  "restricted_contributions": 452,
+  "restricted_contributions": 548,
   "language_breakdown": [
     {
       "name": "HTML",
-      "bytes": 984171,
-      "percent": 26.32
+      "bytes": 985588,
+      "percent": 24.78
+    },
+    {
+      "name": "TypeScript",
+      "bytes": 753664,
+      "percent": 18.95
     },
     {
       "name": "JavaScript",
       "bytes": 656050,
-      "percent": 17.55
-    },
-    {
-      "name": "TypeScript",
-      "bytes": 525239,
-      "percent": 14.05
+      "percent": 16.5
     },
     {
       "name": "Jupyter Notebook",
       "bytes": 439263,
-      "percent": 11.75
+      "percent": 11.05
     },
     {
       "name": "CSS",
-      "bytes": 426519,
-      "percent": 11.41
+      "bytes": 434440,
+      "percent": 10.92
     },
     {
       "name": "Java",
       "bytes": 388626,
-      "percent": 10.39
+      "percent": 9.77
     }
   ],
   "weekly_totals": [
-    {
-      "start": "2026-08-16",
-      "total": 0
-    },
-    {
-      "start": "2026-08-23",
-      "total": 0
-    },
-    {
-      "start": "2026-08-30",
-      "total": 0
-    },
     {
       "start": "2026-09-06",
       "total": 10
@@ -95,21 +83,33 @@
     {
       "start": "2026-11-01",
       "total": 0
+    },
+    {
+      "start": "2026-11-08",
+      "total": 11
+    },
+    {
+      "start": "2026-11-15",
+      "total": 0
+    },
+    {
+      "start": "2026-11-22",
+      "total": 6
     }
   ],
   "longest_streak": 8,
   "weekday_counts": [
-    81,
+    84,
     67,
-    47,
+    50,
     76,
     84,
     107,
-    96
+    107
   ],
-  "top_repo_name": "Frontend-Development",
-  "top_repo_lang": "HTML",
-  "top_track_name": "README.md",
-  "focus_repo_name": "Obsidian-Chess",
-  "focus_repo_lang": "JavaScript"
+  "top_repo_name": "kdrama-java-portfolio",
+  "top_repo_lang": "TypeScript",
+  "top_track_name": "index.html",
+  "focus_repo_name": "Frontend-Development",
+  "focus_repo_lang": "HTML"
 }

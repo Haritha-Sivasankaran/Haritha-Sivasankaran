@@ -1315,25 +1315,37 @@ CARD_ROLE = "Systems Engineer @ TCS  ·  Full-Stack Developer"
 CARD_TAGLINE = "Code that survives Monday traffic and Friday deploys."
 # (label, Simple Icons slug, dark-theme colour, light-theme colour); None = use text colour
 CARD_TECH = [
-    ("React", "react", "#61dafb", "#087ea4"),
-    ("Next.js", "nextdotjs", None, None),
-    ("TypeScript", "typescript", "#4c8fd6", "#3178c6"),
-    ("Tailwind", "tailwindcss", "#38bdf8", "#0891b2"),
+    # Backend & messaging
     ("Java", "openjdk", "#f89820", "#c26b00"),
     ("Spring Boot", "springboot", "#6db33f", "#4e9a2a"),
     ("Python", "python", "#5a9bd5", "#3776ab"),
     ("Node.js", "nodedotjs", "#5fa04e", "#3c873a"),
+    ("Express", "express", None, None),
     ("Kafka", "apachekafka", None, None),
     ("RabbitMQ", "rabbitmq", "#ff6600", "#e65c00"),
+    # Frontend
+    ("React", "react", "#61dafb", "#087ea4"),
+    ("Next.js", "nextdotjs", None, None),
+    ("TypeScript", "typescript", "#4c8fd6", "#3178c6"),
+    ("JavaScript", "javascript", "#f7df1e", "#c9a800"),
+    ("Vue.js", "vuedotjs", "#4fc08d", "#3ba776"),
+    ("Svelte", "svelte", "#ff3e00", "#ff3e00"),
+    ("Tailwind", "tailwindcss", "#38bdf8", "#0891b2"),
+    # Data, infra & tooling
     ("PostgreSQL", "postgresql", "#6b8cef", "#336791"),
+    ("MongoDB", "mongodb", "#47a248", "#3f8f3f"),
     ("Docker", "docker", "#2496ed", "#1d63ed"),
+    ("GH Actions", "githubactions", "#2088ff", "#2088ff"),
+    ("Linux", "linux", None, None),
+    ("Git", "git", "#f05032", "#e44c2c"),
+    ("Jupyter", "jupyter", "#f37626", "#e46e1e"),
 ]
 
 
 def build_profile_card_svg(profile: dict, theme: str) -> str:
     """Single window-style card: intro, stack, live activity and languages."""
     t = CARD_THEMES[theme]
-    W, H = 1200, 608
+    W, H = 1200, 654
     repos = profile["public_repos"] + profile.get("private_repos", 0)
     stats = [
         (format_number(profile["contributions_365d"]), "contributions"),
@@ -1347,19 +1359,19 @@ def build_profile_card_svg(profile: dict, theme: str) -> str:
         return (f'<text x="{x}" y="{y}" class="mono" font-size="12" fill="{t["subtle"]}" '
                 f'letter-spacing="1.5">{escape(text.upper())}</text>')
 
-    tile_w, tile_h, cols = 86, 74, 6
+    tile_w, tile_h, cols = 76, 62, 7
     gap_x = (584 - cols * tile_w) / (cols - 1)
     stack_parts = []
     for i, (name, slug, dark_color, light_color) in enumerate(CARD_TECH):
         tx = 56 + (i % cols) * (tile_w + gap_x)
-        ty = 302 + (i // cols) * (tile_h + 12)
+        ty = 302 + (i // cols) * (tile_h + 8)
         color = (dark_color if theme == "dark" else light_color) or t["fg"]
         stack_parts.append(
-            f'<g class="rise" style="animation-delay:{0.6 + i * 0.05:.2f}s">'
+            f'<g class="rise" style="animation-delay:{0.6 + i * 0.03:.2f}s">'
             f'<rect x="{tx:.1f}" y="{ty}" width="{tile_w}" height="{tile_h}" rx="12" fill="{t["chip"]}" stroke="{t["border"]}"/>'
-            f'<g transform="translate({tx + tile_w / 2 - 13:.1f} {ty + 12}) scale(1.0833)">'
+            f'<g transform="translate({tx + tile_w / 2 - 11:.1f} {ty + 10}) scale(0.9167)">'
             f'<path d="{TECH_ICON_PATHS[slug]}" fill="{color}"/></g>'
-            f'<text x="{tx + tile_w / 2:.1f}" y="{ty + 60}" text-anchor="middle" class="mono" font-size="11.5" '
+            f'<text x="{tx + tile_w / 2:.1f}" y="{ty + 50}" text-anchor="middle" class="mono" font-size="10.5" '
             f'fill="{t["muted"]}">{escape(name)}</text></g>'
         )
     stack_svg = "".join(stack_parts)
@@ -1369,16 +1381,16 @@ def build_profile_card_svg(profile: dict, theme: str) -> str:
     )
     stat_svg = "".join(
         f'<g class="rise" style="animation-delay:{0.8 + i * 0.1:.2f}s">'
-        f'<text x="{720 + (i % 2) * 220}" y="{338 + (i // 2) * 82}" class="sans" font-size="34" '
+        f'<text x="{720 + (i % 2) * 220}" y="{366 + (i // 2) * 90}" class="sans" font-size="34" '
         f'font-weight="700" fill="{t["stat"]}">{escape(v)}</text>'
-        f'<text x="{720 + (i % 2) * 220}" y="{362 + (i // 2) * 82}" class="sans" font-size="14" '
+        f'<text x="{720 + (i % 2) * 220}" y="{390 + (i // 2) * 90}" class="sans" font-size="14" '
         f'fill="{t["muted"]}">{escape(l)}</text></g>'
         for i, (v, l) in enumerate(stats)
     )
 
     langs = profile.get("language_breakdown", [])[:6]
     total = sum(l["percent"] for l in langs) or 1
-    bar_x, bar_y, bar_w = 56, 528, W - 112
+    bar_x, bar_y, bar_w = 56, 574, W - 112
     x, lx, segments, legend = float(bar_x), 56, [], []
     for lang in langs:
         w = bar_w * lang["percent"] / total
@@ -1440,13 +1452,13 @@ def build_profile_card_svg(profile: dict, theme: str) -> str:
   <line x1="56" y1="246.5" x2="{W - 56}" y2="246.5" stroke="{t["line"]}"/>
   <g class="rise" style="animation-delay:.55s">{label(56, 286, "Stack")}{label(720, 286, "Activity · last 12 months")}</g>
   {stack_svg}
-  <line x1="680.5" y1="270" x2="680.5" y2="456" stroke="{t["line"]}"/>
+  <line x1="680.5" y1="270" x2="680.5" y2="502" stroke="{t["line"]}"/>
   {stat_svg}
 
-  <line x1="56" y1="480.5" x2="{W - 56}" y2="480.5" stroke="{t["line"]}"/>
+  <line x1="56" y1="526.5" x2="{W - 56}" y2="526.5" stroke="{t["line"]}"/>
   <g class="rise" style="animation-delay:1.1s">
-  {label(56, 510, "Languages")}
-  <text x="{W - 56}" y="510" text-anchor="end" class="mono" font-size="12" fill="{t["subtle"]}">updated {escape(updated)}</text>
+  {label(56, 556, "Languages")}
+  <text x="{W - 56}" y="556" text-anchor="end" class="mono" font-size="12" fill="{t["subtle"]}">updated {escape(updated)}</text>
   <rect x="{bar_x}" y="{bar_y}" width="{bar_w}" height="8" rx="4" fill="{t["track"]}"/>
   </g>
   <g clip-path="url(#lang)"><g class="grow">{"".join(segments)}</g></g>

@@ -10,6 +10,8 @@ from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
+from tech_icons import TECH_ICON_PATHS
+
 try:
     from zoneinfo import ZoneInfo
 except ImportError:  # pragma: no cover
@@ -1305,12 +1307,21 @@ LANGUAGE_COLORS = {
     "Vue": "#41b883", "Svelte": "#ff3e00", "SCSS": "#c6538c", "Kotlin": "#a97bff", "C++": "#f34b7d",
 }
 CARD_ROLE = "Systems Engineer @ TCS  ·  Full-Stack Developer"
-CARD_TAGLINE = "Code that scales. Interfaces that shine."
-CARD_STACK = [
-    ("Frontend", ["React", "Next.js", "TypeScript", "Tailwind CSS"]),
-    ("Backend", ["Java", "Spring Boot", "Python", "Node.js"]),
-    ("Messaging", ["Kafka", "RabbitMQ", "WebSockets"]),
-    ("Data & infra", ["PostgreSQL", "MongoDB", "Docker", "Linux"]),
+CARD_TAGLINE = "Code that survives Monday traffic and Friday deploys."
+# (label, Simple Icons slug, dark-theme colour, light-theme colour); None = use text colour
+CARD_TECH = [
+    ("React", "react", "#61dafb", "#087ea4"),
+    ("Next.js", "nextdotjs", None, None),
+    ("TypeScript", "typescript", "#4c8fd6", "#3178c6"),
+    ("Tailwind", "tailwindcss", "#38bdf8", "#0891b2"),
+    ("Java", "openjdk", "#f89820", "#c26b00"),
+    ("Spring Boot", "springboot", "#6db33f", "#4e9a2a"),
+    ("Python", "python", "#5a9bd5", "#3776ab"),
+    ("Node.js", "nodedotjs", "#5fa04e", "#3c873a"),
+    ("Kafka", "apachekafka", None, None),
+    ("RabbitMQ", "rabbitmq", "#ff6600", "#e65c00"),
+    ("PostgreSQL", "postgresql", "#6b8cef", "#336791"),
+    ("Docker", "docker", "#2496ed", "#1d63ed"),
 ]
 
 
@@ -1331,20 +1342,21 @@ def build_profile_card_svg(profile: dict, theme: str) -> str:
         return (f'<text x="{x}" y="{y}" class="mono" font-size="12" fill="{t["subtle"]}" '
                 f'letter-spacing="1.5">{escape(text.upper())}</text>')
 
+    tile_w, tile_h, cols = 86, 74, 6
+    gap_x = (584 - cols * tile_w) / (cols - 1)
     stack_parts = []
-    for i, (group, items) in enumerate(CARD_STACK):
-        y = 326 + i * 38
-        stack_parts.append(f'<g class="rise" style="animation-delay:{0.65 + i * 0.1:.2f}s">')
-        stack_parts.append(f'<text x="56" y="{y}" class="mono" font-size="13" fill="{t["muted"]}">{escape(group)}</text>')
-        cx = 180
-        for item in items:
-            w = int(len(item) * 7.9) + 24
-            stack_parts.append(
-                f'<rect x="{cx}" y="{y - 19}" width="{w}" height="27" rx="13.5" fill="{t["chip"]}" stroke="{t["border"]}"/>'
-                f'<text x="{cx + w / 2}" y="{y - 1}" text-anchor="middle" class="mono" font-size="13" fill="{t["fg"]}">{escape(item)}</text>'
-            )
-            cx += w + 8
-        stack_parts.append('</g>')
+    for i, (name, slug, dark_color, light_color) in enumerate(CARD_TECH):
+        tx = 56 + (i % cols) * (tile_w + gap_x)
+        ty = 302 + (i // cols) * (tile_h + 12)
+        color = (dark_color if theme == "dark" else light_color) or t["fg"]
+        stack_parts.append(
+            f'<g class="rise" style="animation-delay:{0.6 + i * 0.05:.2f}s">'
+            f'<rect x="{tx:.1f}" y="{ty}" width="{tile_w}" height="{tile_h}" rx="12" fill="{t["chip"]}" stroke="{t["border"]}"/>'
+            f'<g transform="translate({tx + tile_w / 2 - 13:.1f} {ty + 12}) scale(1.0833)">'
+            f'<path d="{TECH_ICON_PATHS[slug]}" fill="{color}"/></g>'
+            f'<text x="{tx + tile_w / 2:.1f}" y="{ty + 60}" text-anchor="middle" class="mono" font-size="11.5" '
+            f'fill="{t["muted"]}">{escape(name)}</text></g>'
+        )
     stack_svg = "".join(stack_parts)
     dots_svg = "".join(
         f'<circle cx="{dx}" cy="{dy}" r="1.4" fill="{t["dots"]}" opacity="{max(0.0, 1 - (W - 40 - dx) / 380):.2f}"/>'

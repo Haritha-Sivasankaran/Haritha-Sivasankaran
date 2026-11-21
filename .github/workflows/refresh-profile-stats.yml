@@ -37,7 +37,7 @@ jobs:
         # when you want private contribution counts to be available to the script.
         env:
           PROFILE_USERNAME: Haritha-Sivasankaran
-          PROFILE_TIMEZONE: Asia/Calcutta
+          PROFILE_TIMEZONE: Asia/Kolkata
           PROFILE_STATS_TOKEN: ${{ secrets.PROFILE_STATS_TOKEN }}
         run: python scripts/generate_profile_assets.py
 

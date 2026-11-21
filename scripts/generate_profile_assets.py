@@ -4,7 +4,7 @@ import json
 import os
 import re
 from collections import Counter
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, timezone
 from html import escape
 from pathlib import Path
 from urllib.error import HTTPError, URLError
@@ -27,7 +27,7 @@ JSON_PATH = ASSETS_DIR / "profile-data.json"
 MAX_LANGUAGES = 6
 
 USERNAME = os.getenv("PROFILE_USERNAME", "Haritha-Sivasankaran")
-TIMEZONE_NAME = os.getenv("PROFILE_TIMEZONE", "Asia/Calcutta")
+TIMEZONE_NAME = os.getenv("PROFILE_TIMEZONE", "Asia/Kolkata")
 TOKEN = os.getenv("PROFILE_STATS_TOKEN", "").strip()
 
 GRAPHQL_QUERY = """
@@ -174,8 +174,13 @@ def process_code_activity_languages(raw_breakdown: list[dict]) -> list[dict]:
 
 def current_datetime() -> datetime:
     if ZoneInfo is not None:
-        return datetime.now(ZoneInfo(TIMEZONE_NAME))
-    return datetime.utcnow()
+        # Newer runners ship tzdata without legacy aliases (e.g. Asia/Calcutta), so try the modern name too.
+        for name in (TIMEZONE_NAME, "Asia/Kolkata"):
+            try:
+                return datetime.now(ZoneInfo(name))
+            except Exception:
+                continue
+    return datetime.now(timezone(timedelta(hours=5, minutes=30)))
 
 
 def request_json(url: str, token: str | None = None, payload: dict | None = None) -> dict | list:

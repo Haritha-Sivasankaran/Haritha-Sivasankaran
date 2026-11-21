@@ -1289,8 +1289,71 @@ def build_build_svg(profile: dict) -> str:
 </svg>"""
 
 
+STATS_THEMES = {
+    "dark": dict(bg="#0d1117", border="#21262d", fg="#e6edf3", muted="#8b949e", track="#21262d", accent="#3fb950"),
+    "light": dict(bg="#ffffff", border="#d0d7de", fg="#1f2328", muted="#59636e", track="#eaeef2", accent="#1a7f37"),
+}
+LANGUAGE_COLORS = {
+    "HTML": "#e34c26", "JavaScript": "#f1e05a", "TypeScript": "#3178c6", "Jupyter Notebook": "#da5b0b",
+    "CSS": "#663399", "Java": "#b07219", "Python": "#3572a5", "Shell": "#89e051", "Go": "#00add8",
+    "Vue": "#41b883", "Svelte": "#ff3e00", "SCSS": "#c6538c", "Kotlin": "#a97bff", "C++": "#f34b7d",
+}
+
+
+def build_minimal_stats_svg(profile: dict, theme: str) -> str:
+    """Minimal stats card that matches the header-*.svg design."""
+    t = STATS_THEMES[theme]
+    repos = profile["public_repos"] + profile.get("private_repos", 0)
+    stats = [
+        (format_number(profile["contributions_365d"]), "contributions this year"),
+        (format_number(profile["active_days"]), "active days"),
+        (f'{profile.get("longest_streak", 0)} days', "longest streak"),
+        (format_number(repos), "repositories"),
+    ]
+    stat_svg = "".join(
+        f'<text x="{64 + i * 272}" y="92" class="sans" font-size="34" font-weight="700" fill="{t["fg"]}">{escape(value)}</text>'
+        f'<text x="{64 + i * 272}" y="118" class="sans" font-size="14" fill="{t["muted"]}">{escape(label)}</text>'
+        for i, (value, label) in enumerate(stats)
+    )
+
+    langs = profile.get("language_breakdown", [])[:6]
+    total = sum(l["percent"] for l in langs) or 1
+    bar_x, bar_w, x = 64, 1072, 64.0
+    segments, legend, lx = [], [], 64
+    for lang in langs:
+        w = bar_w * lang["percent"] / total
+        color = LANGUAGE_COLORS.get(lang["name"], t["muted"])
+        segments.append(f'<rect x="{x:.1f}" y="150" width="{max(w - 2, 1):.1f}" height="8" fill="{color}"/>')
+        x += w
+        label = f'{lang["name"]} {lang["percent"]:.0f}%'
+        legend.append(
+            f'<circle cx="{lx + 5}" cy="186" r="5" fill="{color}"/>'
+            f'<text x="{lx + 16}" y="191" class="mono" font-size="13" fill="{t["muted"]}">{escape(label)}</text>'
+        )
+        lx += 16 + int(len(label) * 7.9) + 28
+
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="230" viewBox="0 0 1200 230" role="img" aria-labelledby="t">
+  <title id="t">GitHub activity: {escape(", ".join(f"{v} {l}" for v, l in stats))}</title>
+  <style>
+    .sans {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif; }}
+    .mono {{ font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; }}
+  </style>
+  <defs><clipPath id="bar"><rect x="{bar_x}" y="150" width="{bar_w}" height="8" rx="4"/></clipPath></defs>
+  <rect x="0.5" y="0.5" width="1199" height="229" rx="16" fill="{t["bg"]}" stroke="{t["border"]}"/>
+  <circle cx="72" cy="40" r="4" fill="{t["accent"]}"/>
+  <text x="86" y="45" class="mono" font-size="13" fill="{t["muted"]}">GitHub activity · last 12 months</text>
+  {stat_svg}
+  <rect x="{bar_x}" y="150" width="{bar_w}" height="8" rx="4" fill="{t["track"]}"/>
+  <g clip-path="url(#bar)">{"".join(segments)}</g>
+  {"".join(legend)}
+</svg>
+"""
+
+
 def write_outputs(profile: dict) -> None:
     ASSETS_DIR.mkdir(parents=True, exist_ok=True)
+    for theme in STATS_THEMES:
+        (ASSETS_DIR / f"stats-{theme}.svg").write_text(build_minimal_stats_svg(profile, theme), encoding="utf-8")
     SVG_PATH.write_text(build_svg(profile), encoding="utf-8")
     WRAPPED_SVG_PATH.write_text(build_wrapped_svg(profile), encoding="utf-8")
     BUILD_SVG_PATH.write_text(build_build_svg(profile), encoding="utf-8")
@@ -1345,6 +1408,11 @@ def update_readme_cache_buster() -> None:
     new_content = re.sub(
         r'src="\./assets/profile-wrapped\.svg(?:\?[^"]+)?"',
         f'src="./assets/profile-wrapped.svg?t={timestamp}"',
+        new_content
+    )
+    new_content = re.sub(
+        r'(srcset|src)="\./assets/stats-(dark|light)\.svg(?:\?[^"]+)?"',
+        lambda m: f'{m.group(1)}="./assets/stats-{m.group(2)}.svg?t={timestamp}"',
         new_content
     )
     readme_path.write_text(new_content, encoding="utf-8")

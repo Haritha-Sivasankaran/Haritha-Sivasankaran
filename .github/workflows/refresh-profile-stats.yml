@@ -8,7 +8,6 @@ on:
     branches:
       - main
     paths-ignore:
-      - "assets/profile-overview.svg"
       - "assets/profile-data.json"
       - "assets/profile-card-*.svg"
 
@@ -45,7 +44,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/profile-card-dark.svg assets/profile-card-light.svg assets/profile-overview.svg assets/profile-data.json README.md assets/profile-wrapped.svg assets/profile-build.svg
+          git add assets/profile-card-dark.svg assets/profile-card-light.svg assets/profile-data.json README.md
           if git diff --staged --quiet; then
             echo "No generated changes to commit."
             exit 0

@@ -14,7 +14,7 @@ Haritha-Sivasankaran
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="./assets/btn-linkedin-dark.svg" />
       <source media="(prefers-color-scheme: light)" srcset="./assets/btn-linkedin-light.svg" />
-      <img height="44" src="./assets/btn-linkedin-dark.svg" alt="Connect on LinkedIn" />
+      <img height="50" src="./assets/btn-linkedin-dark.svg" alt="Connect on LinkedIn" />
     </picture>
   </a>
 </p>

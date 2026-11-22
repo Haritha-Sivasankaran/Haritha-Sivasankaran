@@ -490,124 +490,163 @@ CARD_TECH = [
 
 
 def build_profile_card_svg(profile: dict, theme: str) -> str:
-    """Single window-style card: intro, stack, live activity and languages."""
+    """Terminal-style card that 'types' itself out: whoami, motto, stack, stats."""
     t = CARD_THEMES[theme]
-    W, H = 1200, 654
+    W = 1200
+    X0 = 56            # left text edge
+    CW = 9.0           # monospace character width (enforced with textLength)
+    TYPE = 0.055       # seconds per typed character
+    PROMPT = "➜  ~/profile"
+    CMD_X = X0 + (len(PROMPT) + 1) * CW
+    parts: list[str] = []
+
+    def show(begin: float) -> str:
+        return f'<set attributeName="opacity" to="1" begin="{begin:.2f}s" fill="freeze"/>'
+
+    def fade(begin: float, dur: float = 0.35) -> str:
+        return (f'<animate attributeName="opacity" from="0" to="1" begin="{begin:.2f}s" '
+                f'dur="{dur}s" fill="freeze"/>')
+
+    def command(y: float, cmd: str, start: float, cid: str) -> float:
+        """Prompt + a command typed character by character. Returns the time typing ends."""
+        n = len(cmd)
+        end = start + n * TYPE
+        widths = ";".join(f"{i * CW:.1f}" for i in range(n + 1))
+        xs = ";".join(f"{CMD_X + i * CW:.1f}" for i in range(n + 1))
+        parts.append(
+            f'<g opacity="0">{show(start - 0.25)}'
+            f'<text x="{X0}" y="{y}" class="mono" font-size="15" textLength="{len(PROMPT) * CW:.0f}" lengthAdjust="spacing">'
+            f'<tspan fill="{t["accent"]}">➜</tspan><tspan fill="{t["name3"]}">  ~/profile</tspan></text></g>'
+            f'<clipPath id="{cid}"><rect x="{CMD_X}" y="{y - 16}" width="0" height="22">'
+            f'<animate attributeName="width" values="{widths}" calcMode="discrete" begin="{start:.2f}s" '
+            f'dur="{n * TYPE + 0.001:.3f}s" fill="freeze"/></rect></clipPath>'
+            f'<text x="{CMD_X}" y="{y}" class="mono" font-size="15" fill="{t["fg"]}" clip-path="url(#{cid})" '
+            f'textLength="{n * CW:.0f}" lengthAdjust="spacing">{escape(cmd)}</text>'
+            f'<rect x="{CMD_X}" y="{y - 14}" width="{CW:.0f}" height="18" fill="{t["accent"]}" opacity="0">'
+            f'{show(start - 0.25)}'
+            f'<animate attributeName="x" values="{xs}" calcMode="discrete" begin="{start:.2f}s" '
+            f'dur="{n * TYPE + 0.001:.3f}s" fill="freeze"/>'
+            f'<set attributeName="opacity" to="0" begin="{end + 0.12:.2f}s" fill="freeze"/></rect>'
+        )
+        return end
+
+    # 1. whoami -> name + role
+    end = command(96, "whoami", 0.6, "c1")
+    parts.append(
+        f'<g opacity="0">{fade(end + 0.2)}'
+        f'<text x="{X0 - 2}" y="160" class="sans" font-size="54" font-weight="700" fill="url(#name)" '
+        f'letter-spacing="-1.2">Haritha Sivasankaran</text>'
+        f'<text x="{X0}" y="192" class="mono" font-size="14" fill="{t["muted"]}">{escape(CARD_ROLE)}</text></g>'
+    )
+
+    # 2. cat motto.txt -> tagline
+    end = command(244, "cat motto.txt", end + 0.9, "c2")
+    parts.append(
+        f'<g opacity="0">{fade(end + 0.2)}'
+        f'<text x="{X0}" y="280" class="sans" font-size="24" fill="{t["fg"]}">{escape(CARD_TAGLINE)}</text></g>'
+    )
+
+    # 3. ls ~/stack -> coloured listing with logos, 7 per row
+    end = command(332, "ls ~/stack", end + 0.8, "c3")
+    col_w = (W - 2 * X0) / 7
+    for row in range(3):
+        items = []
+        for col in range(7):
+            i = row * 7 + col
+            if i >= len(CARD_TECH):
+                break
+            name, slug, dark_color, light_color = CARD_TECH[i]
+            color = (dark_color if theme == "dark" else light_color) or t["fg"]
+            x = X0 + col * col_w
+            y = 372 + row * 34
+            items.append(
+                f'<g transform="translate({x:.1f} {y - 15}) scale(0.75)"><path d="{TECH_ICON_PATHS[slug]}" fill="{color}"/></g>'
+                f'<text x="{x + 26:.1f}" y="{y}" class="mono" font-size="15" fill="{color}">{escape(name.lower().replace(" ", "-"))}</text>'
+            )
+        parts.append(f'<g opacity="0">{fade(end + 0.2 + row * 0.12, 0.25)}{"".join(items)}</g>')
+
+    # 4. ./stats.sh -> git-style stat bars (left) + language bars (right)
+    end = command(500, "./stats.sh --since 1y", end + 1.0, "c4")
     repos = profile["public_repos"] + profile.get("private_repos", 0)
     stats = [
-        (format_number(profile["contributions_365d"]), "contributions"),
-        (format_number(profile["active_days"]), "active days"),
-        (f'{profile.get("longest_streak", 0)} days', "longest streak"),
-        (format_number(repos), "repositories"),
+        ("contributions", profile["contributions_365d"]),
+        ("active days", profile["active_days"]),
+        ("longest streak", profile.get("longest_streak", 0)),
+        ("repositories", repos),
     ]
-
-    def label(x, y, text):
-        return (f'<text x="{x}" y="{y}" class="mono" font-size="12" fill="{t["subtle"]}" '
-                f'letter-spacing="1.5">{escape(text.upper())}</text>')
-
-    tile_w, tile_h, cols = 76, 62, 7
-    gap_x = (584 - cols * tile_w) / (cols - 1)
-    stack_parts = []
-    for i, (name, slug, dark_color, light_color) in enumerate(CARD_TECH):
-        tx = 56 + (i % cols) * (tile_w + gap_x)
-        ty = 302 + (i // cols) * (tile_h + 8)
-        color = (dark_color if theme == "dark" else light_color) or t["fg"]
-        stack_parts.append(
-            f'<g class="rise" style="animation-delay:{0.6 + i * 0.03:.2f}s">'
-            f'<rect x="{tx:.1f}" y="{ty}" width="{tile_w}" height="{tile_h}" rx="12" fill="{t["chip"]}" stroke="{t["border"]}"/>'
-            f'<g transform="translate({tx + tile_w / 2 - 11:.1f} {ty + 10}) scale(0.9167)">'
-            f'<path d="{TECH_ICON_PATHS[slug]}" fill="{color}"/></g>'
-            f'<text x="{tx + tile_w / 2:.1f}" y="{ty + 50}" text-anchor="middle" class="mono" font-size="10.5" '
-            f'fill="{t["muted"]}">{escape(name)}</text></g>'
+    top = max(v for _, v in stats) or 1
+    out_t = end + 0.25
+    for i, (label, value) in enumerate(stats):
+        y = 540 + i * 28
+        plus = max(1, round(28 * (value / top) ** 0.5))
+        parts.append(
+            f'<g opacity="0">{fade(out_t + i * 0.12, 0.25)}'
+            f'<text x="{X0}" y="{y}" class="mono" font-size="15" fill="{t["muted"]}">{escape(label.ljust(15))}</text>'
+            f'<text x="{X0 + 150}" y="{y}" class="mono" font-size="15" fill="{t["muted"]}">|</text>'
+            f'<text x="{X0 + 210}" y="{y}" text-anchor="end" class="mono" font-size="15" font-weight="700" fill="{t["fg"]}">{format_number(value)}</text>'
+            f'<text x="{X0 + 224}" y="{y}" class="mono" font-size="15" fill="{t["accent"]}">{"+" * plus}</text></g>'
         )
-    stack_svg = "".join(stack_parts)
-    dots_svg = "".join(
-        f'<circle cx="{dx}" cy="{dy}" r="1.4" fill="{t["dots"]}" opacity="{max(0.0, 1 - (W - 40 - dx) / 380):.2f}"/>'
-        for dx in range(780, W - 40, 22) for dy in range(70, 232, 22)
-    )
-    stat_svg = "".join(
-        f'<g class="rise" style="animation-delay:{0.8 + i * 0.1:.2f}s">'
-        f'<text x="{720 + (i % 2) * 220}" y="{336 + (i // 2) * 108}" class="sans" font-size="34" '
-        f'font-weight="700" fill="{t["stat"]}">{escape(v)}</text>'
-        f'<text x="{720 + (i % 2) * 220}" y="{360 + (i // 2) * 108}" class="sans" font-size="14" '
-        f'fill="{t["muted"]}">{escape(l)}</text></g>'
-        for i, (v, l) in enumerate(stats)
-    )
 
-    langs = [l for l in profile.get("language_breakdown", []) if l["name"] not in EXCLUDED_LANGUAGES and l["percent"] >= 1][:6]
+    langs = [l for l in profile.get("language_breakdown", [])
+             if l["name"] not in EXCLUDED_LANGUAGES and l["percent"] >= 1][:5]
     total = sum(l["percent"] for l in langs) or 1
-    bar_x, bar_y, bar_w = 56, 574, W - 112
-    x, lx, segments, legend = float(bar_x), 56, [], []
-    for lang in langs:
-        w = bar_w * lang["percent"] / total
+    LX, BAR_X, BAR_W = 640, 800, 260
+    for i, lang in enumerate(langs):
+        y = 540 + i * 28
+        share = lang["percent"] / total
         color = LANGUAGE_COLORS.get(lang["name"], t["muted"])
-        segments.append(f'<rect x="{x:.1f}" y="{bar_y}" width="{max(w - 2, 1):.1f}" height="8" fill="{color}"/>')
-        x += w
-        text = f'{lang["name"]} {lang["percent"] / total * 100:.0f}%'
-        legend.append(
-            f'<circle cx="{lx + 5}" cy="{bar_y + 36}" r="5" fill="{color}"/>'
-            f'<text x="{lx + 16}" y="{bar_y + 41}" class="mono" font-size="13" fill="{t["muted"]}">{escape(text)}</text>'
+        name = "Jupyter" if lang["name"] == "Jupyter Notebook" else lang["name"]
+        parts.append(
+            f'<g opacity="0">{fade(out_t + 0.3 + i * 0.12, 0.25)}'
+            f'<text x="{LX}" y="{y}" class="mono" font-size="15" fill="{t["fg"]}">{escape(name)}</text>'
+            f'<rect x="{BAR_X}" y="{y - 11}" width="{BAR_W}" height="10" rx="2" fill="{t["track"]}"/>'
+            f'<rect x="{BAR_X}" y="{y - 11}" width="0" height="10" rx="2" fill="{color}">'
+            f'<animate attributeName="width" from="0" to="{BAR_W * share:.1f}" begin="{out_t + 0.4 + i * 0.12:.2f}s" '
+            f'dur="0.8s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.2 0.7 0.2 1"/></rect>'
+            f'<text x="{BAR_X + BAR_W + 14}" y="{y}" class="mono" font-size="15" fill="{t["muted"]}">{share * 100:.0f}%</text></g>'
         )
-        lx += 16 + int(len(text) * 7.9) + 28
 
+    # 5. idle prompt with blinking cursor
+    rows = max(len(stats), len(langs))
+    final_y = 540 + rows * 28 + 22
+    final_t = out_t + 0.3 + rows * 0.12 + 0.9
+    parts.append(
+        f'<g opacity="0">{show(final_t)}'
+        f'<text x="{X0}" y="{final_y}" class="mono" font-size="15" textLength="{len(PROMPT) * CW:.0f}" lengthAdjust="spacing">'
+        f'<tspan fill="{t["accent"]}">➜</tspan><tspan fill="{t["name3"]}">  ~/profile</tspan></text>'
+        f'<rect class="cursor" x="{CMD_X}" y="{final_y - 14}" width="{CW:.0f}" height="18" fill="{t["accent"]}"/></g>'
+    )
+
+    H = final_y + 44
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-labelledby="t d">
   <title id="t">Haritha Sivasankaran — {escape(CARD_ROLE)}</title>
-  <desc id="d">{escape(CARD_TAGLINE)} {escape(", ".join(f"{v} {l}" for v, l in stats))}.</desc>
+  <desc id="d">{escape(CARD_TAGLINE)} Stack: {escape(", ".join(n for n, *_ in CARD_TECH))}. {escape(", ".join(f"{format_number(v)} {l}" for l, v in stats))}.</desc>
   <style>
     .sans {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif; }}
     .mono {{ font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; }}
-    .cursor {{ animation: blink 1.1s steps(1) infinite; }}
-    .pulse {{ animation: pulse 2.4s ease-in-out infinite; transform-origin: 62px 100px; }}
-    @keyframes blink {{ 50% {{ opacity: 0; }} }}
-    @keyframes pulse {{ 0%,100% {{ opacity: .35; transform: scale(1); }} 50% {{ opacity: 0; transform: scale(2.2); }} }}
-    .rise {{ animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }}
-    .grow {{ animation: grow 1.4s cubic-bezier(.65,0,.35,1) 1.2s both; transform-box: fill-box; transform-origin: left center; }}
+    .cursor {{ animation: blink 1.05s steps(1) infinite; }}
     .breathe {{ animation: breathe 8s ease-in-out infinite; }}
-    @keyframes rise {{ from {{ opacity: 0; transform: translateY(10px); }} to {{ opacity: 1; transform: none; }} }}
-    @keyframes grow {{ from {{ transform: scaleX(0); }} to {{ transform: scaleX(1); }} }}
+    @keyframes blink {{ 50% {{ opacity: 0; }} }}
     @keyframes breathe {{ 0%,100% {{ opacity: 1; }} 50% {{ opacity: .55; }} }}
-    @media (prefers-reduced-motion: reduce) {{ .cursor, .pulse, .rise, .grow, .breathe {{ animation: none; }} }}
+    @media (prefers-reduced-motion: reduce) {{ .cursor, .breathe {{ animation: none; }} }}
   </style>
   <defs>
     <linearGradient id="name" gradientUnits="userSpaceOnUse" x1="54" y1="0" x2="600" y2="0"><stop offset="0" stop-color="{t["name1"]}"/><stop offset="0.55" stop-color="{t["name2"]}"/><stop offset="1" stop-color="{t["name3"]}"/></linearGradient>
     <clipPath id="win"><rect width="{W}" height="{H}" rx="14"/></clipPath>
-    <radialGradient id="g1" cx="0.88" cy="0.05" r="0.55"><stop offset="0" stop-color="{t["glow1"]}" stop-opacity="{t["glow_op"]}"/><stop offset="1" stop-color="{t["glow1"]}" stop-opacity="0"/></radialGradient>
-    <radialGradient id="g2" cx="0.02" cy="1" r="0.5"><stop offset="0" stop-color="{t["glow2"]}" stop-opacity="{t["glow_op"]}"/><stop offset="1" stop-color="{t["glow2"]}" stop-opacity="0"/></radialGradient>
-    <clipPath id="lang"><rect x="{bar_x}" y="{bar_y}" width="{bar_w}" height="8" rx="4"/></clipPath>
+    <radialGradient id="g1" cx="0.92" cy="0.0" r="0.5"><stop offset="0" stop-color="{t["glow1"]}" stop-opacity="{t["glow_op"]}"/><stop offset="1" stop-color="{t["glow1"]}" stop-opacity="0"/></radialGradient>
+    <radialGradient id="g2" cx="0.0" cy="1" r="0.45"><stop offset="0" stop-color="{t["glow2"]}" stop-opacity="{t["glow_op"]}"/><stop offset="1" stop-color="{t["glow2"]}" stop-opacity="0"/></radialGradient>
   </defs>
   <g clip-path="url(#win)">
     <rect width="{W}" height="{H}" fill="{t["bg"]}"/>
     <rect class="breathe" width="{W}" height="{H}" fill="url(#g1)"/>
     <rect width="{W}" height="{H}" fill="url(#g2)"/>
-    {dots_svg}
     <rect width="{W}" height="44" fill="{t["bar"]}"/>
     <line x1="0" y1="44.5" x2="{W}" y2="44.5" stroke="{t["line"]}"/>
-    <circle cx="28" cy="22" r="6" fill="{t["border"]}"/><circle cx="48" cy="22" r="6" fill="{t["border"]}"/><circle cx="68" cy="22" r="6" fill="{t["border"]}"/>
-    <text x="{W / 2}" y="27" text-anchor="middle" class="mono" font-size="13" fill="{t["subtle"]}">haritha@github: ~/profile</text>
+    <circle cx="28" cy="22" r="6" fill="#ff5f57"/><circle cx="48" cy="22" r="6" fill="#febc2e"/><circle cx="68" cy="22" r="6" fill="#28c840"/>
+    <text x="{W / 2}" y="27" text-anchor="middle" class="mono" font-size="13" fill="{t["subtle"]}">haritha@tcs — zsh — 120×40</text>
   </g>
   <rect x="0.5" y="0.5" width="{W - 1}" height="{H - 1}" rx="14" fill="none" stroke="{t["border"]}"/>
-
-  <g class="rise" style="animation-delay:.1s">
-  <circle class="pulse" cx="62" cy="100" r="5" fill="{t["accent"]}"/>
-  <circle cx="62" cy="100" r="5" fill="{t["accent"]}"/>
-  <text x="78" y="105" class="mono" font-size="14" fill="{t["muted"]}">{escape(CARD_ROLE)}</text>
-  </g>
-  <text class="rise sans" style="animation-delay:.25s" x="54" y="168" font-size="54" font-weight="700" fill="url(#name)" letter-spacing="-1.2">Haritha Sivasankaran<tspan class="cursor" fill="{t["accent"]}">_</tspan></text>
-  <text class="rise sans" style="animation-delay:.4s" x="56" y="212" font-size="24" fill="{t["fg"]}" opacity="0.82">{escape(CARD_TAGLINE)}</text>
-
-  <line x1="56" y1="246.5" x2="{W - 56}" y2="246.5" stroke="{t["line"]}"/>
-  <g class="rise" style="animation-delay:.55s">{label(56, 286, "Stack")}{label(720, 286, "Activity · last 12 months")}</g>
-  {stack_svg}
-  <line x1="680.5" y1="270" x2="680.5" y2="502" stroke="{t["line"]}"/>
-  {stat_svg}
-
-  <line x1="56" y1="526.5" x2="{W - 56}" y2="526.5" stroke="{t["line"]}"/>
-  <g class="rise" style="animation-delay:1.1s">
-  {label(56, 556, "Languages")}
-  <rect x="{bar_x}" y="{bar_y}" width="{bar_w}" height="8" rx="4" fill="{t["track"]}"/>
-  </g>
-  <g clip-path="url(#lang)"><g class="grow">{"".join(segments)}</g></g>
-  <g class="rise" style="animation-delay:1.6s">{"".join(legend)}</g>
+  {"".join(parts)}
 </svg>
 """
 

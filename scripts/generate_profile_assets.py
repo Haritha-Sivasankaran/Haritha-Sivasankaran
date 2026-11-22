@@ -10,6 +10,7 @@ from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
+from tagline_font import TAGLINE_FONT_WOFF2_B64
 from tech_icons import TECH_ICON_PATHS
 
 try:
@@ -543,7 +544,7 @@ def build_profile_card_svg(profile: dict, theme: str) -> str:
     end = command(244, "cat motto.txt", end + 0.9, "c2")
     parts.append(
         f'<g opacity="0">{fade(end + 0.2)}'
-        f'<text x="{X0}" y="280" class="sans" font-size="24" fill="{t["fg"]}">{escape(CARD_TAGLINE)}</text></g>'
+        f'<text x="{X0}" y="280" class="tagline" font-size="24" fill="{t["name2"]}" letter-spacing="-0.3">{escape(CARD_TAGLINE)}</text></g>'
     )
 
     # 3. ls ~/stack -> coloured listing with logos, 7 per row
@@ -624,6 +625,8 @@ def build_profile_card_svg(profile: dict, theme: str) -> str:
   <style>
     .sans {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif; }}
     .mono {{ font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; }}
+    @font-face {{ font-family: "JBM Tagline"; font-style: italic; font-weight: 500; src: url(data:font/woff2;base64,{TAGLINE_FONT_WOFF2_B64}) format("woff2"); }}
+    .tagline {{ font-family: "JBM Tagline", ui-monospace, Menlo, Consolas, monospace; font-style: italic; font-weight: 500; }}
     .cursor {{ animation: blink 1.05s steps(1) infinite; }}
     .breathe {{ animation: breathe 8s ease-in-out infinite; }}
     @keyframes blink {{ 50% {{ opacity: 0; }} }}

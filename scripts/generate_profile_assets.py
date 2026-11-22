@@ -22,6 +22,8 @@ ROOT = Path(__file__).resolve().parents[1]
 ASSETS_DIR = ROOT / "assets"
 JSON_PATH = ASSETS_DIR / "profile-data.json"
 MAX_LANGUAGES = 6
+# Markup/styling is left out of the language bar so it reflects programming languages.
+EXCLUDED_LANGUAGES = {"HTML", "CSS", "SCSS", "Less", "Sass"}
 
 USERNAME = os.getenv("PROFILE_USERNAME", "Haritha-Sivasankaran")
 TIMEZONE_NAME = os.getenv("PROFILE_TIMEZONE", "Asia/Kolkata")
@@ -142,7 +144,8 @@ def fetch_public_repo_language_breakdown(login: str, token: str | None = None) -
         try:
             repo_languages = request_json(repo["languages_url"], token=token)
             for language, byte_count in repo_languages.items():
-                totals[language] += byte_count
+                if language not in EXCLUDED_LANGUAGES:
+                    totals[language] += byte_count
         except Exception as e:
             # Handle potential API errors gracefully for individual repos
             print(f"Failed to fetch languages for {repo.get('name')}: {e}")
@@ -497,7 +500,6 @@ def build_profile_card_svg(profile: dict, theme: str) -> str:
         (f'{profile.get("longest_streak", 0)} days', "longest streak"),
         (format_number(repos), "repositories"),
     ]
-    updated = current_datetime().strftime("%d %b %Y")
 
     def label(x, y, text):
         return (f'<text x="{x}" y="{y}" class="mono" font-size="12" fill="{t["subtle"]}" '
@@ -525,14 +527,14 @@ def build_profile_card_svg(profile: dict, theme: str) -> str:
     )
     stat_svg = "".join(
         f'<g class="rise" style="animation-delay:{0.8 + i * 0.1:.2f}s">'
-        f'<text x="{720 + (i % 2) * 220}" y="{366 + (i // 2) * 90}" class="sans" font-size="34" '
+        f'<text x="{720 + (i % 2) * 220}" y="{336 + (i // 2) * 108}" class="sans" font-size="34" '
         f'font-weight="700" fill="{t["stat"]}">{escape(v)}</text>'
-        f'<text x="{720 + (i % 2) * 220}" y="{390 + (i // 2) * 90}" class="sans" font-size="14" '
+        f'<text x="{720 + (i % 2) * 220}" y="{360 + (i // 2) * 108}" class="sans" font-size="14" '
         f'fill="{t["muted"]}">{escape(l)}</text></g>'
         for i, (v, l) in enumerate(stats)
     )
 
-    langs = profile.get("language_breakdown", [])[:6]
+    langs = [l for l in profile.get("language_breakdown", []) if l["name"] not in EXCLUDED_LANGUAGES][:6]
     total = sum(l["percent"] for l in langs) or 1
     bar_x, bar_y, bar_w = 56, 574, W - 112
     x, lx, segments, legend = float(bar_x), 56, [], []
@@ -541,7 +543,7 @@ def build_profile_card_svg(profile: dict, theme: str) -> str:
         color = LANGUAGE_COLORS.get(lang["name"], t["muted"])
         segments.append(f'<rect x="{x:.1f}" y="{bar_y}" width="{max(w - 2, 1):.1f}" height="8" fill="{color}"/>')
         x += w
-        text = f'{lang["name"]} {lang["percent"]:.0f}%'
+        text = f'{lang["name"]} {lang["percent"] / total * 100:.0f}%'
         legend.append(
             f'<circle cx="{lx + 5}" cy="{bar_y + 36}" r="5" fill="{color}"/>'
             f'<text x="{lx + 16}" y="{bar_y + 41}" class="mono" font-size="13" fill="{t["muted"]}">{escape(text)}</text>'
@@ -602,7 +604,6 @@ def build_profile_card_svg(profile: dict, theme: str) -> str:
   <line x1="56" y1="526.5" x2="{W - 56}" y2="526.5" stroke="{t["line"]}"/>
   <g class="rise" style="animation-delay:1.1s">
   {label(56, 556, "Languages")}
-  <text x="{W - 56}" y="556" text-anchor="end" class="mono" font-size="12" fill="{t["subtle"]}">updated {escape(updated)}</text>
   <rect x="{bar_x}" y="{bar_y}" width="{bar_w}" height="8" rx="4" fill="{t["track"]}"/>
   </g>
   <g clip-path="url(#lang)"><g class="grow">{"".join(segments)}</g></g>

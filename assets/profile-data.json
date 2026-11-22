@@ -2,49 +2,49 @@
   "username": "Haritha-Sivasankaran",
   "name": "Haritha Sivasankaran",
   "source_mode": "github-graphql",
-  "generated_at": "2026-11-22T19:47:26.603496+05:30",
+  "generated_at": "2026-11-23T04:54:06.614422+05:30",
   "timezone": "Asia/Kolkata",
-  "contributions_365d": 584,
+  "contributions_365d": 588,
   "public_contributions": 121,
-  "private_contributions": 463,
-  "active_days": 58,
+  "private_contributions": 467,
+  "active_days": 59,
   "peak_day": 46,
   "public_repos": 11,
-  "private_repos": 9,
+  "private_repos": 10,
   "stars_earned": 2,
   "joined_year": 2021,
   "has_restricted_contributions": true,
-  "restricted_contributions": 463,
+  "restricted_contributions": 467,
   "language_breakdown": [
     {
       "name": "TypeScript",
       "bytes": 753664,
-      "percent": 29.81
+      "percent": 29.62
     },
     {
       "name": "JavaScript",
       "bytes": 633289,
-      "percent": 25.05
+      "percent": 24.89
     },
     {
       "name": "Jupyter Notebook",
       "bytes": 439263,
-      "percent": 17.38
+      "percent": 17.26
     },
     {
       "name": "Java",
       "bytes": 388626,
-      "percent": 15.37
+      "percent": 15.27
     },
     {
       "name": "Python",
       "bytes": 299374,
-      "percent": 11.84
+      "percent": 11.76
     },
     {
-      "name": "Shell",
-      "bytes": 5771,
-      "percent": 0.23
+      "name": "Dart",
+      "bytes": 16813,
+      "percent": 0.66
     }
   ],
   "weekly_totals": [
@@ -94,12 +94,12 @@
     },
     {
       "start": "2026-11-22",
-      "total": 15
+      "total": 19
     }
   ],
   "longest_streak": 8,
   "weekday_counts": [
-    84,
+    88,
     67,
     50,
     76,
@@ -107,9 +107,9 @@
     107,
     116
   ],
-  "top_repo_name": "kdrama-java-portfolio",
-  "top_repo_lang": "TypeScript",
-  "top_track_name": "index.html",
-  "focus_repo_name": "Frontend-Development",
-  "focus_repo_lang": "HTML"
+  "top_repo_name": "kosha",
+  "top_repo_lang": "Dart",
+  "top_track_name": "README.md",
+  "focus_repo_name": "kdrama-java-portfolio",
+  "focus_repo_lang": "TypeScript"
 }

@@ -534,7 +534,7 @@ def build_profile_card_svg(profile: dict, theme: str) -> str:
         for i, (v, l) in enumerate(stats)
     )
 
-    langs = [l for l in profile.get("language_breakdown", []) if l["name"] not in EXCLUDED_LANGUAGES][:6]
+    langs = [l for l in profile.get("language_breakdown", []) if l["name"] not in EXCLUDED_LANGUAGES and l["percent"] >= 1][:6]
     total = sum(l["percent"] for l in langs) or 1
     bar_x, bar_y, bar_w = 56, 574, W - 112
     x, lx, segments, legend = float(bar_x), 56, [], []

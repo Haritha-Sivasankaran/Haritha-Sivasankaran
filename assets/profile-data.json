@@ -2,49 +2,49 @@
   "username": "Haritha-Sivasankaran",
   "name": "Haritha Sivasankaran",
   "source_mode": "github-graphql",
-  "generated_at": "2026-11-22T01:22:31.446047+05:30",
+  "generated_at": "2026-11-22T11:16:09.469494+05:30",
   "timezone": "Asia/Kolkata",
-  "contributions_365d": 577,
-  "public_contributions": 27,
-  "private_contributions": 550,
+  "contributions_365d": 578,
+  "public_contributions": 115,
+  "private_contributions": 463,
   "active_days": 58,
   "peak_day": 46,
-  "public_repos": 10,
-  "private_repos": 10,
+  "public_repos": 11,
+  "private_repos": 9,
   "stars_earned": 2,
   "joined_year": 2021,
   "has_restricted_contributions": true,
-  "restricted_contributions": 550,
+  "restricted_contributions": 463,
   "language_breakdown": [
-    {
-      "name": "HTML",
-      "bytes": 985588,
-      "percent": 24.78
-    },
     {
       "name": "TypeScript",
       "bytes": 753664,
-      "percent": 18.95
+      "percent": 29.88
     },
     {
       "name": "JavaScript",
-      "bytes": 656050,
-      "percent": 16.5
+      "bytes": 633289,
+      "percent": 25.11
     },
     {
       "name": "Jupyter Notebook",
       "bytes": 439263,
-      "percent": 11.05
-    },
-    {
-      "name": "CSS",
-      "bytes": 434440,
-      "percent": 10.92
+      "percent": 17.42
     },
     {
       "name": "Java",
       "bytes": 388626,
-      "percent": 9.77
+      "percent": 15.41
+    },
+    {
+      "name": "Python",
+      "bytes": 293564,
+      "percent": 11.64
+    },
+    {
+      "name": "Shell",
+      "bytes": 5771,
+      "percent": 0.23
     }
   ],
   "weekly_totals": [
@@ -94,7 +94,7 @@
     },
     {
       "start": "2026-11-22",
-      "total": 8
+      "total": 9
     }
   ],
   "longest_streak": 8,
@@ -105,7 +105,7 @@
     76,
     84,
     107,
-    109
+    110
   ],
   "top_repo_name": "kdrama-java-portfolio",
   "top_repo_lang": "TypeScript",

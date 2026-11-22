@@ -646,7 +646,7 @@ def build_profile_card_svg(profile: dict, theme: str) -> str:
     <rect width="{W}" height="44" fill="{t["bar"]}"/>
     <line x1="0" y1="44.5" x2="{W}" y2="44.5" stroke="{t["line"]}"/>
     <circle cx="28" cy="22" r="6" fill="#ff5f57"/><circle cx="48" cy="22" r="6" fill="#febc2e"/><circle cx="68" cy="22" r="6" fill="#28c840"/>
-    <text x="{W / 2}" y="27" text-anchor="middle" class="mono" font-size="13" fill="{t["subtle"]}">haritha@tcs — zsh — 120×40</text>
+    <text x="{W / 2}" y="27" text-anchor="middle" class="mono" font-size="13" fill="{t["subtle"]}">haritha — zsh</text>
   </g>
   <rect x="0.5" y="0.5" width="{W - 1}" height="{H - 1}" rx="14" fill="none" stroke="{t["border"]}"/>
   {"".join(parts)}

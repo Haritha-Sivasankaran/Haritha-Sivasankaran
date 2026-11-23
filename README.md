@@ -4,9 +4,9 @@ Haritha-Sivasankaran
 -->
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/profile-card-dark.svg?t=1795389846" />
-  <source media="(prefers-color-scheme: light)" srcset="./assets/profile-card-light.svg?t=1795389846" />
-  <img width="100%" src="./assets/profile-card-dark.svg?t=1795389846" alt="Haritha Sivasankaran — Systems Engineer @ TCS. Code that survives Monday traffic and Friday deploys. Stack: React, Next.js, TypeScript, Tailwind, Java, Spring Boot, Python, Node.js, Kafka, RabbitMQ, PostgreSQL, Docker." />
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/profile-card-dark.svg?t=1795415591" />
+  <source media="(prefers-color-scheme: light)" srcset="./assets/profile-card-light.svg?t=1795415591" />
+  <img width="100%" src="./assets/profile-card-dark.svg?t=1795415591" alt="Haritha Sivasankaran — Systems Engineer @ TCS. Code that survives Monday traffic and Friday deploys. Stack: React, Next.js, TypeScript, Tailwind, Java, Spring Boot, Python, Node.js, Kafka, RabbitMQ, PostgreSQL, Docker." />
 </picture>
 
 <p align="center">

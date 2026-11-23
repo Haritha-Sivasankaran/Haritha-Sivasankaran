@@ -2,49 +2,49 @@
   "username": "Haritha-Sivasankaran",
   "name": "Haritha Sivasankaran",
   "source_mode": "github-graphql",
-  "generated_at": "2026-11-23T12:03:11.023122+05:30",
+  "generated_at": "2026-11-24T05:05:11.905613+05:30",
   "timezone": "Asia/Kolkata",
-  "contributions_365d": 594,
+  "contributions_365d": 605,
   "public_contributions": 121,
-  "private_contributions": 473,
-  "active_days": 59,
+  "private_contributions": 484,
+  "active_days": 60,
   "peak_day": 46,
   "public_repos": 11,
   "private_repos": 10,
   "stars_earned": 2,
   "joined_year": 2021,
   "has_restricted_contributions": true,
-  "restricted_contributions": 473,
+  "restricted_contributions": 484,
   "language_breakdown": [
     {
       "name": "TypeScript",
       "bytes": 753664,
-      "percent": 27.8
+      "percent": 25.09
     },
     {
       "name": "JavaScript",
       "bytes": 633289,
-      "percent": 23.36
+      "percent": 21.08
     },
     {
       "name": "Jupyter Notebook",
       "bytes": 439263,
-      "percent": 16.21
+      "percent": 14.62
+    },
+    {
+      "name": "Dart",
+      "bytes": 410319,
+      "percent": 13.66
     },
     {
       "name": "Java",
       "bytes": 388626,
-      "percent": 14.34
+      "percent": 12.94
     },
     {
       "name": "Python",
-      "bytes": 299374,
-      "percent": 11.04
-    },
-    {
-      "name": "Dart",
-      "bytes": 175739,
-      "percent": 6.48
+      "bytes": 350155,
+      "percent": 11.66
     }
   ],
   "weekly_totals": [
@@ -94,13 +94,13 @@
     },
     {
       "start": "2026-11-22",
-      "total": 25
+      "total": 36
     }
   ],
   "longest_streak": 8,
   "weekday_counts": [
-    94,
-    67,
+    101,
+    71,
     50,
     76,
     84,
@@ -109,7 +109,7 @@
   ],
   "top_repo_name": "kosha",
   "top_repo_lang": "Dart",
-  "top_track_name": "README.md",
+  "top_track_name": "LICENSE",
   "focus_repo_name": "kdrama-java-portfolio",
   "focus_repo_lang": "TypeScript"
 }
